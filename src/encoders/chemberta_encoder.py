@@ -18,7 +18,8 @@ class ChemBERTaEncoder(nn.Module):
         super().__init__()
         self.device = device
         self.tokenizer = AutoTokenizer.from_pretrained(model_path)
-        self.model = AutoModel.from_pretrained(model_path)
+        # Force safetensors to bypass torch.load() CVE check in torch < 2.6
+        self.model = AutoModel.from_pretrained(model_path, use_safetensors=True)
         self.model.eval()
         self.model.requires_grad_(False)
 
