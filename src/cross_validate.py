@@ -217,6 +217,36 @@ def cross_validate(config: Config, n_folds: int = 5):
 
 
 if __name__ == "__main__":
+    import argparse
+
+    parser = argparse.ArgumentParser(description="5-Fold Cross-Validation")
+    parser.add_argument("--encoder", type=str, default="molformer",
+                        choices=["molformer", "pretrained_gin", "chemberta", "fixed_vector"])
+    parser.add_argument("--fusion", type=str, default="cross_attn",
+                        choices=["cross_attn", "concat"])
+    parser.add_argument("--loss", type=str, default="asl",
+                        choices=["bce", "weighted_bce", "focal", "asl"])
+    parser.add_argument("--fixed_vector_source", type=str, default="mol2vec",
+                        choices=["mol2vec", "pubchemfp", "rdkit_descriptors", "morgan", "maccs"])
+    parser.add_argument("--epochs", type=int, default=None)
+    parser.add_argument("--batch_size", type=int, default=None)
+    parser.add_argument("--lr", type=float, default=None)
+    parser.add_argument("--device", type=str, default=None)
+    args = parser.parse_args()
+
     config = Config()
+    config.encoder = args.encoder
+    config.fusion = args.fusion
+    config.loss = args.loss
+    config.fixed_vector_source = args.fixed_vector_source
+    if args.epochs is not None:
+        config.max_epochs = args.epochs
+    if args.batch_size is not None:
+        config.batch_size = args.batch_size
+    if args.lr is not None:
+        config.lr = args.lr
+    if args.device is not None:
+        config.device = args.device
+
     config.resolve_paths()
     cross_validate(config)
