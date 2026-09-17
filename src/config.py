@@ -29,8 +29,9 @@ class Config:
 
     # --- Axis B: fusion ---
     fusion: Literal["cross_attn", "concat"] = "cross_attn"  # forced to "concat" if encoder is not sequence-capable
-    pooling: Literal["global_gated_attention", "cls"] = "global_gated_attention"
+    pooling: Literal["global_gated_attention", "cls", "explicit_pairwise"] = "global_gated_attention"
     pool_hidden_dim: int = 128
+    pair_pool_hidden_dim: int = 256
     proj_dim: int = 128
     num_heads: int = 8
     attn_dropout: float = 0.15
@@ -93,7 +94,12 @@ class Config:
     def resolve_paths(self):
         """Derive checkpoint_dir and metrics_dir from encoder/fusion/loss/pooling."""
         if self.fusion == "cross_attn":
-            pool_str = "global_gated" if self.pooling == "global_gated_attention" else self.pooling
+            if self.pooling == "explicit_pairwise":
+                pool_str = "pairwise"
+            elif self.pooling == "global_gated_attention":
+                pool_str = "global_gated"
+            else:
+                pool_str = self.pooling
             combo = f"{self.encoder}_{self.fusion}_{pool_str}_{self.loss}"
         else:
             combo = f"{self.encoder}_{self.fusion}_{self.loss}"
