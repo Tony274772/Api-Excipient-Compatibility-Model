@@ -5,6 +5,12 @@ Frozen, shared for both API and Excipient.
 Returns (token_embeddings, pooled_embedding, token_mask).
 """
 
+import sys
+import unittest.mock
+# Bypass graphbolt C++ library requirement on Windows / PyTorch >= 2.4
+if 'dgl.graphbolt' not in sys.modules:
+    sys.modules['dgl.graphbolt'] = unittest.mock.MagicMock()
+
 import torch
 import torch.nn as nn
 import dgl
@@ -28,15 +34,23 @@ class PretrainedGINEncoder(nn.Module):
         super().__init__()
         self.device = device
         self.atom_featurizer = PretrainAtomFeaturizer()
-        self.bond_featurizer = PretrainBondFeaturizer()
+        self.bond_featurizer = PretrainBondFeaturizer(self_loop=True)
 
-        self.model = load_pretrained(pretrained_name)
-        self.model.eval()
-        for p in self.model.parameters():
+        model = load_pretrained(pretrained_name)
+        model.eval()
+        for p in model.parameters():
             p.requires_grad_(False)
+        
+        # Hide the model in a standard Python list so PyTorch's `to()` 
+        # doesn't recursively find it and move it to CUDA.
+        self._model_list = [model]
 
         # In-memory embedding cache keyed by SMILES string
         self._cache: dict[str, tuple[torch.Tensor, torch.Tensor]] = {}
+
+    @property
+    def model(self):
+        return self._model_list[0]
 
     def to(self, device, *args, **kwargs):
         self.device = str(device)
@@ -53,7 +67,7 @@ class PretrainedGINEncoder(nn.Module):
             mol,
             node_featurizer=self.atom_featurizer,
             edge_featurizer=self.bond_featurizer,
-            add_self_loop=False,
+            add_self_loop=True,
         )
         if g is None:
             raise ValueError(f"Could not create graph from SMILES: {smiles}")
@@ -61,38 +75,40 @@ class PretrainedGINEncoder(nn.Module):
 
     @torch.no_grad()
     def _encode_single(self, smiles: str):
-        """Encode a single SMILES, returning (node_embeddings, pooled)."""
+        """Encode a single SMILES, returning (node_embeddings, pooled).
+
+        DGL CPU-only wheel cannot move graphs to CUDA. Since the GIN is
+        frozen (no gradients), we run the entire forward pass on CPU and
+        then move only the output float tensors to the target device.
+        """
         if smiles in self._cache:
             return self._cache[smiles]
 
-        g = self._smiles_to_graph(smiles)
-        g = g.to(self.device)
+        # Build graph on CPU (DGL CPU wheel cannot handle g.to('cuda'))
+        g = self._smiles_to_graph(smiles)  # stays on CPU
 
-        # PretrainAtomFeaturizer stores: 'atomic_number' and 'chirality_type'
-        # PretrainBondFeaturizer stores: 'bond_type' and 'bond_direction_type'
-        # The GIN model's forward expects:
-        #   forward(g, categorical_node_feats, categorical_edge_feats)
-        # where each is a list of 1D LongTensors (one per categorical feature).
+        # Feature tensors on CPU for the GIN forward pass
         categorical_node_feats = [
-            g.ndata['atomic_number'].to(self.device),
-            g.ndata['chirality_type'].to(self.device),
+            g.ndata['atomic_number'],   # CPU LongTensor
+            g.ndata['chirality_type'],  # CPU LongTensor
         ]
 
         if g.num_edges() > 0:
             categorical_edge_feats = [
-                g.edata['bond_type'].to(self.device),
-                g.edata['bond_direction_type'].to(self.device),
+                g.edata['bond_type'],          # CPU LongTensor
+                g.edata['bond_direction_type'],# CPU LongTensor
             ]
         else:
-            # Single-atom molecules have no edges
+            # Single-atom molecules with only self-loops have no bonds
             categorical_edge_feats = [
-                torch.zeros(0, dtype=torch.long, device=self.device),
-                torch.zeros(0, dtype=torch.long, device=self.device),
+                torch.zeros(0, dtype=torch.long),
+                torch.zeros(0, dtype=torch.long),
             ]
 
-        # Forward pass through the GIN model
+        # GIN forward on CPU, then move float outputs to target device
         node_embeddings = self.model(g, categorical_node_feats, categorical_edge_feats)
-        # node_embeddings: [num_atoms, 300]
+        # node_embeddings: [num_atoms, 300]  (CPU float)
+        node_embeddings = node_embeddings.to(self.device)
 
         # Pool: mean over all atoms
         pooled = node_embeddings.mean(dim=0)  # [300]
