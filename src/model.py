@@ -50,6 +50,50 @@ class DescriptorProjectionHead(nn.Module):
         return self.net(x)
 
 
+class GatedAttentionPooling(nn.Module):
+    """Gated attention pooling over a variable-length sequence.
+
+    Args:
+        input_dim: Dimension of input token vectors (default: 128).
+        hidden_dim: Hidden dimension for gating projection (default: 128).
+
+    Forward Args:
+        x: Token embeddings [B, L, D]
+        padding_mask: Bool tensor [B, L], True = padding / invalid, False = valid
+
+    Returns:
+        pooled: Pooled representation [B, D]
+        weights: Attention weights [B, L]
+    """
+
+    def __init__(self, input_dim: int = 128, hidden_dim: int = 128):
+        super().__init__()
+        self.tanh_proj = nn.Linear(input_dim, hidden_dim)
+        self.sigmoid_proj = nn.Linear(input_dim, hidden_dim)
+        self.score = nn.Linear(hidden_dim, 1, bias=False)
+
+    def forward(self, x: torch.Tensor, padding_mask: torch.Tensor = None):
+        tanh_part = torch.tanh(self.tanh_proj(x))
+        sigmoid_part = torch.sigmoid(self.sigmoid_proj(x))
+        gated = tanh_part * sigmoid_part
+        scores = self.score(gated).squeeze(-1)  # [B, L]
+
+        if padding_mask is not None:
+            # Truly safe all-masked handling:
+            # Detect rows where all tokens are masked
+            all_masked = padding_mask.all(dim=-1, keepdim=True)  # [B, 1]
+            scores = scores.masked_fill(padding_mask, -1e9)
+            weights = torch.softmax(scores, dim=-1)
+            # If all tokens in a row were masked, zero out all weights
+            weights = weights.masked_fill(all_masked, 0.0)
+        else:
+            weights = torch.softmax(scores, dim=-1)
+
+        pooled = torch.sum(weights.unsqueeze(-1) * x, dim=1)
+        pooled = torch.nan_to_num(pooled, nan=0.0, posinf=0.0, neginf=0.0)
+        return pooled, weights
+
+
 class CompatibilityModel(nn.Module):
     """Full API-Excipient compatibility prediction model.
     
@@ -95,6 +139,31 @@ class CompatibilityModel(nn.Module):
             )
             self.ln_exc = nn.LayerNorm(proj_dim)
             self.ln_api = nn.LayerNorm(proj_dim)
+
+            # Gated attention pooling using config.pool_hidden_dim
+            pool_hidden_dim = getattr(config, "pool_hidden_dim", proj_dim)
+            self.api_pool = GatedAttentionPooling(
+                input_dim=proj_dim,
+                hidden_dim=pool_hidden_dim,
+            )
+            self.exc_pool = GatedAttentionPooling(
+                input_dim=proj_dim,
+                hidden_dim=pool_hidden_dim,
+            )
+
+            # Separate fusion heads: 256 (global + pooled) -> 128
+            self.api_pool_fusion = nn.Sequential(
+                nn.Linear(proj_dim * 2, proj_dim),
+                nn.LayerNorm(proj_dim),
+                nn.GELU(),
+                nn.Dropout(config.proj_dropout),
+            )
+            self.exc_pool_fusion = nn.Sequential(
+                nn.Linear(proj_dim * 2, proj_dim),
+                nn.LayerNorm(proj_dim),
+                nn.GELU(),
+                nn.Dropout(config.proj_dropout),
+            )
 
         # Descriptor projection heads
         if config.use_descriptors:
@@ -238,9 +307,65 @@ class CompatibilityModel(nn.Module):
             refined_api = torch.nan_to_num(refined_api)
             refined_api = self.ln_api(api_seq + refined_api)  # Residual + LN
 
-            # Extract CLS position as structural embedding
-            h_api_struct = refined_api[:, 0, :]   # [B, 128]
-            h_exc_struct = refined_exc[:, 0, :]   # [B, 128]
+            # Structural representation extraction
+            pooling_mode = getattr(self.config, "pooling", "global_gated_attention")
+            if pooling_mode == "cls":
+                # Legacy CLS-only structural extraction
+                h_api_struct = refined_api[:, 0, :]   # [B, 128]
+                h_exc_struct = refined_exc[:, 0, :]   # [B, 128]
+            else:
+                # Global + Gated Attention Pooling
+                # refined_api / refined_exc shape: [B, L+1, 128]
+                # Position 0: prepended global token
+                api_global = refined_api[:, 0, :]       # [B, 128]
+                exc_global = refined_exc[:, 0, :]       # [B, 128]
+
+                # Molecular tokens: positions 1..L
+                # [:, 1:] explicitly excludes the prepended global token (index 0)
+                # and reuses the existing masks (excluding position 0).
+                api_tokens = refined_api[:, 1:, :]      # [B, L_api, 128]
+                exc_tokens = refined_exc[:, 1:, :]      # [B, L_exc, 128]
+
+                # Reusing existing padding masks for molecular tokens (excluding position 0)
+                api_token_mask = api_mask_ext[:, 1:]    # [B, L_api]
+                exc_token_mask = exc_mask_ext[:, 1:]    # [B, L_exc]
+
+                # Gated attention pooling over valid molecular tokens
+                api_token_pool, api_token_weights = self.api_pool(
+                    api_tokens,
+                    api_token_mask,
+                )
+                exc_token_pool, exc_token_weights = self.exc_pool(
+                    exc_tokens,
+                    exc_token_mask,
+                )
+
+                # Missing-excipient fallback:
+                # Explicitly preserve current missing-excipient behavior:
+                # Where exc_available == 0, only position 0 (global) is valid,
+                # and the token-pooling branch falls back to the learned placeholder.
+                missing_exc = (exc_available == 0.0)    # [B]
+                exc_placeholder_pool = self.exc_global_placeholder.expand(
+                    exc_tokens.size(0),
+                    -1,
+                )                                        # [B, 128]
+                exc_token_pool = torch.where(
+                    missing_exc.unsqueeze(1),
+                    exc_placeholder_pool,
+                    exc_token_pool,
+                )
+
+                # Concatenate global + pooled: [B, 256]
+                api_combined = torch.cat([api_global, api_token_pool], dim=-1)  # [B, 256]
+                exc_combined = torch.cat([exc_global, exc_token_pool], dim=-1)  # [B, 256]
+
+                # Fusion 256 -> 128
+                h_api_struct = self.api_pool_fusion(api_combined)  # [B, 128]
+                h_exc_struct = self.exc_pool_fusion(exc_combined)  # [B, 128]
+
+                # Store detached attention weights internally for inspection/visualization
+                self.api_token_weights = api_token_weights.detach()
+                self.exc_token_weights = exc_token_weights.detach()
 
         else:
             # --- Concat-only fusion (no cross-attention) ---

@@ -64,6 +64,8 @@ def parse_args():
 
     # Fusion (Axis B)
     parser.add_argument("--fusion", choices=["cross_attn", "concat"], default=None)
+    parser.add_argument("--pooling", choices=["global_gated_attention", "cls"], default=None,
+                        help="Pooling mode for cross-attention: 'global_gated_attention' or 'cls'")
 
     # Loss (Axis C)
     parser.add_argument("--loss", choices=["bce", "weighted_bce", "focal", "asl"], default=None)
@@ -92,6 +94,8 @@ def apply_args_to_config(args, config):
         config.fixed_vector_path = args.fixed_vector_path
     if args.fusion is not None:
         config.fusion = args.fusion
+    if args.pooling is not None:
+        config.pooling = args.pooling
     if args.loss is not None:
         config.loss = args.loss
     if args.lr is not None:

@@ -224,6 +224,8 @@ if __name__ == "__main__":
                         choices=["molformer", "pretrained_gin", "chemberta", "fixed_vector"])
     parser.add_argument("--fusion", type=str, default="cross_attn",
                         choices=["cross_attn", "concat"])
+    parser.add_argument("--pooling", type=str, default=None,
+                        choices=["global_gated_attention", "cls"])
     parser.add_argument("--loss", type=str, default="asl",
                         choices=["bce", "weighted_bce", "focal", "asl"])
     parser.add_argument("--fixed_vector_source", type=str, default="mol2vec",
@@ -237,6 +239,8 @@ if __name__ == "__main__":
     config = Config()
     config.encoder = args.encoder
     config.fusion = args.fusion
+    if args.pooling is not None:
+        config.pooling = args.pooling
     config.loss = args.loss
     config.fixed_vector_source = args.fixed_vector_source
     if args.epochs is not None:
