@@ -1,0 +1,25 @@
+Api_name,Excipient_name,API_CID,Excipient_CID,API_Smiles,Excipient_Smiles,ground_truth
+Warfarin,Magnesium aluminum silicate,54678486,3084116,CC(=O)CC(C1=CC=CC=C1)C2=C(C3=CC=CC=C3OC2=O)O,[O-][Si]([O-])([O-])[O-].[Mg+2].[Al+3],1
+Phenytoin,Magnesium oxide,1775,14792,C1=CC=C(C=C1)C2(C(=O)NC(=O)N2)C3=CC=CC=C3,O=[Mg],1
+Trichlormethiazide,Magnesium oxide,5560,14792,C1=C2C(=CC(=C1Cl)S(=O)(=O)N)S(=O)(=O)NC(N2)C(Cl)Cl,O=[Mg],1
+Tetracycline,Calcium phosphate,54675776,21226083,C[C@@]1([C@H]2C[C@H]3[C@@H](C(=O)C(=C([C@]3(C(=O)C2=C(C4=C1C=CC=C4O)O)O)O)C(=O)N)N(C)C)O,[O-]P(=O)([O-])[O-].[Ca+2],1
+Fluvoxamine,Lactose,5324346,6134,COCCCC/C(=N\OCCN)/C1=CC=C(C=C1)C(F)(F)F,C([C@@H]1[C@@H]([C@@H]([C@H]([C@@H](O1)O[C@@H]2[C@H](O[C@H]([C@@H]([C@H]2O)O)O)CO)O)O)O)O,1
+Acetazolamide,Lactose,1986,6134,CC(=O)NC1=NN=C(S1)S(=O)(=O)N,C([C@@H]1[C@@H]([C@@H]([C@H]([C@@H](O1)O[C@@H]2[C@H](O[C@H]([C@@H]([C@H]2O)O)O)CO)O)O)O)O,1
+Acetazolamide,Mannitol,1986,6251,CC(=O)NC1=NN=C(S1)S(=O)(=O)N,C([C@H]([C@H]([C@@H]([C@@H](CO)O)O)O)O)O,1
+Phenytoin sodium,Lactose,657302,6134,C1=CC=C(C=C1)C2(C(=O)[N-]C(=O)N2)C3=CC=CC=C3.[Na+],C([C@@H]1[C@@H]([C@@H]([C@H]([C@@H](O1)O[C@@H]2[C@H](O[C@H]([C@@H]([C@H]2O)O)O)CO)O)O)O)O,1
+Phenytoin sodium,Calcium sulfate,657302,24497,C1=CC=C(C=C1)C2(C(=O)[N-]C(=O)N2)C3=CC=CC=C3.[Na+],[O-]S(=O)(=O)[O-].[Ca+2],1
+Hydrocortisone,Magnesium stearate,5754,11177,C[C@]12CCC(=O)C=C1CC[C@@H]3[C@@H]2[C@H](C[C@]4([C@H]3CC[C@@]4(C(=O)CO)O)C)O,CCCCCCCCCCCCCCCCCC(=O)[O-].CCCCCCCCCCCCCCCCCC(=O)[O-].[Mg+2],1
+Hydrocortisone,Beta cyclodextrin,5754,444041,C[C@]12CCC(=O)C=C1CC[C@@H]3[C@@H]2[C@H](C[C@]4([C@H]3CC[C@@]4(C(=O)CO)O)C)O,C([C@@H]1[C@@H]2[C@@H]([C@H]([C@H](O1)O[C@@H]3[C@H](O[C@@H]([C@@H]([C@H]3O)O)O[C@@H]4[C@H](O[C@@H]([C@@H]([C@H]4O)O)O[C@@H]5[C@H](O[C@@H]([C@@H]([C@H]5O)O)O[C@@H]6[C@H](O[C@@H]([C@@H]([C@H]6O)O)O[C@@H]7[C@H](O[C@@H]([C@@H]([C@H]7O)O)O[C@@H]8[C@H](O[C@H](O2)[C@@H]([C@H]8O)O)CO)CO)CO)CO)CO)CO)O)O)O,1
+Quercetin,Magnesium carbonate,5280343,11029,C1=CC(=C(C=C1C2=C(C(=O)C3=C(C=C(C=C3O2)O)O)O)O)O,C(=O)([O-])[O-].[Mg+2],1
+METFORMIN HYDROCHLORIDE,MAGNESIUM STEARATE,14219,11177,CN(C)C(=N)NC(=N)N.Cl,CCCCCCCCCCCCCCCCCC(=O)[O-].CCCCCCCCCCCCCCCCCC(=O)[O-].[Mg+2],0
+LAMOTRIGINE,SODIUM LAURYL SULFATE,3878,3423265,c1cc(c(c(c1)Cl)Cl)-c2c(N)nc(N)nn2,CCCCCCCCCCCCOS(=O)(=O)[O-].[Na+],0
+GABAPENTIN,MANNITOL,3446,6251,C1CCC(CC1)(CC(=O)O)CN,C([C@H]([C@H]([C@@H]([C@@H](CO)O)O)O)O)O,0
+OMEPRAZOLE,SILICON DIOXIDE,4594,24261,Cc1cnc(C[S+](c2[nH]c3ccc(cc3n2)OC)[O-])c(C)c1OC,O=[Si]=O,0
+CARBAMAZEPINE,PROPYLENE GLYCOL,2554,1030,c1ccc2c(c1)C=Cc3ccccc3N2C(=O)N,CC(CO)O,0
+HYDROCHLOROTHIAZIDE,STEARIC ACID,3639,5281,c1c(c(cc2c1NCNS2(=O)=O)S(=O)(=O)N)Cl,CCCCCCCCCCCCCCCCCC(=O)O,0
+CELECOXIB,TITANIUM DIOXIDE,2662,26042,Cc1ccc(cc1)-c2cc(C(F)(F)F)nn2-c3ccc(cc3)S(=O)(=O)N,O=[Ti]=O,0
+TOPIRAMATE,TRIACETIN,5284627,5541,CC1(C)O[C@]2([H])CO[C@]3(COS(=O)(=O)N)[C@]([H])([C@]2([H])O1)OC(C)(C)O3,CC(=O)OCC(COC(=O)C)OC(=O)C,0
+LEVETIRACETAM,TALC,5284583,165411828,CC[C@@H](C(=O)N)N1CCCC1=O,[OH-].[OH-].[O-][Si]12O[Si]3(O[Si](O1)(O[Si](O2)(O3)[O-])[O-])[O-].[Mg+2].[Mg+2].[Mg+2],0
+FENOFIBRATE,SUCROSE,3339,5988,CC(C)OC(=O)C(C)(C)Oc1ccc(cc1)C(=O)c2ccc(cc2)Cl,C([C@@H]1[C@H]([C@@H]([C@H]([C@H](O1)O[C@@]2(CO)[C@H]([C@@H]([C@@H](CO)O2)O)O)O)O)O)O,0
+RISPERIDONE,LACTOSE MONOHYDRATE,5073,104938,Cc1c(CCN2CCC(CC2)c3c4ccc(cc4on3)F)c(=O)n5CCCCc5n1,C([C@@H]1[C@@H]([C@@H]([C@H]([C@@]([H])(O1)O[C@@H]2[C@@H](CO)O[C@@H]([C@@H]([C@H]2O)O)O)O)O)O)O.O,0
+OLANZAPINE,MAGNESIUM STEARATE,135398745,11177,Cc1cc2C(=Nc3ccccc3Nc2s1)N4CCN(C)CC4,CCCCCCCCCCCCCCCCCC(=O)[O-].CCCCCCCCCCCCCCCCCC(=O)[O-].[Mg+2],0
