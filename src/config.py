@@ -86,6 +86,7 @@ class Config:
     # --- Reproducibility / system ---
     seed: int = 42
     device: str = "auto"
+    split_type: Literal["cluster", "random"] = "cluster"
     checkpoint_dir: str = "checkpoints/molformer"   # set per-run
     metrics_dir: str = "metrics/molformer"           # set per-run
 
@@ -94,12 +95,13 @@ class Config:
 
     def resolve_csv_paths(self):
         """Only fills in train/val/test CSV defaults. Safe to call any number of times."""
+        data_path = f"{self.data_dir}/random_split" if self.split_type == "random" else self.data_dir
         if self.train_csv is None:
-            self.train_csv = f"{self.data_dir}/train.csv"
+            self.train_csv = f"{data_path}/train.csv"
         if self.val_csv is None:
-            self.val_csv = f"{self.data_dir}/val.csv"
+            self.val_csv = f"{data_path}/val.csv"
         if self.test_csv is None:
-            self.test_csv = f"{self.data_dir}/test.csv"
+            self.test_csv = f"{data_path}/test.csv"
 
     def resolve_checkpoint_paths(self):
         """Derive checkpoint_dir and metrics_dir from encoder/fusion/loss/pooling."""
@@ -117,8 +119,10 @@ class Config:
             combo = f"{encoder_name}_{self.fusion}_{pool_str}_{self.loss}"
         else:
             combo = f"{encoder_name}_{self.fusion}_{self.loss}"
-        self.checkpoint_dir = f"checkpoints/{combo}"
-        self.metrics_dir = f"metrics/{combo}"
+        
+        prefix = "random_split/" if self.split_type == "random" else ""
+        self.checkpoint_dir = f"checkpoints/{prefix}{combo}"
+        self.metrics_dir = f"metrics/{prefix}{combo}"
 
     def resolve_paths(self):
         """Back-compat wrapper: old callers that expect resolve_paths() to do both."""

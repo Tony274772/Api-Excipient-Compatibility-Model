@@ -12,7 +12,7 @@ import pandas as pd
 from rdkit import Chem, DataStructs
 from rdkit.Chem import AllChem
 from rdkit.ML.Cluster import Butina
-from sklearn.model_selection import StratifiedGroupKFold
+from sklearn.model_selection import StratifiedGroupKFold, StratifiedKFold
 
 import torch
 
@@ -77,19 +77,22 @@ def cross_validate(config: Config, n_folds: int = 5):
     # Load full dataset
     raw = pd.read_csv(os.path.join(config.data_dir, "start_dataset.csv"))
 
-    # Butina clustering
-    unique_apis = raw["API_Smiles"].unique().tolist()
-    smiles_to_cluster = butina_cluster(unique_apis)
-    raw["cluster_id"] = raw["API_Smiles"].map(smiles_to_cluster)
+    if getattr(config, "split_type", "cluster") == "random":
+        kf = StratifiedKFold(n_splits=n_folds, shuffle=True, random_state=config.seed)
+        splits = kf.split(raw, y=raw["Outcome1"])
+    else:
+        # Butina clustering
+        unique_apis = raw["API_Smiles"].unique().tolist()
+        smiles_to_cluster = butina_cluster(unique_apis)
+        raw["cluster_id"] = raw["API_Smiles"].map(smiles_to_cluster)
 
-    sgkf = StratifiedGroupKFold(n_splits=n_folds, shuffle=True, random_state=config.seed)
+        sgkf = StratifiedGroupKFold(n_splits=n_folds, shuffle=True, random_state=config.seed)
+        splits = sgkf.split(raw, y=raw["Outcome1"], groups=raw["cluster_id"])
 
     all_val_metrics = []
     all_test_metrics = []
 
-    for fold_i, (train_idx, test_idx) in enumerate(
-        sgkf.split(raw, y=raw["Outcome1"], groups=raw["cluster_id"])
-    ):
+    for fold_i, (train_idx, test_idx) in enumerate(splits):
         print(f"\n{'='*60}")
         print(f"FOLD {fold_i + 1}/{n_folds}")
         print(f"{'='*60}")
@@ -99,14 +102,18 @@ def cross_validate(config: Config, n_folds: int = 5):
         test_fold = raw.iloc[test_idx].reset_index(drop=True)
 
         # Split train_fold into actual train + val (stratified, same group constraint)
-        inner_sgkf = StratifiedGroupKFold(n_splits=4, shuffle=True, random_state=config.seed + fold_i)
-        inner_train_idx, inner_val_idx = next(
-            inner_sgkf.split(train_fold, y=train_fold["Outcome1"], groups=train_fold["cluster_id"])
-        )
+        if getattr(config, "split_type", "cluster") == "random":
+            inner_kf = StratifiedKFold(n_splits=4, shuffle=True, random_state=config.seed + fold_i)
+            inner_train_idx, inner_val_idx = next(inner_kf.split(train_fold, y=train_fold["Outcome1"]))
+        else:
+            inner_sgkf = StratifiedGroupKFold(n_splits=4, shuffle=True, random_state=config.seed + fold_i)
+            inner_train_idx, inner_val_idx = next(
+                inner_sgkf.split(train_fold, y=train_fold["Outcome1"], groups=train_fold["cluster_id"])
+            )
 
-        actual_train = train_fold.iloc[inner_train_idx].drop(columns=["cluster_id"]).reset_index(drop=True)
-        actual_val = train_fold.iloc[inner_val_idx].drop(columns=["cluster_id"]).reset_index(drop=True)
-        actual_test = test_fold.drop(columns=["cluster_id"]).reset_index(drop=True)
+        actual_train = train_fold.iloc[inner_train_idx].drop(columns=["cluster_id"], errors="ignore").reset_index(drop=True)
+        actual_val = train_fold.iloc[inner_val_idx].drop(columns=["cluster_id"], errors="ignore").reset_index(drop=True)
+        actual_test = test_fold.drop(columns=["cluster_id"], errors="ignore").reset_index(drop=True)
 
         # Save fold CSVs to temp locations
         fold_dir = os.path.join(config.metrics_dir, f"fold_{fold_i}")

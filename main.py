@@ -56,6 +56,8 @@ def parse_args():
     # Mode
     parser.add_argument("--mode", choices=["train", "cv"], default="train",
                         help="'train' for single train/eval, 'cv' for 5-fold CV")
+    parser.add_argument("--split_type", choices=["cluster", "random"], default=None,
+                        help="Type of data split: 'cluster' (default) or 'random'")
 
     # Encoder (Axis A)
     parser.add_argument("--encoder", choices=list(ENCODER_REGISTRY.keys()), default=None)
@@ -116,6 +118,8 @@ def apply_args_to_config(args, config):
         config.use_descriptors = False
     if args.no_balanced_sampler:
         config.use_balanced_sampler = False
+    if args.split_type is not None:
+        config.split_type = args.split_type
 
 
 def main():
