@@ -4,6 +4,7 @@ Frozen HuggingFace transformer, shared for both API and Excipient.
 Returns (token_embeddings, pooled_embedding, token_mask).
 """
 
+import os
 import torch
 import torch.nn as nn
 from transformers import AutoModel, AutoTokenizer
@@ -18,11 +19,21 @@ class MoLFormerEncoder(nn.Module):
     def __init__(self, model_path: str = "ibm/MoLFormer-XL-both-10pct", device: str = "cpu"):
         super().__init__()
         self.device = device
-        self.tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
+        local_dir = "models/pretrained/molformer"
+        if (model_path == "ibm/MoLFormer-XL-both-10pct" or not os.path.exists(model_path)) and os.path.isdir(local_dir):
+            model_path = local_dir
+
+        is_local = os.path.isdir(model_path)
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            model_path,
+            trust_remote_code=True,
+            local_files_only=is_local,
+        )
         self.model = AutoModel.from_pretrained(
             model_path,
             deterministic_eval=True,
             trust_remote_code=True,
+            local_files_only=is_local,
         )
         self.model.eval()
         self.model.requires_grad_(False)

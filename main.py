@@ -122,7 +122,8 @@ def main():
     args = parse_args()
     config = Config()
     apply_args_to_config(args, config)
-    config.resolve_paths()
+    config.resolve_checkpoint_paths()
+    config.resolve_csv_paths()
 
     seed_everything(config.seed)
     device = get_device(config.device)
@@ -145,7 +146,7 @@ def main():
     if not encoder.is_sequence_capable:
         config.fusion = "concat"
         # Re-resolve paths since fusion may have changed
-        config.resolve_paths()
+        config.resolve_checkpoint_paths()
 
     # Compute positive prior from training data
     train_df = pd.read_csv(config.train_csv)

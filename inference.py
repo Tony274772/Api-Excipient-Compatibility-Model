@@ -47,7 +47,7 @@ MODEL_REGISTRY = {
     "pretrained_gin_cross_attn_asl":        ("pretrained_gin", "cross_attn", "global_gated_attention", "asl"),
     "pretrained_gin_concat_asl":            ("pretrained_gin", "concat",     "global_gated_attention", "asl"),
     # ── Fixed-vector (pubchemfp) variants ──
-    "fixed_vector_concat_asl":              ("fixed_vector",   "concat",     "global_gated_attention", "asl"),
+    "fixed_vector_pubchemfp_concat_asl":    ("fixed_vector",   "concat",     "global_gated_attention", "asl"),
 }
 
 
@@ -178,25 +178,10 @@ def run_inference_single_model(
         predictions:  [N] binary predictions (0/1) using val-tuned threshold
         threshold:    the val-tuned threshold used
     """
-    # Build encoder
-    encoder = build_encoder(config, device)
-
-    # Force concat fusion for non-sequence encoders
-    if not encoder.is_sequence_capable:
-        config.fusion = "concat"
-
-    # Build model
-    model = CompatibilityModel(config, encoder)
-    model.to(device)
-
-    # Load checkpoint
-    ckpt_path = os.path.join(config.checkpoint_dir, "best_model.pt")
-    if not os.path.exists(ckpt_path):
-        raise FileNotFoundError(f"Checkpoint not found: {ckpt_path}")
-
-    checkpoint = torch.load(ckpt_path, map_location=device, weights_only=False)
-    model.load_state_dict(checkpoint["model_state_dict"])
-    model.eval()
+    from ensemble._common import build_model_from_checkpoint
+    
+    # We ignore the passed-in config, as build_model_from_checkpoint reads it directly
+    model, config = build_model_from_checkpoint(model_name, device)
 
     # Load val-tuned threshold
     threshold = load_threshold(config.metrics_dir)
@@ -331,22 +316,12 @@ def main():
         print(f"Running: {model_name}")
         print(f"  encoder={encoder_type}, fusion={fusion}, pooling={pooling}, loss={loss}")
 
-        # Build config for this model
-        config = Config()
-        config.encoder = encoder_type
-        config.fusion = fusion
-        config.pooling = pooling
-        config.loss = loss
-        # Set checkpoint/metrics dirs directly from model_name
-        # (bypass resolve_paths which may generate different names for old CLS checkpoints)
-        config.checkpoint_dir = f"checkpoints/{model_name}"
-        config.metrics_dir = f"metrics/{model_name}"
-        # Resolve CSV paths only
-        config.train_csv = f"{config.data_dir}/train.csv"
-        config.val_csv = f"{config.data_dir}/val.csv"
-        config.test_csv = f"{config.data_dir}/test.csv"
+        # Build config for this model using the new helper
+        from ensemble._common import load_config_for_checkpoint
+        config, _ = load_config_for_checkpoint(model_name, device)
+
         # Set fixed_vector_path for fixed_vector encoder
-        if encoder_type == "fixed_vector":
+        if config.encoder == "fixed_vector":
             config.fixed_vector_source = "pubchemfp"
             config.fixed_vector_path = "data/pubchem_fps.csv"
 
@@ -377,10 +352,16 @@ def main():
 
     # Save results
     os.makedirs(os.path.dirname(args.output) if os.path.dirname(args.output) else ".", exist_ok=True)
-    result_df.to_csv(args.output, index=False)
-
-    print(f"\n{'='*60}")
-    print(f"Results saved to: {args.output}")
+    try:
+        result_df.to_csv(args.output, index=False)
+        print(f"\n{'='*60}")
+        print(f"Results saved to: {args.output}")
+    except PermissionError:
+        fallback_output = args.output.replace(".csv", "_fallback.csv")
+        result_df.to_csv(fallback_output, index=False)
+        print(f"\n{'='*60}")
+        print(f"WARNING: Permission denied when saving to {args.output}.")
+        print(f"Results saved to fallback: {fallback_output}")
     print(f"Columns: {list(result_df.columns)}")
 
     # Print compact summary table

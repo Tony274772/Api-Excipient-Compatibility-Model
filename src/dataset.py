@@ -108,8 +108,8 @@ def collate_fn(batch: list[dict]) -> dict:
 
 def build_dataloaders(config):
     """Build train/val/test DataLoaders from config."""
-    if hasattr(config, "resolve_paths"):
-        config.resolve_paths()
+    if hasattr(config, "resolve_csv_paths"):
+        config.resolve_csv_paths()
 
     train_ds = CompatibilityDataset(
         config.train_csv,

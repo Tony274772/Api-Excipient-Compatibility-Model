@@ -207,7 +207,7 @@ class CompatibilityModel(nn.Module):
                     input_dim=512,
                     hidden_dim=pair_pool_hidden_dim,
                 )
-            else:
+            elif getattr(config, "pooling", "global_gated_attention") == "global_gated_attention":
                 # Gated attention pooling using config.pool_hidden_dim (default)
                 pool_hidden_dim = getattr(config, "pool_hidden_dim", proj_dim)
                 self.api_pool = GatedAttentionPooling(

@@ -5,6 +5,7 @@ Frozen, shared for both API and Excipient.
 Returns (token_embeddings, pooled_embedding, token_mask).
 """
 
+import os
 import sys
 import unittest.mock
 # Bypass graphbolt C++ library requirement on Windows / PyTorch >= 2.4
@@ -36,7 +37,25 @@ class PretrainedGINEncoder(nn.Module):
         self.atom_featurizer = PretrainAtomFeaturizer()
         self.bond_featurizer = PretrainBondFeaturizer(self_loop=True)
 
-        model = load_pretrained(pretrained_name)
+        local_pth = "models/pretrained/gin/gin_supervised_contextpred_pre_trained.pth"
+        if os.path.isfile(pretrained_name):
+            pth_path = pretrained_name
+        elif os.path.isfile(local_pth):
+            pth_path = local_pth
+        else:
+            pth_path = None
+
+        if pth_path is not None:
+            from dgllife.model.pretrain import create_property_model
+            model = create_property_model("gin_supervised_contextpred")
+            ckpt = torch.load(pth_path, map_location="cpu")
+            if "model_state_dict" in ckpt:
+                model.load_state_dict(ckpt["model_state_dict"])
+            else:
+                model.load_state_dict(ckpt)
+        else:
+            model = load_pretrained(pretrained_name)
+
         model.eval()
         for p in model.parameters():
             p.requires_grad_(False)

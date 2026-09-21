@@ -4,6 +4,7 @@ Frozen HuggingFace SMILES transformer.
 Returns (token_embeddings, pooled_embedding, token_mask).
 """
 
+import os
 import torch
 import torch.nn as nn
 from transformers import AutoModel, AutoTokenizer
@@ -17,9 +18,21 @@ class ChemBERTaEncoder(nn.Module):
     def __init__(self, model_path: str = "DeepChem/ChemBERTa-77M-MTR", device: str = "cpu"):
         super().__init__()
         self.device = device
-        self.tokenizer = AutoTokenizer.from_pretrained(model_path)
+        local_dir = "models/pretrained/chemberta"
+        if (model_path == "DeepChem/ChemBERTa-77M-MTR" or not os.path.exists(model_path)) and os.path.isdir(local_dir):
+            model_path = local_dir
+
+        is_local = os.path.isdir(model_path)
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            model_path,
+            local_files_only=is_local,
+        )
         # Force safetensors to bypass torch.load() CVE check in torch < 2.6
-        self.model = AutoModel.from_pretrained(model_path, use_safetensors=True)
+        self.model = AutoModel.from_pretrained(
+            model_path,
+            use_safetensors=True,
+            local_files_only=is_local,
+        )
         self.model.eval()
         self.model.requires_grad_(False)
 

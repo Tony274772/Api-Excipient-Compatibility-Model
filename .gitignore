@@ -1,5 +1,8 @@
 # Model checkpoints and weights (prevents exceeding GitHub's 100MB file limit)
 checkpoints/
+models/pretrained/
+models/*.pkl
+*.pkl
 *.pt
 *.pth
 *.ckpt

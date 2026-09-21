@@ -1,5 +1,6 @@
 """Full configuration schema – Section 10 of the spec."""
 
+import os
 from dataclasses import dataclass, field
 from typing import Literal, Optional
 
@@ -20,9 +21,9 @@ class Config:
 
     # --- Axis A: encoder selection ---
     encoder: Literal["molformer", "pretrained_gin", "chemberta", "fixed_vector"] = "molformer"
-    molformer_model_path: str = "ibm/MoLFormer-XL-both-10pct"
-    chemberta_model_path: str = "DeepChem/ChemBERTa-77M-MTR"
-    gin_pretrained_name: str = "gin_supervised_contextpred"
+    molformer_model_path: str = "models/pretrained/molformer" if os.path.isdir("models/pretrained/molformer") else "ibm/MoLFormer-XL-both-10pct"
+    chemberta_model_path: str = "models/pretrained/chemberta" if os.path.isdir("models/pretrained/chemberta") else "DeepChem/ChemBERTa-77M-MTR"
+    gin_pretrained_name: str = "models/pretrained/gin/gin_supervised_contextpred_pre_trained.pth" if os.path.isfile("models/pretrained/gin/gin_supervised_contextpred_pre_trained.pth") else "gin_supervised_contextpred"
     fixed_vector_source: Literal["mol2vec", "pubchemfp", "rdkit_descriptors"] = "mol2vec"
     fixed_vector_path: Optional[str] = None   # csv of precomputed vectors, keyed by CID
     encoder_output_dim: int = 768              # auto-set per encoder at model build time
@@ -91,8 +92,21 @@ class Config:
     def __post_init__(self):
         self.resolve_paths()
 
-    def resolve_paths(self):
+    def resolve_csv_paths(self):
+        """Only fills in train/val/test CSV defaults. Safe to call any number of times."""
+        if self.train_csv is None:
+            self.train_csv = f"{self.data_dir}/train.csv"
+        if self.val_csv is None:
+            self.val_csv = f"{self.data_dir}/val.csv"
+        if self.test_csv is None:
+            self.test_csv = f"{self.data_dir}/test.csv"
+
+    def resolve_checkpoint_paths(self):
         """Derive checkpoint_dir and metrics_dir from encoder/fusion/loss/pooling."""
+        encoder_name = self.encoder
+        if self.encoder == "fixed_vector":
+            encoder_name = f"fixed_vector_{self.fixed_vector_source}"
+
         if self.fusion == "cross_attn":
             if self.pooling == "explicit_pairwise":
                 pool_str = "pairwise"
@@ -100,15 +114,13 @@ class Config:
                 pool_str = "global_gated"
             else:
                 pool_str = self.pooling
-            combo = f"{self.encoder}_{self.fusion}_{pool_str}_{self.loss}"
+            combo = f"{encoder_name}_{self.fusion}_{pool_str}_{self.loss}"
         else:
-            combo = f"{self.encoder}_{self.fusion}_{self.loss}"
+            combo = f"{encoder_name}_{self.fusion}_{self.loss}"
         self.checkpoint_dir = f"checkpoints/{combo}"
         self.metrics_dir = f"metrics/{combo}"
-        # Resolve split CSV defaults
-        if self.train_csv is None:
-            self.train_csv = f"{self.data_dir}/train.csv"
-        if self.val_csv is None:
-            self.val_csv = f"{self.data_dir}/val.csv"
-        if self.test_csv is None:
-            self.test_csv = f"{self.data_dir}/test.csv"
+
+    def resolve_paths(self):
+        """Back-compat wrapper: old callers that expect resolve_paths() to do both."""
+        self.resolve_checkpoint_paths()
+        self.resolve_csv_paths()

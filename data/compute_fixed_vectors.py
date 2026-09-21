@@ -22,6 +22,7 @@ import numpy as np
 import pandas as pd
 from rdkit import Chem
 from rdkit.Chem import AllChem, MACCSkeys
+import gensim
 
 
 def get_unique_molecules(data_dir: str = "data") -> pd.DataFrame:
@@ -75,6 +76,58 @@ def compute_maccs(smiles_list: list[str]) -> np.ndarray:
         else:
             fps.append(np.zeros((166,), dtype=np.float32))
     return np.array(fps, dtype=np.float32)
+
+
+def compute_mol2vec(smiles_list: list[str], model_path: str = "models/pretrained/mol2vec/model_300dim.pkl") -> np.ndarray:
+    """Compute 300-dim mol2vec embeddings for a list of SMILES using pretrained Word2Vec."""
+    if not os.path.exists(model_path):
+        if os.path.exists("models/model_300dim.pkl"):
+            model_path = "models/model_300dim.pkl"
+        else:
+            raise FileNotFoundError(f"mol2vec model not found at {model_path}. Please download it first.")
+    
+    print(f"Loading mol2vec model from {model_path}...")
+    model = gensim.models.Word2Vec.load(model_path)
+    
+    vectors = []
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            vectors.append(np.zeros((300,), dtype=np.float32))
+            continue
+            
+        # Extract Morgan identifiers (radius 0 and 1)
+        info = {}
+        _ = AllChem.GetMorganFingerprint(mol, 1, bitInfo=info)
+        mol_atoms = [a.GetIdx() for a in mol.GetAtoms()]
+        dict_atoms = {x: {r: None for r in [0, 1]} for x in mol_atoms}
+        for element in info:
+            for atom_idx, radius_at in info[element]:
+                dict_atoms[atom_idx][radius_at] = element
+                
+        # Tokenize molecule into sentence of identifiers
+        sentence = []
+        for atom in mol_atoms:
+            for r in [0, 1]:
+                ident = dict_atoms[atom][r]
+                if ident is not None:
+                    sentence.append(str(ident))
+                    
+        # Average the Word2Vec vectors for the sentence tokens
+        mol_vecs = []
+        for token in sentence:
+            if token in model.wv.key_to_index:
+                mol_vecs.append(model.wv.get_vector(token))
+            else:
+                mol_vecs.append(model.wv.get_vector("UNK"))
+                
+        if mol_vecs:
+            avg_vec = np.mean(mol_vecs, axis=0)
+            vectors.append(avg_vec)
+        else:
+            vectors.append(np.zeros((300,), dtype=np.float32))
+            
+    return np.array(vectors, dtype=np.float32)
 
 
 def fetch_pubchem_fingerprints(cids: list[str]) -> dict[str, np.ndarray]:
@@ -134,16 +187,18 @@ def fetch_pubchem_fingerprints(cids: list[str]) -> dict[str, np.ndarray]:
 
 def main():
     parser = argparse.ArgumentParser(description="Precompute fixed-vector embeddings")
-    parser.add_argument("--type", choices=["morgan", "maccs", "pubchemfp"], default="morgan",
+    parser.add_argument("--type", choices=["morgan", "maccs", "pubchemfp", "mol2vec", "ecfp4"], default="morgan",
                         help="Type of fixed vector to compute")
     parser.add_argument("--data_dir", default="data", help="Directory containing train/val/test.csv")
     parser.add_argument("--output", default=None, help="Output CSV path")
+    parser.add_argument("--model_path", default="models/pretrained/mol2vec/model_300dim.pkl",
+                        help="Path to pretrained mol2vec model (.pkl)")
     args = parser.parse_args()
 
     mols_df = get_unique_molecules(args.data_dir)
     print(f"Found {len(mols_df)} unique molecules across splits.")
 
-    if args.type == "morgan":
+    if args.type == "morgan" or args.type == "ecfp4":
         out_path = args.output or os.path.join(args.data_dir, "morgan_fps.csv")
         vectors = compute_morgan(mols_df["smiles"].tolist(), n_bits=1024)
         cols = [f"bit_{i}" for i in range(1024)]
@@ -151,7 +206,7 @@ def main():
         vec_df.insert(0, "smiles", mols_df["smiles"])
         vec_df.insert(0, "cid", mols_df["cid"])
         vec_df.to_csv(out_path, index=False)
-        print(f"Saved 1024-bit Morgan fingerprints to {out_path}")
+        print(f"Saved 1024-bit Morgan/ECFP4 fingerprints to {out_path}")
 
     elif args.type == "maccs":
         out_path = args.output or os.path.join(args.data_dir, "maccs_keys.csv")
@@ -178,6 +233,16 @@ def main():
             rows.append(row_dict)
         pd.DataFrame(rows).to_csv(out_path, index=False)
         print(f"Saved 881-bit PubChem fingerprints to {out_path}")
+
+    elif args.type == "mol2vec":
+        out_path = args.output or os.path.join(args.data_dir, "mol2vec_embeddings.csv")
+        vectors = compute_mol2vec(mols_df["smiles"].tolist(), model_path=args.model_path)
+        cols = [f"dim_{i}" for i in range(300)]
+        vec_df = pd.DataFrame(vectors, columns=cols)
+        vec_df.insert(0, "smiles", mols_df["smiles"])
+        vec_df.insert(0, "cid", mols_df["cid"])
+        vec_df.to_csv(out_path, index=False)
+        print(f"Saved 300-dim mol2vec embeddings to {out_path}")
 
 
 if __name__ == "__main__":
