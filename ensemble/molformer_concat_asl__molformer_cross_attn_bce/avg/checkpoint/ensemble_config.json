@@ -1,0 +1,8 @@
+{
+  "method": "avg",
+  "base_model_a": "molformer_concat_asl",
+  "base_model_b": "molformer_cross_attn_bce",
+  "weight_a": 0.5,
+  "weight_b": 0.5,
+  "threshold": 0.536
+}

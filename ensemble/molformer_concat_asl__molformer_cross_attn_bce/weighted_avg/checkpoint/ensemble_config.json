@@ -1,0 +1,9 @@
+{
+  "method": "weighted_avg",
+  "base_model_a": "molformer_concat_asl",
+  "base_model_b": "molformer_cross_attn_bce",
+  "weight_a": 0.15000000000000002,
+  "weight_b": 0.85,
+  "selection_metric": "val_pr_auc",
+  "threshold": 0.157
+}
