@@ -177,6 +177,7 @@ def run_inference_single_model(
     config: Config,
     dataset: HeldOutDataset,
     device: torch.device,
+    checkpoints_dir: str = "checkpoints",
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray, float]:
     """Run inference for a single model checkpoint on the held-out dataset.
 
@@ -189,7 +190,7 @@ def run_inference_single_model(
     from ensemble._common import build_model_from_checkpoint
     
     # We ignore the passed-in config, as build_model_from_checkpoint reads it directly
-    model, config = build_model_from_checkpoint(model_name, device)
+    model, config = build_model_from_checkpoint(model_name, device, checkpoints_dir=checkpoints_dir)
 
     # Load val-tuned threshold
     threshold = load_threshold(config.metrics_dir)
@@ -249,8 +250,13 @@ def parse_args():
     )
     parser.add_argument("--device", default=None, help="Device to use (cpu/cuda)")
     parser.add_argument(
-        "--output", default="held_out_testset/held_out_predictions.csv",
-        help="Output CSV path (default: held_out_testset/held_out_predictions.csv)"
+        "--split_type", choices=["cluster", "random"], default="cluster",
+        help="Split type to run inference on: 'cluster' (default) or 'random'"
+    )
+    parser.add_argument(
+        "--output", default=None,
+        help="Output CSV path (default: held_out_testset/held_out_predictions.csv for cluster, "
+             "held_out_testset/held_out_predictions_random_split.csv for random)"
     )
     parser.add_argument(
         "--held_out_csv", default="held_out_testset/held_out_test_set.csv",
@@ -273,11 +279,21 @@ def main():
     seed_everything(args.seed)
     device = get_device(args.device or "auto")
 
+    # Determine checkpoints directory and default output path based on split_type
+    if args.split_type == "random":
+        checkpoints_dir = "checkpoints/random_split"
+        output_path = args.output or "held_out_testset/held_out_predictions_random_split.csv"
+    else:
+        checkpoints_dir = "checkpoints"
+        output_path = args.output or "held_out_testset/held_out_predictions.csv"
+
     print(f"Device: {device}")
+    print(f"Split type: {args.split_type}")
+    print(f"Checkpoints dir: {checkpoints_dir}")
     print(f"Held-out CSV: {args.held_out_csv}")
+    print(f"Output path: {output_path}")
 
     # Discover available models
-    checkpoints_dir = "checkpoints"
     all_available = discover_available_models(checkpoints_dir)
 
     if args.models:
@@ -320,7 +336,7 @@ def main():
     from ensemble._common import load_config_for_checkpoint
 
     for model_name in models_to_run:
-        config, _ = load_config_for_checkpoint(model_name, device)
+        config, _ = load_config_for_checkpoint(model_name, device, checkpoints_dir=checkpoints_dir)
 
         print(f"\n{'='*60}")
         print(f"Running: {model_name}")
@@ -339,7 +355,7 @@ def main():
 
         try:
             logits, probs, predictions, threshold = run_inference_single_model(
-                model_name, config, dataset, device
+                model_name, config, dataset, device, checkpoints_dir=checkpoints_dir
             )
 
             # Add columns to result DataFrame
@@ -363,16 +379,16 @@ def main():
             result_df[f"{model_name}_threshold"] = np.nan
 
     # Save results
-    os.makedirs(os.path.dirname(args.output) if os.path.dirname(args.output) else ".", exist_ok=True)
+    os.makedirs(os.path.dirname(output_path) if os.path.dirname(output_path) else ".", exist_ok=True)
     try:
-        result_df.to_csv(args.output, index=False)
+        result_df.to_csv(output_path, index=False)
         print(f"\n{'='*60}")
-        print(f"Results saved to: {args.output}")
+        print(f"Results saved to: {output_path}")
     except PermissionError:
-        fallback_output = args.output.replace(".csv", "_fallback.csv")
+        fallback_output = output_path.replace(".csv", "_fallback.csv")
         result_df.to_csv(fallback_output, index=False)
         print(f"\n{'='*60}")
-        print(f"WARNING: Permission denied when saving to {args.output}.")
+        print(f"WARNING: Permission denied when saving to {output_path}.")
         print(f"Results saved to fallback: {fallback_output}")
     print(f"Columns: {list(result_df.columns)}")
 

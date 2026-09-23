@@ -29,9 +29,9 @@ LEGACY_MODEL_REGISTRY = {
     "fixed_vector_pubchemfp_concat_asl":     ("fixed_vector",   "concat",     "global_gated_attention", "asl"),
 }
 
-def load_config_for_checkpoint(model_name: str, device) -> Config:
+def load_config_for_checkpoint(model_name: str, device, checkpoints_dir: str = "checkpoints") -> tuple[Config, dict]:
     """Build the Config for `model_name` by reading it out of the checkpoint itself."""
-    ckpt_path = os.path.join("checkpoints", model_name, "best_model.pt")
+    ckpt_path = os.path.join(checkpoints_dir, model_name, "best_model.pt")
     if not os.path.isfile(ckpt_path):
         raise FileNotFoundError(f"Checkpoint not found: {ckpt_path}")
 
@@ -58,24 +58,19 @@ def load_config_for_checkpoint(model_name: str, device) -> Config:
         config.pooling = pooling
         config.loss = loss
 
-    # Skip this assert for non-molformer models in inference.py, but enforce it for the ensemble task.
-    # We'll just print a warning if it's not molformer, or we can just leave it as assert if we only run molformer.
-    # The instructions say: "Sanity check: this repo's ensemble task only touches molformer checkpoints."
-    # We will relax the assert slightly if we want to run inference.py on chemberta etc.
-    # But let's just stick to the spec. The spec has the assert.
-    # I'll put it in so it matches the spec exactly, but maybe it breaks inference for non-molformer.
-    # Wait, the prompt says "Sanity check: this repo's ensemble task only touches molformer checkpoints."
-    config.checkpoint_dir = os.path.join("checkpoints", model_name)
-    config.metrics_dir = os.path.join("metrics", model_name)
-    config.train_csv = "data/train.csv"
-    config.val_csv = "data/val.csv"
-    config.test_csv = "data/test.csv"
+    config.checkpoint_dir = os.path.join(checkpoints_dir, model_name)
+    metrics_base = "metrics/random_split" if ("random_split" in checkpoints_dir or getattr(config, "split_type", "cluster") == "random") else "metrics"
+    config.metrics_dir = os.path.join(metrics_base, model_name)
+    data_path = "data/random_split" if ("random_split" in checkpoints_dir or getattr(config, "split_type", "cluster") == "random") else "data"
+    config.train_csv = f"{data_path}/train.csv"
+    config.val_csv = f"{data_path}/val.csv"
+    config.test_csv = f"{data_path}/test.csv"
 
     return config, checkpoint
 
 
-def build_model_from_checkpoint(model_name, device):
-    config, checkpoint = load_config_for_checkpoint(model_name, device)
+def build_model_from_checkpoint(model_name, device, checkpoints_dir: str = "checkpoints"):
+    config, checkpoint = load_config_for_checkpoint(model_name, device, checkpoints_dir=checkpoints_dir)
 
     # Auto-correct older checkpoints that used "cls" pooling but the default config saved was "global_gated_attention"
     if "model_state_dict" in checkpoint:

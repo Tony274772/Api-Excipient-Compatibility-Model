@@ -96,12 +96,20 @@ class Config:
     def resolve_csv_paths(self):
         """Only fills in train/val/test CSV defaults. Safe to call any number of times."""
         data_path = f"{self.data_dir}/random_split" if self.split_type == "random" else self.data_dir
-        if self.train_csv is None:
+        if self.train_csv is None or self.train_csv in [f"{self.data_dir}/train.csv", f"{self.data_dir}/random_split/train.csv"]:
             self.train_csv = f"{data_path}/train.csv"
-        if self.val_csv is None:
+        if self.val_csv is None or self.val_csv in [f"{self.data_dir}/val.csv", f"{self.data_dir}/random_split/val.csv"]:
             self.val_csv = f"{data_path}/val.csv"
-        if self.test_csv is None:
+        if self.test_csv is None or self.test_csv in [f"{self.data_dir}/test.csv", f"{self.data_dir}/random_split/test.csv"]:
             self.test_csv = f"{data_path}/test.csv"
+        if self.fixed_vector_path is None and self.encoder == "fixed_vector":
+            path_map = {
+                "pubchemfp": f"{self.data_dir}/pubchem_fps.csv",
+                "maccs": f"{self.data_dir}/maccs_keys.csv",
+                "mol2vec": f"{self.data_dir}/mol2vec_embeddings.csv",
+                "morgan": f"{self.data_dir}/morgan_fps.csv",
+            }
+            self.fixed_vector_path = path_map.get(self.fixed_vector_source)
 
     def resolve_checkpoint_paths(self):
         """Derive checkpoint_dir and metrics_dir from encoder/fusion/loss/pooling."""

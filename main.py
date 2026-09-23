@@ -58,6 +58,8 @@ def parse_args():
                         help="'train' for single train/eval, 'cv' for 5-fold CV")
     parser.add_argument("--split_type", choices=["cluster", "random"], default=None,
                         help="Type of data split: 'cluster' (default) or 'random'")
+    parser.add_argument("--run_name", type=str, default=None,
+                        help="Explicit folder name for checkpoint and metrics (e.g. molformer_cross_attn_asl)")
 
     # Encoder (Axis A)
     parser.add_argument("--encoder", choices=list(ENCODER_REGISTRY.keys()), default=None)
@@ -128,6 +130,11 @@ def main():
     apply_args_to_config(args, config)
     config.resolve_checkpoint_paths()
     config.resolve_csv_paths()
+
+    if args.run_name:
+        prefix = "random_split/" if config.split_type == "random" else ""
+        config.checkpoint_dir = f"checkpoints/{prefix}{args.run_name}"
+        config.metrics_dir = f"metrics/{prefix}{args.run_name}"
 
     seed_everything(config.seed)
     device = get_device(config.device)
