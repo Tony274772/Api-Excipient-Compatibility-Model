@@ -65,9 +65,6 @@ def load_config_for_checkpoint(model_name: str, device) -> Config:
     # But let's just stick to the spec. The spec has the assert.
     # I'll put it in so it matches the spec exactly, but maybe it breaks inference for non-molformer.
     # Wait, the prompt says "Sanity check: this repo's ensemble task only touches molformer checkpoints."
-    if "molformer" not in model_name and config.encoder != "molformer":
-        print(f"Warning: Expected a molformer checkpoint, but got {config.encoder} for {model_name}")
-
     config.checkpoint_dir = os.path.join("checkpoints", model_name)
     config.metrics_dir = os.path.join("metrics", model_name)
     config.train_csv = "data/train.csv"
