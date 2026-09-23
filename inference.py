@@ -42,7 +42,15 @@ MODEL_REGISTRY = {
     "molformer_cross_attn_pairwise_bce":    ("molformer", "cross_attn", "explicit_pairwise",      "bce"),
     "molformer_concat_asl":                 ("molformer", "concat",     "global_gated_attention", "asl"),
     # ── ChemBERTa variants ──
+    "chemberta_concat_asl":                 ("chemberta", "concat",     "global_gated_attention", "asl"),
     "chemberta_cross_attn_asl":             ("chemberta", "cross_attn", "global_gated_attention", "asl"),
+    "chemberta_cross_attn_bce":             ("chemberta", "cross_attn", "global_gated_attention", "bce"),
+    "chemberta_cross_attn_focal":           ("chemberta", "cross_attn", "global_gated_attention", "focal"),
+    "chemberta_cross_attn_weighted_bce":    ("chemberta", "cross_attn", "global_gated_attention", "weighted_bce"),
+    "chemberta_cross_attn_global_gated_asl":("chemberta", "cross_attn", "global_gated_attention", "asl"),
+    "chemberta_cross_attn_global_gated_bce":("chemberta", "cross_attn", "global_gated_attention", "bce"),
+    "chemberta_cross_attn_pairwise_asl":    ("chemberta", "cross_attn", "explicit_pairwise",      "asl"),
+    "chemberta_cross_attn_pairwise_bce":    ("chemberta", "cross_attn", "explicit_pairwise",      "bce"),
     # ── GIN variants ──
     "pretrained_gin_cross_attn_asl":        ("pretrained_gin", "cross_attn", "global_gated_attention", "asl"),
     "pretrained_gin_concat_asl":            ("pretrained_gin", "concat",     "global_gated_attention", "asl"),
@@ -222,8 +230,10 @@ def discover_available_models(checkpoints_dir: str) -> list[str]:
     if not os.path.isdir(checkpoints_dir):
         return available
     for name in sorted(os.listdir(checkpoints_dir)):
+        if name == "random_split":
+            continue
         ckpt_path = os.path.join(checkpoints_dir, name, "best_model.pt")
-        if os.path.isfile(ckpt_path) and name in MODEL_REGISTRY:
+        if os.path.isfile(ckpt_path):
             available.append(name)
     return available
 
@@ -274,9 +284,6 @@ def main():
         # Validate user-specified models
         models_to_run = []
         for m in args.models:
-            if m not in MODEL_REGISTRY:
-                print(f"Warning: '{m}' is not in MODEL_REGISTRY, skipping")
-                continue
             ckpt_path = os.path.join(checkpoints_dir, m, "best_model.pt")
             if not os.path.isfile(ckpt_path):
                 print(f"Warning: checkpoint not found for '{m}', skipping")
@@ -310,20 +317,25 @@ def main():
     # Run inference for each model
     encoder_cache = {}  # Cache encoders by type to avoid reloading
 
+    from ensemble._common import load_config_for_checkpoint
+
     for model_name in models_to_run:
-        encoder_type, fusion, pooling, loss = MODEL_REGISTRY[model_name]
+        config, _ = load_config_for_checkpoint(model_name, device)
+
         print(f"\n{'='*60}")
         print(f"Running: {model_name}")
-        print(f"  encoder={encoder_type}, fusion={fusion}, pooling={pooling}, loss={loss}")
-
-        # Build config for this model using the new helper
-        from ensemble._common import load_config_for_checkpoint
-        config, _ = load_config_for_checkpoint(model_name, device)
+        print(f"  encoder={config.encoder}, fusion={config.fusion}, pooling={config.pooling}, loss={config.loss}")
 
         # Set fixed_vector_path for fixed_vector encoder
         if config.encoder == "fixed_vector":
-            config.fixed_vector_source = "pubchemfp"
-            config.fixed_vector_path = "data/pubchem_fps.csv"
+            src = getattr(config, "fixed_vector_source", "pubchemfp")
+            path_map = {
+                "pubchemfp": "data/pubchem_fps.csv",
+                "maccs": "data/maccs_keys.csv",
+                "mol2vec": "data/mol2vec_embeddings.csv",
+                "morgan": "data/morgan_fps.csv",
+            }
+            config.fixed_vector_path = path_map.get(src, "data/pubchem_fps.csv")
 
         try:
             logits, probs, predictions, threshold = run_inference_single_model(
