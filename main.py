@@ -29,7 +29,7 @@ from src.cross_validate import cross_validate
 
 
 # GNN encoder names that use the new trainable encoder path
-GNN_ENCODERS = {"dmpnn_chemprop", "dmpnn_scratch", "attentivefp", "gine", "gatv2", "pna"}
+GNN_ENCODERS = {"dmpnn_chemprop", "dmpnn_scratch", "attentivefp", "gine", "gatv2", "pna", "pretrained_gat"}
 
 
 def build_encoder(config, device):

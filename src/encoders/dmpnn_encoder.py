@@ -343,7 +343,7 @@ class CheMeleonDMPNNEncoder(nn.Module):
 
         from chemprop.data import MoleculeDatapoint
 
-        dp = MoleculeDatapoint(smiles)
+        dp = MoleculeDatapoint.from_smi(smiles)
         mg = self.featurizer(dp.mol)
         self._graph_cache[smiles] = mg
         return mg
@@ -378,7 +378,7 @@ class CheMeleonDMPNNEncoder(nn.Module):
                 empty_indices.append(i)
             else:
                 valid_indices.append(i)
-                datapoints.append(MoleculeDatapoint(smi))
+                datapoints.append(MoleculeDatapoint.from_smi(smi))
 
         all_node_embeds = []
         all_pooled = []
@@ -391,7 +391,7 @@ class CheMeleonDMPNNEncoder(nn.Module):
             # Build batch mol graph
             mol_graphs = [self.featurizer(dp.mol) for dp in datapoints]
             bmg = BatchMolGraph(mol_graphs)
-            bmg = bmg.to(device)
+            bmg.to(device)
 
             # Run message passing
             with torch.set_grad_enabled(not self.frozen and self.training):
@@ -517,27 +517,3 @@ class DMPNNEncoder(nn.Module):
 
     def forward(self, *args, **kwargs):
         return self._impl(*args, **kwargs)
-
-    def parameters(self, recurse=True):
-        return self._impl.parameters(recurse)
-
-    def named_parameters(self, prefix='', recurse=True):
-        return self._impl.named_parameters(prefix, recurse)
-
-    def to(self, *args, **kwargs):
-        self._impl = self._impl.to(*args, **kwargs)
-        return self
-
-    def train(self, mode=True):
-        self._impl.train(mode)
-        return self
-
-    def eval(self):
-        self._impl.eval()
-        return self
-
-    def state_dict(self, *args, **kwargs):
-        return self._impl.state_dict(*args, **kwargs)
-
-    def load_state_dict(self, *args, **kwargs):
-        return self._impl.load_state_dict(*args, **kwargs)

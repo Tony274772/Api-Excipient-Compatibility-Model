@@ -173,16 +173,14 @@ class Config:
         if self.encoder == "fixed_vector":
             encoder_name = f"fixed_vector_{self.fixed_vector_source}"
 
-        if self.fusion == "cross_attn":
-            if self.pooling == "explicit_pairwise":
-                pool_str = "pairwise"
-            elif self.pooling == "global_gated_attention":
-                pool_str = "global_gated"
-            else:
-                pool_str = self.pooling
-            combo = f"{encoder_name}_{self.fusion}_{pool_str}_{self.loss}"
+        if self.pooling == "explicit_pairwise":
+            pool_str = "pairwise"
+        elif self.pooling == "global_gated_attention":
+            pool_str = "global_gated"
         else:
-            combo = f"{encoder_name}_{self.fusion}_{self.loss}"
+            pool_str = self.pooling
+
+        combo = f"{encoder_name}_{self.fusion}_{pool_str}_{self.loss}"
         
         prefix = "random_split/" if self.split_type == "random" else ""
         self.checkpoint_dir = f"checkpoints/{prefix}{combo}"
