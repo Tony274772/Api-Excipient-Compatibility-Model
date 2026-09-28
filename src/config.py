@@ -180,7 +180,10 @@ class Config:
         else:
             pool_str = self.pooling
 
-        combo = f"{encoder_name}_{self.fusion}_{pool_str}_{self.loss}"
+        if self.encoder == "fixed_vector":
+            combo = f"{encoder_name}_{self.fusion}_{self.loss}"
+        else:
+            combo = f"{encoder_name}_{self.fusion}_{pool_str}_{self.loss}"
         
         prefix = "random_split/" if self.split_type == "random" else ""
         self.checkpoint_dir = f"checkpoints/{prefix}{combo}"
