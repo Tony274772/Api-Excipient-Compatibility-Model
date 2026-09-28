@@ -20,7 +20,11 @@ class Config:
     reaction_lookup_path: str = "data/reaction_lookup.csv"
 
     # --- Axis A: encoder selection ---
-    encoder: Literal["molformer", "pretrained_gin", "chemberta", "fixed_vector"] = "molformer"
+    encoder: Literal[
+        "molformer", "pretrained_gin", "chemberta", "fixed_vector",
+        "dmpnn_chemprop", "dmpnn_scratch",
+        "attentivefp", "gine", "gatv2", "pna", "pretrained_gat"
+    ] = "molformer"
     molformer_model_path: str = "models/pretrained/molformer" if os.path.isdir("models/pretrained/molformer") else "ibm/MoLFormer-XL-both-10pct"
     chemberta_model_path: str = "models/pretrained/chemberta" if os.path.isdir("models/pretrained/chemberta") else "DeepChem/ChemBERTa-77M-MTR"
     gin_pretrained_name: str = "models/pretrained/gin/gin_supervised_contextpred_pre_trained.pth" if os.path.isfile("models/pretrained/gin/gin_supervised_contextpred_pre_trained.pth") else "gin_supervised_contextpred"
@@ -89,6 +93,58 @@ class Config:
     split_type: Literal["cluster", "random"] = "cluster"
     checkpoint_dir: str = "checkpoints/molformer"   # set per-run
     metrics_dir: str = "metrics/molformer"           # set per-run
+
+    # --- New trainable molecular GNN settings ---
+    gnn_hidden_dim: int = 300
+    gnn_node_feature_dim: int = 39
+    gnn_edge_feature_dim: int = 10
+    gnn_num_layers: int = 3
+    gnn_dropout: float = 0.10
+
+    # D-MPNN specific
+    dmpnn_depth: int = 3
+    dmpnn_bias: bool = False
+    dmpnn_undirected: bool = False
+    dmpnn_use_pretrained: bool = True
+    dmpnn_pretrained_checkpoint: Optional[str] = "models/pretrained/chemeleon_mp.pt"
+    dmpnn_encoder_lr: float = 1.0e-5  # Separate LR for CheMeleon pretrained encoder
+
+    # AttentiveFP specific
+    attentivefp_num_layers: int = 2
+    attentivefp_num_timesteps: int = 2
+
+    # GATv2 specific
+    gatv2_heads: int = 4
+    gatv2_negative_slope: float = 0.2
+
+    # GINE specific
+    gine_train_eps: bool = True
+    gine_eps: float = 0.0
+
+    # PNA specific
+    pna_towers: int = 5
+    pna_pre_layers: int = 1
+    pna_post_layers: int = 1
+    pna_divide_input: bool = False
+    pna_aggregators: tuple = ("mean", "min", "max", "std")
+    pna_scalers: tuple = ("identity", "amplification", "attenuation")
+    pna_degree_hist: Optional[list] = None  # computed from training data at runtime
+
+    # Feature schema version guard
+    gnn_feature_schema: str = "attentivefp39_edge10_v1"
+
+    # Pretrained GNN configuration
+    gnn_pretrained_frozen: bool = True
+    gnn_offline: bool = False
+
+    # CheMeleon provenance tracking
+    chemeleon_checkpoint_path: Optional[str] = None
+    chemeleon_checkpoint_md5: Optional[str] = None
+    chemeleon_source_url: str = "https://zenodo.org/records/15460715/files/chemeleon_mp.pt"
+    
+    # Stanford GAT specific
+    stanford_gat_checkpoint_path: str = "models/pretrained/stanford_gat/gat_contextpred.pth"
+    stanford_gat_source_repo: str = "https://github.com/snap-stanford/pretrain-gnns"
 
     def __post_init__(self):
         self.resolve_paths()

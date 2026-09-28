@@ -27,6 +27,41 @@ def _get_fixed_vector():
     return FixedVectorEncoder
 
 
+def _get_dmpnn():
+    from src.encoders.dmpnn_encoder import DMPNNEncoder
+    return DMPNNEncoder
+
+
+def _get_dmpnn_scratch():
+    from src.encoders.dmpnn_encoder import DMPNNEncoder
+    return DMPNNEncoder
+
+
+def _get_attentivefp():
+    from src.encoders.attentivefp_encoder import AttentiveFPEncoder
+    return AttentiveFPEncoder
+
+
+def _get_gine():
+    from src.encoders.gine_encoder import GINEEncoder
+    return GINEEncoder
+
+
+def _get_gatv2():
+    from src.encoders.gatv2_encoder import GATv2Encoder
+    return GATv2Encoder
+
+
+def _get_pna():
+    from src.encoders.pna_encoder import PNAEncoder
+    return PNAEncoder
+
+
+def _get_pretrained_gat():
+    from src.encoders.stanford_gat_encoder import StanfordPretrainedGATEncoder
+    return StanfordPretrainedGATEncoder
+
+
 class _LazyRegistry(dict):
     """Dict that resolves encoder classes lazily on access."""
 
@@ -35,6 +70,13 @@ class _LazyRegistry(dict):
         "pretrained_gin": _get_gin,
         "chemberta": _get_chemberta,
         "fixed_vector": _get_fixed_vector,
+        "dmpnn_chemprop": _get_dmpnn,
+        "dmpnn_scratch": _get_dmpnn_scratch,
+        "attentivefp": _get_attentivefp,
+        "gine": _get_gine,
+        "gatv2": _get_gatv2,
+        "pna": _get_pna,
+        "pretrained_gat": _get_pretrained_gat,
     }
 
     def __getitem__(self, key):

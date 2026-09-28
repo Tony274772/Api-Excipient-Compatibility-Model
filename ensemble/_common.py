@@ -81,8 +81,11 @@ def build_model_from_checkpoint(model_name, device, checkpoints_dir: str = "chec
                 print(f"[{model_name}] Auto-correcting pooling to 'cls' because api_pool is missing from state_dict.")
                 config.pooling = "cls"
 
+    # GNN encoder names
+    GNN_ENCODERS = {"dmpnn_chemprop", "dmpnn_scratch", "attentivefp", "gine", "gatv2", "pna"}
+
     encoder_cls = ENCODER_REGISTRY[config.encoder]
-    # Handle different encoder types correctly if we use this beyond molformer
+    # Handle different encoder types correctly
     if config.encoder == "molformer":
         encoder = encoder_cls(config.molformer_model_path, device=str(device))
     elif config.encoder == "pretrained_gin":
@@ -95,6 +98,8 @@ def build_model_from_checkpoint(model_name, device, checkpoints_dir: str = "chec
             vector_path=config.fixed_vector_path,
             device=str(device),
         )
+    elif config.encoder in GNN_ENCODERS:
+        encoder = encoder_cls(config, device=str(device))
     else:
         raise ValueError(f"Unknown encoder: {config.encoder}")
         

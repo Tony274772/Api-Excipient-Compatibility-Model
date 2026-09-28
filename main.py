@@ -6,6 +6,8 @@ Usage:
     python main.py --encoder fixed_vector --fusion concat --fixed_vector_path data/mol2vec.csv
     python main.py --encoder molformer --loss focal   # loss ablation
     python main.py --mode cv                          # 5-fold cross-validation
+    python main.py --encoder gine --fusion cross_attn --loss asl
+    python main.py --encoder dmpnn_chemprop --fusion cross_attn --loss asl
 """
 
 import argparse
@@ -26,6 +28,10 @@ from src.evaluate import evaluate_model, save_metrics
 from src.cross_validate import cross_validate
 
 
+# GNN encoder names that use the new trainable encoder path
+GNN_ENCODERS = {"dmpnn_chemprop", "dmpnn_scratch", "attentivefp", "gine", "gatv2", "pna"}
+
+
 def build_encoder(config, device):
     """Instantiate the selected encoder."""
     encoder_cls = ENCODER_REGISTRY[config.encoder]
@@ -42,6 +48,9 @@ def build_encoder(config, device):
             vector_path=config.fixed_vector_path,
             device=str(device),
         )
+    elif config.encoder in GNN_ENCODERS:
+        # All new GNN encoders take (config, device)
+        encoder = encoder_cls(config, device=str(device))
     else:
         raise ValueError(f"Unknown encoder: {config.encoder}")
 
@@ -150,6 +159,24 @@ def main():
 
     # --- Single train/eval run ---
 
+    # Compute positive prior from training data (needed before encoder for PNA)
+    train_df = pd.read_csv(config.train_csv)
+    config.positive_prior = float(train_df["Outcome1"].mean())
+    print(f"Positive prior (from train): {config.positive_prior:.4f}")
+
+    # PNA requires degree histogram computed from training data BEFORE encoder construction
+    if config.encoder == "pna":
+        print("Computing PNA degree histogram from training data...")
+        from src.encoders.pna_utils import degree_histogram_from_dataframe
+        deg_hist = degree_histogram_from_dataframe(train_df)
+        config.pna_degree_hist = deg_hist.tolist()
+        print(f"PNA degree histogram: {len(config.pna_degree_hist)} bins, max degree = {len(config.pna_degree_hist) - 1}")
+
+    # Record CheMeleon provenance
+    if config.encoder == "dmpnn_chemprop":
+        config.chemeleon_checkpoint_path = config.dmpnn_pretrained_checkpoint
+        config.chemeleon_checkpoint_md5 = "6a80b54fdb7de37ef0374d302f01e8ce"
+
     # Build encoder
     encoder = build_encoder(config, device)
 
@@ -158,11 +185,6 @@ def main():
         config.fusion = "concat"
         # Re-resolve paths since fusion may have changed
         config.resolve_checkpoint_paths()
-
-    # Compute positive prior from training data
-    train_df = pd.read_csv(config.train_csv)
-    config.positive_prior = float(train_df["Outcome1"].mean())
-    print(f"Positive prior (from train): {config.positive_prior:.4f}")
 
     # Build model
     model = CompatibilityModel(config, encoder)
@@ -178,8 +200,11 @@ def main():
     train_loader, val_loader, test_loader = build_dataloaders(config)
     print(f"Data: {len(train_loader.dataset)} train, {len(val_loader.dataset)} val, {len(test_loader.dataset)} test")
 
-    # Train
-    model, history = train(model, train_loader, val_loader, config, device)
+    # Train — use separate LR groups for CheMeleon pretrained encoder
+    if config.encoder == "dmpnn_chemprop":
+        model, history = _train_with_separate_lr(model, train_loader, val_loader, config, device)
+    else:
+        model, history = train(model, train_loader, val_loader, config, device)
 
     # Evaluate
     val_metrics, test_metrics, best_thresh = evaluate_model(
@@ -209,6 +234,98 @@ def main():
     save_metrics({"history": history}, os.path.join(config.metrics_dir, "training_history.json"))
 
     print(f"\nMetrics saved to {config.metrics_dir}/")
+
+
+def _train_with_separate_lr(model, train_loader, val_loader, config, device):
+    """Train with separate learning-rate groups for CheMeleon encoder vs downstream.
+
+    CheMeleon message-passing: lr = dmpnn_encoder_lr (1e-5 default)
+    Everything else:            lr = config.lr (1.5e-4 default)
+    """
+    from torch.optim import AdamW
+    from torch.optim.lr_scheduler import ReduceLROnPlateau
+    from src.loss import get_loss_fn
+    from src.evaluate import get_val_pr_auc
+    from src.train import compute_pos_weight, train_one_epoch
+    import time
+
+    os.makedirs(config.checkpoint_dir, exist_ok=True)
+
+    # Separate encoder and downstream parameters
+    encoder_params = []
+    downstream_params = []
+
+    for name, param in model.named_parameters():
+        if not param.requires_grad:
+            continue
+        if "encoder" in name:
+            encoder_params.append(param)
+        else:
+            downstream_params.append(param)
+
+    param_groups = [
+        {"params": encoder_params, "lr": config.dmpnn_encoder_lr},
+        {"params": downstream_params, "lr": config.lr},
+    ]
+
+    optimizer = AdamW(param_groups, weight_decay=config.weight_decay)
+    scheduler = ReduceLROnPlateau(optimizer, mode="max", factor=config.lr_factor, patience=config.lr_patience)
+
+    loss_fn = get_loss_fn(config)
+    pos_weight = compute_pos_weight(train_loader) if config.loss == "weighted_bce" else None
+
+    best_pr_auc = -1.0
+    best_epoch = 0
+    patience_counter = 0
+    best_ckpt_path = os.path.join(config.checkpoint_dir, "best_model.pt")
+
+    history = {"train_loss": [], "val_pr_auc": [], "lr": []}
+
+    print(f"\nTraining with encoder={config.encoder}, fusion={config.fusion}, loss={config.loss}")
+    print(f"CheMeleon encoder LR: {config.dmpnn_encoder_lr}, Downstream LR: {config.lr}")
+    print(f"Device: {device}, Epochs: {config.max_epochs}, Batch size: {config.batch_size}")
+    print(f"Checkpoint dir: {config.checkpoint_dir}\n")
+
+    for epoch in range(1, config.max_epochs + 1):
+        t0 = time.time()
+        avg_loss = train_one_epoch(model, train_loader, optimizer, loss_fn, device, config, pos_weight)
+        val_pr_auc = get_val_pr_auc(model, val_loader, device)
+        scheduler.step(val_pr_auc)
+        current_lr = optimizer.param_groups[1]["lr"]  # downstream LR
+
+        history["train_loss"].append(avg_loss)
+        history["val_pr_auc"].append(val_pr_auc)
+        history["lr"].append(current_lr)
+
+        elapsed = time.time() - t0
+        print(
+            f"Epoch {epoch:3d}/{config.max_epochs} | "
+            f"Loss: {avg_loss:.4f} | Val PR-AUC: {val_pr_auc:.4f} | "
+            f"LR: {current_lr:.2e} | Time: {elapsed:.1f}s"
+        )
+
+        if val_pr_auc > best_pr_auc + config.early_stop_min_delta:
+            best_pr_auc = val_pr_auc
+            best_epoch = epoch
+            patience_counter = 0
+            torch.save({
+                "epoch": epoch,
+                "model_state_dict": model.state_dict(),
+                "optimizer_state_dict": optimizer.state_dict(),
+                "val_pr_auc": val_pr_auc,
+                "config": config,
+            }, best_ckpt_path)
+        else:
+            patience_counter += 1
+            if patience_counter >= config.early_stop_patience:
+                print(f"\nEarly stopping at epoch {epoch} (patience={config.early_stop_patience})")
+                break
+
+    print(f"\nRestoring best model from epoch {best_epoch} (PR-AUC={best_pr_auc:.4f})")
+    checkpoint = torch.load(best_ckpt_path, map_location=device, weights_only=False)
+    model.load_state_dict(checkpoint["model_state_dict"])
+
+    return model, history
 
 
 if __name__ == "__main__":

@@ -31,7 +31,6 @@ from src.descriptors import DESCRIPTOR_NAMES
 
 MODEL_REGISTRY = {
     # ── MoLFormer variants ──
-    # Note: all cross_attn checkpoints trained with global_gated_attention pooling
     "molformer_cross_attn_asl":             ("molformer", "cross_attn", "global_gated_attention", "asl"),
     "molformer_cross_attn_bce":             ("molformer", "cross_attn", "global_gated_attention", "bce"),
     "molformer_cross_attn_focal":           ("molformer", "cross_attn", "global_gated_attention", "focal"),
@@ -57,6 +56,9 @@ MODEL_REGISTRY = {
     # ── Fixed-vector (pubchemfp) variants ──
     "fixed_vector_pubchemfp_concat_asl":    ("fixed_vector",   "concat",     "global_gated_attention", "asl"),
 }
+
+# GNN encoder names
+GNN_ENCODERS = {"dmpnn_chemprop", "dmpnn_scratch", "attentivefp", "gine", "gatv2", "pna"}
 
 
 class HeldOutDataset(torch.utils.data.Dataset):
@@ -153,6 +155,8 @@ def build_encoder(config, device):
             vector_path=config.fixed_vector_path,
             device=str(device),
         )
+    elif config.encoder in GNN_ENCODERS:
+        encoder = encoder_cls(config, device=str(device))
     else:
         raise ValueError(f"Unknown encoder: {config.encoder}")
 

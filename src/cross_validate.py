@@ -46,6 +46,10 @@ def butina_cluster(unique_smiles, dist_thresh=0.15):
     return smiles_to_cluster
 
 
+# GNN encoder names that use the new trainable encoder path
+GNN_ENCODERS = {"dmpnn_chemprop", "dmpnn_scratch", "attentivefp", "gine", "gatv2", "pna"}
+
+
 def build_encoder(config, device):
     """Build an encoder instance from config."""
     from src.encoders import ENCODER_REGISTRY
@@ -62,6 +66,8 @@ def build_encoder(config, device):
             vector_path=config.fixed_vector_path,
             device=str(device),
         )
+    elif config.encoder in GNN_ENCODERS:
+        encoder = encoder_cls(config, device=str(device))
     else:
         raise ValueError(f"Unknown encoder: {config.encoder}")
     encoder.to(device)
@@ -134,6 +140,13 @@ def cross_validate(config: Config, n_folds: int = 5):
 
         # Compute positive prior
         fold_config.positive_prior = actual_train["Outcome1"].mean()
+
+        # PNA: compute fold-local degree histogram from actual_train only
+        if fold_config.encoder == "pna":
+            from src.encoders.pna_utils import degree_histogram_from_dataframe
+            deg_hist = degree_histogram_from_dataframe(actual_train)
+            fold_config.pna_degree_hist = deg_hist.tolist()
+            print(f"  PNA fold {fold_i} degree histogram: {len(fold_config.pna_degree_hist)} bins")
 
         # Build encoder, model, dataloaders
         encoder = build_encoder(fold_config, device)
@@ -228,7 +241,8 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="5-Fold Cross-Validation")
     parser.add_argument("--encoder", type=str, default="molformer",
-                        choices=["molformer", "pretrained_gin", "chemberta", "fixed_vector"])
+                        choices=["molformer", "pretrained_gin", "chemberta", "fixed_vector",
+                                 "dmpnn_chemprop", "dmpnn_scratch", "attentivefp", "gine", "gatv2", "pna"])
     parser.add_argument("--fusion", type=str, default="cross_attn",
                         choices=["cross_attn", "concat"])
     parser.add_argument("--pooling", type=str, default=None,
