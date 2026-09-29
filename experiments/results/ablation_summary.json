@@ -1,0 +1,330 @@
+[
+  {
+    "id": "A",
+    "name": "exp_A_bce_sampler_on",
+    "loss": "bce",
+    "sampler": "ON",
+    "best_epoch": 5,
+    "best_threshold": 0.085,
+    "runtime_sec": 28.6,
+    "val_pr_auc": 0.7134,
+    "val_f1": 0.702,
+    "val_mcc": 0.6727,
+    "val_precision": 0.7067,
+    "val_recall": 0.6974,
+    "val_accuracy": 0.9466,
+    "test_pr_auc": 0.7213,
+    "test_f1": 0.625,
+    "test_mcc": 0.5755,
+    "test_precision": 0.5556,
+    "test_recall": 0.7143,
+    "test_accuracy": 0.9018,
+    "val_cm": [
+      [
+        744,
+        22
+      ],
+      [
+        23,
+        53
+      ]
+    ],
+    "test_cm": [
+      [
+        551,
+        44
+      ],
+      [
+        22,
+        55
+      ]
+    ]
+  },
+  {
+    "id": "B",
+    "name": "exp_B_bce_sampler_off",
+    "loss": "bce",
+    "sampler": "OFF",
+    "best_epoch": 5,
+    "best_threshold": 0.189,
+    "runtime_sec": 21.8,
+    "val_pr_auc": 0.7724,
+    "val_f1": 0.6923,
+    "val_mcc": 0.6788,
+    "val_precision": 0.8333,
+    "val_recall": 0.5921,
+    "val_accuracy": 0.9525,
+    "test_pr_auc": 0.6467,
+    "test_f1": 0.5217,
+    "test_mcc": 0.4718,
+    "test_precision": 0.5902,
+    "test_recall": 0.4675,
+    "test_accuracy": 0.9018,
+    "val_cm": [
+      [
+        757,
+        9
+      ],
+      [
+        31,
+        45
+      ]
+    ],
+    "test_cm": [
+      [
+        570,
+        25
+      ],
+      [
+        41,
+        36
+      ]
+    ]
+  },
+  {
+    "id": "C",
+    "name": "exp_C_asl_sampler_on",
+    "loss": "asl",
+    "sampler": "ON",
+    "best_epoch": 3,
+    "best_threshold": 0.785,
+    "runtime_sec": 17.3,
+    "val_pr_auc": 0.7304,
+    "val_f1": 0.6772,
+    "val_mcc": 0.6671,
+    "val_precision": 0.8431,
+    "val_recall": 0.5658,
+    "val_accuracy": 0.9513,
+    "test_pr_auc": 0.6246,
+    "test_f1": 0.5303,
+    "test_mcc": 0.4891,
+    "test_precision": 0.6364,
+    "test_recall": 0.4545,
+    "test_accuracy": 0.9077,
+    "val_cm": [
+      [
+        758,
+        8
+      ],
+      [
+        33,
+        43
+      ]
+    ],
+    "test_cm": [
+      [
+        575,
+        20
+      ],
+      [
+        42,
+        35
+      ]
+    ]
+  },
+  {
+    "id": "D",
+    "name": "exp_D_asl_sampler_off",
+    "loss": "asl",
+    "sampler": "OFF",
+    "best_epoch": 5,
+    "best_threshold": 0.387,
+    "runtime_sec": 21.2,
+    "val_pr_auc": 0.759,
+    "val_f1": 0.7075,
+    "val_mcc": 0.68,
+    "val_precision": 0.7324,
+    "val_recall": 0.6842,
+    "val_accuracy": 0.9489,
+    "test_pr_auc": 0.6386,
+    "test_f1": 0.5325,
+    "test_mcc": 0.4683,
+    "test_precision": 0.4891,
+    "test_recall": 0.5844,
+    "test_accuracy": 0.8824,
+    "val_cm": [
+      [
+        747,
+        19
+      ],
+      [
+        24,
+        52
+      ]
+    ],
+    "test_cm": [
+      [
+        548,
+        47
+      ],
+      [
+        32,
+        45
+      ]
+    ]
+  },
+  {
+    "id": "E",
+    "name": "exp_E_weighted_bce_sampler_off",
+    "loss": "weighted_bce",
+    "sampler": "OFF",
+    "best_epoch": 11,
+    "best_threshold": 0.072,
+    "runtime_sec": 33.7,
+    "val_pr_auc": 0.6944,
+    "val_f1": 0.641,
+    "val_mcc": 0.6046,
+    "val_precision": 0.625,
+    "val_recall": 0.6579,
+    "val_accuracy": 0.9335,
+    "test_pr_auc": 0.6656,
+    "test_f1": 0.5955,
+    "test_mcc": 0.5416,
+    "test_precision": 0.5248,
+    "test_recall": 0.6883,
+    "test_accuracy": 0.8929,
+    "val_cm": [
+      [
+        736,
+        30
+      ],
+      [
+        26,
+        50
+      ]
+    ],
+    "test_cm": [
+      [
+        547,
+        48
+      ],
+      [
+        24,
+        53
+      ]
+    ]
+  },
+  {
+    "id": "F",
+    "name": "exp_F_weighted_bce_sampler_on",
+    "loss": "weighted_bce",
+    "sampler": "ON",
+    "best_epoch": 3,
+    "best_threshold": 0.977,
+    "runtime_sec": 17.4,
+    "val_pr_auc": 0.6837,
+    "val_f1": 0.6479,
+    "val_mcc": 0.6175,
+    "val_precision": 0.697,
+    "val_recall": 0.6053,
+    "val_accuracy": 0.9406,
+    "test_pr_auc": 0.5012,
+    "test_f1": 0.5031,
+    "test_mcc": 0.4368,
+    "test_precision": 0.4878,
+    "test_recall": 0.5195,
+    "test_accuracy": 0.8824,
+    "val_cm": [
+      [
+        746,
+        20
+      ],
+      [
+        30,
+        46
+      ]
+    ],
+    "test_cm": [
+      [
+        553,
+        42
+      ],
+      [
+        37,
+        40
+      ]
+    ]
+  },
+  {
+    "id": "G",
+    "name": "exp_G_focal_sampler_on",
+    "loss": "focal",
+    "sampler": "ON",
+    "best_epoch": 5,
+    "best_threshold": 0.416,
+    "runtime_sec": 20.2,
+    "val_pr_auc": 0.7334,
+    "val_f1": 0.6968,
+    "val_mcc": 0.6662,
+    "val_precision": 0.6835,
+    "val_recall": 0.7105,
+    "val_accuracy": 0.9442,
+    "test_pr_auc": 0.7012,
+    "test_f1": 0.6429,
+    "test_mcc": 0.5949,
+    "test_precision": 0.5934,
+    "test_recall": 0.7013,
+    "test_accuracy": 0.9107,
+    "val_cm": [
+      [
+        741,
+        25
+      ],
+      [
+        22,
+        54
+      ]
+    ],
+    "test_cm": [
+      [
+        558,
+        37
+      ],
+      [
+        23,
+        54
+      ]
+    ]
+  },
+  {
+    "id": "H",
+    "name": "exp_H_focal_sampler_off",
+    "loss": "focal",
+    "sampler": "OFF",
+    "best_epoch": 5,
+    "best_threshold": 0.186,
+    "runtime_sec": 21.8,
+    "val_pr_auc": 0.7571,
+    "val_f1": 0.6826,
+    "val_mcc": 0.6512,
+    "val_precision": 0.6264,
+    "val_recall": 0.75,
+    "val_accuracy": 0.9371,
+    "test_pr_auc": 0.6828,
+    "test_f1": 0.627,
+    "test_mcc": 0.5804,
+    "test_precision": 0.537,
+    "test_recall": 0.7532,
+    "test_accuracy": 0.8973,
+    "val_cm": [
+      [
+        732,
+        34
+      ],
+      [
+        19,
+        57
+      ]
+    ],
+    "test_cm": [
+      [
+        545,
+        50
+      ],
+      [
+        19,
+        58
+      ]
+    ]
+  }
+]

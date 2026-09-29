@@ -1,0 +1,15 @@
+{
+  "exp_id": "G",
+  "exp_name": "exp_G_focal_sampler_on",
+  "loss": "focal",
+  "use_balanced_sampler": true,
+  "positive_prior": 0.09408866995073892,
+  "lr": 0.00015,
+  "batch_size": 64,
+  "seed": 42,
+  "split_type": "cluster",
+  "train_csv": "data/train.csv",
+  "val_csv": "data/val.csv",
+  "test_csv": "data/test.csv",
+  "elapsed_seconds": 20.16
+}
