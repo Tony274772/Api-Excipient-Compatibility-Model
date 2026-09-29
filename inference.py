@@ -58,7 +58,7 @@ MODEL_REGISTRY = {
 }
 
 # GNN encoder names
-GNN_ENCODERS = {"dmpnn_chemprop", "dmpnn_scratch", "attentivefp", "gine", "gatv2", "pna"}
+GNN_ENCODERS = {"dmpnn_chemprop", "dmpnn_scratch", "attentivefp", "gine", "gatv2", "pna", "pretrained_gat"}
 
 
 class HeldOutDataset(torch.utils.data.Dataset):

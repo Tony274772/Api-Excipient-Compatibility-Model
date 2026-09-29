@@ -82,7 +82,7 @@ def build_model_from_checkpoint(model_name, device, checkpoints_dir: str = "chec
                 config.pooling = "cls"
 
     # GNN encoder names
-    GNN_ENCODERS = {"dmpnn_chemprop", "dmpnn_scratch", "attentivefp", "gine", "gatv2", "pna"}
+    GNN_ENCODERS = {"dmpnn_chemprop", "dmpnn_scratch", "attentivefp", "gine", "gatv2", "pna", "pretrained_gat"}
 
     encoder_cls = ENCODER_REGISTRY[config.encoder]
     # Handle different encoder types correctly
