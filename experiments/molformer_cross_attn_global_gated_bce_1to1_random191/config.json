@@ -1,0 +1,18 @@
+{
+  "experiment": "molformer_cross_attn_global_gated_bce_1to1_random191",
+  "encoder": "molformer",
+  "fusion": "cross_attn",
+  "pooling": "global_gated_attention",
+  "loss": "bce",
+  "use_balanced_sampler": false,
+  "use_descriptors": true,
+  "learning_rate": 0.00015,
+  "batch_size": 64,
+  "max_epochs": 150,
+  "seed": 42,
+  "positive_prior": 0.5,
+  "threshold_step": 0.001,
+  "train_csv": "C:\\Users\\pardhu\\Desktop\\versions_of_api-exc\\project\\experiments\\molformer_cross_attn_global_gated_bce_1to1_random191\\selected_training_pairs.csv",
+  "val_csv": "C:\\Users\\pardhu\\Desktop\\versions_of_api-exc\\project\\data\\val.csv",
+  "test_csv": "C:\\Users\\pardhu\\Desktop\\versions_of_api-exc\\project\\data\\test.csv"
+}

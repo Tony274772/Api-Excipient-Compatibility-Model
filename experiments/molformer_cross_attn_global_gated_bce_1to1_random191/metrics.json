@@ -1,0 +1,155 @@
+{
+  "experiment_name": "molformer_cross_attn_global_gated_bce_1to1_random191",
+  "timestamp": "2026-09-29 11:43:16",
+  "random_seed": 42,
+  "dataset_composition": {
+    "train": {
+      "compatible": 191,
+      "incompatible": 191,
+      "total": 382
+    },
+    "val": {
+      "compatible": 766,
+      "incompatible": 76,
+      "total": 842
+    },
+    "test": {
+      "compatible": 595,
+      "incompatible": 77,
+      "total": 672
+    }
+  },
+  "training_duration_seconds": 10.23,
+  "best_epoch": 6,
+  "validation_metrics": {
+    "pr_auc": 0.6830070975000229,
+    "f1": 0.6794871794871795,
+    "mcc": 0.6470467452041603,
+    "precision": 0.6625,
+    "recall": 0.6973684210526315,
+    "accuracy": 0.9406175771971497,
+    "threshold": 0.516,
+    "confusion_matrix": [
+      [
+        739,
+        27
+      ],
+      [
+        23,
+        53
+      ]
+    ]
+  },
+  "test_metrics": {
+    "pr_auc": 0.5597581897726742,
+    "f1": 0.49382716049382713,
+    "mcc": 0.42531609501963275,
+    "precision": 0.47058823529411764,
+    "recall": 0.5194805194805194,
+    "accuracy": 0.8779761904761905,
+    "threshold": 0.516,
+    "confusion_matrix": [
+      [
+        550,
+        45
+      ],
+      [
+        37,
+        40
+      ]
+    ]
+  },
+  "test_incompatible_detection": {
+    "correct": 40,
+    "missed": 37,
+    "total": 77,
+    "recall": 0.5195
+  },
+  "test_compatible_detection": {
+    "correct_tn": 550,
+    "false_positives": 45,
+    "total": 595,
+    "specificity": 0.9244
+  },
+  "comparison_with_baseline": {
+    "val_pr_auc": {
+      "baseline": 0.7134029276457352,
+      "1to1": 0.6830070975000229,
+      "delta": -0.0304
+    },
+    "val_f1": {
+      "baseline": 0.7019867549668874,
+      "1to1": 0.6794871794871795,
+      "delta": -0.0225
+    },
+    "val_mcc": {
+      "baseline": 0.6726517612609005,
+      "1to1": 0.6470467452041603,
+      "delta": -0.0256
+    },
+    "val_recall": {
+      "baseline": 0.6973684210526315,
+      "1to1": 0.6973684210526315,
+      "delta": 0.0
+    },
+    "val_precision": {
+      "baseline": 0.7066666666666667,
+      "1to1": 0.6625,
+      "delta": -0.0442
+    },
+    "val_accuracy": {
+      "baseline": 0.9465558194774347,
+      "1to1": 0.9406175771971497,
+      "delta": -0.0059
+    },
+    "val_threshold": {
+      "baseline": 0.085,
+      "1to1": 0.516,
+      "delta": 0.431
+    },
+    "test_pr_auc": {
+      "baseline": 0.7213020113552382,
+      "1to1": 0.5597581897726742,
+      "delta": -0.1615
+    },
+    "test_f1": {
+      "baseline": 0.625,
+      "1to1": 0.49382716049382713,
+      "delta": -0.1312
+    },
+    "test_mcc": {
+      "baseline": 0.5754623926930088,
+      "1to1": 0.42531609501963275,
+      "delta": -0.1501
+    },
+    "test_recall": {
+      "baseline": 0.7142857142857143,
+      "1to1": 0.5194805194805194,
+      "delta": -0.1948
+    },
+    "test_precision": {
+      "baseline": 0.5555555555555556,
+      "1to1": 0.47058823529411764,
+      "delta": -0.085
+    },
+    "test_accuracy": {
+      "baseline": 0.9017857142857143,
+      "1to1": 0.8779761904761905,
+      "delta": -0.0238
+    },
+    "test_threshold": {
+      "baseline": 0.085,
+      "1to1": 0.516,
+      "delta": 0.431
+    },
+    "test_correct_incompatible": {
+      "baseline": "55 / 77",
+      "1to1": "40 / 77"
+    },
+    "test_false_positives": {
+      "baseline": 44,
+      "1to1": 45,
+      "delta": 1
+    }
+  }
+}
