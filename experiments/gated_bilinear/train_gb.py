@@ -18,12 +18,19 @@ from torch.optim import AdamW
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 
 from experiments.gated_bilinear.config import GBConfig
-from experiments.gated_bilinear.dataset import build_gb_dataloaders
+from rdkit import RDLogger
+RDLogger.DisableLog('rdApp.*')
+from experiments.gated_bilinear.dataset import build_gb_dataloaders, build_gb_heldout_dataloader
 from experiments.gated_bilinear.features import compute_gb_descriptor_norm_stats
 from experiments.gated_bilinear.loss import AsymmetricFocalLoss
 from experiments.gated_bilinear.model import GatedBilinearModel, FIXED_VECTOR_FAMILIES
 from experiments.gated_bilinear.prior import ExcipientPriorTable
-from experiments.gated_bilinear.evaluate_gb import evaluate_gb_model, save_gb_metrics, get_val_pr_auc_gb
+from experiments.gated_bilinear.evaluate_gb import (
+    evaluate_gb_model,
+    evaluate_heldout_gb,
+    save_gb_metrics,
+    get_val_pr_auc_gb,
+)
 
 from src.encoders import ENCODER_REGISTRY
 from src.utils import seed_everything, get_device
@@ -47,8 +54,9 @@ def train_one_epoch_gb(model, loader, optimizer, loss_fn, device, config):
     n_batches = 0
 
     for batch in loader:
-        labels = batch["label"].to(device)
-        sample_weight = batch["sample_weight"].to(device)
+        batch = {k: v.to(device) if isinstance(v, torch.Tensor) else v for k, v in batch.items()}
+        labels = batch["label"]
+        sample_weight = batch["sample_weight"]
 
         optimizer.zero_grad()
         logits = model(batch)
@@ -115,6 +123,8 @@ def parse_args():
         "molformer", "chemberta",
         "gin", "gat", "dmpnn"
     ], required=True, help="Model family to train")
+    parser.add_argument("--model_name", type=str, default=None,
+                        help="Model name identifier (defaults to family name, e.g. gin)")
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--device", type=str, default=None)
     return parser.parse_args()
@@ -124,6 +134,7 @@ def main():
     args = parse_args()
     config = GBConfig()
     config.gb_family = args.family
+    model_name = args.model_name or config.gb_family
     if args.seed is not None:
         config.seed = args.seed
     if args.device is not None:
@@ -146,6 +157,8 @@ def main():
     config.resolve_checkpoint_paths()
     config.resolve_csv_paths()
     config.resolve_gb_paths()
+    if args.model_name:
+        config.gb_metrics_dir = f"experiments/results/metrics_bilinear/{args.model_name}"
 
     seed_everything(config.seed)
     device = get_device(config.device)
@@ -186,7 +199,8 @@ def main():
     # 2. Build DataLoaders
     print("Building DataLoaders...")
     train_loader, val_loader, test_loader = build_gb_dataloaders(config, prior_table, desc_stats)
-    print(f"Data: {len(train_loader.dataset)} train, {len(val_loader.dataset)} val, {len(test_loader.dataset)} test")
+    heldout_loader = build_gb_heldout_dataloader(config, prior_table, desc_stats)
+    print(f"Data: {len(train_loader.dataset)} train, {len(val_loader.dataset)} val, {len(test_loader.dataset)} test, {len(heldout_loader.dataset)} held-out")
 
     # 3. Build Encoder
     print("Building Encoder...")
@@ -274,11 +288,22 @@ def main():
     checkpoint = torch.load(best_ckpt_path, map_location=device, weights_only=False)
     model.load_state_dict(checkpoint["model_state_dict"])
     
-    print("\nEvaluating...")
+    print("\nEvaluating on Validation and Test sets...")
     val_metrics, test_metrics, best_thresh, screen_thresh = evaluate_gb_model(model, val_loader, test_loader, device, config)
 
+    print("\nEvaluating on Held-Out 24-Pair Set...")
+    heldout_metrics, heldout_df = evaluate_heldout_gb(
+        model=model,
+        heldout_loader=heldout_loader,
+        device=device,
+        threshold=best_thresh,
+        model_name=model_name,
+        output_csv_path=config.gb_heldout_predictions_csv,
+        heldout_source_csv=config.gb_heldout_csv,
+    )
+
     print(f"\n{'='*60}")
-    print("FINAL RESULTS (PGB)")
+    print(f"FINAL RESULTS (PGB - {model_name.upper()})")
     print(f"{'='*60}")
     print(f"Main threshold (MCC w/ TNR >= {config.gb_tnr_floor}): {best_thresh:.4f}")
     print(f"Screen threshold (Recall >= {config.gb_screen_min_recall}): {screen_thresh:.4f}")
@@ -289,13 +314,21 @@ def main():
             print(f"  {k}: {v:.4f}" if isinstance(v, float) else f"  {k}: {v}")
     print(f"  confusion_matrix: {test_metrics['confusion_matrix']}")
 
+    print(f"\nHeld-Out 24-Pair Metrics (at Main threshold {best_thresh:.4f}):")
+    for k, v in heldout_metrics.items():
+        if k != "confusion_matrix":
+            print(f"  {k}: {v:.4f}" if isinstance(v, float) else f"  {k}: {v}")
+    print(f"  confusion_matrix: {heldout_metrics['confusion_matrix']}")
+
     # Save metrics
     os.makedirs(config.gb_metrics_dir, exist_ok=True)
     save_gb_metrics(val_metrics, os.path.join(config.gb_metrics_dir, "val_metrics.json"))
     save_gb_metrics(test_metrics, os.path.join(config.gb_metrics_dir, "test_metrics.json"))
+    save_gb_metrics(heldout_metrics, os.path.join(config.gb_metrics_dir, "heldout_metrics.json"))
     save_gb_metrics({"history": history}, os.path.join(config.gb_metrics_dir, "training_history.json"))
     
-    print(f"\nMetrics saved to {config.gb_metrics_dir}/")
+    print(f"\nMetrics saved to: {config.gb_metrics_dir}/")
+    print(f"Held-out predictions accumulated in: {config.gb_heldout_predictions_csv}")
 
 
 if __name__ == "__main__":

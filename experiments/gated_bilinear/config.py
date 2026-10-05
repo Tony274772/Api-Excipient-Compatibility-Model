@@ -88,12 +88,14 @@ class GBConfig(Config):
 
     # ── Output paths (override at runtime) ───────────────────────────────
     gb_checkpoint_dir: str = "checkpoints/gated_bilinear"
-    gb_metrics_dir: str = "metrics/gated_bilinear"
+    gb_metrics_dir: str = "experiments/results/metrics_bilinear"
+    gb_heldout_csv: str = "held_out_testset/held_out_test_set.csv"
+    gb_heldout_predictions_csv: str = "held_out_testset/held_out_predictions_gatedbilinear.csv"
 
     def resolve_gb_paths(self):
         """Set checkpoint and metrics dirs based on family name."""
         self.gb_checkpoint_dir = f"checkpoints/gated_bilinear/{self.gb_family}"
-        self.gb_metrics_dir = f"metrics/gated_bilinear/{self.gb_family}"
+        self.gb_metrics_dir = f"experiments/results/metrics_bilinear/{self.gb_family}"
 
     def __post_init__(self):
         super().__post_init__()

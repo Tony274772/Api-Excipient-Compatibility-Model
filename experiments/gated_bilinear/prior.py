@@ -16,8 +16,10 @@ import re
 from typing import Optional
 
 import numpy as np
-from rdkit import Chem, DataStructs
-from rdkit.Chem import AllChem
+from rdkit import Chem, DataStructs, RDLogger
+RDLogger.DisableLog('rdApp.*')
+from rdkit.Chem import AllChem, rdFingerprintGenerator
+from functools import lru_cache
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -95,6 +97,7 @@ def _family_key(smiles: str) -> str:
 # Morgan-512 fingerprint for Tanimoto nearest-neighbour lookup
 # ═══════════════════════════════════════════════════════════════════════════════
 
+@lru_cache(maxsize=None)
 def _morgan_fp_for_tanimoto(smiles: str):
     """Compute Morgan-512 fingerprint for Tanimoto comparison.
 
@@ -105,7 +108,8 @@ def _morgan_fp_for_tanimoto(smiles: str):
     mol = Chem.MolFromSmiles(smiles)
     if mol is None:
         return None
-    return AllChem.GetMorganFingerprintAsBitVect(mol, radius=2, nBits=512)
+    gen = rdFingerprintGenerator.GetMorganGenerator(radius=2, fpSize=512)
+    return gen.GetFingerprint(mol)
 
 
 # ═══════════════════════════════════════════════════════════════════════════════

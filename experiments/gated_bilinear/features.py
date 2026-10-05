@@ -14,8 +14,11 @@ dataset construction time or on the fly.
 
 from __future__ import annotations
 
+from functools import lru_cache
+
 import numpy as np
-from rdkit import Chem
+from rdkit import Chem, RDLogger
+RDLogger.DisableLog('rdApp.*')
 from rdkit.Chem import (
     AllChem,
     Descriptors,
@@ -66,6 +69,7 @@ def _or_bit_arrays(*arrays: np.ndarray) -> np.ndarray:
 # MACCS keys (166 bits, bit 0 dropped → 166 features)
 # ═══════════════════════════════════════════════════════════════════════════════
 
+@lru_cache(maxsize=None)
 def compute_maccs(smiles: str) -> np.ndarray:
     """166-bit MACCS keys, salt-aware (OR over fragments), bit 0 dropped."""
     mols = _parse_fragments(smiles)
@@ -86,6 +90,9 @@ def compute_maccs(smiles: str) -> np.ndarray:
 # Morgan fingerprints (radius 2, configurable length)
 # ═══════════════════════════════════════════════════════════════════════════════
 
+from rdkit.Chem import rdFingerprintGenerator
+
+@lru_cache(maxsize=None)
 def compute_morgan(smiles: str, n_bits: int = 512) -> np.ndarray:
     """Morgan fingerprint, salt-aware (OR over fragments).
 
@@ -98,8 +105,9 @@ def compute_morgan(smiles: str, n_bits: int = 512) -> np.ndarray:
         return np.zeros(n_bits, dtype=np.float32)
 
     fps = []
+    gen = rdFingerprintGenerator.GetMorganGenerator(radius=2, fpSize=n_bits)
     for mol in mols:
-        fp = AllChem.GetMorganFingerprintAsBitVect(mol, radius=2, nBits=n_bits)
+        fp = gen.GetFingerprint(mol)
         arr = np.zeros(n_bits, dtype=np.float32)
         ConvertToNumpyArray(fp, arr)
         fps.append(arr)
@@ -147,6 +155,7 @@ def _compute_gb_descriptors_single(mol: Chem.Mol) -> list[float]:
     return values
 
 
+@lru_cache(maxsize=None)
 def compute_gb_descriptors(smiles: str) -> np.ndarray:
     """12-dim RDKit descriptors, using the first valid fragment."""
     mols = _parse_fragments(smiles)
@@ -221,6 +230,7 @@ _CHEM_FLAG_DEFS = [
 CHEM_FLAG_NAMES = [name for name, _ in _CHEM_FLAG_DEFS]
 
 
+@lru_cache(maxsize=None)
 def compute_chem_flags(smiles: str) -> np.ndarray:
     """18-dim binary chemistry flags, salt-aware.
 
@@ -284,6 +294,7 @@ def compute_chem_flags(smiles: str) -> np.ndarray:
 MECHANISM_NAMES = [entry["mechanism"] for entry in REACTION_TABLE]
 
 
+@lru_cache(maxsize=None)
 def compute_mechanism_flags(api_smiles: str, exc_smiles: str) -> np.ndarray:
     """5-dim binary mechanism flags for an API–excipient pair.
 

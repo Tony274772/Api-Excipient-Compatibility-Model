@@ -87,6 +87,9 @@ class GBCompatibilityDataset(Dataset):
             if col in self.df.columns:
                 self._cluster_col = col
                 break
+                
+        # Instance-level cache
+        self._cache = {}
 
     def __len__(self):
         return len(self.df)
@@ -101,12 +104,22 @@ class GBCompatibilityDataset(Dataset):
         return np.zeros(dim, dtype=np.float32)
 
     def __getitem__(self, idx):
+        if idx in self._cache:
+            return self._cache[idx]
         row = self.df.iloc[idx]
 
         api_smiles = str(row["API_Smiles"])
         exc_smiles = str(row["Excipient_Smiles"]) if pd.notna(row.get("Excipient_Smiles")) else ""
         exc_available = 1.0 if exc_smiles != "" else 0.0
-        label = float(row["Outcome1"])
+        # Flexible label lookup (Outcome1 for train/val/test, ground_truth for heldout)
+        if "Outcome1" in row and pd.notna(row["Outcome1"]):
+            label = float(row["Outcome1"])
+        elif "ground_truth" in row and pd.notna(row["ground_truth"]):
+            label = float(row["ground_truth"])
+        elif "label" in row and pd.notna(row["label"]):
+            label = float(row["label"])
+        else:
+            label = 0.0
 
         # API cluster for leave-own-API-cluster-out
         api_cluster = None
@@ -188,6 +201,7 @@ class GBCompatibilityDataset(Dataset):
             result["api_mol2vec"] = torch.tensor(api_mol2vec, dtype=torch.float32)
             result["exc_mol2vec"] = torch.tensor(exc_mol2vec, dtype=torch.float32)
 
+        self._cache[idx] = result
         return result
 
 
@@ -324,3 +338,43 @@ def build_gb_dataloaders(config, prior_table, descriptor_norm_stats):
     )
 
     return train_loader, val_loader, test_loader
+
+
+def build_gb_heldout_dataloader(
+    config: GBConfig,
+    prior_table: ExcipientPriorTable,
+    descriptor_norm_stats: dict,
+    heldout_csv: Optional[str] = None,
+) -> DataLoader:
+    """Build DataLoader for the 24-pair held-out test set."""
+    csv_path = heldout_csv or getattr(config, "gb_heldout_csv", "held_out_testset/held_out_test_set.csv")
+    family = config.gb_family.lower()
+    
+    morgan_bits = 1024 if family == "morgan" else 512
+
+    pubchem_vectors = None
+    mol2vec_vectors = None
+    if family == "pubchem":
+        pubchem_vectors = load_precomputed_vectors(getattr(config, "pubchem_fps_path", "data/pubchem_fps.csv"))
+    elif family == "mol2vec":
+        mol2vec_vectors = load_precomputed_vectors(getattr(config, "mol2vec_embeddings_path", "data/mol2vec_embeddings.csv"))
+
+    heldout_ds = GBCompatibilityDataset(
+        csv_path=csv_path,
+        prior_table=prior_table,
+        descriptor_norm_stats=descriptor_norm_stats,
+        family=family,
+        morgan_bits=morgan_bits,
+        is_train=False,
+        pubchem_vectors=pubchem_vectors,
+        mol2vec_vectors=mol2vec_vectors,
+    )
+
+    return DataLoader(
+        heldout_ds,
+        batch_size=len(heldout_ds),
+        shuffle=False,
+        collate_fn=gb_collate_fn,
+        drop_last=False,
+        num_workers=0,
+    )

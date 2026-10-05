@@ -11,6 +11,7 @@ import json
 import os
 
 import numpy as np
+import pandas as pd
 import torch
 from sklearn.metrics import (
     average_precision_score,
@@ -32,11 +33,12 @@ def collect_gb_predictions(model, loader, device):
 
     with torch.no_grad():
         for batch in loader:
+            batch = {k: v.to(device) if isinstance(v, torch.Tensor) else v for k, v in batch.items()}
             # The model expects the entire batch dict, and handles device placement internally
             # but we need to move it here as it was doing in main train loop
             logits = model(batch)
             all_logits.append(logits.cpu())
-            all_labels.append(batch["label"])
+            all_labels.append(batch["label"].cpu())
 
     all_logits = torch.cat(all_logits).numpy()
     all_labels = torch.cat(all_labels).numpy()
@@ -185,3 +187,69 @@ def get_val_pr_auc_gb(model, val_loader, device):
     """Quick PR-AUC computation for scheduler/early stopping."""
     probs, labels = collect_gb_predictions(model, val_loader, device)
     return average_precision_score(labels.astype(int), probs)
+
+
+def evaluate_heldout_gb(
+    model,
+    heldout_loader,
+    device,
+    threshold: float,
+    model_name: str,
+    output_csv_path: str = "held_out_testset/held_out_predictions_gatedbilinear.csv",
+    heldout_source_csv: str = "held_out_testset/held_out_test_set.csv",
+) -> tuple[dict, pd.DataFrame]:
+    """Run inference on the 24-pair held-out set and update the accumulator CSV.
+    
+    Preserves all existing model columns in output_csv_path.
+    """
+    model.eval()
+    all_logits = []
+    all_labels = []
+
+    with torch.no_grad():
+        for batch in heldout_loader:
+            batch = {k: v.to(device) if isinstance(v, torch.Tensor) else v for k, v in batch.items()}
+            logits = model(batch)
+            all_logits.append(logits.cpu())
+            all_labels.append(batch["label"].cpu())
+
+    logits = torch.cat(all_logits).numpy()
+    labels = torch.cat(all_labels).numpy()
+    probs = 1 / (1 + np.exp(-logits))
+    preds = (probs >= threshold).astype(int)
+
+    # Compute metrics on held-out set
+    metrics = compute_metrics_gb(probs, labels, threshold)
+
+    # Load or initialize result dataframe
+    os.makedirs(os.path.dirname(output_csv_path) if os.path.dirname(output_csv_path) else ".", exist_ok=True)
+    if os.path.isfile(output_csv_path):
+        result_df = pd.read_csv(output_csv_path)
+    else:
+        orig_df = pd.read_csv(heldout_source_csv)
+        base_cols = [
+            "Api_name", "Excipient_name", "API_CID", "Excipient_CID",
+            "API_Smiles", "Excipient_Smiles", "ground_truth"
+        ]
+        cols_to_keep = [c for c in base_cols if c in orig_df.columns]
+        result_df = orig_df[cols_to_keep].copy()
+        if "ground_truth" not in result_df.columns and "Outcome1" in orig_df.columns:
+            result_df["ground_truth"] = orig_df["Outcome1"]
+
+    keys_to_store = [f"gated_bilinear_{model_name}" if not model_name.startswith("gated_bilinear_") else model_name]
+
+    for k in keys_to_store:
+        result_df[f"{k}_logit"] = logits
+        result_df[f"{k}_probability"] = probs
+        result_df[f"{k}_prediction"] = preds
+        result_df[f"{k}_threshold"] = float(threshold)
+
+    try:
+        result_df.to_csv(output_csv_path, index=False)
+        print(f"Held-out predictions saved/updated in: {output_csv_path}")
+    except PermissionError:
+        fallback = output_csv_path.replace(".csv", "_fallback.csv")
+        result_df.to_csv(fallback, index=False)
+        print(f"WARNING: Permission denied for {output_csv_path}. Saved to fallback: {fallback}")
+
+    return metrics, result_df
