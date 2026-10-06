@@ -29,16 +29,14 @@ def collect_predictions(model, loader, device):
 
     with torch.no_grad():
         for batch in loader:
-            batch_device = {
-                "api_smiles": batch["api_smiles"],
-                "exc_smiles": batch["exc_smiles"],
-                "api_desc": batch["api_desc"].to(device),
-                "exc_desc": batch["exc_desc"].to(device),
-                "exc_available": batch["exc_available"].to(device),
-            }
+            batch_device = {k: (v.to(device) if isinstance(v, torch.Tensor) else v)
+                            for k, v in batch.items()}
+            labels = batch_device.pop("label")
+            _ = batch_device.pop("sample_weight", None)
+            
             logits = model(batch_device)
             all_logits.append(logits.cpu())
-            all_labels.append(batch["label"])
+            all_labels.append(labels.cpu())
 
     all_logits = torch.cat(all_logits).numpy()
     all_labels = torch.cat(all_labels).numpy()
@@ -47,20 +45,69 @@ def collect_predictions(model, loader, device):
     return all_probs, all_labels
 
 
-def tune_threshold(probs: np.ndarray, labels: np.ndarray, step: float = 0.001):
-    """Sweep thresholds on validation set, pick best F1."""
-    best_f1 = -1.0
-    best_thresh = 0.5
+def tune_threshold(
+    probs: np.ndarray,
+    labels: np.ndarray,
+    step: float = 0.001,
+    tnr_floor: float = 0.0,   # 0.0 means no floor (old behaviour, backward-compat)
+):
+    """
+    Sweep thresholds on a validation set.
 
+    If tnr_floor > 0 (e.g. 0.97):
+        - Candidate thresholds are those where TNR >= tnr_floor.
+        - Among candidates, pick the one that maximises val MCC.
+        - If no threshold satisfies the floor, relax to the threshold
+          with the highest TNR (most conservative available).
+    If tnr_floor == 0:
+        - Pick the threshold that maximises val F1  (old behaviour).
+    """
     thresholds = np.arange(step, 1.0, step)
+    labels_int = labels.astype(int)
+
+    if tnr_floor == 0.0:
+        # ── legacy F1 mode ───────────────────────────────────────────────
+        best_f1 = -1.0
+        best_thresh = 0.5
+        for t in thresholds:
+            preds = (probs >= t).astype(int)
+            f1 = f1_score(labels_int, preds, zero_division=0)
+            if f1 > best_f1:
+                best_f1 = f1
+                best_thresh = t
+        return best_thresh, best_f1
+
+    # ── MCC + TNR-floor mode ─────────────────────────────────────────────
+    negatives = (labels_int == 0).sum()
+
+    best_mcc = -2.0
+    best_thresh = 0.5
+    best_tnr_fallback = -1.0
+    best_thresh_fallback = 0.5
+
     for t in thresholds:
         preds = (probs >= t).astype(int)
-        f1 = f1_score(labels, preds, zero_division=0)
-        if f1 > best_f1:
-            best_f1 = f1
+        tn = int(((preds == 0) & (labels_int == 0)).sum())
+        tnr = tn / negatives if negatives > 0 else 1.0
+
+        # Track best TNR seen (for the fallback case)
+        if tnr > best_tnr_fallback:
+            best_tnr_fallback = tnr
+            best_thresh_fallback = t
+
+        if tnr < tnr_floor:
+            continue  # does not satisfy the floor
+
+        mcc = matthews_corrcoef(labels_int, preds)
+        if mcc > best_mcc:
+            best_mcc = mcc
             best_thresh = t
 
-    return best_thresh, best_f1
+    if best_mcc == -2.0:
+        # No threshold satisfied the floor — use the most conservative one
+        return best_thresh_fallback, 0.0
+
+    return best_thresh, best_mcc
 
 
 def compute_metrics(probs: np.ndarray, labels: np.ndarray, threshold: float):
@@ -96,7 +143,8 @@ def evaluate_model(model, val_loader, test_loader, device, config):
     """
     # Validation
     val_probs, val_labels = collect_predictions(model, val_loader, device)
-    best_thresh, _ = tune_threshold(val_probs, val_labels, config.threshold_step)
+    tnr_floor = getattr(config, "pgb_tnr_floor", 0.0) if getattr(config, "use_pgb_head", False) else 0.0
+    best_thresh, _ = tune_threshold(val_probs, val_labels, config.threshold_step, tnr_floor=tnr_floor)
     val_metrics = compute_metrics(val_probs, val_labels, best_thresh)
 
     # Test (using val-tuned threshold)

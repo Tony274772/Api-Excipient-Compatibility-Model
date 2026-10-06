@@ -48,7 +48,7 @@ class PretrainedGINEncoder(nn.Module):
         if pth_path is not None:
             from dgllife.model.pretrain import create_property_model
             model = create_property_model("gin_supervised_contextpred")
-            ckpt = torch.load(pth_path, map_location="cpu")
+            ckpt = torch.load(pth_path, map_location="cpu", weights_only=True)
             if "model_state_dict" in ckpt:
                 model.load_state_dict(ckpt["model_state_dict"])
             else:

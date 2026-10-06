@@ -226,7 +226,7 @@ class StanfordPretrainedGATEncoder(nn.Module):
         self.gnn = StanfordGNN(num_layer=5, emb_dim=300, JK="last", drop_ratio=0.0)
 
         # Load weights
-        state_dict = torch.load(ckpt_path, map_location="cpu")
+        state_dict = torch.load(ckpt_path, map_location="cpu", weights_only=True)
         # In the snap repo, the model was often saved as a GNN_graphpred which has a self.gnn
         # If the keys have "gnn.", strip it.
         new_state_dict = {}

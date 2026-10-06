@@ -9,8 +9,12 @@ import copy
 
 import numpy as np
 import pandas as pd
+import torch
+from torch.utils.data import DataLoader
 from rdkit import Chem, DataStructs
-from rdkit.Chem import AllChem
+from rdkit.Chem import AllChem, rdFingerprintGenerator
+from rdkit import RDLogger
+RDLogger.DisableLog('rdApp.*')
 from rdkit.ML.Cluster import Butina
 from sklearn.model_selection import StratifiedGroupKFold, StratifiedKFold
 
@@ -18,17 +22,18 @@ import torch
 
 from src.config import Config
 from src.utils import seed_everything, get_device
-from src.dataset import CompatibilityDataset, collate_fn, build_dataloaders
+from src.dataset import CompatibilityDataset, collate_fn, build_dataloaders, PGBDataset, pgb_collate_fn, PGBNormStats
 from src.evaluate import evaluate_model, compute_metrics, tune_threshold, collect_predictions, save_metrics
-from src.train import train
-from src.model import CompatibilityModel
+from src.train import train, pgb_train
+from src.model import CompatibilityModel, pgb_model_from_config
 
 
 def _morgan_fp(smiles, radius=2, n_bits=2048):
     mol = Chem.MolFromSmiles(smiles)
     if mol is None:
         raise ValueError(f"RDKit cannot parse SMILES: {smiles}")
-    return AllChem.GetMorganFingerprintAsBitVect(mol, radius, nBits=n_bits)
+    gen = rdFingerprintGenerator.GetMorganGenerator(radius=radius, fpSize=n_bits)
+    return gen.GetFingerprint(mol)
 
 
 def butina_cluster(unique_smiles, dist_thresh=0.15):
@@ -47,7 +52,7 @@ def butina_cluster(unique_smiles, dist_thresh=0.15):
 
 
 # GNN encoder names that use the new trainable encoder path
-GNN_ENCODERS = {"dmpnn_chemprop", "dmpnn_scratch", "attentivefp", "gine", "gatv2", "pna"}
+GNN_ENCODERS = {"dmpnn_chemprop", "dmpnn_scratch", "attentivefp", "gine", "gatv2", "pna", "pretrained_gat"}
 
 
 def build_encoder(config, device):
@@ -236,6 +241,169 @@ def cross_validate(config: Config, n_folds: int = 5):
     return cv_summary
 
 
+def pgb_cross_validate(config: Config, n_folds: int = 5):
+    """
+    5-fold CV for PGBCompatibilityModel.
+    Mirrors cross_validate() logic but:
+    - Uses PGBDataset + pgb_collate_fn instead of CompatibilityDataset
+    - Builds PGBCompatibilityModel via pgb_model_from_config()
+    - Computes ExcipientPriorTable and PGBNormStats per fold (train-only)
+    - Uses pgb_train() instead of train()
+    - Calls tune_threshold with tnr_floor=config.pgb_tnr_floor
+    """
+    from src.dataset import PGBDataset, pgb_collate_fn, PGBNormStats
+    from src.pgb_prior import ExcipientPriorTable
+    from src.model import pgb_model_from_config
+    from src.train import pgb_train
+
+    seed_everything(config.seed)
+    device = get_device(config.device)
+
+    raw = pd.read_csv(os.path.join(config.data_dir, "start_dataset.csv"))
+
+    if getattr(config, "split_type", "cluster") == "random":
+        kf = StratifiedKFold(n_splits=n_folds, shuffle=True, random_state=config.seed)
+        splits = kf.split(raw, y=raw["Outcome1"])
+    else:
+        unique_apis = raw["API_Smiles"].unique().tolist()
+        smiles_to_cluster = butina_cluster(unique_apis)
+        raw["cluster_id"] = raw["API_Smiles"].map(smiles_to_cluster)
+        sgkf = StratifiedGroupKFold(n_splits=n_folds, shuffle=True, random_state=config.seed)
+        splits = sgkf.split(raw, y=raw["Outcome1"], groups=raw["cluster_id"])
+
+    all_val_metrics  = []
+    all_test_metrics = []
+
+    for fold_i, (train_idx, test_idx) in enumerate(splits):
+        print(f"\n{'='*60}\nPGB FOLD {fold_i+1}/{n_folds}\n{'='*60}")
+
+        train_fold = raw.iloc[train_idx].reset_index(drop=True)
+        test_fold  = raw.iloc[test_idx].reset_index(drop=True)
+
+        if getattr(config, "split_type", "cluster") == "random":
+            inner_kf = StratifiedKFold(n_splits=4, shuffle=True, random_state=config.seed+fold_i)
+            inner_train_idx, inner_val_idx = next(inner_kf.split(train_fold, y=train_fold["Outcome1"]))
+        else:
+            inner_sgkf = StratifiedGroupKFold(n_splits=4, shuffle=True, random_state=config.seed+fold_i)
+            inner_train_idx, inner_val_idx = next(inner_sgkf.split(
+                train_fold, y=train_fold["Outcome1"], groups=train_fold["cluster_id"]))
+
+        actual_train = train_fold.iloc[inner_train_idx].reset_index(drop=True)
+        actual_val   = train_fold.iloc[inner_val_idx].reset_index(drop=True)
+        actual_test  = test_fold.reset_index(drop=True)
+
+        fold_dir = os.path.join(config.metrics_dir, f"fold_{fold_i}")
+        os.makedirs(fold_dir, exist_ok=True)
+        fold_train_csv = os.path.join(fold_dir, "train.csv")
+        fold_val_csv   = os.path.join(fold_dir, "val.csv")
+        fold_test_csv  = os.path.join(fold_dir, "test.csv")
+        actual_train.to_csv(fold_train_csv, index=False)
+        actual_val.to_csv(fold_val_csv,   index=False)
+        actual_test.to_csv(fold_test_csv,  index=False)
+
+        fold_config = copy.deepcopy(config)
+        fold_config.train_csv = fold_train_csv
+        fold_config.val_csv   = fold_val_csv
+        fold_config.test_csv  = fold_test_csv
+        fold_config.checkpoint_dir = os.path.join(config.checkpoint_dir, f"fold_{fold_i}")
+        fold_config.positive_prior = float(actual_train["Outcome1"].mean())
+        fold_config.use_balanced_sampler = False  # always off for PGB
+        fold_config.loss = "asym_focal"
+
+        os.makedirs(fold_config.checkpoint_dir, exist_ok=True)
+
+        # Build encoder
+        encoder = build_encoder(fold_config, device)
+        if not encoder.is_sequence_capable:
+            fold_config.fusion = "concat"
+
+        # Build PGB norm stats from unique training SMILES only
+        all_train_smiles = list(set(
+            actual_train["API_Smiles"].dropna().tolist() +
+            actual_train["Excipient_Smiles"].dropna().tolist()
+        ))
+        pgb_norm = PGBNormStats.from_smiles_list(all_train_smiles)
+        
+        # Save PGB norm stats
+        pgb_norm.save(os.path.join(fold_config.checkpoint_dir, "pgb_norm_stats.npz"))
+
+        # Build excipient prior from training rows only
+        from src.pgb_prior import ExcipientPriorTable, build_leave_cluster_out_prior_vectors
+        prior_table = ExcipientPriorTable()
+        prior_table.fit(
+            actual_train,
+            leave_out_cluster_id=None,   # for training rows: leave-cluster-out done implicitly by the fold
+        )
+        
+        # Save prior table
+        prior_table.save(os.path.join(fold_config.checkpoint_dir, "prior_table.json"))
+        
+        # Build per-row train priors with leave-cluster-out logic
+        cluster_col = "cluster_id" if "cluster_id" in actual_train.columns else None
+        train_priors = build_leave_cluster_out_prior_vectors(actual_train, cluster_col=cluster_col)
+
+        # Get fixed-vector encoder if applicable
+        fv_enc = encoder if fold_config.encoder == "fixed_vector" else None
+
+        train_ds = PGBDataset(fold_train_csv, fold_config.encoder,
+                              getattr(fold_config, "fixed_vector_source", "maccs"),
+                              prior_table, pgb_norm, fixed_vector_encoder=fv_enc, row_priors=train_priors)
+        val_ds   = PGBDataset(fold_val_csv,   fold_config.encoder,
+                              getattr(fold_config, "fixed_vector_source", "maccs"),
+                              prior_table, pgb_norm, fixed_vector_encoder=fv_enc)
+        test_ds  = PGBDataset(fold_test_csv,  fold_config.encoder,
+                              getattr(fold_config, "fixed_vector_source", "maccs"),
+                              prior_table, pgb_norm, fixed_vector_encoder=fv_enc)
+
+        train_loader = DataLoader(train_ds, batch_size=fold_config.pgb_batch_size,
+                                  shuffle=True, collate_fn=pgb_collate_fn, num_workers=0)
+        val_loader   = DataLoader(val_ds,   batch_size=fold_config.pgb_batch_size,
+                                  shuffle=False, collate_fn=pgb_collate_fn, num_workers=0)
+        test_loader  = DataLoader(test_ds,  batch_size=fold_config.pgb_batch_size,
+                                  shuffle=False, collate_fn=pgb_collate_fn, num_workers=0)
+
+        # Build model
+        model = pgb_model_from_config(fold_config, encoder)
+        model.to(device)
+
+        # Train
+        model, history = pgb_train(model, train_loader, val_loader, fold_config, device)
+
+        # Evaluate
+        val_metrics, test_metrics, threshold = evaluate_model(
+            model, val_loader, test_loader, device, fold_config
+        )
+
+        print(f"\nPGB Fold {fold_i+1} Val:  PR-AUC={val_metrics['pr_auc']:.4f}, F1={val_metrics['f1']:.4f}, MCC={val_metrics['mcc']:.4f}")
+        print(f"PGB Fold {fold_i+1} Test: PR-AUC={test_metrics['pr_auc']:.4f}, F1={test_metrics['f1']:.4f}, MCC={test_metrics['mcc']:.4f}")
+        print(f"  threshold={threshold:.3f}")
+
+        all_val_metrics.append(val_metrics)
+        all_test_metrics.append(test_metrics)
+
+        save_metrics(val_metrics,  os.path.join(fold_dir, "val_metrics.json"))
+        save_metrics(test_metrics, os.path.join(fold_dir, "test_metrics.json"))
+        with open(os.path.join(fold_dir, "training_history.json"), "w") as f:
+            json.dump(history, f, indent=2)
+
+        del model, encoder
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+
+    # Aggregate
+    cv_summary = {}
+    for key in ["pr_auc", "f1", "mcc", "precision", "recall", "accuracy"]:
+        vals      = [m[key] for m in all_val_metrics]
+        test_vals = [m[key] for m in all_test_metrics]
+        cv_summary[f"val_{key}_mean"]  = float(np.mean(vals))
+        cv_summary[f"val_{key}_std"]   = float(np.std(vals))
+        cv_summary[f"test_{key}_mean"] = float(np.mean(test_vals))
+        cv_summary[f"test_{key}_std"]  = float(np.std(test_vals))
+
+    save_metrics(cv_summary, os.path.join(config.metrics_dir, "cv_metrics.json"))
+    return cv_summary
+
+
 if __name__ == "__main__":
     import argparse
 
@@ -250,9 +418,9 @@ if __name__ == "__main__":
     parser.add_argument("--pairwise", action="store_true",
                         help="Use explicit API-token × Excipient-token pairwise pooling (sets --pooling explicit_pairwise)")
     parser.add_argument("--loss", type=str, default="asl",
-                        choices=["bce", "weighted_bce", "focal", "asl"])
+                        choices=["bce", "weighted_bce", "focal", "asl", "asym_focal"])
     parser.add_argument("--fixed_vector_source", type=str, default="mol2vec",
-                        choices=["mol2vec", "pubchemfp", "rdkit_descriptors", "morgan", "maccs"])
+                        choices=["mol2vec", "pubchemfp", "rdkit_descriptors", "maccs", "morgan"])
     parser.add_argument("--epochs", type=int, default=None)
     parser.add_argument("--batch_size", type=int, default=None)
     parser.add_argument("--lr", type=float, default=None)

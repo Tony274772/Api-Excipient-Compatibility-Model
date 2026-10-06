@@ -571,3 +571,448 @@ class CompatibilityModel(nn.Module):
         # Classifier
         logits = self.classifier(pair_vector)  # [B, 1]
         return logits.squeeze(1)  # [B]
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Prior-Gated Bilinear (PGB) Architecture
+# ═══════════════════════════════════════════════════════════════════════════
+
+
+class MoleculeTower(nn.Module):
+    """
+    Turns a single molecule's features into a 96-d vector h.
+    Input: struct_vec [B, struct_dim], maccs [B,167], morgan [B,512],
+           pgb_desc [B,12], flags [B,18], salt_context [B,8].
+    """
+
+    def __init__(
+        self,
+        struct_dim: int,
+        primary_dim: int,
+        secondary_dim: int,
+        pgb_dim: int = 96,
+        dropout: float = 0.15,
+        use_missing_embedding: bool = False,
+        use_salt_context: bool = True,
+    ):
+        super().__init__()
+        self.has_struct = struct_dim > 0
+        self.has_secondary = secondary_dim > 0
+        self.use_missing_embedding = use_missing_embedding
+        self.use_salt_context = use_salt_context
+
+        # Structural branch
+        if self.has_struct:
+            self.struct_block = nn.Identity()
+            struct_out = struct_dim
+        else:
+            struct_out = 0
+
+        # Primary fingerprint branch
+        self.primary_block = nn.Sequential(
+            nn.Linear(primary_dim, 64),
+            nn.LayerNorm(64),
+            nn.GELU(),
+            nn.Dropout(dropout),
+        )
+
+        if self.use_missing_embedding:
+            self.missing_primary = nn.Parameter(torch.zeros(64))
+
+        # Secondary fingerprint branch
+        if self.has_secondary:
+            secondary_out = 32
+            self.secondary_block = nn.Sequential(
+                nn.Linear(secondary_dim, secondary_out),
+                nn.LayerNorm(secondary_out),
+                nn.GELU(),
+                nn.Dropout(dropout * 0.5),
+            )
+        else:
+            secondary_out = 0
+
+        # Descriptor block: 12 → 24
+        self.desc_block = nn.Sequential(
+            nn.Linear(12, 24),
+            nn.LayerNorm(24),
+            nn.GELU(),
+        )
+
+        # Flag block: 18 → 16
+        self.flag_block = nn.Sequential(
+            nn.Linear(18, 16),
+            nn.GELU(),
+        )
+
+        # Mix: concat all branches → 96
+        mix_in = struct_out + 64 + secondary_out + 24 + 16
+        if self.use_missing_embedding:
+            mix_in += 1  # avail flag
+        if self.use_salt_context:
+            mix_in += 8  # salt features
+
+        self.mix = nn.Sequential(
+            nn.Linear(mix_in, pgb_dim),
+            nn.LayerNorm(pgb_dim),
+            nn.GELU(),
+        )
+
+    def forward(
+        self,
+        struct_vec,     # [B, struct_dim] or None
+        primary,        # [B, primary_dim]
+        primary_avail,  # [B] or None
+        secondary,      # [B, secondary_dim] or None
+        pgb_desc,       # [B, 12]
+        salt,           # [B, 8] or None
+        flags,          # [B, 18]
+    ):
+        parts = []
+        if self.has_struct and struct_vec is not None:
+            parts.append(struct_vec)
+            
+        prim_proj = self.primary_block(primary)
+        if self.use_missing_embedding and primary_avail is not None:
+            # Replace unavailable with missing embedding
+            missing_mask = (primary_avail == 0.0).unsqueeze(1)
+            prim_proj = torch.where(missing_mask, self.missing_primary, prim_proj)
+            parts.append(prim_proj)
+            parts.append(primary_avail.unsqueeze(1))
+        else:
+            parts.append(prim_proj)
+
+        if self.has_secondary and secondary is not None:
+            parts.append(self.secondary_block(secondary))
+            
+        parts.append(self.desc_block(pgb_desc))
+        parts.append(self.flag_block(flags))
+        
+        if self.use_salt_context and salt is not None:
+            parts.append(salt)
+
+        return self.mix(torch.cat(parts, dim=-1))
+
+
+class PGBHead(nn.Module):
+    """
+    Prior-Gated Bilinear head.
+    Input: h_api [B,96], h_exc [B,96], prior_vec [B,5], mech_flags [B,5], exc_flags [B,18]
+    Output: logit [B]
+    """
+
+    def __init__(self, config):
+        super().__init__()
+        d = config.pgb_tower_dim       # 96
+        r = config.pgb_bilinear_rank   # 16
+
+        # Bilinear maps (no bias — each is a thin projection)
+        self.U = nn.Linear(d, r, bias=False)
+        self.V = nn.Linear(d, r, bias=False)
+
+        # Gate network: prior_vec(5) + api_flags(18) + exc_flags(18) + mech_flags(5) = 46
+        gate_in = config.pgb_prior_vec_dim + (config.pgb_num_flags * 2) + config.pgb_num_mechanisms
+        self.gate = nn.Sequential(
+            nn.Linear(gate_in, 32),
+            nn.GELU(),
+            nn.Linear(32, r),
+            nn.Sigmoid(),
+        )
+
+        # MLP: [h_api(d) + h_exc(d) + product(d) + diff(d) + gated(r) + prior(5) + mech(5)]
+        concat_dim = d + d + d + d + r + config.pgb_prior_vec_dim + config.pgb_num_mechanisms  # 410
+        self.mlp = nn.Sequential(
+            nn.Linear(concat_dim, config.pgb_head_hidden_1),
+            nn.GELU(),
+            nn.Dropout(config.pgb_head_dropout_1),
+            nn.Linear(config.pgb_head_hidden_1, config.pgb_head_hidden_2),
+            nn.GELU(),
+            nn.Dropout(config.pgb_head_dropout_2),
+            nn.Linear(config.pgb_head_hidden_2, 1),
+        )
+        
+        # Adaptive prior trust
+        self.prior_trust_mlp = nn.Sequential(
+            nn.Linear(config.pgb_prior_vec_dim, 8),
+            nn.GELU(),
+            nn.Linear(8, 1),
+            nn.Sigmoid()
+        )
+
+        self.prior_bias = nn.Parameter(torch.zeros(1))
+
+    def forward(self, h_api, h_exc, prior_vec, api_flags, exc_flags, mech_flags):
+        """
+        h_api, h_exc : [B, 96]
+        prior_vec    : [B, 5]  — [p_exact, p_delta, p_family, log_n, unseen]
+        api_flags    : [B, 18]
+        exc_flags    : [B, 18]
+        mech_flags   : [B, 5]
+        Returns      : logit [B]
+        """
+        product = h_api * h_exc
+        diff    = torch.abs(h_api - h_exc)
+
+        bilinear = self.U(h_api) * self.V(h_exc)              # [B, r]
+
+        gate_input = torch.cat([prior_vec, api_flags, exc_flags, mech_flags], dim=-1)  # [B, 46]
+        gate       = self.gate(gate_input)                     # [B, r]
+        gated      = bilinear * gate                           # [B, r]
+
+        concat = torch.cat(
+            [h_api, h_exc, product, diff, gated, prior_vec, mech_flags],
+            dim=-1,
+        )  # [B, 410]
+
+        residual = self.mlp(concat).squeeze(-1)  # [B]
+
+        # Adaptive Prior weight
+        prior_weight = self.prior_trust_mlp(prior_vec).squeeze(-1)
+
+        # Prior logit offset: w * log(p / (1 - p)) + b
+        p = prior_vec[:, 0].clamp(1e-6, 1 - 1e-6)   # p_exact
+        logit_prior = torch.log(p / (1 - p))
+        logit = residual + prior_weight * logit_prior + self.prior_bias
+
+        return logit   # [B]
+
+    def init_bias(self, global_rate: float, pgb_prior_offset: float = 0.2):
+        """
+        Set the prior_bias so that at zero residual and a never-seen excipient
+        (p_exact = global_rate) the output is (1 + pgb_prior_offset) * log(p/(1-p)).
+        """
+        if 0 < global_rate < 1:
+            log_odds = np.log(global_rate / (1 - global_rate))
+            self.prior_bias.data.fill_(pgb_prior_offset * log_odds)
+
+
+class PGBCompatibilityModel(nn.Module):
+    """
+    Full Prior-Gated Bilinear model for one encoder family.
+
+    Keeps the existing encoder (frozen or trainable) and the existing
+    cross-attention/pooling layers from CompatibilityModel.
+    Replaces the 609-d pair head with MoleculeTower + PGBHead.
+
+    Instantiate by calling pgb_model_from_config(config, encoder) — do not
+    call this class directly unless you know exactly what tower_spec to pass.
+    """
+
+    def __init__(self, config, encoder, api_tower: MoleculeTower, exc_tower: MoleculeTower):
+        super().__init__()
+        self.config  = config
+        self.encoder = encoder
+        self.api_tower = api_tower
+        self.exc_tower = exc_tower
+        self.head = PGBHead(config)
+
+        enc_dim  = encoder.output_dim
+        proj_dim = config.proj_dim   # 128 — kept from existing config
+
+        self.use_cross_attn = (
+            config.fusion == "cross_attn" and encoder.is_sequence_capable
+        )
+
+        if self.use_cross_attn:
+            self.api_proj = ProjectionHead(enc_dim, proj_dim, config.proj_dropout)
+            self.exc_proj = ProjectionHead(enc_dim, proj_dim, config.proj_dropout)
+            self.exc_placeholder = nn.Parameter(torch.randn(1, 1, proj_dim) * 0.01)
+            self.exc_global_placeholder = nn.Parameter(torch.randn(1, proj_dim) * 0.01)
+            self.cross_attn_exc = nn.MultiheadAttention(
+                proj_dim, config.num_heads, config.attn_dropout, batch_first=True
+            )
+            self.cross_attn_api = nn.MultiheadAttention(
+                proj_dim, config.num_heads, config.attn_dropout, batch_first=True
+            )
+            self.ln_exc = nn.LayerNorm(proj_dim)
+            self.ln_api = nn.LayerNorm(proj_dim)
+
+            pooling = getattr(config, "pooling", "global_gated_attention")
+            self.pooling = pooling
+            if pooling == "global_gated_attention":
+                pool_hidden = getattr(config, "pool_hidden_dim", proj_dim)
+                self.api_pool = GatedAttentionPooling(proj_dim, pool_hidden)
+                self.exc_pool = GatedAttentionPooling(proj_dim, pool_hidden)
+                self.api_pool_fusion = nn.Sequential(
+                    nn.Linear(proj_dim * 2, proj_dim), nn.LayerNorm(proj_dim),
+                    nn.GELU(), nn.Dropout(config.proj_dropout),
+                )
+                self.exc_pool_fusion = nn.Sequential(
+                    nn.Linear(proj_dim * 2, proj_dim), nn.LayerNorm(proj_dim),
+                    nn.GELU(), nn.Dropout(config.proj_dropout),
+                )
+        else:
+            self.struct_dim = 0   # fixed-vector: no structural branch
+
+    def _encode_struct(self, batch, device):
+        """
+        Returns h_api_struct [B,128] and h_exc_struct [B,128] for seq. encoders,
+        or None, None for fixed-vector encoders (struct_dim == 0).
+        Mirrors CompatibilityModel.forward logic for cross-attn + gated pooling / CLS.
+        """
+        if not self.use_cross_attn:
+            return None, None
+
+        api_smiles = batch["api_smiles"]
+        exc_smiles = batch["exc_smiles"]
+        exc_available = batch["exc_available"]
+
+        api_tok, api_pool, api_mask = self.encoder.encode(api_smiles)
+        exc_tok, exc_pool, exc_mask = self.encoder.encode(exc_smiles)
+
+        api_tok  = api_tok.to(device);  api_pool  = api_pool.to(device);  api_mask  = api_mask.to(device)
+        exc_tok  = exc_tok.to(device);  exc_pool  = exc_pool.to(device);  exc_mask  = exc_mask.to(device)
+
+        B = api_tok.shape[0]
+
+        api_tok_p  = self.api_proj(api_tok)
+        api_pool_p = self.api_proj(api_pool)
+        exc_tok_p  = self.exc_proj(exc_tok)
+        exc_pool_p = self.exc_proj(exc_pool)
+
+        api_cls = api_pool_p.unsqueeze(1)
+        api_seq = torch.cat([api_cls, api_tok_p], dim=1)
+        api_mask_ext = torch.cat([torch.zeros(B,1,dtype=torch.bool,device=device), api_mask], dim=1)
+
+        exc_cls = exc_pool_p.unsqueeze(1)
+        exc_seq = torch.cat([exc_cls, exc_tok_p], dim=1)
+        exc_mask_ext = torch.cat([torch.zeros(B,1,dtype=torch.bool,device=device), exc_mask], dim=1)
+
+        # Missing-excipient placeholder logic (same as CompatibilityModel)
+        exc_avail_mask = exc_available.unsqueeze(1).unsqueeze(2)
+        exc_seq = exc_seq * exc_avail_mask
+        inv_mask = (1 - exc_available).unsqueeze(1).unsqueeze(2)
+        exc_seq_cls  = exc_seq[:, :1, :] + inv_mask * self.exc_global_placeholder.expand(B,-1).unsqueeze(1)
+        if exc_seq.shape[1] > 1:
+            exc_seq_tok1 = exc_seq[:, 1:2, :] + inv_mask * self.exc_placeholder.expand(B,1,-1)
+            exc_seq = torch.cat([exc_seq_cls, exc_seq_tok1, exc_seq[:, 2:, :]], dim=1)
+        else:
+            exc_seq = exc_seq_cls
+
+        exc_mask_ext = exc_mask_ext & (exc_available.unsqueeze(1).bool())
+        for i in range(B):
+            if exc_available[i].item() == 0.0:
+                exc_mask_ext[i, :] = True;  exc_mask_ext[i, 0] = False
+
+        refined_exc, _ = self.cross_attn_exc(query=exc_seq, key=api_seq, value=api_seq,
+                                              key_padding_mask=api_mask_ext)
+        refined_exc = torch.nan_to_num(refined_exc)
+        refined_exc = self.ln_exc(exc_seq + refined_exc)
+
+        refined_api, _ = self.cross_attn_api(query=api_seq, key=exc_seq, value=exc_seq,
+                                              key_padding_mask=exc_mask_ext)
+        refined_api = torch.nan_to_num(refined_api)
+        refined_api = self.ln_api(api_seq + refined_api)
+
+        pooling = getattr(self, "pooling", "global_gated_attention")
+        if pooling == "global_gated_attention":
+            api_global  = refined_api[:, 0, :]
+            exc_global  = refined_exc[:, 0, :]
+            api_tokens  = refined_api[:, 1:, :]
+            exc_tokens  = refined_exc[:, 1:, :]
+            api_token_mask = api_mask_ext[:, 1:]
+            exc_token_mask = exc_mask_ext[:, 1:]
+
+            api_token_pool, _ = self.api_pool(api_tokens, api_token_mask)
+            exc_token_pool, _ = self.exc_pool(exc_tokens, exc_token_mask)
+
+            missing_exc = (exc_available == 0.0)
+            exc_token_pool = torch.where(
+                missing_exc.unsqueeze(1),
+                self.exc_global_placeholder.expand(exc_tokens.size(0), -1),
+                exc_token_pool,
+            )
+            api_struct = self.api_pool_fusion(torch.cat([api_global, api_token_pool], dim=-1))
+            exc_struct = self.exc_pool_fusion(torch.cat([exc_global, exc_token_pool], dim=-1))
+        else:
+            # CLS pooling (ChemBERTa, D-MPNN)
+            api_struct = refined_api[:, 0, :]
+            exc_struct = refined_exc[:, 0, :]
+
+        return api_struct, exc_struct
+
+    def forward(self, batch: dict) -> torch.Tensor:
+        device = batch["api_flags"].device
+
+        # Structural vectors (from encoder + cross-attention)
+        api_struct, exc_struct = self._encode_struct(batch, device)
+
+        # On-the-fly feature tensors (pre-computed by PGBDataset collate)
+        api_primary   = batch["api_primary"].to(device)    # [B, primary_dim]
+        exc_primary   = batch["exc_primary"].to(device)
+        api_prim_avail= batch["api_prim_avail"].to(device)
+        exc_prim_avail= batch["exc_prim_avail"].to(device)
+        api_secondary = batch.get("api_secondary")
+        exc_secondary = batch.get("exc_secondary")
+        if api_secondary is not None:
+            api_secondary = api_secondary.to(device)
+            exc_secondary = exc_secondary.to(device)
+        api_pgb_desc  = batch["api_pgb_desc"].to(device)   # [B, 12]
+        exc_pgb_desc  = batch["exc_pgb_desc"].to(device)
+        api_salt      = batch["api_salt"].to(device)
+        exc_salt      = batch["exc_salt"].to(device)
+        api_flags     = batch["api_flags"].to(device)      # [B, 18]
+        exc_flags     = batch["exc_flags"].to(device)
+        prior_vec     = batch["prior_vec"].to(device)      # [B, 5]
+        mech_flags    = batch["mech_flags"].to(device)     # [B, 5]
+
+        # Normalized PGB descriptors
+        api_pgb_desc_norm = batch["api_pgb_desc_norm"].to(device)
+        exc_pgb_desc_norm = batch["exc_pgb_desc_norm"].to(device)
+
+        h_api = self.api_tower(api_struct, api_primary, api_prim_avail, api_secondary, api_pgb_desc_norm, api_salt, api_flags)
+        h_exc = self.exc_tower(exc_struct, exc_primary, exc_prim_avail, exc_secondary, exc_pgb_desc_norm, exc_salt, exc_flags)
+
+        return self.head(h_api, h_exc, prior_vec, api_flags, exc_flags, mech_flags)
+
+
+def pgb_model_from_config(config, encoder) -> "PGBCompatibilityModel":
+    """
+    Build a PGBCompatibilityModel appropriate for `config.encoder`.
+
+    Tower specs per family:
+      maccs      : primary=167 MACCS, secondary=512 Morgan
+      morgan     : primary=1024 Morgan, secondary=167 MACCS
+      pubchemfp  : primary=881 PubChem, secondary=512 Morgan
+      mol2vec    : primary=300 Mol2vec, secondary=512 Morgan
+      molformer  : struct=128, primary=167 MACCS, secondary=0
+      chemberta  : struct=128, primary=512 Morgan, secondary=0
+      pretrained_gin : struct=128, primary=167 MACCS, secondary=0
+      pretrained_gat : struct=128, primary=167 MACCS, secondary=0
+      dmpnn_chemprop : struct=128, primary=167 MACCS, secondary=0
+    """
+    enc = config.encoder
+    fvs = getattr(config, "fixed_vector_source", "mol2vec")
+
+    _tower_specs = {
+        # (struct_dim, primary_dim, secondary_dim)
+        "fixed_vector": {
+            "maccs":     (0, 167, 512),
+            "morgan":    (0, 1024, 167),
+            "pubchemfp": (0, 881,  512),
+            "mol2vec":   (0, 300,  512),
+        },
+        "seq": (128, 167, 0),
+    }
+
+    # Special case: ChemBERTa uses Morgan as primary instead of MACCS
+    _chemberta_spec = (128, 512, 0)
+
+    if enc == "fixed_vector":
+        sd, pd_, sec = _tower_specs["fixed_vector"][fvs]
+    elif enc == "chemberta":
+        sd, pd_, sec = _chemberta_spec
+    else:
+        sd, pd_, sec = _tower_specs["seq"]
+
+    use_missing = getattr(config, "pgb_use_missing_embedding", True)
+    use_salt = getattr(config, "pgb_use_salt_context", True)
+
+    api_tower = MoleculeTower(sd, pd_, sec, config.pgb_tower_dim, config.proj_dropout, use_missing_embedding=use_missing, use_salt_context=use_salt)
+    exc_tower = MoleculeTower(sd, pd_, sec, config.pgb_tower_dim, config.proj_dropout, use_missing_embedding=use_missing, use_salt_context=use_salt)
+
+    model = PGBCompatibilityModel(config, encoder, api_tower, exc_tower)
+    model.head.init_bias(
+        global_rate=getattr(config, "positive_prior", 0.094),
+        pgb_prior_offset=config.pgb_prior_offset,
+    )
+    return model

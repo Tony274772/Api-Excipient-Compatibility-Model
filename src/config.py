@@ -28,7 +28,7 @@ class Config:
     molformer_model_path: str = "models/pretrained/molformer" if os.path.isdir("models/pretrained/molformer") else "ibm/MoLFormer-XL-both-10pct"
     chemberta_model_path: str = "models/pretrained/chemberta" if os.path.isdir("models/pretrained/chemberta") else "DeepChem/ChemBERTa-77M-MTR"
     gin_pretrained_name: str = "models/pretrained/gin/gin_supervised_contextpred_pre_trained.pth" if os.path.isfile("models/pretrained/gin/gin_supervised_contextpred_pre_trained.pth") else "gin_supervised_contextpred"
-    fixed_vector_source: Literal["mol2vec", "pubchemfp", "rdkit_descriptors"] = "mol2vec"
+    fixed_vector_source: Literal["mol2vec", "pubchemfp", "rdkit_descriptors", "maccs", "morgan"] = "mol2vec"
     fixed_vector_path: Optional[str] = None   # csv of precomputed vectors, keyed by CID
     encoder_output_dim: int = 768              # auto-set per encoder at model build time
 
@@ -54,8 +54,38 @@ class Config:
     desc_proj_dim: int = 24
     desc_dropout: float = 0.15
 
+    # --- PGB (Prior-Gated Bilinear) head ---
+    use_pgb_head: bool = False              # enable PGB head and all associated features
+    pgb_tower_dim: int = 96                 # output dimension of each molecule tower
+    pgb_bilinear_rank: int = 16             # rank of the low-rank bilinear term
+    pgb_head_hidden_1: int = 128            # MLP layer 1 width
+    pgb_head_hidden_2: int = 48             # MLP layer 2 width
+    pgb_head_dropout_1: float = 0.30        # dropout after layer 1
+    pgb_head_dropout_2: float = 0.20        # dropout after layer 2
+    pgb_prior_scale_init: float = 0.8       # initial value of learned prior scale s
+    pgb_prior_offset: float = 0.2           # fraction of global log-odds added to bias init
+    pgb_num_flags: int = 18                 # number of chemistry flags (do not change)
+    pgb_num_mechanisms: int = 5             # number of SMARTS mechanism rules (do not change)
+    pgb_num_desc: int = 12                  # number of PGB descriptors (do not change)
+    pgb_prior_vec_dim: int = 5              # [p_exact, p_delta, p_family, log_n, unseen]
+
+    # --- PGB training overrides (only active when use_pgb_head=True) ---
+    pgb_lr: float = 1.2e-3                  # LR for new PGB layers (tower, head)
+    pgb_encoder_lr: float = 3e-4            # LR for kept encoder layers (proj, cross-attn)
+    pgb_weight_decay: float = 2e-3
+    pgb_max_epochs: int = 60                # 40 for fixed-vector, 60 for seq. encoders
+    pgb_early_stop_patience: int = 7
+    pgb_lr_patience: int = 4
+    pgb_batch_size: int = 64
+    pgb_use_balanced_sampler: bool = False   # MUST stay False — no double weighting
+    pgb_loss: str = "asym_focal"             # "asym_focal" is the only valid PGB loss
+    pgb_focal_gamma_pos: float = 1.2
+    pgb_focal_gamma_neg: float = 2.5
+    pgb_tnr_floor: float = 0.97             # min true-negative-rate for threshold selection
+    pgb_prior_table_path: str = ""          # set at runtime per fold
+
     # --- Axis C: loss ---
-    loss: Literal["bce", "weighted_bce", "focal", "asl"] = "asl"
+    loss: Literal["bce", "weighted_bce", "focal", "asl", "asym_focal"] = "asl"
     asl_gamma_neg: float = 4.0
     asl_gamma_pos: float = 1.0
     asl_clip: float = 0.05
@@ -188,6 +218,11 @@ class Config:
         prefix = "random_split/" if self.split_type == "random" else ""
         self.checkpoint_dir = f"checkpoints/{prefix}{combo}"
         self.metrics_dir = f"metrics/{prefix}{combo}"
+
+        # PGB runs get their own prefix so they don't overwrite the baseline runs
+        if getattr(self, "use_pgb_head", False):
+            self.checkpoint_dir = self.checkpoint_dir.replace("checkpoints/", "checkpoints/pgb_")
+            self.metrics_dir = self.metrics_dir.replace("metrics/", "metrics/pgb_")
 
     def resolve_paths(self):
         """Back-compat wrapper: old callers that expect resolve_paths() to do both."""

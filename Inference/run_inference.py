@@ -8,9 +8,10 @@ from torch.utils.data import DataLoader
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from src.dataset import CompatibilityDataset, collate_fn
+from src.dataset import CompatibilityDataset, collate_fn, PGBDataset, pgb_collate_fn, PGBNormStats
 from ensemble._common import build_model_from_checkpoint
 from src.evaluate import collect_predictions, tune_threshold
+from src.pgb_prior import ExcipientPriorTable
 
 from sklearn.metrics import (
     average_precision_score,
@@ -43,6 +44,18 @@ INCOMPATIBLE_MODELS = [
     "fixed_vector_pubchemfp_concat_focal",
     "fixed_vector_morgan_concat_weighted_bce",
     "fixed_vector_pubchemfp_concat_asl"
+]
+
+PGB_MODELS = [
+    "pgb_maccs",
+    "pgb_morgan",
+    "pgb_pubchemfp",
+    "pgb_mol2vec",
+    "pgb_molformer",
+    "pgb_chemberta",
+    "pgb_gin",
+    "pgb_gat",
+    "pgb_dmpnn",
 ]
 
 def compute_per_class_metrics(probs, labels, threshold):
@@ -131,18 +144,13 @@ def main():
     # Run from root so data paths work properly
     os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     
-    val_ds = CompatibilityDataset("data/val.csv", "data/api_descriptors.csv", "data/excipient_descriptors.csv", "models/descriptor_norm_stats.json")
-    test_ds = CompatibilityDataset("data/test.csv", "data/api_descriptors.csv", "data/excipient_descriptors.csv", "models/descriptor_norm_stats.json")
-    
-    val_loader = DataLoader(val_ds, batch_size=64, shuffle=False, collate_fn=collate_fn)
-    test_loader = DataLoader(test_ds, batch_size=64, shuffle=False, collate_fn=collate_fn)
-
-    val_df = val_ds.df
-    test_df = test_ds.df
+    val_df = pd.read_csv("data/val.csv")
+    test_df = pd.read_csv("data/test.csv")
 
     tasks = [
         ("compatible", COMPATIBLE_MODELS),
-        ("incompatible", INCOMPATIBLE_MODELS)
+        ("incompatible", INCOMPATIBLE_MODELS),
+        ("pgb", PGB_MODELS)
     ]
 
     for category, models in tasks:
@@ -152,9 +160,42 @@ def main():
                 model, config = build_model_from_checkpoint(model_name, device, checkpoints_dir="checkpoints")
                 model.eval()
 
+                is_pgb = getattr(config, "use_pgb_head", False)
+
+                if is_pgb:
+                    pgb_norm = PGBNormStats.load(os.path.join(config.checkpoint_dir, "pgb_norm_stats.npz"))
+                    prior_table = ExcipientPriorTable.load(os.path.join(config.checkpoint_dir, "prior_table.json"))
+                    fv_enc = model.encoder if config.encoder == "fixed_vector" else None
+                    val_ds = PGBDataset("data/val.csv", config.encoder, getattr(config, "fixed_vector_source", "maccs"), prior_table, pgb_norm, fv_enc)
+                    test_ds = PGBDataset("data/test.csv", config.encoder, getattr(config, "fixed_vector_source", "maccs"), prior_table, pgb_norm, fv_enc)
+                    val_loader = DataLoader(val_ds, batch_size=64, shuffle=False, collate_fn=pgb_collate_fn)
+                    test_loader = DataLoader(test_ds, batch_size=64, shuffle=False, collate_fn=pgb_collate_fn)
+                else:
+                    val_ds = CompatibilityDataset("data/val.csv", "data/api_descriptors.csv", "data/excipient_descriptors.csv", "models/descriptor_norm_stats.json")
+                    test_ds = CompatibilityDataset("data/test.csv", "data/api_descriptors.csv", "data/excipient_descriptors.csv", "models/descriptor_norm_stats.json")
+                    val_loader = DataLoader(val_ds, batch_size=64, shuffle=False, collate_fn=collate_fn)
+                    test_loader = DataLoader(test_ds, batch_size=64, shuffle=False, collate_fn=collate_fn)
+
                 # Get predictions
-                val_probs, val_labels = collect_predictions(model, val_loader, device)
-                test_probs, test_labels = collect_predictions(model, test_loader, device)
+                if is_pgb:
+                    # PGB has different batch keys, we need to handle prediction extraction
+                    def _pgb_collect(loader):
+                        all_logits = []
+                        all_labels = []
+                        with torch.no_grad():
+                            for batch in loader:
+                                batch_device = {k: (v.to(device) if isinstance(v, torch.Tensor) else v) for k, v in batch.items()}
+                                labels = batch_device.pop("label")
+                                _ = batch_device.pop("sample_weight", None)
+                                logits = model(batch_device)
+                                all_logits.append(logits.cpu())
+                                all_labels.append(labels.cpu())
+                        return 1 / (1 + np.exp(-torch.cat(all_logits).numpy())), torch.cat(all_labels).numpy()
+                    val_probs, val_labels = _pgb_collect(val_loader)
+                    test_probs, test_labels = _pgb_collect(test_loader)
+                else:
+                    val_probs, val_labels = collect_predictions(model, val_loader, device)
+                    test_probs, test_labels = collect_predictions(model, test_loader, device)
 
                 # Load previously tuned threshold if it exists
                 val_metrics_path = os.path.join(config.metrics_dir, "val_metrics.json")
@@ -163,7 +204,9 @@ def main():
                         old_metrics = json.load(f)
                         best_thresh = old_metrics.get("threshold", 0.5)
                 else:
-                    best_thresh, _ = tune_threshold(val_probs, val_labels, 0.001)
+                    tnr_floor = getattr(config, "pgb_tnr_floor", 0.0) if is_pgb else 0.0
+                    best_thresh, _ = tune_threshold(val_probs, val_labels, 0.001, tnr_floor=tnr_floor)
+
 
                 val_preds = (val_probs >= best_thresh).astype(int)
                 test_preds = (test_probs >= best_thresh).astype(int)

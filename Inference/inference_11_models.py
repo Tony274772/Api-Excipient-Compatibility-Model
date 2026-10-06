@@ -21,6 +21,10 @@ import base64
 import json
 import os
 import sys
+
+# Allow running from inside the inference/ folder
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import time
 import urllib.request
 import urllib.parse

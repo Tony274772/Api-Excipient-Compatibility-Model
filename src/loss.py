@@ -93,12 +93,37 @@ def get_loss_fn(config):
         )
 
     elif config.loss == "asl":
-        return lambda logits, targets, sw=None: asl_loss(
+        return lambda logits, targets, sw=None, **kw: asl_loss(
             logits, targets, sw,
             gamma_neg=config.asl_gamma_neg,
             gamma_pos=config.asl_gamma_pos,
             clip=config.asl_clip,
         )
+
+    elif config.loss == "asym_focal":
+        gp = getattr(config, "pgb_focal_gamma_pos", 1.2)
+        gn = getattr(config, "pgb_focal_gamma_neg", 2.5)
+
+        def _asym_focal(logits, targets, sw=None, pw=None, **kw):
+            p = torch.sigmoid(logits)
+            # Positive part: down-weight easy positives
+            loss_pos = targets * (1 - p) ** gp \
+                       * F.binary_cross_entropy_with_logits(
+                           logits, targets,
+                           pos_weight=pw,
+                           reduction="none"
+                       )
+            # Negative part: heavily penalize confident false alarms
+            loss_neg = (1 - targets) * p ** gn \
+                       * F.binary_cross_entropy_with_logits(
+                           logits, targets,
+                           reduction="none"
+                       )
+            loss = loss_pos + loss_neg
+            if sw is not None:
+                loss = loss * sw
+            return loss.mean()
+        return _asym_focal
 
     else:
         raise ValueError(f"Unknown loss: {config.loss}")
