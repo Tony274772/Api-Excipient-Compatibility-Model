@@ -126,7 +126,7 @@ def parse_args():
     parser.add_argument("--checkpoint", type=str, default=None, help="Path to best_model.pt")
     parser.add_argument("--heldout_csv", type=str, default="held_out_testset/held_out_test_set.csv")
     parser.add_argument("--output", type=str, default="held_out_testset/held_out_predictions_gatedbilinear.csv")
-    parser.add_argument("--device", type=str, default=None)
+    parser.add_argument("--device", type=str, default="auto")
     parser.add_argument("--seed", type=int, default=42)
     return parser.parse_args()
 
@@ -134,7 +134,7 @@ def parse_args():
 def main():
     args = parse_args()
     seed_everything(args.seed)
-    device = get_device(args.device)
+    device = get_device(args.device or "auto")
 
     # Prepare shared prior table and stats from training set
     cfg_base = GBConfig()
