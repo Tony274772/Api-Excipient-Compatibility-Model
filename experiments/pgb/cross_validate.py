@@ -1,22 +1,19 @@
-"""
-run_pgb_single.py
-Entry point for training the 9 Prior-Gated Bilinear (PGB) models exactly once (no CV).
-It uses an 80/20 train/val split on start_dataset.csv, and evaluates on the 24-pairs held_out_testset.csv.
+"""5-fold cross-validation for PGB architecture.
 
-Run one family at a time:
-    python run_pgb_single.py --family maccs
-    python run_pgb_single.py --family molformer
-    python run_pgb_single.py --family all
+Supports direct CLI execution:
+    python -m experiments.pgb.cross_validate --family maccs
+    python -m experiments.pgb.cross_validate --family molformer
+    python -m experiments.pgb.cross_validate --family all
 """
 
 import argparse
-from src.config import Config
-from src.single_run import pgb_single_run
-from run_pgb import FAMILIES
+from experiments.pgb.config import PGBConfig, FAMILIES
+from src.cross_validate import pgb_cross_validate
+
 
 def run_family(name: str, args):
     spec = FAMILIES[name]
-    config = Config()
+    config = PGBConfig()
     config.use_pgb_head = True
     config.split_type   = "cluster"
     config.seed         = args.seed
@@ -32,12 +29,19 @@ def run_family(name: str, args):
     config.resolve_paths()
 
     print(f"\n{'='*60}")
-    print(f"Training PGB model SINGLE RUN: {name}")
+    print(f"Training PGB model CV: {name}")
     print(f"{'='*60}")
-    val_metrics, test_metrics = pgb_single_run(config)
+    summary = pgb_cross_validate(config)
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
+    print(f"\nPGB {name} CV summary:")
+    for k in ["pr_auc", "f1", "mcc"]:
+        print(f"  val  {k}: {summary[f'val_{k}_mean']:.4f} ± {summary[f'val_{k}_std']:.4f}")
+        print(f"  test {k}: {summary[f'test_{k}_mean']:.4f} ± {summary[f'test_{k}_std']:.4f}")
+    return summary
+
+
+def main():
+    parser = argparse.ArgumentParser(description="PGB 5-fold cross-validation.")
     parser.add_argument("--family", default="maccs",
                         choices=list(FAMILIES.keys()) + ["all"])
     parser.add_argument("--epochs", type=int, default=None)
@@ -50,3 +54,7 @@ if __name__ == "__main__":
             run_family(name, args)
     else:
         run_family(args.family, args)
+
+
+if __name__ == "__main__":
+    main()
