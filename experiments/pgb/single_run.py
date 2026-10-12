@@ -1,6 +1,6 @@
-"""Single-run training for PGB architecture on 60/20/20 train/val/test data.
+"""Single-run training for PGB architecture on group split (60/20/20 Butina cluster split) data.
 
-Saves metrics to experiments/results/metrics_pgb/{family}/:
+Saves metrics to experiments/results/metrics_pgb/group_split/{family}/:
     val_metrics.json, test_metrics.json, heldout_metrics.json, training_history.json
 
 Supports direct CLI execution:
@@ -16,6 +16,10 @@ from src.single_run import pgb_single_run
 
 def run_family(name: str, args):
     config = PGBConfig()
+    config.data_dir = "data"
+    config.split_type = "cluster"
+    config.pgb_metrics_root = "experiments/results/metrics_pgb/group_split"
+    config.pgb_checkpoint_root = "checkpoints/pgb/group_split"
     config.apply_family_spec(name)
     config.seed = args.seed
 

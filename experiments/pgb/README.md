@@ -14,12 +14,12 @@ This directory contains the **PGB (Prior-Gated Bilinear)** architecture implemen
 | **Gate Inputs** | 28 features (prior 5 + excipient flags 18 + mechanism 5) | 46 features (prior 5 + API flags 18 + excipient flags 18 + mechanism 5) |
 | **Concat Vector** | 426-d (includes both raw and gated bilinear) | 410-d (gated bilinear + representations + flags) |
 | **Prior Weighting** | Fixed learned scale $s$ | Dynamic adaptive `prior_trust_mlp` |
-| **Checkpoints** | `checkpoints/gated_bilinear/<family>/` | `checkpoints/pgb/<family>/` |
-| **Metrics Folder** | `experiments/results/metrics_bilinear/<family>/` | `experiments/results/metrics_pgb/<family>/` |
+| **Checkpoints** | `checkpoints/gated_bilinear/<family>/` | `checkpoints/pgb/group_split/<family>/` |
+| **Metrics Folder** | `experiments/results/metrics_bilinear/<family>/` | `experiments/results/metrics_pgb/group_split/<family>/` |
 | **Single Run Script** | `python -m experiments.gated_bilinear.train_gb` | `python -m experiments.pgb.single_run` |
 | **CV Script** | N/A (single training loop) | `python -m experiments.pgb.cross_validate` |
 | **Inference Script** | `python -m experiments.gated_bilinear.inference_gb` | `python -m experiments.pgb.inference` or `python Inference/inference_pgb_single.py` |
-| **Predictions CSV** | `held_out_testset/held_out_predictions_gatedbilinear.csv` | `held_out_testset/held_out_predictions_pgb_single.csv` |
+| **Predictions CSV** | `held_out_testset/held_out_predictions_gatedbilinear.csv` | `held_out_testset/held_out_predictions_pgb_group_split.csv` |
 
 ---
 
@@ -34,7 +34,7 @@ experiments/pgb/
 ├── dataset.py            # PGBDataset, pgb_collate_fn, PGBNormStats
 ├── model.py              # MoleculeTower, PGBHead, PGBCompatibilityModel
 ├── train.py              # PGB training loop with dual learning rate
-├── single_run.py         # 60/20/20 data/ pipeline & CLI runner
+├── single_run.py         # Group split 60/20/20 data/ pipeline & CLI runner
 ├── cross_validate.py     # 5-fold Stratified Group K-Fold CV & CLI runner
 ├── inference.py          # Held-out 24-pair test set evaluation & predictions export
 └── README.md             # Architecture documentation
@@ -44,7 +44,7 @@ experiments/pgb/
 
 ## 3. Metrics Output Format
 
-When training via `single_run.py`, metrics are saved in `experiments/results/metrics_pgb/<family>/`:
+When training via `single_run.py`, metrics are saved in `experiments/results/metrics_pgb/group_split/<family>/`:
 - `val_metrics.json`
 - `test_metrics.json`
 - `heldout_metrics.json`

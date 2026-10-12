@@ -64,7 +64,7 @@ def compute_extended_metrics(probs: np.ndarray, labels: np.ndarray, threshold: f
 def pgb_single_run(config: Config):
     """
     Trains PGBCompatibilityModel on the standard 60/20/20 split from data/ folder.
-    Saves metrics to experiments/results/metrics_pgb/{family}/:
+    Saves metrics to experiments/results/metrics_pgb/group_split/{family}/:
       - val_metrics.json
       - test_metrics.json
       - heldout_metrics.json
@@ -91,13 +91,13 @@ def pgb_single_run(config: Config):
     print(f"  Val:   {len(val_fold)} rows")
     print(f"  Test:  {len(test_fold)} rows")
 
-    # Metrics directory: experiments/results/metrics_pgb/{family}
-    metrics_root = getattr(config, "pgb_metrics_root", "experiments/results/metrics_pgb")
+    # Metrics directory: experiments/results/metrics_pgb/group_split/{family}
+    metrics_root = getattr(config, "pgb_metrics_root", "experiments/results/metrics_pgb/group_split")
     metrics_dir = os.path.join(metrics_root, family_name)
     os.makedirs(metrics_dir, exist_ok=True)
 
-    # Checkpoint directory: checkpoints/pgb/{family}
-    ckpt_root = getattr(config, "pgb_checkpoint_root", "checkpoints/pgb")
+    # Checkpoint directory: checkpoints/pgb/group_split/{family}
+    ckpt_root = getattr(config, "pgb_checkpoint_root", "checkpoints/pgb/group_split")
     checkpoint_dir = os.path.join(ckpt_root, family_name)
     os.makedirs(checkpoint_dir, exist_ok=True)
 

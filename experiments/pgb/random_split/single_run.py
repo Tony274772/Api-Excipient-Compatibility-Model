@@ -17,6 +17,10 @@ from src.single_run import pgb_single_run
 def run_family(name: str, args):
     config = PGBConfig()
     config.data_dir = "data/random_split"
+    config.split_type = "random"
+    config.train_csv = "data/random_split/train.csv"
+    config.val_csv = "data/random_split/val.csv"
+    config.test_csv = "data/random_split/test.csv"
     config.pgb_metrics_root = "experiments/results/metrics_pgb/random_split"
     config.pgb_checkpoint_root = "checkpoints/pgb/random_split"
     

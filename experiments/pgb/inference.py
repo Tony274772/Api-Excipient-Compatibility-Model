@@ -20,8 +20,10 @@ from src.utils import get_device
 
 def get_best_threshold(family: str, metrics_dir: str) -> float:
     candidates = [
+        os.path.join("experiments/results/metrics_pgb/group_split", family, "val_metrics.json"),
         os.path.join("experiments/results/metrics_pgb", family, "val_metrics.json"),
         os.path.join(metrics_dir, "val_metrics.json"),
+        os.path.join(metrics_dir, "single_run_80_20split", "val_metrics.json"),
         os.path.join(metrics_dir, "single_run", "val_metrics.json"),
     ]
     for p in candidates:
@@ -36,9 +38,14 @@ def get_best_threshold(family: str, metrics_dir: str) -> float:
 
 def find_checkpoint(family: str, config: PGBConfig) -> str | None:
     candidates = [
+        os.path.join("checkpoints/pgb/group_split", family, "best_model.pt"),
+        os.path.join("checkpoints/pgb/group_split", family, "single_run_80_20split", "best_model.pt"),
+        os.path.join("checkpoints/pgb/group_split", family, "single_run", "best_model.pt"),
         os.path.join("checkpoints/pgb", family, "best_model.pt"),
+        os.path.join("checkpoints/pgb", family, "single_run_80_20split", "best_model.pt"),
         os.path.join("checkpoints/pgb", family, "single_run", "best_model.pt"),
         os.path.join(config.checkpoint_dir, "best_model.pt"),
+        os.path.join(config.checkpoint_dir, "single_run_80_20split", "best_model.pt"),
         os.path.join(config.checkpoint_dir, "single_run", "best_model.pt"),
     ]
     for c in candidates:
@@ -72,8 +79,20 @@ def run_inference(
         config = PGBConfig()
         if random_split:
             config.data_dir = "data/random_split"
+            config.split_type = "random"
+            config.train_csv = "data/random_split/train.csv"
+            config.val_csv = "data/random_split/val.csv"
+            config.test_csv = "data/random_split/test.csv"
             config.pgb_metrics_root = "experiments/results/metrics_pgb/random_split"
             config.pgb_checkpoint_root = "checkpoints/pgb/random_split"
+        else:
+            config.data_dir = "data"
+            config.split_type = "cluster"
+            config.train_csv = "data/train.csv"
+            config.val_csv = "data/val.csv"
+            config.test_csv = "data/test.csv"
+            config.pgb_metrics_root = "experiments/results/metrics_pgb/group_split"
+            config.pgb_checkpoint_root = "checkpoints/pgb/group_split"
         
         config.apply_family_spec(family)
 
@@ -164,11 +183,13 @@ if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--random_split", action="store_true", help="Run inference on random_split models")
+    parser.add_argument("--group_split", action="store_true", default=True, help="Run inference on group_split models (default)")
+    parser.add_argument("--output", type=str, default=None, help="Custom output CSV path")
     args = parser.parse_args()
     
     if args.random_split:
-        out_path = "held_out_testset/held_out_predictions_pgb_random_split.csv"
+        out_path = args.output or "held_out_testset/held_out_predictions_pgb_random_split.csv"
+        run_inference(output_path=out_path, random_split=True)
     else:
-        out_path = "held_out_testset/held_out_predictions_pgb_single.csv"
-        
-    run_inference(output_path=out_path, random_split=args.random_split)
+        out_path = args.output or "held_out_testset/held_out_predictions_pgb_group_split.csv"
+        run_inference(output_path=out_path, random_split=False)

@@ -26,8 +26,8 @@ class PGBConfig(Config):
     use_pgb_head: bool = True
     split_type: str = "cluster"
     family: str = "maccs"
-    pgb_metrics_root: str = "experiments/results/metrics_pgb"
-    pgb_checkpoint_root: str = "checkpoints/pgb"
+    pgb_metrics_root: str = "experiments/results/metrics_pgb/group_split"
+    pgb_checkpoint_root: str = "checkpoints/pgb/group_split"
 
     def apply_family_spec(self, family_name: str):
         if family_name not in FAMILIES:
@@ -36,6 +36,6 @@ class PGBConfig(Config):
         spec = FAMILIES[family_name]
         for k, v in spec.items():
             setattr(self, k, v)
+        self.resolve_paths()
         self.checkpoint_dir = f"{self.pgb_checkpoint_root}/{family_name}"
         self.metrics_dir = f"{self.pgb_metrics_root}/{family_name}"
-        self.resolve_paths()

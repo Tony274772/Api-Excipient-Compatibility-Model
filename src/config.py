@@ -181,12 +181,12 @@ class Config:
 
     def resolve_csv_paths(self):
         """Only fills in train/val/test CSV defaults. Safe to call any number of times."""
-        data_path = f"{self.data_dir}/random_split" if self.split_type == "random" else self.data_dir
-        if self.train_csv is None or self.train_csv in [f"{self.data_dir}/train.csv", f"{self.data_dir}/random_split/train.csv"]:
+        data_path = f"{self.data_dir}/random_split" if (self.split_type == "random" and not self.data_dir.endswith("random_split")) else self.data_dir
+        if self.train_csv is None or any(self.train_csv.endswith(s) for s in ["/train.csv", "\\train.csv", "train.csv"]):
             self.train_csv = f"{data_path}/train.csv"
-        if self.val_csv is None or self.val_csv in [f"{self.data_dir}/val.csv", f"{self.data_dir}/random_split/val.csv"]:
+        if self.val_csv is None or any(self.val_csv.endswith(s) for s in ["/val.csv", "\\val.csv", "val.csv"]):
             self.val_csv = f"{data_path}/val.csv"
-        if self.test_csv is None or self.test_csv in [f"{self.data_dir}/test.csv", f"{self.data_dir}/random_split/test.csv"]:
+        if self.test_csv is None or any(self.test_csv.endswith(s) for s in ["/test.csv", "\\test.csv", "test.csv"]):
             self.test_csv = f"{data_path}/test.csv"
         if self.fixed_vector_path is None and self.encoder == "fixed_vector":
             path_map = {
