@@ -1,0 +1,2 @@
+family,seed,threshold,heldout_correct,heldout_TP,heldout_TN,heldout_pr_auc,heldout_roc_auc,val_pr_auc,val_mcc,val_f1,test_pr_auc,test_roc_auc,test_mcc,test_f1,test_cm,heldout_cm
+morgan,42,0.6900000000000001,19,8,11,0.9138635125767478,0.9027777777777778,0.6641388179303598,0.6090612906681256,0.6260869565217392,0.5837259600231277,0.8916253248287267,0.45038203480886596,0.49645390070921985,"[[589, 23], [48, 35]]","[[11, 1], [4, 8]]"

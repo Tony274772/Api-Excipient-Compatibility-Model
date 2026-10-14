@@ -1,0 +1,17 @@
+{
+  "variant": "ablation_3level_1d",
+  "family": "morgan",
+  "seed": 43,
+  "prior_dim": 1,
+  "prior_table": "ThreeLevelPriorTable",
+  "prior_levels": "exact -> nn -> global",
+  "gate_in": 42,
+  "pair_rep_dim": 406,
+  "prior_trust_in": 1,
+  "n_trainable_params": 235547,
+  "max_epochs": 40,
+  "epochs_trained": 8,
+  "best_val_pr_auc_during_training": 0.6641258409445544,
+  "threshold": 0.767,
+  "device": "cuda"
+}

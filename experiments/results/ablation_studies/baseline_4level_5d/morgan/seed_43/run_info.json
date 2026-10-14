@@ -1,0 +1,17 @@
+{
+  "variant": "baseline_4level_5d",
+  "family": "morgan",
+  "seed": 43,
+  "prior_dim": 5,
+  "prior_table": "ExcipientPriorTable",
+  "prior_levels": "exact -> family -> nn -> global",
+  "gate_in": 46,
+  "pair_rep_dim": 410,
+  "prior_trust_in": 5,
+  "n_trainable_params": 236219,
+  "max_epochs": 40,
+  "epochs_trained": 8,
+  "best_val_pr_auc_during_training": 0.6984101519512284,
+  "threshold": 0.749,
+  "device": "cuda"
+}

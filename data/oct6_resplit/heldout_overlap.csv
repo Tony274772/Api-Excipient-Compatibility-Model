@@ -1,0 +1,4 @@
+split,API_CID,Excipient_CID,Outcome1
+train,5754,444041,1
+train,5754,11177,1
+val,54675776,24456,1

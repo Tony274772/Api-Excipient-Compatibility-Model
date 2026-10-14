@@ -1,0 +1,25 @@
+{
+  "train_leave_cluster_out": {
+    "exact": 1903,
+    "global": 83,
+    "family": 24,
+    "nn": 20
+  },
+  "val": {
+    "exact": 790,
+    "global": 30,
+    "family": 13,
+    "nn": 9
+  },
+  "test": {
+    "exact": 640,
+    "global": 17,
+    "family": 8,
+    "nn": 7
+  },
+  "heldout": {
+    "exact": 21,
+    "global": 2,
+    "family": 1
+  }
+}

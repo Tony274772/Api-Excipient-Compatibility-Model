@@ -1,0 +1,10 @@
+model,thr,missing_inputs_now,before_correct,after_correct,after_TP,after_TN,before_PRAUC,after_PRAUC,after_ROC,before_MCC,after_MCC,max_prob_change,min_margin,note
+maccs,0.741,0,19,19,7,12,0.9084,0.9084,0.8819,0.6417,0.6417,3.4e-08,0.003,
+morgan,0.671,0,20,20,8,12,0.9594,0.9594,0.9583,0.7071,0.7071,6.4e-08,0.0009,
+pubchemfp,0.846,0,16,16,5,11,0.8824,0.8963,0.8958,0.3849,0.3849,2.7e-01,0.0005,"30 rows by CID from training file, 18 rows from supplementary file"
+mol2vec,0.97,0,16,16,4,12,0.9311,0.9379,0.9306,0.4472,0.4472,2.2e-01,0.0002,"30 rows by CID from training file, 18 rows from supplementary file"
+molformer,0.747,0,18,18,6,12,0.9379,0.9379,0.9306,0.5774,0.5774,1.3e-07,0.0249,
+chemberta,0.896,0,16,16,5,11,0.893,0.893,0.8958,0.3849,0.3849,6.3e-08,0.0122,
+gin,0.671,0,18,18,6,12,0.9764,0.9764,0.9722,0.5774,0.5774,1.2e-07,0.001,
+gat,0.844,0,16,16,5,11,0.8661,0.8661,0.8611,0.3849,0.3849,2.4e-07,0.0103,
+dmpnn,0.768,0,19,19,7,12,0.9347,0.9347,0.9236,0.6417,0.6417,1.8e-07,0.0034,

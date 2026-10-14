@@ -1,0 +1,37 @@
+{
+  "model": "pretrained_gat_cross_attn_global_gated_bce",
+  "kind": "baseline",
+  "seed": 42,
+  "device": "cuda",
+  "split": {
+    "train_csv": "data/split_8020/train.csv",
+    "val_csv": "data/split_8020/val.csv",
+    "train_md5": "a8002a6e381d8fe768d3a6b934001225",
+    "val_md5": "21983eb5ebd14af7c000d0910417f2c3",
+    "heldout_csv": "held_out_testset/held_out_test_set.csv",
+    "heldout_md5": "acfd0c6ae9e19908f96dd7d1fdd3206a"
+  },
+  "git_commit": "7f852465f77fb6a99be050c1c7991c0c5ce7ecfc+uncommitted-changes",
+  "epochs_trained": 23,
+  "best_epoch": 17,
+  "threshold_from_val": 0.999,
+  "finished": "2026-10-14T06:02:39",
+  "minutes": 3.57,
+  "config": {
+    "encoder": "pretrained_gat",
+    "fixed_vector_source": "mol2vec",
+    "fixed_vector_path": null,
+    "fusion": "cross_attn",
+    "pooling": "global_gated_attention",
+    "loss": "bce",
+    "use_descriptors": true,
+    "use_balanced_sampler": true,
+    "lr": 0.00015,
+    "batch_size": 64,
+    "max_epochs": 150,
+    "early_stop_patience": 6,
+    "threshold_step": 0.001
+  },
+  "descriptor_norm_stats": "data/split_8020/descriptor_norm_stats.json",
+  "heldout_fixed_vectors": null
+}
