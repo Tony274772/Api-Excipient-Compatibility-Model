@@ -1,0 +1,5 @@
+# The project root ignores checkpoints/ and *.pt; this folder keeps its model checkpoints (~1 MB each).
+!checkpoints/
+!checkpoints/**
+!*.pt
+__pycache__/

@@ -1,0 +1,21 @@
+Split reproduction run 2026-10-14T13:31:40
+rdkit 2026.03.6 | scikit-learn 1.5.1 | pandas 2.2.2
+
+Input start_dataset.csv: 3544 pairs, 533 APIs, 336 excipients
+Butina (Morgan r=2, 2048 bits, distance cutoff 0.15): 530 unique API SMILES -> 512 clusters
+GroupShuffleSplit(n_splits=1, test_size=0.2, random_state=42) on cluster_id
+
+train  rows= 2770 | incompatible= 276 (10.0%) | compatible= 2494 | unique APIs= 425 | unique excipients= 304
+val    rows=  774 | incompatible=  68 ( 8.8%) | compatible=  706 | unique APIs= 108 | unique excipients= 158
+test   rows=   24 | incompatible=  12 (50.0%) | compatible=   12 | unique APIs=  21 | unique excipients=  18
+
+API cluster overlap train<->val: 0
+API_CID overlap train<->val:     0
+Excipient_CID overlap train<->val (expected): 126 of 158 val excipients
+
+Held-out pair also in train: API_CID 5754 + Excipient_CID 444041 (label 1)
+Held-out pair also in train: API_CID 5754 + Excipient_CID 11177 (label 1)
+
+train.csv vs original: identical rows/order = True, identical bytes = True (md5 cfa2e256c21a15abd42f1f852ef94357)
+val.csv vs original: identical rows/order = True, identical bytes = True (md5 5ba1f79b6e5283a5350094c4b9b53edc)
+test.csv vs original: identical rows/order = True, identical bytes = True (md5 61aeb1f251ab0c5201310a3c8ed56103)

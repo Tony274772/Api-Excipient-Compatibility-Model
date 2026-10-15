@@ -309,7 +309,16 @@ def run_shap_analysis(config: Optional[SHAPConfig] = None) -> Dict[str, Any]:
     print(f"  [OK] Saved: {p6}")
 
     # Plot 7: Select Waterfall Plots
-    for s_idx in range(min(5, len(X_test))):
+    # The first 5 rows, plus one correctly predicted compatible pair so both classes are shown
+    # (start_dataset.csv begins with incompatible rows, so the first 5 are all incompatible).
+    waterfall_idx = list(range(min(5, len(X_test))))
+    probs = 1.0 / (1.0 + np.exp(-(base_value + shap_values.sum(axis=1))))
+    compat = np.where((y_test == 0) & (probs < 0.2))[0]
+    if len(compat) == 0:
+        compat = np.where((y_test == 0) & (probs < 0.5))[0]
+    if len(compat) and not (y_test[waterfall_idx] == 0).any():
+        waterfall_idx.append(int(compat[0]))
+    for s_idx in waterfall_idx:
         pw = os.path.join(cfg.plots_dir, f"waterfall_sample_{s_idx}.png")
         plot_sample_waterfall(
             shap_values,
@@ -321,7 +330,7 @@ def run_shap_analysis(config: Optional[SHAPConfig] = None) -> Dict[str, Any]:
             top_k=15,
             save_path=pw,
         )
-    print(f"  [OK] Saved 5 sample waterfall plots")
+    print(f"  [OK] Saved {len(waterfall_idx)} sample waterfall plots (rows {waterfall_idx})")
 
     # Plot 8: Top Morgan Bits Decoded
     p8 = os.path.join(cfg.plots_dir, "morgan_top_bits.png")

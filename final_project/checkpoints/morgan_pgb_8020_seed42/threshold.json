@@ -1,0 +1,4 @@
+{
+  "threshold": 0.671,
+  "rule": "best val MCC with TNR >= 0.97 (from the original 2026-10-06 training run, reference_results/val_metrics.json)"
+}

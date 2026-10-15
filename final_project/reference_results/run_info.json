@@ -1,0 +1,21 @@
+{
+  "model": "Morgan-PGB",
+  "split": "80/20: Butina API clusters (Morgan r=2, 2048 bits, distance cutoff 0.15), GroupShuffleSplit(test_size=0.2, random_state=42)",
+  "seed": 42,
+  "trained": "2026-10-06",
+  "original_code": "git commit f534ef7: run_pgb_single.py --family morgan -> pgb_single_run() in src/single_run.py",
+  "original_checkpoint": "checkpoints/pgb_fixed_vector_morgan_concat_asl/single_run_80_20split/",
+  "best_epoch": 1,
+  "val_pr_auc_at_best_epoch": 0.6858562142144815,
+  "threshold_from_val": 0.671,
+  "tnr_floor": 0.97,
+  "data": {
+    "train": {"path": "data/train.csv", "rows": 2770, "md5": "cfa2e256c21a15abd42f1f852ef94357"},
+    "val": {"path": "data/val.csv", "rows": 774, "md5": "5ba1f79b6e5283a5350094c4b9b53edc"},
+    "heldout": {"path": "data/held_out_test_set.csv", "rows": 24, "md5": "acfd0c6ae9e19908f96dd7d1fdd3206a"}
+  },
+  "files": {
+    "val_metrics.json, heldout_metrics.json": "saved by the original run (heldout_metrics.json was saved there as test_metrics.json)",
+    "predictions_val.csv, predictions_heldout.csv, heldout_unseen_metrics.json": "re-scored from the shipped checkpoint on 2026-10-14 (CPU); confusion matrices and PR-AUC identical to the original metrics"
+  }
+}

@@ -1,0 +1,8 @@
+# Tested with Python 3.12.7, torch 2.5.1 (CUDA and CPU), rdkit 2026.03.6, scikit-learn 1.5.1,
+# pandas 2.2.2, numpy 1.26.4, tqdm 4.66.5
+torch>=2.1
+rdkit>=2023.9.1
+scikit-learn>=1.3
+pandas>=2.0
+numpy>=1.24,<2
+tqdm>=4.60

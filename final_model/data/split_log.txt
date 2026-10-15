@@ -1,0 +1,80 @@
+==============================================================================
+FINAL MODEL (Morgan-PGB) - DATA SPLIT LOG
+==============================================================================
+Source dataset        : data/start_dataset.csv  (md5 9572ba67ca8be7af5fee7a3c9911ccfe)
+Built                 : 2026-10-14T12:07:36 by `python run.py split`
+Split type            : API-cluster grouped, label-stratified, ~60 / 20 / 20 (train / val / test)
+Random seed           : 42
+External test set     : data/held_out_test_set.csv (24 pairs, scored only, not part of the split)
+
+==============================================================================
+STEP 1: RAW DATA (start_dataset.csv)
+==============================================================================
+Total pairs            : 3544
+Compatible (0)         : 3200 (90.3%)
+Incompatible (1)       : 344 (9.7%)
+Unique API_CID         : 533
+Unique API SMILES      : 530
+Unique Excipient_CID   : 336
+
+==============================================================================
+STEP 2: NEAR-DUPLICATE API CLUSTERING (Butina, Morgan r=2 2048 bits, Tanimoto >= 0.85)
+==============================================================================
+Unique API SMILES clustered      : 530
+Butina clusters                  : 512
+Clusters with > 1 API            : 18 (largest: 2 APIs)
+APIs in a multi-API cluster      : 36 (6.8% of all APIs)
+
+-> cluster_id is the grouping key: near-duplicate APIs (salts, stereoisomers, close analogues)
+   always land in the same split.
+
+==============================================================================
+STEP 3: GROUPED STRATIFIED SPLIT (~60 / 20 / 20)
+==============================================================================
+(a) VAL  : GroupShuffleSplit(test_size=0.2, random_state=42) draws 20% of the API clusters
+           -> 103 clusters, 774 rows
+(b) TEST : the remaining clusters go into StratifiedGroupKFold(n_splits=4, shuffle=True,
+           random_state=42), stratified on Outcome1; fold 1 is TEST, folds 2-4 are TRAIN
+           -> test 105 clusters / 695 rows, train 304 clusters / 2075 rows
+
+==============================================================================
+STEP 4: LEAKAGE VERIFICATION
+==============================================================================
+API cluster overlap train<->val : 0
+API cluster overlap train<->test: 0
+API cluster overlap val<->test  : 0
+
+API_CID / API SMILES overlap train<->val : 0 / 0
+API_CID / API SMILES overlap train<->test: 0 / 0
+API_CID / API SMILES overlap val<->test  : 0 / 0
+
+No leakage: every API (and every near-duplicate API cluster) is in exactly one split.
+
+Excipient_CID overlap train<->val  (expected, NOT leakage): 121 / 158 val excipients also in train
+Excipient_CID overlap train<->test (expected, NOT leakage): 119 / 164 test excipients also in train
+
+==============================================================================
+STEP 5: OVERLAP WITH THE 24 HELD-OUT PAIRS (same CIDs, or same parent molecules)
+==============================================================================
+train: Hydrocortisone + Beta cyclodextrin (API_CID 5754, Excipient_CID 444041, label 1)
+train: Hydrocortisone + Magnesium stearate (API_CID 5754, Excipient_CID 11177, label 1)
+val  : Tetracycline + Calcium phosphate (API_CID 54675776, Excipient_CID 24456, label 1)
+-> 3 of the 24 held-out pairs also occur in start_dataset; they were kept in their split.
+
+==============================================================================
+STEP 6: SPLIT SUMMARY
+==============================================================================
+TRAIN | rows= 2075 (58.5%) | pos= 193 ( 9.3%) | neg= 1882 (90.7%) | API clusters= 304 | unique APIs= 318 | unique excipients= 259
+VAL   | rows=  774 (21.8%) | pos=  68 ( 8.8%) | neg=  706 (91.2%) | API clusters= 103 | unique APIs= 108 | unique excipients= 158
+TEST  | rows=  695 (19.6%) | pos=  83 (11.9%) | neg=  612 (88.1%) | API clusters= 105 | unique APIs= 107 | unique excipients= 164
+TOTAL | rows= 3544 (every start_dataset row is used exactly once)
+
+==============================================================================
+STEP 7: FILES WRITTEN
+==============================================================================
+train.csv :  2075 rows | md5 975c1b7666eba661c44c9d6320fa4f35 | identical to data/train.csv: True
+val.csv   :   774 rows | md5 5ba1f79b6e5283a5350094c4b9b53edc | identical to data/val.csv: True
+test.csv  :   695 rows | md5 3da308e1615b1b1665b35d40c074a8c8 | identical to data/test.csv: True
+columns   : API_CID, Excipient_CID, Outcome1, API_Smiles, Excipient_Smiles, cluster_id
+grouping key used: cluster_id (Butina API cluster)
+==============================================================================

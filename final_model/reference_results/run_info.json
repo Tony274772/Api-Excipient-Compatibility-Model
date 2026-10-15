@@ -1,0 +1,35 @@
+{
+  "family": "morgan",
+  "seed": 42,
+  "device": "cuda",
+  "config_copied_from": "checkpoints/pgb_fixed_vector_morgan_concat_asl/single_run_80_20split/best_model.pt",
+  "split": {
+    "train": {
+      "path": "data/oct6_resplit/train.csv",
+      "rows": 2075,
+      "md5": "975c1b7666eba661c44c9d6320fa4f35"
+    },
+    "val": {
+      "path": "data/oct6_resplit/val.csv",
+      "rows": 774,
+      "md5": "5ba1f79b6e5283a5350094c4b9b53edc"
+    },
+    "test": {
+      "path": "data/oct6_resplit/test.csv",
+      "rows": 695,
+      "md5": "3da308e1615b1b1665b35d40c074a8c8"
+    }
+  },
+  "heldout": {
+    "path": "held_out_testset/held_out_test_set.csv",
+    "md5": "acfd0c6ae9e19908f96dd7d1fdd3206a"
+  },
+  "git_commit": "7f852465f77fb6a99be050c1c7991c0c5ce7ecfc+uncommitted-changes",
+  "epochs_trained": 9,
+  "best_epoch": 2,
+  "threshold_from_val": 0.6900000000000001,
+  "tnr_floor": 0.97,
+  "heldout_fixed_vectors": null,
+  "finished": "2026-10-14T11:03:45",
+  "minutes": 2.91
+}

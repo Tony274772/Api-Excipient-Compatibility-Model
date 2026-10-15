@@ -1,0 +1,7 @@
+# The project root ignores checkpoints/ and *.pt; the final model (~1 MB) is kept with this folder.
+!checkpoints/
+!checkpoints/**
+!*.pt
+checkpoints/retrain_seed_*/
+outputs/
+__pycache__/
