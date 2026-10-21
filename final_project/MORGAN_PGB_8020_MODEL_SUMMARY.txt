@@ -1,0 +1,413 @@
+==============================================================================================
+MORGAN-PGB API-EXCIPIENT COMPATIBILITY MODEL  -  80/20 SPLIT  -  FULL SUMMARY
+==============================================================================================
+Written 2026-10-15. Every number below was read from the model's own files (final_project/,
+checkpoint, metrics JSON, prediction CSVs) or recomputed from the checkpoint.
+
+----------------------------------------------------------------------------------------------
+CONTENTS
+----------------------------------------------------------------------------------------------
+ 1. At a glance
+ 2. Where the model lives
+ 3. Dataset
+ 4. How the 80/20 split was made
+ 5. Model inputs (features per molecule)
+ 6. Architecture
+ 7. The excipient prior (5 values)
+ 8. Prediction formula, the bias b and the rate p
+ 9. Training recipe
+10. Decision threshold
+11. Results (validation, held-out, held-out unseen)
+12. Held-out predictions, pair by pair
+13. Held-out pairs that also occur in start_dataset (CID vs SMILES)
+14. Known issues to disclose
+15. Reproducibility
+16. Using the model without excipient SMILES
+17. Figures made for this model
+18. How to run
+
+
+==============================================================================================
+1. AT A GLANCE
+==============================================================================================
+Model ............. Prior-Gated Bilinear (PGB) head on Morgan-1024 + MACCS fingerprints,
+                    chemistry flags, PGB descriptors, salt context, excipient prior and
+                    reaction-mechanism flags
+Task .............. predict whether an API-excipient pair is incompatible (label 1) or
+                    compatible (label 0)
+Split ............. 80/20 by Butina API cluster: train 2,770 / validation 774
+External test ..... 24 held-out pairs (12 incompatible, 12 compatible)
+Seed .............. 42
+Best epoch ........ 1 (early stopping on validation PR-AUC)
+Threshold ......... 0.671 (best validation MCC with true-negative rate >= 0.97)
+Parameters ........ 236,219
+Held-out .......... 20/24 correct  (TP 8, TN 12, FP 0, FN 4)
+                    PR-AUC 0.959, ROC-AUC 0.958, MCC 0.707
+Held-out unseen ... 18/22 correct on the 22 held-out pairs not in train
+                    PR-AUC 0.942, ROC-AUC 0.950, MCC 0.671
+Validation ........ 734/774 correct, PR-AUC 0.686, ROC-AUC 0.924, MCC 0.639, F1 0.655
+Trained ........... 2026-10-06, original code at git commit f534ef7
+                    (run_pgb_single.py --family morgan -> pgb_single_run() in src/single_run.py)
+
+
+==============================================================================================
+2. WHERE THE MODEL LIVES
+==============================================================================================
+Self-contained package (code + data + checkpoint + results; can be moved anywhere):
+    versions_of_api-exc/final_project/        (also copied at project/final_project/)
+
+    run.py                                   train / evaluate / predict / split
+    src/                                     model, dataset, features, prior table, training, metrics
+    checkpoints/morgan_pgb_8020_seed42/      THE TRAINED MODEL
+        best_model.pt                        weights + training config
+        prior_table.json                     excipient prior table (fit on train only)
+        pgb_norm_stats.npz                   PGB descriptor mean / std (train only)
+        threshold.json                       0.671
+    data/
+        start_dataset.csv                    3,544 pairs (md5 9572ba67ca8be7af5fee7a3c9911ccfe)
+        train.csv                            2,770 rows  (md5 cfa2e256c21a15abd42f1f852ef94357)
+        val.csv                              774 rows    (md5 5ba1f79b6e5283a5350094c4b9b53edc)
+        held_out_test_set.csv                24 pairs    (md5 acfd0c6ae9e19908f96dd7d1fdd3206a)
+        split_log.txt                        log of the split reproduction
+    reference_results/                       original metrics and predictions
+
+Original location in the project:
+    checkpoints/pgb_fixed_vector_morgan_concat_asl/single_run_80_20split/   (checkpoint)
+    metrics/pgb_fixed_vector_morgan_concat_asl/single_run_80_20split/       (metrics, split CSVs)
+    In that folder "test" = the 24 held-out pairs (test_metrics.json = held-out metrics).
+
+Not to be confused with project/final_model/ = the 60/20/20 model (19/24 held-out).
+
+
+==============================================================================================
+3. DATASET
+==============================================================================================
+start_dataset.csv
+    Total pairs ............ 3,544
+    Compatible (0) ......... 3,200 (90.3%)
+    Incompatible (1) ....... 344   (9.7%)
+    Unique API_CID ......... 533   (530 unique API SMILES)
+    Unique Excipient_CID ... 336
+    Columns ................ API_CID, Excipient_CID, Outcome1, API_Smiles, Excipient_Smiles
+
+held_out_test_set.csv (external test, never used for training, early stopping or threshold)
+    24 pairs: 12 incompatible, 12 compatible, 21 APIs, 18 excipients
+    Columns: Api_name, Excipient_name, API_CID, Excipient_CID, API_Smiles, Excipient_Smiles,
+             ground_truth
+
+
+==============================================================================================
+4. HOW THE 80/20 SPLIT WAS MADE
+==============================================================================================
+1. Butina clustering of the 530 unique API SMILES on Morgan fingerprints (radius 2, 2,048 bits),
+   Tanimoto distance cutoff 0.15 (similarity >= 0.85) -> 512 clusters, stored as cluster_id.
+   Near-duplicate APIs (salts, stereoisomers, close analogues) share a cluster.
+2. GroupShuffleSplit(n_splits=1, test_size=0.2, random_state=42), grouped by cluster_id.
+   Not stratified on the label.
+3. The test set is the 24 external held-out pairs.
+
+    split   rows   incompatible    compatible   unique APIs   unique excipients
+    train   2,770  276 (10.0%)     2,494        425           304
+    val       774   68 ( 8.8%)       706        108           158
+    test       24   12 (50.0%)        12         21            18
+
+Leakage checks
+    API cluster overlap train<->val ......... 0
+    API_CID overlap train<->val ............. 0
+    Excipient_CID overlap train<->val ....... 126 of 158 val excipients (expected, not leakage)
+
+Rebuilding the split from start_dataset.csv (python run.py split) reproduces train.csv and
+val.csv byte for byte.
+
+
+==============================================================================================
+5. MODEL INPUTS (FEATURES PER MOLECULE)
+==============================================================================================
+Input is one SMILES for the API and one for the excipient. Everything is computed from SMILES
+with RDKit; no precomputed vector file is needed.
+
+Each molecule (API and excipient separately) gets:
+    feature             size     encoded to
+    Morgan FP           1,024    64   (radius 2, primary block)
+    MACCS keys            167    32   (secondary block)
+    PGB descriptors        12    24   (physicochemical: MolWt, LogP, TPSA, ...; normalized with
+                                       train-only mean/std)
+    Chemistry flags        18    16   (reactive functional groups, binary)
+    Salt context            8     8   (passed directly: charges, inorganic heavy atoms, fragments)
+    Availability            1     1   (passed directly)
+                                ----
+                                 145  -> "Mix" layer -> 96-D molecule embedding
+
+Pair-level inputs:
+    Excipient prior          5   (section 7)
+    Mechanism flags (SMARTS) 5   (Maillard, ester/amide hydrolysis, metal-ion oxidation,
+                                  acid-base salt displacement, Schiff base)
+
+
+==============================================================================================
+6. ARCHITECTURE
+==============================================================================================
+A. Two molecule towers (same design, separate weights): API tower and excipient tower
+       Morgan 1024 -> 64, MACCS 167 -> 32, descriptors 12 -> 24, flags 18 -> 16,
+       + salt 8 + availability 1  =>  145 -> Mix (Linear + LayerNorm) -> 96-D embedding
+   (The encoder is a "fixed_vector" type with no weights; fusion = concat, no cross-attention.)
+
+B. PGB interaction head, inputs h_api [96], h_exc [96]
+   1. Pairwise interactions
+        API || Excipient (concatenation) ...... 192
+        API (.) Excipient (element-wise) ...... 96
+        |API - Excipient| ..................... 96
+   2. Low-rank bilinear:  U*h_api (.) V*h_exc,  U, V: 96 -> 16 (no bias)  -> 16
+   3. Prior-informed gate g = sigmoid(MLP(gate context)),  46 -> 32 -> 16
+        gate context = prior (5) + API flags (18) + excipient flags (18) + mechanism flags (5) = 46
+        gated = bilinear (.) g                                              -> 16
+   4. Concat: 192 + 96 + 96 + gated 16 + prior 5 + mechanism 5 = 410
+   5. MLP: 410 -> 128 -> 48 -> 1  (GELU, dropout 0.30 and 0.20)  = residual r
+   6. Adaptive prior trust: w = sigmoid(MLP(prior)), 5 -> 8 -> 1
+   7. Output logit z = r + w * logit(p_exact) + b
+      P(incompatible) = sigmoid(z); predicted incompatible if P >= 0.671
+
+Layer shapes (from the checkpoint):
+    api_tower.primary_block   (64, 1024)     api_tower.secondary_block (32, 167)
+    api_tower.desc_block      (24, 12)       api_tower.flag_block      (16, 18)
+    api_tower.mix             (96, 145)      api_tower.missing_primary (64,)
+    (excipient tower identical shapes, separate weights)
+    head.U (16, 96)   head.V (16, 96)
+    head.gate         (32, 46) -> (16, 32)
+    head.mlp          (128, 410) -> (48, 128) -> (1, 48)
+    head.prior_trust_mlp (8, 5) -> (1, 8)
+    head.prior_bias   (1,)
+    Total parameters: 236,219
+
+
+==============================================================================================
+7. THE EXCIPIENT PRIOR (5 VALUES)
+==============================================================================================
+A table of how often each excipient is incompatible in the TRAIN rows (prior_table.json).
+For each excipient the model receives:
+    p_exact   Laplace-smoothed incompatibility rate of this excipient (stereo-blind canonical
+              SMILES):  p = (pos + 4 * 0.094) / (n + 4)
+    p_delta   p_exact - 0.094 (global rate)
+    p_family  same rate after stripping water / common solvents (hydrate family)
+    log_n     log(1 + n), n = number of train rows with this excipient
+    unseen    1 if the excipient is not in train, else 0
+Lookup order: exact match -> hydrate family -> nearest neighbour (Morgan-512 Tanimoto) -> 0.094.
+Training rows use leave-own-cluster-out priors: a train row's prior is computed without rows
+from its own API cluster, so the prior never contains that row's own label.
+
+
+==============================================================================================
+8. PREDICTION FORMULA, THE BIAS b AND THE RATE p
+==============================================================================================
+z = r + w * logit(p_exact) + b
+    r ... MLP output (residual)
+    w ... adaptive prior trust, in (0, 1)
+    b ... head.prior_bias, one trainable number
+
+How b is obtained
+    Start value: b0 = 0.2 * log(p / (1 - p))   (0.2 = config pgb_prior_offset)
+    p = share of incompatible pairs in train = 276 / 2,770 = 0.0996  (config positive_prior,
+        confirmed in the checkpoint);  1 - p = 0.9004
+    b0 = 0.2 * log(0.0996 / 0.9004) = 0.2 * (-2.20) = about -0.44
+    Then b is learned by backpropagation with all other weights. Learned value: -0.421.
+
+What p is for
+    p is used only to set b's starting value, so the untrained model already leans toward
+    "compatible" (about 10% of pairs are incompatible). This makes the first epochs more
+    stable. It has no effect on predictions afterwards, the threshold or the excipient prior.
+    Class imbalance is handled separately by the loss (positive-class weight).
+    (For the 60/20/20 model the same p is 193 / 2,075 = 0.093.)
+
+
+==============================================================================================
+9. TRAINING RECIPE
+==============================================================================================
+    Loss ........................ asymmetric focal, gamma+ 1.2, gamma- 2.5, positive-class
+                                  weight, no balanced sampler
+    Optimizer ................... AdamW, LR 1.2e-3, weight decay 2e-3
+    Batch size .................. 64
+    Gradient clipping ........... 1.0
+    LR schedule ................. ReduceLROnPlateau on val PR-AUC, factor 0.5, patience 4
+    Early stopping .............. val PR-AUC, patience 7, min delta 0.002, max 40 epochs
+    Best epoch .................. 1 (val PR-AUC 0.6859)
+    Fit on train only ........... PGB descriptor norm stats, excipient prior table
+    Seed ........................ 42
+    Device ...................... GPU (original run)
+
+
+==============================================================================================
+10. DECISION THRESHOLD
+==============================================================================================
+Swept from 0.001 to 0.999 in steps of 0.001 on validation. Among thresholds that keep the
+true-negative rate >= 0.97, the one with the best MCC was chosen: 0.671.
+The held-out pairs played no part in choosing it.
+
+
+==============================================================================================
+11. RESULTS
+==============================================================================================
+                        Held-out (24)   Held-out unseen (22)   Validation (774)
+    PR-AUC              0.9594          0.9415                 0.6859
+    ROC-AUC             0.9583          0.9500                 0.9239
+    F1                  0.8000          0.7500                 0.6552
+    MCC                 0.7071          0.6708                 0.6393
+    Precision           1.0000          1.0000                 0.7917
+    Recall              0.6667          0.6000                 0.5588
+    Accuracy            0.8333          0.8182                 0.9483
+    Correct             20/24           18/22                  734/774
+    TP / FP / TN / FN   8 / 0 / 12 / 4  6 / 0 / 12 / 4         38 / 10 / 696 / 30
+    Confusion matrix    [[12,0],[4,8]]  [[12,0],[4,6]]         [[696,10],[30,38]]
+    Threshold           0.671           0.671                  0.671
+
+Held-out unseen = the 24 held-out pairs minus the 2 pairs that are also in train.
+Validation ROC-AUC was not saved by the original run; it was recomputed from the checkpoint
+(0.9239). Re-scoring the checkpoint reproduces every saved metric exactly.
+
+Comparison with the 60/20/20 model (project/final_model/): held-out 19/24, PR-AUC 0.914,
+ROC-AUC 0.903, MCC 0.602, threshold 0.690.
+
+
+==============================================================================================
+12. HELD-OUT PREDICTIONS, PAIR BY PAIR (threshold 0.671; label 1 = incompatible)
+==============================================================================================
+row  API                       Excipient                     label  P(incompat)  pred  result
+  1  Warfarin                  Magnesium aluminum silicate     1    0.5621        0    WRONG
+  2  Phenytoin                 Magnesium oxide                 1    0.6719        1    ok
+  3  Trichlormethiazide        Magnesium oxide                 1    0.8185        1    ok
+  4  Tetracycline              Calcium phosphate               1    0.7101        1    ok
+  5  Fluvoxamine               Lactose                         1    0.5729        0    WRONG
+  6  Acetazolamide             Lactose                         1    0.7249        1    ok
+  7  Acetazolamide             Mannitol                        1    0.4440        0    WRONG
+  8  Phenytoin sodium          Lactose                         1    0.5050        0    WRONG
+  9  Phenytoin sodium          Calcium sulfate                 1    0.8006        1    ok
+ 10  Hydrocortisone            Magnesium stearate              1    0.6819        1    ok (in train)
+ 11  Hydrocortisone            Beta cyclodextrin               1    0.7551        1    ok (in train)
+ 12  Quercetin                 Magnesium carbonate             1    0.7084        1    ok
+ 13  Metformin hydrochloride   Magnesium stearate              0    0.5254        0    ok
+ 14  Lamotrigine               Sodium lauryl sulfate           0    0.2830        0    ok
+ 15  Gabapentin                Mannitol                        0    0.2310        0    ok
+ 16  Omeprazole                Silicon dioxide                 0    0.1366        0    ok
+ 17  Carbamazepine             Propylene glycol                0    0.2714        0    ok
+ 18  Hydrochlorothiazide       Stearic acid                    0    0.4377        0    ok
+ 19  Celecoxib                 Titanium dioxide                0    0.0539        0    ok
+ 20  Topiramate                Triacetin                       0    0.1729        0    ok
+ 21  Levetiracetam             Talc                            0    0.6701        0    ok
+ 22  Fenofibrate               Sucrose                         0    0.3495        0    ok
+ 23  Risperidone               Lactose monohydrate             0    0.2072        0    ok
+ 24  Olanzapine                Magnesium stearate              0    0.3589        0    ok
+
+All 12 compatible pairs are correct (no false positives). The 4 errors are incompatible pairs
+predicted compatible: Warfarin + Mg aluminum silicate, Fluvoxamine + lactose, Acetazolamide +
+mannitol, Phenytoin sodium + lactose. Close calls: row 2 (0.6719, just above 0.671) and
+row 21 (0.6701, just below).
+
+
+==============================================================================================
+13. HELD-OUT PAIRS THAT ALSO OCCUR IN START_DATASET (CID vs SMILES)
+==============================================================================================
+Row numbers count data rows only (row 1 = first row under the header).
+
+Pairs repeated with the same CIDs (2):
+  held-out row 10  Hydrocortisone + Magnesium stearate
+      start_dataset row 492, 80/20 train.csv row 373, label 1 in both
+      API CID 5754 = 5754, Excipient CID 11177 = 11177
+      API SMILES differ (held-out has stereo marks, start_dataset does not)
+      Excipient SMILES identical
+  held-out row 11  Hydrocortisone + Beta cyclodextrin
+      start_dataset row 491, 80/20 train.csv row 372, label 1 in both
+      API CID 5754 = 5754, Excipient CID 444041 = 444041
+      API and excipient SMILES both differ only by stereo marks
+
+Near-match (not a CID match):
+  held-out row 4   Tetracycline + Calcium phosphate (CID 54675776 + 21226083)
+      start_dataset row 3116 / 80/20 val.csv row 674: Tetracycline + tricalcium phosphate
+      (CID 54675776 + 24456), label 1. Same API CID, different excipient CID and SMILES;
+      they match only after removing the calcium ions and stereo marks.
+
+The model's Morgan fingerprints ignore stereochemistry, so it sees rows 10 and 11 as the same
+molecules it trained on.
+
+Same CID, different SMILES elsewhere: 30 of the 48 held-out molecules have a CID that is in
+start_dataset; 15 have identical SMILES and 15 differ. The differences are notation only:
+stereo marks (11), aromatic vs Kekule form (Hydrochlorothiazide, Risperidone), a tautomer
+(Metformin HCl) and an explicit [H] (Lactose monohydrate).
+Files: project/final_model/data/heldout_pairs_repeated_in_start_dataset.csv and
+       project/final_model/data/heldout_vs_start_dataset_cid_smiles.csv
+
+
+==============================================================================================
+14. KNOWN ISSUES TO DISCLOSE
+==============================================================================================
+- Two held-out pairs are in train with the same label (rows 10 and 11). On the 22 held-out
+  pairs the model never trained on it scores 18/22.
+- val.csv contains Tetracycline + tricalcium phosphate, the same chemistry as held-out row 4.
+- There is no internal test set: validation drives early stopping and the threshold, so the
+  validation metrics are optimistic. The held-out set is the only untouched test, and with 24
+  pairs one pair changes accuracy by about 4 points.
+- The split is grouped by API cluster but not stratified on the label (train 10.0%, val 8.8%
+  incompatible).
+- Best epoch is 1: the model reached its best validation PR-AUC after a single epoch.
+
+
+==============================================================================================
+15. REPRODUCIBILITY
+==============================================================================================
+- Inference is deterministic: re-scoring the checkpoint gives the same predictions on CPU and
+  GPU (probability differences around 1e-7), 20/24 every time.
+- Retraining with seed 42 uses the identical config but can differ slightly on another GPU or on
+  CPU, so the held-out count may move by a pair. Other seeds give different models. For reported
+  results, use the shipped checkpoint.
+- Tested with Python 3.12.7, torch 2.5.1, rdkit 2026.03.6, scikit-learn 1.5.1, pandas 2.2.2,
+  numpy 1.26.4.
+
+
+==============================================================================================
+16. USING THE MODEL WITHOUT EXCIPIENT SMILES
+==============================================================================================
+Everything the model knows about an excipient comes from its SMILES (fingerprints, flags,
+descriptors, salt context, prior-table lookup, mechanism SMARTS). The excipient name is never
+read. Without SMILES the code still runs, but it fills zeros and a default prior, so every
+excipient paired with the same API gets the same score: an API-only risk score, not a
+compatibility prediction. Every training row had an excipient SMILES, so this path was never
+trained.
+(Tested on the 60/20/20 model with the same architecture: held-out 19/24 -> 17/24, ROC-AUC
+0.903 -> 0.694, and Acetazolamide + lactose / + mannitol got the identical score.)
+Options: look up excipient SMILES (PubChem, or the local openmix ingredient table, which covers
+31 of the 67 excipients in pipeline_groups.csv), use repeat-unit SMILES for polymers, or retrain
+with excipient dropout.
+
+
+==============================================================================================
+17. FIGURES MADE FOR THIS MODEL
+==============================================================================================
+ARES metrics table (validation vs held-out, confusion matrices):
+    project/metrics/pgb_fixed_vector_morgan_concat_asl/single_run_80_20split/
+        ares_metrics_morgan_pgb_8020.png
+
+Graphical abstract (architecture + data + evaluation):
+    project/graphical_abstract/morgan_pgb_8020_graphical_abstract.{svg,png,_600dpi.tif}
+    script: make_graphical_abstract_8020.py
+
+Graphical abstract, architecture VARIANT (1-D prior, no adaptive prior trust):
+    project/graphical_abstract/morgan_pgb_8020_graphical_abstract_prior1.{svg,png,_600dpi.tif}
+    script: make_graphical_abstract_8020_prior1.py
+    Changes: prior 5 -> 1 (p_exact only), gate context 46 -> 42, gate 42 -> 32 -> 16,
+    concat 410 -> 406, MLP 406 -> 128 -> 48 -> 1, adaptive prior trust removed, z = r + b.
+    NOTE: this architecture has NOT been trained. Panel D still shows the metrics of the trained
+    model above (5-D prior + adaptive prior trust). Retrain the variant, or remove the metrics,
+    before using that figure.
+
+
+==============================================================================================
+18. HOW TO RUN (inside final_project/)
+==============================================================================================
+    pip install -r requirements.txt
+    python run.py evaluate                  # scores the shipped model, prints 20/24
+    python run.py predict --csv pairs.csv   # needs API_Smiles, Excipient_Smiles columns
+    python run.py train                     # retrain -> checkpoints/morgan_pgb_8020_retrain_seed42/
+    python run.py train --seed 43 --device cpu
+    python run.py split                     # rebuild train/val from start_dataset.csv
+
+==============================================================================================
+END
+==============================================================================================
