@@ -1,0 +1,54 @@
+{
+  "model": "pgb_fixed_vector_morgan_concat_asl",
+  "kind": "pgb",
+  "seed": 42,
+  "device": "cuda",
+  "split": {
+    "train_csv": "final_project/data_noleak\\train.csv",
+    "val_csv": "final_project/data_noleak\\val.csv",
+    "heldout_csv": "final_project/data_noleak\\held_out_test_set.csv",
+    "train_md5": "3d234c1ad887ba4fd912a2a63988dd8a",
+    "val_md5": "5ba1f79b6e5283a5350094c4b9b53edc",
+    "heldout_md5": "acfd0c6ae9e19908f96dd7d1fdd3206a"
+  },
+  "git_commit": "a563ae7d0c6d13965c64d76f3c4d6f426e7fadde",
+  "epochs_trained": 11,
+  "best_epoch": 4,
+  "best_val_pr_auc_checkpoint": 0.6899391364374746,
+  "threshold_from_val": 0.8130000000000001,
+  "threshold_rule": "best val MCC with TNR >= 0.97",
+  "checks_passed": {
+    "encoder": "not used (morgan bits computed from SMILES)",
+    "datasets": {
+      "train": 2768,
+      "val": 774,
+      "heldout": 24
+    }
+  },
+  "finished": "2026-10-22T10:01:40",
+  "minutes": 4.76,
+  "architecture": {
+    "model_class": "PGBCompatibilityModel",
+    "family": "morgan",
+    "encoder": "fixed_vector",
+    "fusion": "concat",
+    "pooling": "n/a",
+    "train_prior": "leave-own-cluster-out (cluster_id column of train.csv)"
+  },
+  "config": {
+    "family": "morgan",
+    "encoder": "fixed_vector",
+    "fixed_vector_source": "morgan",
+    "fusion": "concat",
+    "pooling": "global_gated_attention",
+    "loss": "asym_focal",
+    "pgb_lr": 0.0012,
+    "pgb_encoder_lr": 0.0003,
+    "pgb_batch_size": 64,
+    "pgb_max_epochs": 40,
+    "pgb_early_stop_patience": 7,
+    "pgb_tnr_floor": 0.97,
+    "pgb_prior_vec_dim": 5
+  },
+  "heldout_fixed_vectors": null
+}

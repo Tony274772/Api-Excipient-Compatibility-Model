@@ -1,0 +1,2 @@
+model,kind,seed,heldout_correct,heldout_TP,heldout_TN,heldout_FP,heldout_FN,unseen_correct,clean_correct,heldout_pr_auc,heldout_roc_auc,heldout_mcc,val_pr_auc,val_roc_auc,val_mcc,val_f1,threshold
+pgb_fixed_vector_morgan_concat_asl,pgb,42,15,3,12,0,9,15/24,14/22,0.8822573260073261,0.8819444444444445,0.3779644730092272,0.6899391364374746,0.9356565572404598,0.6307948093117943,0.6363636363636364,0.8130000000000001
