@@ -1,0 +1,32 @@
+{
+  "model": "Morgan-PGB",
+  "ablation": "no_prior",
+  "description": "E. excipient prior removed (gate 46 -> 41, MLP 410 -> 405, no w term), z = r + b",
+  "parameters": 235362,
+  "split": "80/20 (Butina API clusters, GroupShuffleSplit random_state=42)",
+  "seed": 42,
+  "device": "cuda",
+  "data": {
+    "train": {
+      "path": "data/train.csv",
+      "rows": 2770,
+      "md5": "cfa2e256c21a15abd42f1f852ef94357"
+    },
+    "val": {
+      "path": "data/val.csv",
+      "rows": 774,
+      "md5": "5ba1f79b6e5283a5350094c4b9b53edc"
+    },
+    "heldout": {
+      "path": "data/held_out_test_set.csv",
+      "rows": 24,
+      "md5": "acfd0c6ae9e19908f96dd7d1fdd3206a"
+    }
+  },
+  "epochs_trained": 10,
+  "best_epoch": 3,
+  "threshold_from_val": 0.808,
+  "tnr_floor": 0.97,
+  "finished": "2026-10-22T13:21:41",
+  "minutes": 2.0
+}

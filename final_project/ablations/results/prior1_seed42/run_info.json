@@ -1,0 +1,32 @@
+{
+  "model": "Morgan-PGB",
+  "ablation": "prior1",
+  "description": "B. prior 5 -> 1 (p_exact only) in gate, MLP and prior trust; w kept",
+  "parameters": 235547,
+  "split": "80/20 (Butina API clusters, GroupShuffleSplit random_state=42)",
+  "seed": 42,
+  "device": "cuda",
+  "data": {
+    "train": {
+      "path": "data/train.csv",
+      "rows": 2770,
+      "md5": "cfa2e256c21a15abd42f1f852ef94357"
+    },
+    "val": {
+      "path": "data/val.csv",
+      "rows": 774,
+      "md5": "5ba1f79b6e5283a5350094c4b9b53edc"
+    },
+    "heldout": {
+      "path": "data/held_out_test_set.csv",
+      "rows": 24,
+      "md5": "acfd0c6ae9e19908f96dd7d1fdd3206a"
+    }
+  },
+  "epochs_trained": 8,
+  "best_epoch": 1,
+  "threshold_from_val": 0.656,
+  "tnr_floor": 0.97,
+  "finished": "2026-10-22T12:07:24",
+  "minutes": 1.81
+}
