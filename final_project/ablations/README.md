@@ -19,6 +19,8 @@ model changes. Nothing in `src/`, `run.py` or the final checkpoints is touched.
 | `no_flags_api` | I-a. the 18 API chemistry flags removed (API tower mix 145 -> 129, gate 46 -> 28) | `z = r + w * logit(p_exact) + b` |
 | `no_flags_exc` | I-b. the 18 excipient chemistry flags removed (excipient tower mix 145 -> 129, gate 46 -> 28) | `z = r + w * logit(p_exact) + b` |
 | `no_flags_metal` | I-c. the 10 metal / inorganic flags removed on both sides (flag blocks 18 -> 8, gate 46 -> 26) | `z = r + w * logit(p_exact) + b` |
+| `no_family` | J. data only: excipient prior looked up as exact -> nearest neighbour -> global (family fallback removed); run as `prior1+no_family` | unchanged |
+| `train_global` | K. data only: prior global rate = train positive rate (0.0996) in place of the hard-coded 0.094; run as `prior1+no_family+train_global` | unchanged |
 
 Ablations combine with `+`, applied left to right (the order does not change the model):
 `prior1+no_w` = 1-D prior and no prior trust, `z = r + b` (the "prior1" graphical-abstract variant).
@@ -80,6 +82,21 @@ has_Al, has_Si, has_Ti_Fe, has_Mn_Cr, is_salt, very_short`; it overlaps with the
 `no_flags_metal+no_salt` tests whether one covers for the other. `keep_flags(model, side, names)` keeps
 any other subset.
 
+`no_family` changes the data, not the model (`DATA_SETTINGS` in `variants.py` sets
+`config.prior_lookup = "no_family"`; `prior_lookup.py` has the table). The family key of `src/pgb_prior.py`
+strips water / solvents and keeps the longest fragment, so it groups all metal salts of one anion (all
+phosphates, all stearates). Without it, `p_exact` changes for 24 of 2,770 train rows (leave-own-cluster-out),
+4 of 774 val rows and 1 held-out pair; every other row keeps its prior. `prior1+no_family` has exactly the
+weights of `prior1`, so compare it with `prior1`.
+
+`train_global` (data only, `prior_global_rate = "train"`) replaces `GLOBAL_RATE = 0.094` of `src/pgb_prior.py`
+(left over from an earlier split) with the train positive rate 276 / 2770 = 0.0996, in the Laplace
+pseudocount `p = (pos + 4 * rate) / (n + 4)`, the unseen fallback and `p_delta`. The rate is stored in the
+config (`prior_global_rate_value`), so evaluation uses the same table. Most excipients have 1-3 train rows,
+but the change is small: `p_exact` moves by at most 0.0056 (+0.001 on average). Compare
+`prior1+no_family+train_global` with `prior1+no_family` (identical weights). `prior_lookup.py` builds the
+table class from both settings; with neither it is `src`'s `ExcipientPriorTable` itself.
+
 Each variant first builds the full model and then removes its part, so every layer it keeps starts
 from exactly the same weights as the full model with the same seed. Removed inputs are cut out of the
 existing weight matrices (no new layers, no extra random draws). One side effect: the cut prior trust
@@ -101,6 +118,8 @@ python ablations/run_ablation.py train --ablation no_flags
 python ablations/run_ablation.py train --ablation no_flags_api
 python ablations/run_ablation.py train --ablation no_flags_exc
 python ablations/run_ablation.py train --ablation no_flags_metal
+python ablations/run_ablation.py train --ablation prior1+no_family
+python ablations/run_ablation.py train --ablation prior1+no_family+train_global
 python ablations/run_ablation.py train --ablation full
 python ablations/run_ablation.py evaluate --ablation no_w
 python ablations/run_ablation.py list
@@ -159,3 +178,24 @@ The head grows from 5 to 13 mechanism inputs (gate 46 -> 54, MLP 410 -> 418, 237
 Output goes to `ablations/checkpoints/full_mechv2_seed42/` and `ablations/results/full_mechv2_seed42/`,
 and `summary.csv` gets a `mech` column. The larger layers draw more random numbers at init, so `full`
 with v1 and v2 do not start from identical weights (unlike the ablations above).
+
+## Global-rate fix and 5-seed runs
+
+`src/pgb_prior.py` used a hard-coded global rate 0.094 (left over from an earlier split) as the smoothing
+pseudocount, unseen fallback and `p_delta` reference. It now takes the train positive rate (276 / 2770 =
+0.0996) from the caller and saves it in `prior_table.json`; `run.py train` and every new ablation run use it.
+Tables saved before load with 0.094, so the shipped model (20/24) and all earlier checkpoints score exactly
+as before. `old_global` reproduces the old rate in a new run.
+
+The single-seed runs made with 0.094 are in `archive_global0094/` (checkpoints, results, summary). With the
+fix, `full` is the old `train_global`; its seeds 42-46 are in `checkpoints/full_seed4*` (copies of
+`train_global_seed4*`) and `results/full_5seeds/`.
+
+```bash
+python ablations/run_seeds.py                       # every ablation, seeds 42-46, skips runs that exist
+python ablations/run_seeds.py --ablations no_w no_prior --seeds 42 43 44 45 46
+python ablations/run_seeds.py --collect-only        # rebuild results/<ablation>_5seeds/
+```
+
+Each `results/<ablation>_5seeds/` holds per-seed val / held-out predictions, mean +- sd and a 5-seed ensemble
+(threshold from val), as written by `collect_seeds.py`. Logs go to `results/logs/`.

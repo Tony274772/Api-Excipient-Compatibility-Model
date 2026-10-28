@@ -43,11 +43,13 @@ import torch  # noqa: E402
 from torch.utils.data import DataLoader  # noqa: E402
 
 from ablations.mech_v2 import NUM_MECH_V2, MechV2PGBDataset  # noqa: E402
-from ablations.variants import ABLATIONS, DESCRIPTIONS, build_model, parse_ablation  # noqa: E402
+from ablations.prior_lookup import (build_leave_cluster_out_prior_vectors, load_prior_table,  # noqa: E402
+                                    new_prior_table)
+from src.pgb_prior import GLOBAL_RATE  # noqa: E402
+from ablations.variants import ABLATIONS, DESCRIPTIONS, build_model, data_settings, parse_ablation  # noqa: E402
 from ablations.variants import describe as describe_ablation  # noqa: E402
 from src.dataset import PGBDataset, PGBNormStats, pgb_collate_fn  # noqa: E402
 from src.evaluate import collect_predictions, save_metrics, tune_threshold  # noqa: E402
-from src.pgb_prior import ExcipientPriorTable, build_leave_cluster_out_prior_vectors  # noqa: E402
 from src.utils import get_device, seed_everything  # noqa: E402
 
 CKPT_ROOT = "ablations/checkpoints"
@@ -93,7 +95,7 @@ def load_checkpoint(ckpt_dir, device):
     model = build_model(config, encoder)
     model.load_state_dict(ckpt["model_state_dict"])
     model.to(device).eval()
-    prior_table = ExcipientPriorTable.load(os.path.join(ckpt_dir, "prior_table.json"))
+    prior_table = load_prior_table(config, os.path.join(ckpt_dir, "prior_table.json"))
     pgb_norm = PGBNormStats.load(os.path.join(ckpt_dir, "pgb_norm_stats.npz"))
     return model, config, encoder, prior_table, pgb_norm, ckpt
 
@@ -114,6 +116,11 @@ def train(ablation, seed, device_str=None, epochs=None, overwrite=False, mech="v
     seed_everything(seed)
     config = make_config(seed, device_str or "auto", epochs)
     config.ablation = ablation
+    for key, value in data_settings(ablation).items():   # data ablations, e.g. no_family -> prior_lookup
+        setattr(config, key, value)
+    # prior global rate: the train positive rate (from make_config), or the old 0.094 with old_global
+    legacy = getattr(config, "prior_global_rate", "train") == "legacy"
+    config.prior_global_rate_value = GLOBAL_RATE if legacy else config.positive_prior
     config.mech_set = mech
     if mech == "v2":
         config.pgb_num_mechanisms = NUM_MECH_V2   # sizes the gate and MLP inputs of the head
@@ -127,10 +134,10 @@ def train(ablation, seed, device_str=None, epochs=None, overwrite=False, mech="v
     pgb_norm = PGBNormStats.from_smiles_list(all_train_smiles)
     pgb_norm.save(os.path.join(ckpt_dir, "pgb_norm_stats.npz"))
 
-    prior_table = ExcipientPriorTable()
+    prior_table = new_prior_table(config)
     prior_table.fit(train_df, leave_out_cluster_id=None)
     prior_table.save(os.path.join(ckpt_dir, "prior_table.json"))
-    train_priors = build_leave_cluster_out_prior_vectors(train_df, cluster_col="cluster_id")
+    train_priors = build_leave_cluster_out_prior_vectors(train_df, config, cluster_col="cluster_id")
 
     train_loader = make_loader(TRAIN_CSV, config, prior_table, pgb_norm, encoder, row_priors=train_priors, shuffle=True)
     val_loader = make_loader(VAL_CSV, config, prior_table, pgb_norm, encoder)
@@ -152,6 +159,8 @@ def train(ablation, seed, device_str=None, epochs=None, overwrite=False, mech="v
         json.dump({
             "model": "Morgan-PGB", "ablation": ablation, "mech_set": mech, "description": describe(ablation, mech),
             "parameters": n_params(model),
+            "prior_table": {"lookup": getattr(config, "prior_lookup", "full"),
+                            "global_rate": float(prior_table.global_rate)},
             "split": "80/20 (Butina API clusters, GroupShuffleSplit random_state=42)",
             "seed": seed, "device": str(device),
             "data": {s: {"path": p, "rows": len(pd.read_csv(p)), "md5": md5(p)}

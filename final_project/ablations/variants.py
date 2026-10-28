@@ -369,6 +369,41 @@ def no_flags_metal(model):
     return model
 
 
+# --------------------------------------------------------------------------- J. prior lookup without family
+def no_family(model):
+    """Data ablation: the model is unchanged; the excipient prior is looked up as exact -> nearest neighbour
+    -> global, without the family (longest-fragment) fallback. See ablations/prior_lookup.py."""
+    return model
+
+
+def train_global(model):
+    """The train positive rate (276 / 2770 = 0.0996) as the prior's global rate. This is now the default for
+    every run, so train_global == full; the name is kept so the runs made with it still load."""
+    return model
+
+
+def old_global(model):
+    """Data ablation: the old hard-coded global rate 0.094 (runs before the fix), model unchanged."""
+    return model
+
+
+# Ablations that change the data pipeline instead of (or as well as) the model: config settings applied
+# before the prior table, data loaders and model are built.
+DATA_SETTINGS = {
+    "no_family": {"prior_lookup": "no_family"},
+    "train_global": {"prior_global_rate": "train"},
+    "old_global": {"prior_global_rate": "legacy"},
+}
+
+
+def data_settings(name):
+    """Config settings of all data ablations in 'a+b+...'."""
+    settings = {}
+    for part in parse_ablation(name):
+        settings.update(DATA_SETTINGS.get(part, {}))
+    return settings
+
+
 # --------------------------------------------------------------------------- registry
 def full(model):
     """The unchanged model (baseline trained through the same harness)."""
@@ -389,6 +424,9 @@ ABLATIONS = {
     "no_flags_api": no_flags_api,
     "no_flags_exc": no_flags_exc,
     "no_flags_metal": no_flags_metal,
+    "no_family": no_family,
+    "train_global": train_global,
+    "old_global": old_global,
 }
 
 DESCRIPTIONS = {
@@ -405,6 +443,9 @@ DESCRIPTIONS = {
     "no_flags_api": "I-a. API chemistry flags removed (API tower mix 145 -> 129, gate 46 -> 28)",
     "no_flags_exc": "I-b. excipient chemistry flags removed (excipient tower mix 145 -> 129, gate 46 -> 28)",
     "no_flags_metal": "I-c. 10 metal / inorganic chemistry flags removed on both sides (flag blocks 18 -> 8, gate 46 -> 26)",
+    "no_family": "J. prior lookup exact -> nearest neighbour -> global (family fallback removed; data only)",
+    "train_global": "K. prior global rate = train positive rate 0.0996 (now the default, same as full)",
+    "old_global": "K-old. prior global rate = old hard-coded 0.094 (runs before the fix; data only)",
 }
 
 

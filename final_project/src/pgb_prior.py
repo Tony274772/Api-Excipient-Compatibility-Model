@@ -11,9 +11,14 @@ import pandas as pd
 from rdkit import Chem
 from rdkit.Chem import AllChem
 
-GLOBAL_RATE = 0.094          # global incompatibility rate across the full dataset
+GLOBAL_RATE = 0.094          # legacy global rate (an earlier split); used only when a table has no fitted rate
 LAPLACE_ALPHA = 4            # Laplace smoothing count
-LAPLACE_PRIOR = GLOBAL_RATE  # pseudocount prior
+LAPLACE_PRIOR = GLOBAL_RATE  # legacy pseudocount prior
+
+# The global rate of a table is the train positive rate, passed in by the caller (run.py: 276 / 2770 =
+# 0.0996 for the 80/20 split). It is the smoothing pseudocount, the fallback for unseen excipients and the
+# p_delta reference, and it is saved in prior_table.json. Tables saved before it was stored load with 0.094,
+# so earlier checkpoints score exactly as before.
 
 
 def _canonical_stereo_blind(smiles: str) -> str | None:
@@ -57,9 +62,11 @@ class ExcipientPriorTable:
     """
     Holds a train-derived per-excipient incompatibility rate.
     Three lookup keys per excipient (exact → family → nearest-neighbour → global).
+    global_rate: train positive rate (smoothing pseudocount, unseen fallback, p_delta reference).
     """
 
-    def __init__(self):
+    def __init__(self, global_rate: float = GLOBAL_RATE):
+        self.global_rate = float(global_rate)
         self._exact: dict[str, tuple[float, int]] = {}   # key → (p, n)
         self._family: dict[str, tuple[float, int]] = {}  # stripped key → (p_family, n)
         self._fps: dict[str, object] = {}                 # exact_key → Morgan fp
@@ -93,7 +100,7 @@ class ExcipientPriorTable:
         exact_agg = df.groupby("exc_key").agg(n=("Outcome1", "size"), pos=("Outcome1", "sum"))
         for key, row in exact_agg.iterrows():
             pos, n = row["pos"], row["n"]
-            p = (pos + LAPLACE_ALPHA * LAPLACE_PRIOR) / (n + LAPLACE_ALPHA)
+            p = (pos + LAPLACE_ALPHA * self.global_rate) / (n + LAPLACE_ALPHA)
             self._exact[key] = (float(p), int(n))
             
             # Save Morgan fingerprint for nearest neighbour
@@ -109,7 +116,7 @@ class ExcipientPriorTable:
         fam_agg = df.groupby("fam_key").agg(n=("Outcome1", "size"), pos=("Outcome1", "sum"))
         for fam_key, row in fam_agg.iterrows():
             pos, n = row["pos"], row["n"]
-            p = (pos + LAPLACE_ALPHA * LAPLACE_PRIOR) / (n + LAPLACE_ALPHA)
+            p = (pos + LAPLACE_ALPHA * self.global_rate) / (n + LAPLACE_ALPHA)
             self._family[fam_key] = (float(p), int(n))
 
         self._fitted = True
@@ -118,7 +125,7 @@ class ExcipientPriorTable:
         """
         Return a dict with keys:
             p_exact       float  Laplace-smoothed incompatibility rate
-            p_delta       float  p_exact - GLOBAL_RATE
+            p_delta       float  p_exact - global_rate
             p_family      float  hydrate-stripped family rate
             log_n         float  log(1 + n)
             unseen        float  1.0 if unseen, 0.0 otherwise
@@ -128,10 +135,11 @@ class ExcipientPriorTable:
         """
         if not self._fitted:
             raise RuntimeError("Call fit() before lookup().")
+        g = self.global_rate
 
         if pd.isna(exc_smiles) or not exc_smiles:
             return {
-                "p_exact": GLOBAL_RATE, "p_delta": 0.0, "p_family": GLOBAL_RATE,
+                "p_exact": g, "p_delta": 0.0, "p_family": g,
                 "log_n": 0.0, "unseen": 1.0,
             }
 
@@ -147,7 +155,7 @@ class ExcipientPriorTable:
             p_fam = self._family.get(fam_key, (p, n))[0]
             return {
                 "p_exact": p,
-                "p_delta": p - GLOBAL_RATE,
+                "p_delta": p - g,
                 "p_family": p_fam,
                 "log_n": float(np.log1p(n)),
                 "unseen": 0.0,
@@ -158,7 +166,7 @@ class ExcipientPriorTable:
             p_fam, n_fam = self._family[fam_key]
             return {
                 "p_exact": p_fam,
-                "p_delta": p_fam - GLOBAL_RATE,
+                "p_delta": p_fam - g,
                 "p_family": p_fam,
                 "log_n": 0.0,
                 "unseen": 0.0,
@@ -169,7 +177,7 @@ class ExcipientPriorTable:
         if fp_query is not None and self._fps:
             from rdkit import DataStructs
             best_sim = 0.0
-            best_p = GLOBAL_RATE
+            best_p = g
             for stored_key, stored_fp in self._fps.items():
                 sim = DataStructs.TanimotoSimilarity(fp_query, stored_fp)
                 if sim > best_sim:
@@ -178,7 +186,7 @@ class ExcipientPriorTable:
             if best_sim >= 0.6:
                 return {
                     "p_exact": best_p,
-                    "p_delta": best_p - GLOBAL_RATE,
+                    "p_delta": best_p - g,
                     "p_family": best_p,
                     "log_n": 0.0,
                     "unseen": 0.0,
@@ -186,9 +194,9 @@ class ExcipientPriorTable:
 
         # Global fallback
         return {
-            "p_exact": GLOBAL_RATE,
+            "p_exact": g,
             "p_delta": 0.0,
-            "p_family": GLOBAL_RATE,
+            "p_family": g,
             "log_n": 0.0,
             "unseen": 1.0,
         }
@@ -201,6 +209,7 @@ class ExcipientPriorTable:
             fps_data[k] = list(fp.GetOnBits())
             
         data = {
+            "global_rate": self.global_rate,
             "exact": {k: list(v) for k, v in self._exact.items()},
             "family": {k: list(v) for k, v in self._family.items()},
             "fps_on_bits": fps_data,
@@ -213,6 +222,7 @@ class ExcipientPriorTable:
         t = cls()
         with open(path) as f:
             data = json.load(f)
+        t.global_rate = float(data.get("global_rate", GLOBAL_RATE))   # tables saved before: 0.094
         t._exact = {k: tuple(v) for k, v in data["exact"].items()}
         t._family = {k: tuple(v) for k, v in data["family"].items()}
         
@@ -229,10 +239,12 @@ class ExcipientPriorTable:
         t._fitted = True
         return t
 
-def build_leave_cluster_out_prior_vectors(train_df: pd.DataFrame, cluster_col="cluster_id"):
+def build_leave_cluster_out_prior_vectors(train_df: pd.DataFrame, cluster_col="cluster_id",
+                                          global_rate: float = GLOBAL_RATE):
     """
     For every training row, compute its excipient prior using
     all training rows except rows belonging to the same API cluster.
+    global_rate is the train positive rate (the same for every leave-out table).
     Returns a list of 5-d prior vectors parallel to train_df rows.
     """
     priors = []
@@ -253,7 +265,7 @@ def build_leave_cluster_out_prior_vectors(train_df: pd.DataFrame, cluster_col="c
     unique_clusters = df[cluster_col].unique() if cluster_col in df.columns else [None]
     tables = {}
     for c in unique_clusters:
-        pt = ExcipientPriorTable()
+        pt = ExcipientPriorTable(global_rate=global_rate)
         pt.fit(df, leave_out_cluster_id=c, _precomputed_fps=fps_cache)
         tables[c] = pt
         

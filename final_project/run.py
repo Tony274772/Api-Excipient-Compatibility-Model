@@ -286,11 +286,13 @@ def train(seed, device_str=None, epochs=None, overwrite=False):
     pgb_norm = PGBNormStats.from_smiles_list(all_train_smiles)
     pgb_norm.save(os.path.join(ckpt_dir, "pgb_norm_stats.npz"))
 
-    # excipient prior table from train rows; train rows get leave-own-cluster-out priors
-    prior_table = ExcipientPriorTable()
+    # excipient prior table from train rows (global rate = train positive rate); train rows get
+    # leave-own-cluster-out priors
+    prior_table = ExcipientPriorTable(global_rate=config.positive_prior)
     prior_table.fit(train_df, leave_out_cluster_id=None)
     prior_table.save(os.path.join(ckpt_dir, "prior_table.json"))
-    train_priors = build_leave_cluster_out_prior_vectors(train_df, cluster_col="cluster_id")
+    train_priors = build_leave_cluster_out_prior_vectors(train_df, cluster_col="cluster_id",
+                                                         global_rate=prior_table.global_rate)
 
     train_loader = make_loader(TRAIN_CSV, config, prior_table, pgb_norm, encoder, row_priors=train_priors, shuffle=True)
     val_loader = make_loader(VAL_CSV, config, prior_table, pgb_norm, encoder)

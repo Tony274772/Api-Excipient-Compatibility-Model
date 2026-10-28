@@ -319,9 +319,7 @@ class PGBDataset(Dataset):
         if self.row_priors is not None:
             prior_vec = self.row_priors[idx]
         else:
-            prior_info = self.prior_table.lookup(exc_smi) if exc_smi else {
-                "p_exact": 0.094, "p_delta": 0.0, "p_family": 0.094, "log_n": 0.0, "unseen": 1.0,
-            }
+            prior_info = self.prior_table.lookup(exc_smi)   # no SMILES -> the table's global rate
             prior_vec = np.array([
                 prior_info["p_exact"],
                 prior_info["p_delta"],

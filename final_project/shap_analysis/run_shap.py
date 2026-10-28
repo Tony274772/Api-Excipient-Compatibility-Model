@@ -144,7 +144,8 @@ def main():
 
     print("[2/7] building features")
     train_df = pd.read_csv(TRAIN_CSV)
-    train_priors = build_leave_cluster_out_prior_vectors(train_df, cluster_col="cluster_id")  # as in training
+    train_priors = build_leave_cluster_out_prior_vectors(train_df, cluster_col="cluster_id",   # as in training
+                                                         global_rate=prior_table.global_rate)
     train_ds = make_dataset(TRAIN_CSV, config, prior_table, pgb_norm, encoder, row_priors=train_priors)
     rng = np.random.default_rng(args.seed)
     bg = extract_features(train_ds, model, device, rng.choice(len(train_ds), size=min(args.bg_samples, len(train_ds)), replace=False))
