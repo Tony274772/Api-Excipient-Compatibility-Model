@@ -449,9 +449,18 @@ DESCRIPTIONS = {
 }
 
 
+# Candidate final models, each a named set of ablations.
+DESIGNS = {
+    # keep w, 1-D prior, chemistry flags, bilinear; remove family lookup, salt, gate, availability, mechanism flags
+    "design_a": ["prior1", "no_family", "no_salt", "no_gate", "no_avail", "no_mech"],
+    # as design_a, but keep the salt context and the family lookup
+    "design_b": ["prior1", "no_gate", "no_avail", "no_mech"],
+}
+
+
 def parse_ablation(name):
-    """'prior1+no_w' -> ['prior1', 'no_w']; raises ValueError for unknown parts."""
-    parts = name.split("+")
+    """'prior1+no_w' -> ['prior1', 'no_w'], with designs expanded; raises ValueError for unknown parts."""
+    parts = [p for part in name.split("+") for p in DESIGNS.get(part, [part])]
     unknown = [p for p in parts if p not in ABLATIONS]
     if unknown:
         raise ValueError(f"unknown ablation(s) {unknown}; available: {sorted(ABLATIONS)}")

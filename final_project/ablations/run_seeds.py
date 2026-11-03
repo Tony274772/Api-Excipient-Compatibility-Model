@@ -7,6 +7,7 @@ already have a checkpoint are skipped, so the script can be stopped and started 
 Usage (from final_project/):
     python ablations/run_seeds.py                                   # all ablations below, seeds 42-46
     python ablations/run_seeds.py --ablations no_w no_prior --seeds 42 43 44 45 46
+    python ablations/run_seeds.py --ablations design_a design_b     # the two candidate final models
     python ablations/run_seeds.py --collect-only                    # only rebuild the <ablation>_5seeds folders
 """
 

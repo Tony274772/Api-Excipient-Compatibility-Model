@@ -199,3 +199,19 @@ python ablations/run_seeds.py --collect-only        # rebuild results/<ablation>
 
 Each `results/<ablation>_5seeds/` holds per-seed val / held-out predictions, mean +- sd and a 5-seed ensemble
 (threshold from val), as written by `collect_seeds.py`. Logs go to `results/logs/`.
+
+## Candidate final models
+
+| Name | Keeps | Removes | Ablations | Parameters |
+|---|---|---|---|---|
+| `design_a` | `w`, 1-D prior, chemistry flags, bilinear term | family lookup, salt context, gate, availability flag, mechanism flags | `prior1+no_family+no_salt+no_gate+no_avail+no_mech` | 231,147 |
+| `design_b` | as `design_a`, plus salt context and family lookup | gate, availability flag, mechanism flags | `prior1+no_gate+no_avail+no_mech` | 232,683 |
+
+Without the gate, the chemistry flags reach the model only through the towers. Both designs use the train-rate
+prior. Train them on seeds 42-46 and compare with `results/full_5seeds/`:
+
+```bash
+python ablations/run_seeds.py --ablations design_a design_b
+```
+
+Output goes to `checkpoints/design_*_seed*`, `results/design_*_seed*` and `results/design_*_5seeds/`.

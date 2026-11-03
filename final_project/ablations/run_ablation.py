@@ -46,7 +46,7 @@ from ablations.mech_v2 import NUM_MECH_V2, MechV2PGBDataset  # noqa: E402
 from ablations.prior_lookup import (build_leave_cluster_out_prior_vectors, load_prior_table,  # noqa: E402
                                     new_prior_table)
 from src.pgb_prior import GLOBAL_RATE  # noqa: E402
-from ablations.variants import ABLATIONS, DESCRIPTIONS, build_model, data_settings, parse_ablation  # noqa: E402
+from ablations.variants import ABLATIONS, DESCRIPTIONS, DESIGNS, build_model, data_settings, parse_ablation  # noqa: E402
 from ablations.variants import describe as describe_ablation  # noqa: E402
 from src.dataset import PGBDataset, PGBNormStats, pgb_collate_fn  # noqa: E402
 from src.evaluate import collect_predictions, save_metrics, tune_threshold  # noqa: E402
@@ -259,6 +259,8 @@ def main():
     if args.cmd == "list":
         for k in ABLATIONS:
             print(f"{k:15s} {DESCRIPTIONS[k]}")
+        for k, parts in DESIGNS.items():
+            print(f"{k:15s} {'+'.join(parts)}")
         print('combine with "+", applied left to right, e.g. prior1+no_w')
     elif args.cmd == "train":
         train(args.ablation, args.seed, args.device, args.epochs, args.overwrite, args.mech)
