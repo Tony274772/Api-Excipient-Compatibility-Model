@@ -1,0 +1,34 @@
+API + EXCIPIENT GROUP SPLIT (val API and val excipient both unseen in train)
+
+Run 2026-11-03T10:55:11 by data/make_split_variants.py
+rdkit 2026.03.6 | scikit-learn 1.5.1 | pandas 2.2.2
+Input start_dataset.csv: 3544 pairs, 533 APIs, 336 excipients (md5 9572ba67ca8be7af5fee7a3c9911ccfe)
+Butina (Morgan r=2, 2048 bits, distance cutoff 0.15): 530 API SMILES -> 512 clusters | 331 excipient SMILES -> 284 clusters
+Excipient parent-compound groups: 284 Butina clusters -> 234 groups (80 salt / hydrate / acid / mixture links); largest groups hold 11.2%, 7.5%, 6.4% of rows
+
+val API clusters  = GroupShuffleSplit(test_size=0.2, random_state=42) on cluster_id (same 103 clusters as data/val.csv)
+val excipient groups = the label-stratified group split of excipient_new/ (same 33 groups as excipient_new/val.csv)
+train = API in train clusters AND excipient in train groups
+val   = API in val clusters AND excipient in val groups
+dropped (one side in each) = 1196 pairs -> dropped_mixed.csv.
+The API side is not stratified (it is the existing API split); the excipient side is.
+
+train   rows= 2201 | incompatible= 220 (10.0%) | compatible= 1981 | unique APIs= 409 | unique excipients= 253 | API clusters= 393 | excipient clusters= 220 | excipient groups= 182
+val     rows=  147 | incompatible=  14 ( 9.5%) | compatible=  133 | unique APIs=  77 | unique excipients=  29 | API clusters=  73 | excipient clusters=  21 | excipient groups=  18
+heldout rows=   24 | incompatible=  12 (50.0%) | compatible=   12 | unique APIs=  21 | unique excipients=  18
+
+API cluster overlap train<->val:       0 of 73 val API clusters
+API_CID overlap train<->val:           0 of 77 val APIs
+excipient cluster overlap train<->val: 0 of 21 val excipient clusters
+excipient group overlap train<->val:   0 of 18 val excipient groups
+Excipient_CID overlap train<->val:     0 of 29 val excipients
+pair overlap train<->val:              0
+
+held-out APIs seen in train:           7 of 24 pairs
+held-out excipients seen in train:     15 of 24 pairs
+held-out pair also in train:           API_CID 5754 + Excipient_CID 11177
+held-out pair also in train:           API_CID 5754 + Excipient_CID 444041
+
+train.csv: md5 98fc7c18b2da378df029715e0568e373
+val.csv: md5 af68edd0ec6582d561819bd228f97fd6
+dropped_mixed.csv: md5 521bb98bdf3cf49f7d30fddc6ece82c9

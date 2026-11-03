@@ -1,0 +1,29 @@
+RANDOM SPLIT (80/20, stratified on Outcome1)
+
+Run 2026-11-03T10:55:11 by data/make_split_variants.py
+rdkit 2026.03.6 | scikit-learn 1.5.1 | pandas 2.2.2
+Input start_dataset.csv: 3544 pairs, 533 APIs, 336 excipients (md5 9572ba67ca8be7af5fee7a3c9911ccfe)
+Butina (Morgan r=2, 2048 bits, distance cutoff 0.15): 530 API SMILES -> 512 clusters | 331 excipient SMILES -> 284 clusters
+Excipient parent-compound groups: 284 Butina clusters -> 234 groups (80 salt / hydrate / acid / mixture links); largest groups hold 11.2%, 7.5%, 6.4% of rows
+
+train_test_split(test_size=0.2, random_state=42, stratify=Outcome1) on rows
+APIs and excipients are shared between train and val by design.
+
+train   rows= 2835 | incompatible= 275 ( 9.7%) | compatible= 2560 | unique APIs= 514 | unique excipients= 310 | API clusters= 495 | excipient clusters= 263 | excipient groups= 216
+val     rows=  709 | incompatible=  69 ( 9.7%) | compatible=  640 | unique APIs= 359 | unique excipients= 143 | API clusters= 348 | excipient clusters= 126 | excipient groups= 105
+heldout rows=   24 | incompatible=  12 (50.0%) | compatible=   12 | unique APIs=  21 | unique excipients=  18
+
+API cluster overlap train<->val:       331 of 348 val API clusters
+API_CID overlap train<->val:           340 of 359 val APIs
+excipient cluster overlap train<->val: 105 of 126 val excipient clusters
+excipient group overlap train<->val:   87 of 105 val excipient groups
+Excipient_CID overlap train<->val:     117 of 143 val excipients
+pair overlap train<->val:              0
+
+held-out APIs seen in train:           9 of 24 pairs
+held-out excipients seen in train:     21 of 24 pairs
+held-out pair also in train:           API_CID 5754 + Excipient_CID 11177
+held-out pair also in train:           API_CID 5754 + Excipient_CID 444041
+
+train.csv: md5 a27f262997dcba7a287ee0ebb98afd88
+val.csv: md5 53be4cd6104ce275a593df462f564cb8

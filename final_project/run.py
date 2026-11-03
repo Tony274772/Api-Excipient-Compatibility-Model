@@ -7,7 +7,10 @@ Everything this script needs is inside this folder; it can be moved anywhere.
 Usage (from any directory):
     python run.py train                               # train from scratch -> checkpoints/morgan_pgb_8020_retrain_seed42/
     python run.py train --seed 43 --device cpu
+    python run.py train --data-dir data/random        # other split -> checkpoints/morgan_pgb_random_seed42/
+                                                      # (data/random, data/excipient_new, data/api_excipient_new)
     python run.py evaluate                            # metrics of the shipped model (val + held-out)
+    python run.py evaluate --checkpoint checkpoints/morgan_pgb_random_seed42   # scores on the data it was trained on
     python run.py evaluate --checkpoint checkpoints/morgan_pgb_8020_retrain_seed42
     python run.py predict --csv my_pairs.csv          # score new pairs (needs API_Smiles, Excipient_Smiles)
     python run.py split                               # rebuild the 80/20 split from start_dataset + write the split log
@@ -53,10 +56,19 @@ from src.utils import get_device, seed_everything
 
 RDLogger.DisableLog("rdApp.*")   # silence "not removing hydrogen atom without neighbors" on inorganic salts
 
+DATA_DIR = "data"   # train / val / held-out folder; switched by --data-dir (see use_data_dir)
 TRAIN_CSV = "data/train.csv"
 VAL_CSV = "data/val.csv"
 HELDOUT_CSV = "data/held_out_test_set.csv"
 START_CSV = "data/start_dataset.csv"
+DATA_DIR_FILE = "data_dir.txt"   # written into each new checkpoint: the data folder it was trained on
+SPLIT_NAMES = {
+    "data": "API group split (80/20, Butina API clusters, GroupShuffleSplit random_state=42)",
+    "data/random": "random split (80/20, stratified on Outcome1, random_state=42)",
+    "data/excipient_new": "excipient group split (80/20, parent-compound excipient groups, label-stratified)",
+    "data/api_excipient_new": "API + excipient group split (val API and excipient both unseen in train)",
+    "data/api_cluster06": "API group split at Tanimoto >= 0.6 (80/20, Butina API clusters incl. close analogues)",
+}
 FINAL_CKPT = "checkpoints/morgan_pgb_8020_seed42"
 REFERENCE = "reference_results"
 METRICS = "metrics"
@@ -64,6 +76,21 @@ SPLITS = ["val", "heldout"]
 
 
 # --------------------------------------------------------------------------- helpers
+def use_data_dir(data_dir):
+    """Point TRAIN_CSV / VAL_CSV / HELDOUT_CSV at data_dir (relative to this folder, e.g. data/random)."""
+    global DATA_DIR, TRAIN_CSV, VAL_CSV, HELDOUT_CSV
+    data_dir = os.path.relpath(os.path.abspath(data_dir), HERE).replace(os.sep, "/")
+    for name in ("train.csv", "val.csv", "held_out_test_set.csv"):
+        if not os.path.exists(os.path.join(data_dir, name)):
+            raise SystemExit(f"{data_dir}/{name} not found")
+    DATA_DIR = data_dir
+    TRAIN_CSV, VAL_CSV, HELDOUT_CSV = (f"{data_dir}/{n}" for n in ("train.csv", "val.csv", "held_out_test_set.csv"))
+
+
+def split_name():
+    return SPLIT_NAMES.get(DATA_DIR, DATA_DIR)
+
+
 def md5(path):
     with open(path, "rb") as f:
         return hashlib.md5(f.read()).hexdigest()
@@ -210,7 +237,8 @@ def evaluate(ckpt_dir, device_str=None):
         tables[s].to_csv(os.path.join(out_dir, f"predictions_{s}.csv"), index=False)
 
     print("=" * 100)
-    print("Morgan-PGB  |  80/20 split  |  checkpoint:", ckpt_dir)
+    print("Morgan-PGB  |  checkpoint:", ckpt_dir)
+    print(f"data folder {DATA_DIR}: {split_name()}")
     print(f"device {device} | best epoch {ckpt.get('epoch')} | val PR-AUC at best epoch {ckpt.get('val_pr_auc', float('nan')):.4f}")
     print(f"rows: train {len(frame_for('train'))} | val {len(data['val'])} | held-out {len(data['heldout'])}")
     print(f"threshold {thr_note}")
@@ -264,10 +292,14 @@ def predict(csv, ckpt_dir, device_str=None, out=None):
 def train(seed, device_str=None, epochs=None, overwrite=False):
     from src.train import pgb_train
 
-    ckpt_dir = f"checkpoints/morgan_pgb_8020_retrain_seed{seed}"
+    # data/ keeps the original name; another split folder gets its own, e.g. morgan_pgb_random_seed42
+    tag = "8020_retrain" if DATA_DIR == "data" else os.path.basename(DATA_DIR)
+    ckpt_dir = f"checkpoints/morgan_pgb_{tag}_seed{seed}"
     if os.path.exists(os.path.join(ckpt_dir, "best_model.pt")) and not overwrite:
         raise SystemExit(f"{ckpt_dir} already exists; pass --overwrite to retrain")
     os.makedirs(ckpt_dir, exist_ok=True)
+    with open(os.path.join(ckpt_dir, DATA_DIR_FILE), "w") as f:
+        f.write(DATA_DIR + "\n")
     out_dir = os.path.join(METRICS, os.path.basename(ckpt_dir))
     os.makedirs(out_dir, exist_ok=True)
     t0 = time.time()
@@ -299,7 +331,7 @@ def train(seed, device_str=None, epochs=None, overwrite=False):
 
     model = pgb_model_from_config(config, encoder)
     model.to(device)
-    print(f"[Morgan-PGB 80/20 | seed {seed} | {device}] train {len(train_df)} | val {len(val_df)} | "
+    print(f"[Morgan-PGB | {DATA_DIR} | seed {seed} | {device}] train {len(train_df)} | val {len(val_df)} | "
           f"max epochs {config.pgb_max_epochs} | checkpoint -> {os.path.join(HERE, ckpt_dir)}")
     model, history = pgb_train(model, train_loader, val_loader, config, device)
 
@@ -311,7 +343,7 @@ def train(seed, device_str=None, epochs=None, overwrite=False):
     save_metrics({"history": history}, os.path.join(out_dir, "training_history.json"))
     with open(os.path.join(out_dir, "run_info.json"), "w") as f:
         json.dump({
-            "model": "Morgan-PGB", "split": "80/20 (Butina API clusters, GroupShuffleSplit random_state=42)",
+            "model": "Morgan-PGB", "data_dir": DATA_DIR, "split": split_name(),
             "seed": seed, "device": str(device),
             "data": {name: {"path": p, "rows": len(pd.read_csv(p)), "md5": md5(p)}
                      for name, p in [("train", TRAIN_CSV), ("val", VAL_CSV), ("heldout", HELDOUT_CSV)]},
@@ -429,10 +461,15 @@ def main():
     t.add_argument("--device", default=None, help="cpu, cuda (default: cuda if available)")
     t.add_argument("--epochs", type=int, default=None, help="max epochs (default 40, early stopping on val PR-AUC)")
     t.add_argument("--overwrite", action="store_true")
+    t.add_argument("--data-dir", default="data",
+                   help="folder with train.csv / val.csv / held_out_test_set.csv: data (API group split, default), "
+                        "data/random, data/excipient_new, data/api_excipient_new, data/api_cluster06")
 
     e = sub.add_parser("evaluate", help="metrics on val / held-out + held-out predictions")
     e.add_argument("--checkpoint", default=FINAL_CKPT)
     e.add_argument("--device", default=None)
+    e.add_argument("--data-dir", default=None,
+                   help=f"data folder to score (default: the one in the checkpoint's {DATA_DIR_FILE}, else data)")
 
     pr = sub.add_parser("predict", help="score a CSV of pairs (API_Smiles, Excipient_Smiles; optional Outcome1/ground_truth)")
     pr.add_argument("--csv", required=True)
@@ -450,6 +487,14 @@ def main():
             setattr(args, attr, os.path.join(CALLER_CWD, v))
     if args.cmd == "predict" and args.out and not os.path.isabs(args.out):
         args.out = os.path.join(CALLER_CWD, args.out)
+    data_dir = getattr(args, "data_dir", None)
+    if args.cmd == "evaluate" and data_dir is None:
+        saved = os.path.join(args.checkpoint, DATA_DIR_FILE)
+        data_dir = open(saved).read().strip() if os.path.exists(saved) else "data"
+    if data_dir:
+        if not os.path.isabs(data_dir) and not os.path.isdir(data_dir) and os.path.isdir(os.path.join(CALLER_CWD, data_dir)):
+            data_dir = os.path.join(CALLER_CWD, data_dir)
+        use_data_dir(data_dir)
 
     if args.cmd == "train":
         train(args.seed, args.device, args.epochs, args.overwrite)

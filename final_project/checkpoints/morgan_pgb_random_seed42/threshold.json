@@ -1,0 +1,4 @@
+{
+  "threshold": 0.723,
+  "rule": "best val MCC with TNR >= 0.97"
+}

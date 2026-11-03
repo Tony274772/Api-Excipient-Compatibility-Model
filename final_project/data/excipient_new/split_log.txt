@@ -1,0 +1,112 @@
+EXCIPIENT GROUP SPLIT, STRATIFIED (val excipients unseen in train)
+
+Run 2026-11-03T10:55:11 by data/make_split_variants.py
+rdkit 2026.03.6 | scikit-learn 1.5.1 | pandas 2.2.2
+Input start_dataset.csv: 3544 pairs, 533 APIs, 336 excipients (md5 9572ba67ca8be7af5fee7a3c9911ccfe)
+Butina (Morgan r=2, 2048 bits, distance cutoff 0.15): 530 API SMILES -> 512 clusters | 331 excipient SMILES -> 284 clusters
+Excipient parent-compound groups: 284 Butina clusters -> 234 groups (80 salt / hydrate / acid / mixture links); largest groups hold 11.2%, 7.5%, 6.4% of rows
+
+Label-stratified group split on exc_group_id: best of 1000 random group shuffles (numpy default_rng(42)): trial 340, val = 20.2% of rows at 9.8% incompatible (overall 9.7%); API + excipient val at 9.5%; score 0.0362
+APIs are shared between train and val by design.
+
+Excipient pairs merged by the parent-compound rule or EXCIPIENT_SYNONYMS (Butina put them in different clusters):
+  COCC1C(C(C(C(O1)OC2C(OC(C(C2OC)OC)OC)COC)OC)OC)OC  <->  CC(COCC1C(C(C(C(O1)OC2C(OC(C(C2OCC(C)O)OCC(C)O)OCC(C)O)COCC(C)O)OCC(C)O)OCC(C)O)OCC(C)O)O.COCC1C(C(C(C(O1)OC2C(OC(C(C2OC)OC)OC)COC)OC)OC)OC
+  OS(=O)(=O)O  <->  [O-]S(=O)(=O)[O-]
+  CCCCCCCCCCCCCCCCCC(=O)[O-].CCCCCCCCCCCCCCCCCC(=O)[O-].[Mg+2]  <->  CCCCCCCCCCCCCCCCCC(=O)O
+  CCCCCCCCCCCCCCCCCC(=O)[O-].CCCCCCCCCCCCCCCCCC(=O)[O-].[Mg+2]  <->  CCCCCCCCCCCCCCCCCC(=O)O.CCCCCCCCCCCCCCCC(=O)O.C(C(CO)O)O
+  C=CN1CCCC1=O  <->  CC(=O)OC=C.C=CN1CCCC1=O
+  C1=CC=C2C(=C1)C(=O)[N-]S2(=O)=O.[Na+]  <->  C1=CC=C2C(=C1)C(=O)NS2(=O)=O
+  CC(=O)[O-].C(C(C(C(C(C=O)O)O)O)O)O.[Na+]  <->  CC(=O)O.C(C(C(C(C(C=O)O)O)O)O)O.[Na]
+  CC(=O)[O-].C(C(C(C(C(C=O)O)O)O)O)O.[Na+]  <->  CC(=O)O.C(C(C(C(C(C=O)O)O)O)O)O
+  CC(=O)[O-].C(C(C(C(C(C=O)O)O)O)O)O.[Na+]  <->  CC(=O)O.C(C(C(C(C(C=O)O)O)O)O)O.[Na] 
+  CC(=O)[O-].C(C(C(C(C(C=O)O)O)O)O)O.[Na+]  <->  CC(=O)[O-].[K+]
+  [O-]S(=O)(=O)[O-].[Ca+2]  <->  O.O.[O-]S(=O)(=O)[O-].[Ca+2]
+  OP(=O)([O-])[O-].[Ca+2]  <->  [O-]P(=O)([O-])[O-].[Ca+2].[Ca+2]
+  OP(=O)([O-])[O-].[Ca+2]  <->  O.O.[O-]P(=O)([O-])[O-].[Ca+2].[Ca+2]
+  OP(=O)([O-])[O-].[Ca+2]  <->  [O-]P(=O)([O-])[O-].[O-]P(=O)([O-])[O-].[Ca+2].[Ca+2].[Ca+2]
+  C1=CC(=CC=C1N=NC2=C(C=CC3=C2C=CC(=C3)S(=O)(=O)[O-])O)S(=O)(=O)[O-].[Na+].[Na+]  <->  C1=CC(=CC=C1N=NC2=C(C=CC3=C2C=CC(=C3)S(=O)(=O)[O-])[O-])S(=O)(=O)[O-].[Al+3]
+  C1=CC2=C(C=C1S(=O)(=O)O)C(=C(N2)C3=NC4=C(C3=O)C=C(C=C4)S(=O)(=O)O)O  <->  C1=CC2=C(C=C1S(=O)(=O)[O-])C(=C(N2)C3=NC4=C(C3=O)C=C(C=C4)S(=O)(=O)[O-])O.[Na+].[Na+]
+  C1=CC2=C(C=C1S(=O)(=O)O)C(=C(N2)C3=NC4=C(C3=O)C=C(C=C4)S(=O)(=O)O)O  <->  C1=CC2=C(C=C1S(=O)(=O)[O-])C(=C(N2)C3=NC4=C(C3=O)C=C(C=C4)S(=O)(=O)[O-])O.C1=CC2=C(C=C1S(=O)(=O)[O-])C(=C(N2)C3=NC4=C(C3=O)C=C(C=C4)S(=O)(=O)[O-])O.C1=CC2=C(C=C1S(=O)(=O)[O-])C(=C(N2)C3=NC4=C(C3=O)C=C(C=C4)S(=O)(=O)[O-])O.[Al+3].[Al+3]
+  CC(=O)OC=C.C=CN1CCCC1=O  <->  CC(=O)OC=C
+  CC(CO)O  <->  CC(CO)O.CC(=O)O.CO.C(CC(=O)O)C(=O)O
+  O.O.OP(=O)([O-])[O-].[Ca+2]  <->  [O-]P(=O)([O-])[O-].[Ca+2].[Ca+2]
+  O.O.OP(=O)([O-])[O-].[Ca+2]  <->  O.O.[O-]P(=O)([O-])[O-].[Ca+2].[Ca+2]
+  O.O.OP(=O)([O-])[O-].[Ca+2]  <->  [O-]P(=O)([O-])[O-].[O-]P(=O)([O-])[O-].[Ca+2].[Ca+2].[Ca+2]
+  C(C(=O)O)C(CC(=O)O)(C(=O)O)O  <->  C(C(=O)[O-])C(CC(=O)[O-])(C(=O)[O-])O.[Na+].[Na+].[Na+]
+  C(C(=O)O)C(CC(=O)O)(C(=O)O)O  <->  C(C(=O)[O-])C(CC(=O)[O-])(C(=O)[O-])O
+  C(C(=O)O)C(CC(=O)O)(C(=O)O)O  <->  C(C(=O)[O-])C(CC(=O)[O-])(C(=O)[O-])O.C(C(=O)[O-])C(CC(=O)[O-])(C(=O)[O-])O.[Ca+2].[Ca+2].[Ca+2]
+  CC(C)(C)C1=C(C=CC(=C1)O)OC  <->  CC(C)(C)C1=C(C=CC(=C1)O)OC.CC(C)(C)C1=C(C=CC(=C1)OC)O
+  CC(COCC1C(C(C(C(O1)OC2C(OC(C(C2OCC(C)O)OCC(C)O)OCC(C)O)COCC(C)O)OCC(C)O)OCC(C)O)OCC(C)O)O  <->  CC(COCC1C(C(C(C(O1)OC2C(OC(C(C2OCC(C)O)OCC(C)O)OCC(C)O)COCC(C)O)OCC(C)O)OCC(C)O)OCC(C)O)O.COCC1C(C(C(C(O1)OC2C(OC(C(C2OC)OC)OC)COC)OC)OC)OC
+  CCCCCCCCCCCCCCCCCC(=O)[O-].CCCCCCCCCCCCCCCCCC(=O)[O-].[Zn+2]  <->  CCCCCCCCCCCCCCCCCC(=O)O
+  CCCCCCCCCCCCCCCCCC(=O)[O-].CCCCCCCCCCCCCCCCCC(=O)[O-].[Zn+2]  <->  CCCCCCCCCCCCCCCCCC(=O)O.CCCCCCCCCCCCCCCC(=O)O.C(C(CO)O)O
+  CCCCCCCCCCCCCCCCCC(=O)O  <->  CCCCCCCCCCCCCCCCCC(=O)O.CCCCCCCCCCCCCCCC(=O)O.C(C(CO)O)O
+  CCCCCCCCCCCCCCCCCC(=O)O  <->  CCCCCCCCCCCCCCCCCC(=O)[O-].CCCCCCCCCCCCCCCCCC(=O)[O-].[Ca+2]
+  CCCCCCCCCCCCCCCCCC(=O)O  <->  CCCCCCCCCCCCCCCCCC(=O)[O-].CCCCCCCCCCCCCCCCCC(=O)[O-].[Mg+2] 
+  C(=O)(O)[O-].[Na+]  <->  C(=O)([O-])[O-].[Na+].[Na+]
+  C(=O)(O)[O-].[Na+]  <->  C(=O)([O-])[O-].O.[Na+].[Na+]
+  CCOC(=O)C=C.CC(=C)C(=O)OC.CC(=C)C(=O)OCC[N+](C)(C)C.[Cl-]  <->  CC(=C)C(=O)OC
+  B(O)(O)O.C(CN(CC(=O)O)CC(=O)O)N(CC(=O)O)CC(=O)O.C(C(CO)(CO)N)O  <->  C(CN(CC(=O)O)CC(=O)O)N(CC(=O)O)CC(=O)O
+  B(O)(O)O.C(CN(CC(=O)O)CC(=O)O)N(CC(=O)O)CC(=O)O.C(C(CO)(CO)N)O  <->  C(CN(CC(=O)[O-])CC(=O)[O-])N(CC(=O)[O-])CC(=O)[O-].[Na+].[Na+].[Na+].[Na+]
+  B(O)(O)O.C(CN(CC(=O)O)CC(=O)O)N(CC(=O)O)CC(=O)O.C(C(CO)(CO)N)O  <->  C(CN(CC(=O)[O-])CC(=O)[O-])N(CC(=O)O)CC(=O)[O-].[Na+].[Ca+2]
+  B(O)(O)O.C(CN(CC(=O)O)CC(=O)O)N(CC(=O)O)CC(=O)O.C(C(CO)(CO)N)O  <->  C(CN(CC(=O)O)CC(=O)O)N(CC(=O)O)CC(=O)O.[Na+]
+  C1=CC(=CC=C1N=NC2C(=NN(C2=O)C3=CC=C(C=C3)S(=O)(=O)[O-])C(=O)[O-])S(=O)(=O)[O-].[Na+].[Na+].[Na+]  <->  C1=CC(=CC=C1N=NC2C(=NN(C2=O)C3=CC=C(C=C3)S(=O)(=O)O)C(=O)O)S(=O)(=O)O.[Al]
+  C1=CC(=CC=C1N=NC2C(=NN(C2=O)C3=CC=C(C=C3)S(=O)(=O)[O-])C(=O)[O-])S(=O)(=O)[O-].[Na+].[Na+].[Na+]  <->  C1=CC(=CC=C1N=NC2C(=NN(C2=O)C3=CC=C(C=C3)S(=O)(=O)O)C(=O)O)S(=O)(=O)O.[Na+]
+  C1(C(C(OC(C1O)O)C(=O)[O-])O)O.[Na+]  <->  C1(C(C(OC(C1O)O)C(=O)O)O)O
+  O.O.[Cl-].[Cl-].[Ca+2]  <->  [Cl-].[Cl-].[Ca+2]
+  CC(CO)O.CC(=O)O.CO.C(CC(=O)O)C(=O)O  <->  C(CC(=O)O)C(=O)O
+  C=O  <->  C=O.C1(=NC(=NC(=N1)N)N)N
+  CCCCCCCCCCCCCCCC(=O)O  <->  CCCCCCCCCCCCCCCCCC(=O)O.CCCCCCCCCCCCCCCC(=O)O.C(C(CO)O)O
+  CCCCCCCCCCCCCCCCCC(=O)O.CCCCCCCCCCCCCCCC(=O)O.C(C(CO)O)O  <->  C(C(CO)O)O
+  CCCCCCCCCCCCCCCCCC(=O)O.CCCCCCCCCCCCCCCC(=O)O.C(C(CO)O)O  <->  CCCCCCCCCCCCCCCCCC(=O)[O-].CCCCCCCCCCCCCCCCCC(=O)[O-].[Ca+2]
+  CCCCCCCCCCCCCCCCCC(=O)O.CCCCCCCCCCCCCCCC(=O)O.C(C(CO)O)O  <->  CCCCCCCCCCCCCCCCCC(=O)[O-].CCCCCCCCCCCCCCCCCC(=O)[O-].[Mg+2] 
+  CC(=C)C(=O)O  <->  CC(=C)C(=O)O.CC(=C)C(=O)O.CN(C)C
+  CC(=C)C(=O)O  <->  CCOC(=O)C=C.CC(=C)C(=O)O
+  COC(=O)C1=CC=C(C=C1)O  <->  COC(=O)C1=CC=C(C=C1)[O-].[Na+]
+  C(C(C(=O)O)O)(C(=O)O)O  <->  C(C(C(=O)[O-])O)(C(=O)[O-])O
+  C(CN(CC(=O)O)CC(=O)O)N(CC(=O)O)CC(=O)O  <->  C(CN(CC(=O)[O-])CC(=O)[O-])N(CC(=O)[O-])CC(=O)[O-].[Na+].[Na+].[Na+].[Na+]
+  C(CN(CC(=O)O)CC(=O)O)N(CC(=O)O)CC(=O)O  <->  C(CN(CC(=O)[O-])CC(=O)[O-])N(CC(=O)O)CC(=O)[O-].[Na+].[Ca+2]
+  C1=CC=C2C(=C1)C(=O)OC23C4=CC(=C(C(=C4OC5=C(C(=C(C=C35)I)[O-])I)I)[O-])I.[Na+].[Na+]  <->  C1=CC=C2C(=C1)C(=O)OC23C4=CC(=C(C(=C4OC5=C(C(=C(C=C35)I)O)I)I)O)I
+  C(C(CO)O)O  <->  C1CO1.C(C(CO)O)O
+  C(C(CO)O)O  <->  CCCCCCCCCCCCCCCCCCCCCC(=O)O.C(C(CO)O)O
+  CC(C(=O)O)O  <->  CC(C(=O)[O-])O.CC(C(=O)[O-])O.[Ca+2]
+  C=CN1CCCC1=O.C=CO  <->  C=CO
+  C=CO  <->  CC(=O)OC=C.C=CO
+  CC(=O)OC=C  <->  CC(=O)OC=C.C1=CC=C(C(=C1)C(=O)O)C(=O)O
+  C(CN(CC(=O)[O-])CC(=O)[O-])N(CC(=O)[O-])CC(=O)[O-].[Na+].[Na+].[Na+].[Na+]  <->  C(CN(CC(=O)[O-])CC(=O)[O-])N(CC(=O)O)CC(=O)[O-].[Na+].[Ca+2]
+  C(CN(CC(=O)[O-])CC(=O)[O-])N(CC(=O)[O-])CC(=O)[O-].[Na+].[Na+].[Na+].[Na+]  <->  C(CN(CC(=O)O)CC(=O)O)N(CC(=O)O)CC(=O)O.[Na+]
+  C1=CC2=C(C=C1S(=O)(=O)[O-])C(=C(N2)C3=NC4=C(C3=O)C=C(C=C4)S(=O)(=O)[O-])O.[Na+].[Na+]  <->  C1=CC2=C(C=C1S(=O)(=O)O)C(=C(N2)C3=NC4=C(C3=O)C=C(C=C4)S(=O)(=O)O)O.[Na+]
+  CC(=C)C(=O)OC.C1=CC=C(C=C1)COC(=O)CCC(C(=O)O)N  <->  CC(=C)C(=O)OC
+  C1=CC2=C(C=C1S(=O)(=O)O)C(=C(N2)C3=NC4=C(C3=O)C=C(C=C4)S(=O)(=O)O)O.[Na+]  <->  C1=CC2=C(C=C1S(=O)(=O)[O-])C(=C(N2)C3=NC4=C(C3=O)C=C(C=C4)S(=O)(=O)[O-])O.C1=CC2=C(C=C1S(=O)(=O)[O-])C(=C(N2)C3=NC4=C(C3=O)C=C(C=C4)S(=O)(=O)[O-])O.C1=CC2=C(C=C1S(=O)(=O)[O-])C(=C(N2)C3=NC4=C(C3=O)C=C(C=C4)S(=O)(=O)[O-])O.[Al+3].[Al+3]
+  CC1CO1.C1CO1  <->  C1CO1
+  C(=O)([O-])[O-].[Na+].[Na+]  <->  C(=O)([O-])[O-].O.[Na+].[Na+]
+  CC1CCC2(CC1)C(CO2)C.CC1CCC(C(C1)O)C(C)C.CC1CCC(C(C1)OC(=O)C)C(C)C.CC1CCC(C(=O)C1)C(C)C.CC1CCC2=C(C1)OC=C2C.CC1CCC(=C(C)C)C(=O)C1  <->  CC1CCC(C(C1)O)C(C)C
+  CC1CCC2(CC1)C(CO2)C.CC1CCC(C(C1)O)C(C)C.CC1CCC(C(C1)OC(=O)C)C(C)C.CC1CCC(C(=O)C1)C(C)C.CC1CCC2=C(C1)OC=C2C.CC1CCC(=C(C)C)C(=O)C1  <->  CC1CCC(C(=O)C1)C(C)C
+  C#P  <->  [C-]#P
+  CCCCC(CC)COC(=O)CC(C(=O)OCC(CC)CCCC)S(=O)(=O)O  <->  CCCCC(CC)COC(=O)CC(C(=O)OCC(CC)CCCC)S(=O)(=O)[O-].[Na+]
+  C1CO1.C(C(CO)O)O  <->  C1CO1
+  CC(C)(C)C1=C(C=CC(=C1)O)OC.CC(C)(C)C1=C(C=CC(=C1)OC)O  <->  CC(C)(C)C1=C(C=CC(=C1)OC)O
+  C(CN(CC(=O)[O-])CC(=O)[O-])N(CC(=O)O)CC(=O)[O-].[Na+].[Ca+2]  <->  C(CN(CC(=O)O)CC(=O)O)N(CC(=O)O)CC(=O)O.[Na+]
+  CCCCCCCCC=CCCCCCCCC(=O)OCCOCC(C1C(C(CO1)OCCO)OCCO)OCCO  <->  CCCCCCCCC=CCCCCCCCC(=O)OCCOCC(C1C(CC(O1)OCCO)OCCO)OCCO
+  CC(COCC1C(C(C(C(O1)OC)OCC(C)O)OCC(C)O)OC2C(C(C(C(O2)COC)OC3C(C(C(C(O3)CO)OC)O)O)OC)OC)O  <->  CC(COCC1C(C(C(C(O1)OC2C(OC(C(C2OCC(C)O)OCC(C)O)OCC(C)O)COCC(C)O)OCC(C)O)OCC(C)O)OCC(C)O)O.COCC1C(C(C(C(O1)OC2C(OC(C(C2OC)OC)OC)COC)OC)OC)OC
+  C(C1C(C(C(C(O1)OC(C(CO)O)C(C(C=O)O)O)O)O)O)O  <->  C(C1C(C(C(C(O1)OC2C(OC(C(C2O)O)O)CO)O)O)O)O
+  O.[OH-].[O-2].[Fe+3]  <->  O.[O-2].[O-2].[O-2].[Fe+3].[Fe+3]
+Synonym merges (by CID): 5281955 = 5284448 polysorbate 80 (two sorbitan ring drawings, both C32H60O10); 24832095 = 57503849 hypromellose / hydroxypropylmethylcellulose (HPMC); 3037558 = 6134 lactose, anhydrous / beta-lactose; 23320441 = 61560 ferric oxide yellow (C.I. 77492) / ferric oxide hydrate
+
+train   rows= 2828 | incompatible= 274 ( 9.7%) | compatible= 2554 | unique APIs= 512 | unique excipients= 283 | API clusters= 491 | excipient clusters= 246 | excipient groups= 201
+val     rows=  716 | incompatible=  70 ( 9.8%) | compatible=  646 | unique APIs= 383 | unique excipients=  53 | API clusters= 368 | excipient clusters=  38 | excipient groups=  33
+heldout rows=   24 | incompatible=  12 (50.0%) | compatible=   12 | unique APIs=  21 | unique excipients=  18
+
+API cluster overlap train<->val:       347 of 368 val API clusters
+API_CID overlap train<->val:           362 of 383 val APIs
+excipient cluster overlap train<->val: 0 of 38 val excipient clusters
+excipient group overlap train<->val:   0 of 33 val excipient groups
+Excipient_CID overlap train<->val:     0 of 53 val excipients
+pair overlap train<->val:              0
+
+held-out APIs seen in train:           9 of 24 pairs
+held-out excipients seen in train:     15 of 24 pairs
+held-out pair also in train:           API_CID 5754 + Excipient_CID 11177
+held-out pair also in train:           API_CID 5754 + Excipient_CID 444041
+
+train.csv: md5 8d7ba4a9f89a95c5df311715c609b097
+val.csv: md5 b098644379b06fcd2fc2ca40f4b3a0b1

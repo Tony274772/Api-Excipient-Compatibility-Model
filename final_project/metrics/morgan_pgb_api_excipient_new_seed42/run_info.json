@@ -1,0 +1,30 @@
+{
+  "model": "Morgan-PGB",
+  "data_dir": "data/api_excipient_new",
+  "split": "API + excipient group split (val API and excipient both unseen in train)",
+  "seed": 42,
+  "device": "cuda",
+  "data": {
+    "train": {
+      "path": "data/api_excipient_new/train.csv",
+      "rows": 2201,
+      "md5": "98fc7c18b2da378df029715e0568e373"
+    },
+    "val": {
+      "path": "data/api_excipient_new/val.csv",
+      "rows": 147,
+      "md5": "af68edd0ec6582d561819bd228f97fd6"
+    },
+    "heldout": {
+      "path": "data/api_excipient_new/held_out_test_set.csv",
+      "rows": 24,
+      "md5": "acfd0c6ae9e19908f96dd7d1fdd3206a"
+    }
+  },
+  "epochs_trained": 8,
+  "best_epoch": 1,
+  "threshold_from_val": 0.754,
+  "tnr_floor": 0.97,
+  "finished": "2026-11-03T11:22:48",
+  "minutes": 1.18
+}

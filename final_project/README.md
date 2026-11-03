@@ -70,6 +70,19 @@ The original model was trained on a GPU. A retrain with seed 42 uses the identic
 against the config stored in the original checkpoint), but GPU and CPU arithmetic differ slightly, so
 the held-out count can move by a pair or so. Other seeds give different models.
 
+### Training on another split
+
+```bash
+python run.py train --data-dir data/random
+```
+
+`--data-dir` takes any folder with `train.csv`, `val.csv` and `held_out_test_set.csv`. The default is
+`data` (the API group split above). The other splits (see "Split variants" below) are `data/random`,
+`data/excipient_new` and `data/api_excipient_new`. The recipe is the same. The checkpoint goes to
+`checkpoints/morgan_pgb_<folder>_seed<N>/` (e.g. `morgan_pgb_random_seed42`) and stores the data folder in
+`data_dir.txt`, so `python run.py evaluate --checkpoint checkpoints/morgan_pgb_random_seed42` scores
+that model on its own val set. Pass `--data-dir` to `evaluate` to score on a different folder.
+
 ## Other commands
 
 ```bash
@@ -111,6 +124,9 @@ data/
     train.csv  val.csv                  the 80/20 split the model was trained / tuned on
     held_out_test_set.csv               24 external pairs (label column ground_truth, 1 = incompatible)
     split_log.txt                       log of the split reproduction
+    make_split_variants.py              builds the three split variants below
+    random/  excipient_new/  api_excipient_new/
+                                        split variants: train.csv, val.csv, held_out_test_set.csv, split_log.txt
 reference_results/                      original metrics, held-out and val predictions, run info
 metrics/                                created by run.py (metrics JSON, prediction CSVs, training history)
 ```
@@ -125,6 +141,35 @@ metrics/                                created by run.py (metrics JSON, predict
 3. The test set is the 24 held-out pairs (12 incompatible, 12 compatible).
 
 No API cluster or API CID is in both train and val. Excipients are shared by design.
+
+### Split variants
+
+`python data/make_split_variants.py` builds three more train / val splits from `start_dataset.csv` to
+compare split strategies. All use seed 42 and the same 24 held-out pairs.
+
+Excipient groups (`exc_group_id`, 234 groups) are what the excipient splits keep whole:
+
+1. Butina on excipient SMILES with the API recipe: 284 clusters (`exc_cluster_id`).
+2. Clusters merged when two excipients are forms of the same parent compound: same fragments once water,
+   solvents and charges are removed (CaCl2 = CaCl2 dihydrate), or the same organic part with counter-ions
+   dropped (sodium saccharin = saccharin, aluminium lake = dye), or one is a mixture containing the other.
+3. Four PubChem duplicates no rule can see (`EXCIPIENT_SYNONYMS`): polysorbate 80, hypromellose (HPMC),
+   anhydrous lactose, and ferric oxide yellow / hydrate.
+
+The excipient split is stratified: `StratifiedGroupKFold` cannot balance it (its folds range 6–13 %
+incompatible) because a few groups hold up to 11 % of rows. Instead the script keeps the best of 1000
+random group shuffles: closest to 20 % of rows and to the overall 9.7 % rate, also scoring the rate of
+the API + excipient val. Only row counts and labels are used.
+
+| Folder | Split | Train (incompatible) | Val (incompatible) | Unseen in val |
+|---|---|---|---|---|
+| `data/` | API group (above) | 2770 (276, 10.0 %) | 774 (68, 8.8 %) | APIs |
+| `data/random/` | random 80/20, stratified on the label | 2835 (275, 9.7 %) | 709 (69, 9.7 %) | nothing |
+| `data/excipient_new/` | stratified group split on `exc_group_id` | 2828 (274, 9.7 %) | 716 (70, 9.8 %) | excipients |
+| `data/api_excipient_new/` | val API clusters of `data/` × val excipient groups of `excipient_new/` | 2201 (220, 10.0 %) | 147 (14, 9.5 %) | APIs and excipients |
+
+In `api_excipient_new`, the 1196 pairs that have one side in train groups and the other in val groups are
+dropped (`dropped_mixed.csv`). Each folder's `split_log.txt` has the overlap checks and the merge list.
 
 ## Training recipe
 

@@ -1,0 +1,30 @@
+{
+  "model": "Morgan-PGB",
+  "data_dir": "data/random",
+  "split": "random split (80/20, stratified on Outcome1, random_state=42)",
+  "seed": 42,
+  "device": "cuda",
+  "data": {
+    "train": {
+      "path": "data/random/train.csv",
+      "rows": 2835,
+      "md5": "a27f262997dcba7a287ee0ebb98afd88"
+    },
+    "val": {
+      "path": "data/random/val.csv",
+      "rows": 709,
+      "md5": "53be4cd6104ce275a593df462f564cb8"
+    },
+    "heldout": {
+      "path": "data/random/held_out_test_set.csv",
+      "rows": 24,
+      "md5": "acfd0c6ae9e19908f96dd7d1fdd3206a"
+    }
+  },
+  "epochs_trained": 12,
+  "best_epoch": 5,
+  "threshold_from_val": 0.723,
+  "tnr_floor": 0.97,
+  "finished": "2026-11-03T11:16:25",
+  "minutes": 2.92
+}
