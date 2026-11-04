@@ -15,7 +15,7 @@ The API side is not stratified (it is the existing API split); the excipient sid
 
 train   rows= 2201 | incompatible= 220 (10.0%) | compatible= 1981 | unique APIs= 409 | unique excipients= 253 | API clusters= 393 | excipient clusters= 220 | excipient groups= 182
 val     rows=  147 | incompatible=  14 ( 9.5%) | compatible=  133 | unique APIs=  77 | unique excipients=  29 | API clusters=  73 | excipient clusters=  21 | excipient groups=  18
-heldout rows=   24 | incompatible=  12 (50.0%) | compatible=   12 | unique APIs=  21 | unique excipients=  18
+heldout rows=   22 | incompatible=  10 (45.5%) | compatible=   12 | unique APIs=  20 | unique excipients=  17
 
 API cluster overlap train<->val:       0 of 73 val API clusters
 API_CID overlap train<->val:           0 of 77 val APIs
@@ -24,10 +24,9 @@ excipient group overlap train<->val:   0 of 18 val excipient groups
 Excipient_CID overlap train<->val:     0 of 29 val excipients
 pair overlap train<->val:              0
 
-held-out APIs seen in train:           7 of 24 pairs
-held-out excipients seen in train:     15 of 24 pairs
-held-out pair also in train:           API_CID 5754 + Excipient_CID 11177
-held-out pair also in train:           API_CID 5754 + Excipient_CID 444041
+held-out APIs seen in train:           5 of 22 pairs
+held-out excipients seen in train:     13 of 22 pairs
+held-out set: 2 pairs also in train (API_CID 5754 + Excipient_CID 11177 / 444041) removed 2026-11-04
 
 train.csv: md5 98fc7c18b2da378df029715e0568e373
 val.csv: md5 af68edd0ec6582d561819bd228f97fd6

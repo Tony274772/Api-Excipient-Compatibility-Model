@@ -1,4 +1,4 @@
-# FINAL PROJECT: Morgan-PGB on the 80/20 split (20/24 held-out)
+# FINAL PROJECT: Morgan-PGB on the 80/20 split (18/22 held-out)
 
 This folder holds the API–excipient compatibility model trained on the 80/20 split, and everything
 it needs: code, data, held-out set, the original trained checkpoint and its metrics. It does not read
@@ -7,11 +7,11 @@ anything outside this folder, so you can copy it anywhere and it still trains, e
 | | |
 |---|---|
 | Model | Prior-Gated Bilinear (PGB) head on Morgan-1024 + MACCS fingerprints, chemistry flags, PGB descriptors, salt context, excipient prior, mechanism flags |
-| Split | train 2770 / val 774 rows (80 / 20 by Butina API cluster, no cluster in both) + the 24 held-out pairs as external test |
+| Split | train 2770 / val 774 rows (80 / 20 by Butina API cluster, no cluster in both) + the 22 held-out pairs as external test |
 | Seed | 42 (best epoch 1, early stopping on val PR-AUC) |
 | Threshold | 0.671 (best val MCC with true-negative rate ≥ 0.97) |
-| Held-out (24 pairs) | **20/24 correct**: TP 8, TN 12, FP 0, FN 4, PR-AUC 0.959, ROC-AUC 0.958, MCC 0.707 |
-| Held-out, 22 pairs not in train | 18/22 correct, PR-AUC 0.942, MCC 0.671 |
+| Held-out (22 pairs) | **18/22 correct**: TP 6, TN 12, FP 0, FN 4, PR-AUC 0.942, ROC-AUC 0.950, MCC 0.671 |
+| Original held-out (24 pairs, 2 also in train) | 20/24 correct, PR-AUC 0.959, ROC-AUC 0.958, MCC 0.707 |
 | Val (774) | PR-AUC 0.686, ROC-AUC 0.924, MCC 0.639, F1 0.655, 734/774 correct |
 
 In the original project this was `run_pgb_single.py --family morgan` (commit `f534ef7`, trained
@@ -45,7 +45,7 @@ This trains from scratch with seed 42 and the original recipe. It:
 1. prints the loss and val PR-AUC for each epoch (max 40, early stopping with patience 7),
 2. saves the checkpoint to `checkpoints/morgan_pgb_8020_retrain_seed42/`
    (`best_model.pt`, `prior_table.json`, `pgb_norm_stats.npz`, `threshold.json`),
-3. evaluates the new model and prints the val and held-out metrics plus the 24 held-out predictions,
+3. evaluates the new model and prints the val and held-out metrics plus the 22 held-out predictions,
 4. writes metrics, predictions, `training_history.json` and `run_info.json` to
    `metrics/morgan_pgb_8020_retrain_seed42/`.
 
@@ -88,7 +88,7 @@ that model on its own val set. Pass `--data-dir` to `evaluate` to score on a dif
 ```bash
 python run.py evaluate
 ```
-Scores the shipped original model and checks it against `reference_results/` (prints 20/24).
+Scores the shipped original model and checks it against `reference_results/` (prints 18/22).
 
 ```bash
 python run.py evaluate --checkpoint checkpoints/morgan_pgb_8020_retrain_seed42
@@ -114,7 +114,7 @@ confirms the result is identical to `data/train.csv` and `data/val.csv`.
 run.py                                  entry point: train / evaluate / predict / split
 src/                                    model, dataset, features, prior table, training loop, metrics
                                         (same code as the project's src/; encoders trimmed to the one used)
-checkpoints/morgan_pgb_8020_seed42/     THE ORIGINAL TRAINED MODEL (20/24)
+checkpoints/morgan_pgb_8020_seed42/     THE ORIGINAL TRAINED MODEL (18/22)
     best_model.pt                       weights + training config
     prior_table.json                    excipient prior table (fit on train only)
     pgb_norm_stats.npz                  PGB descriptor mean / std (train only)
@@ -122,12 +122,13 @@ checkpoints/morgan_pgb_8020_seed42/     THE ORIGINAL TRAINED MODEL (20/24)
 data/
     start_dataset.csv                   full dataset (3544 pairs) the split is made from
     train.csv  val.csv                  the 80/20 split the model was trained / tuned on
-    held_out_test_set.csv               24 external pairs (label column ground_truth, 1 = incompatible)
+    held_out_test_set.csv               22 external pairs (label column ground_truth, 1 = incompatible)
     split_log.txt                       log of the split reproduction
     make_split_variants.py              builds the three split variants below
     random/  excipient_new/  api_excipient_new/
                                         split variants: train.csv, val.csv, held_out_test_set.csv, split_log.txt
 reference_results/                      original metrics, held-out and val predictions, run info
+                                        (*_24pairs = the original 24-pair held-out results)
 metrics/                                created by run.py (metrics JSON, prediction CSVs, training history)
 ```
 
@@ -138,14 +139,14 @@ metrics/                                created by run.py (metrics JSON, predict
 2. `GroupShuffleSplit(n_splits=1, test_size=0.2, random_state=42)` grouped by `cluster_id` gives
    train (2770 rows, 10.0 % incompatible) and val (774 rows, 8.8 % incompatible). The split is not
    stratified on the label.
-3. The test set is the 24 held-out pairs (12 incompatible, 12 compatible).
+3. The test set is the 22 held-out pairs (10 incompatible, 12 compatible).
 
 No API cluster or API CID is in both train and val. Excipients are shared by design.
 
 ### Split variants
 
 `python data/make_split_variants.py` builds three more train / val splits from `start_dataset.csv` to
-compare split strategies. All use seed 42 and the same 24 held-out pairs.
+compare split strategies. All use seed 42 and the same 22 held-out pairs.
 
 Excipient groups (`exc_group_id`, 234 groups) are what the excipient splits keep whole:
 
@@ -183,9 +184,11 @@ dropped (`dropped_mixed.csv`). Each folder's `split_log.txt` has the overlap che
 
 ## Known issues to disclose
 
-- **Held-out pairs in train.** Two held-out pairs are also in `train.csv` with the same label (1):
-  Hydrocortisone + Magnesium stearate and Hydrocortisone + β-cyclodextrin. On the 22 held-out pairs
-  the model never trained on, it scores 18/22 (`evaluate` prints this as `heldout_unseen`).
+- **Held-out pairs that were in train (removed).** The original held-out set had 24 pairs; two of
+  them are also in `train.csv` (in every split, since they come from `start_dataset.csv`) with the same
+  label (1): Hydrocortisone + Magnesium stearate and Hydrocortisone + β-cyclodextrin. They were removed
+  from `held_out_test_set.csv` on 2026-11-04. The model predicted both correctly, so it scores 20/24 on
+  the original set and 18/22 now.
 - **Near-duplicate in val.** `val.csv` contains Tetracycline + tricalcium phosphate, the same
   chemistry as held-out pair #4 (Tetracycline + calcium phosphate).
 - **No internal test set.** Val is used for early stopping and the threshold, so the val metrics are

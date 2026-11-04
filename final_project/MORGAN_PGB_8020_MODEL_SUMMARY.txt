@@ -36,15 +36,16 @@ Model ............. Prior-Gated Bilinear (PGB) head on Morgan-1024 + MACCS finge
 Task .............. predict whether an API-excipient pair is incompatible (label 1) or
                     compatible (label 0)
 Split ............. 80/20 by Butina API cluster: train 2,770 / validation 774
-External test ..... 24 held-out pairs (12 incompatible, 12 compatible)
+External test ..... 22 held-out pairs (10 incompatible, 12 compatible)
 Seed .............. 42
 Best epoch ........ 1 (early stopping on validation PR-AUC)
 Threshold ......... 0.671 (best validation MCC with true-negative rate >= 0.97)
 Parameters ........ 236,219
-Held-out .......... 20/24 correct  (TP 8, TN 12, FP 0, FN 4)
-                    PR-AUC 0.959, ROC-AUC 0.958, MCC 0.707
-Held-out unseen ... 18/22 correct on the 22 held-out pairs not in train
+Held-out .......... 18/22 correct  (TP 6, TN 12, FP 0, FN 4)
                     PR-AUC 0.942, ROC-AUC 0.950, MCC 0.671
+Original 24 pairs . 20/24 correct  (TP 8, TN 12, FP 0, FN 4)
+                    PR-AUC 0.959, ROC-AUC 0.958, MCC 0.707
+                    (2 of the 24 were also in train; removed 2026-11-04)
 Validation ........ 734/774 correct, PR-AUC 0.686, ROC-AUC 0.924, MCC 0.639, F1 0.655
 Trained ........... 2026-10-06, original code at git commit f534ef7
                     (run_pgb_single.py --family morgan -> pgb_single_run() in src/single_run.py)
@@ -67,14 +68,15 @@ Self-contained package (code + data + checkpoint + results; can be moved anywher
         start_dataset.csv                    3,544 pairs (md5 9572ba67ca8be7af5fee7a3c9911ccfe)
         train.csv                            2,770 rows  (md5 cfa2e256c21a15abd42f1f852ef94357)
         val.csv                              774 rows    (md5 5ba1f79b6e5283a5350094c4b9b53edc)
-        held_out_test_set.csv                24 pairs    (md5 acfd0c6ae9e19908f96dd7d1fdd3206a)
+        held_out_test_set.csv                22 pairs    (md5 e89bbe19d0e94a47329dd826eb4b6b51;
+                                                     original 24 pairs: acfd0c6ae9e19908f96dd7d1fdd3206a)
         split_log.txt                        log of the split reproduction
     reference_results/                       original metrics and predictions
 
 Original location in the project:
     checkpoints/pgb_fixed_vector_morgan_concat_asl/single_run_80_20split/   (checkpoint)
     metrics/pgb_fixed_vector_morgan_concat_asl/single_run_80_20split/       (metrics, split CSVs)
-    In that folder "test" = the 24 held-out pairs (test_metrics.json = held-out metrics).
+    In that folder "test" = the original 24 held-out pairs (test_metrics.json = held-out metrics).
 
 Not to be confused with project/final_model/ = the 60/20/20 model (19/24 held-out).
 
@@ -91,7 +93,8 @@ start_dataset.csv
     Columns ................ API_CID, Excipient_CID, Outcome1, API_Smiles, Excipient_Smiles
 
 held_out_test_set.csv (external test, never used for training, early stopping or threshold)
-    24 pairs: 12 incompatible, 12 compatible, 21 APIs, 18 excipients
+    22 pairs: 10 incompatible, 12 compatible, 20 APIs, 17 excipients
+    (originally 24; the 2 pairs also in train were removed on 2026-11-04, see section 13)
     Columns: Api_name, Excipient_name, API_CID, Excipient_CID, API_Smiles, Excipient_Smiles,
              ground_truth
 
@@ -104,12 +107,12 @@ held_out_test_set.csv (external test, never used for training, early stopping or
    Near-duplicate APIs (salts, stereoisomers, close analogues) share a cluster.
 2. GroupShuffleSplit(n_splits=1, test_size=0.2, random_state=42), grouped by cluster_id.
    Not stratified on the label.
-3. The test set is the 24 external held-out pairs.
+3. The test set is the 22 external held-out pairs.
 
     split   rows   incompatible    compatible   unique APIs   unique excipients
     train   2,770  276 (10.0%)     2,494        425           304
     val       774   68 ( 8.8%)       706        108           158
-    test       24   12 (50.0%)        12         21            18
+    test       22   10 (45.5%)        12         20            17
 
 Leakage checks
     API cluster overlap train<->val ......... 0
@@ -246,7 +249,7 @@ The held-out pairs played no part in choosing it.
 ==============================================================================================
 11. RESULTS
 ==============================================================================================
-                        Held-out (24)   Held-out unseen (22)   Validation (774)
+                        Original (24)   Held-out (22)          Validation (774)
     PR-AUC              0.9594          0.9415                 0.6859
     ROC-AUC             0.9583          0.9500                 0.9239
     F1                  0.8000          0.7500                 0.6552
@@ -259,7 +262,8 @@ The held-out pairs played no part in choosing it.
     Confusion matrix    [[12,0],[4,8]]  [[12,0],[4,6]]         [[696,10],[30,38]]
     Threshold           0.671           0.671                  0.671
 
-Held-out unseen = the 24 held-out pairs minus the 2 pairs that are also in train.
+Held-out (22) = the test set now. Original (24) = the held-out set before the 2 pairs that are also
+in train were removed (2026-11-04); same model and predictions.
 Validation ROC-AUC was not saved by the original run; it was recomputed from the checkpoint
 (0.9239). Re-scoring the checkpoint reproduces every saved metric exactly.
 
@@ -269,6 +273,7 @@ ROC-AUC 0.903, MCC 0.602, threshold 0.690.
 
 ==============================================================================================
 12. HELD-OUT PREDICTIONS, PAIR BY PAIR (threshold 0.671; label 1 = incompatible)
+    Row numbers are those of the original 24-pair file; rows 10 and 11 have since been removed.
 ==============================================================================================
 row  API                       Excipient                     label  P(incompat)  pred  result
   1  Warfarin                  Magnesium aluminum silicate     1    0.5621        0    WRONG
@@ -280,8 +285,8 @@ row  API                       Excipient                     label  P(incompat) 
   7  Acetazolamide             Mannitol                        1    0.4440        0    WRONG
   8  Phenytoin sodium          Lactose                         1    0.5050        0    WRONG
   9  Phenytoin sodium          Calcium sulfate                 1    0.8006        1    ok
- 10  Hydrocortisone            Magnesium stearate              1    0.6819        1    ok (in train)
- 11  Hydrocortisone            Beta cyclodextrin               1    0.7551        1    ok (in train)
+ 10  Hydrocortisone            Magnesium stearate              1    0.6819        1    ok (in train, removed)
+ 11  Hydrocortisone            Beta cyclodextrin               1    0.7551        1    ok (in train, removed)
  12  Quercetin                 Magnesium carbonate             1    0.7084        1    ok
  13  Metformin hydrochloride   Magnesium stearate              0    0.5254        0    ok
  14  Lamotrigine               Sodium lauryl sulfate           0    0.2830        0    ok
@@ -296,7 +301,7 @@ row  API                       Excipient                     label  P(incompat) 
  23  Risperidone               Lactose monohydrate             0    0.2072        0    ok
  24  Olanzapine                Magnesium stearate              0    0.3589        0    ok
 
-All 12 compatible pairs are correct (no false positives). The 4 errors are incompatible pairs
+Of the 22 pairs now in the test set, 18 are correct. All 12 compatible pairs are correct (no false positives). The 4 errors are incompatible pairs
 predicted compatible: Warfarin + Mg aluminum silicate, Fluvoxamine + lactose, Acetazolamide +
 mannitol, Phenytoin sodium + lactose. Close calls: row 2 (0.6719, just above 0.671) and
 row 21 (0.6701, just below).
@@ -305,7 +310,7 @@ row 21 (0.6701, just below).
 ==============================================================================================
 13. HELD-OUT PAIRS THAT ALSO OCCUR IN START_DATASET (CID vs SMILES)
 ==============================================================================================
-Row numbers count data rows only (row 1 = first row under the header).
+Row numbers count data rows only (row 1 = first row under the header) of the original 24-pair file.
 
 Pairs repeated with the same CIDs (2):
   held-out row 10  Hydrocortisone + Magnesium stearate
@@ -338,12 +343,13 @@ Files: project/final_model/data/heldout_pairs_repeated_in_start_dataset.csv and
 ==============================================================================================
 14. KNOWN ISSUES TO DISCLOSE
 ==============================================================================================
-- Two held-out pairs are in train with the same label (rows 10 and 11). On the 22 held-out
-  pairs the model never trained on it scores 18/22.
+- Two of the original 24 held-out pairs (rows 10 and 11) are in train with the same label. They
+  were removed from held_out_test_set.csv on 2026-11-04; the model scores 18/22 on the rest
+  (20/24 with them).
 - val.csv contains Tetracycline + tricalcium phosphate, the same chemistry as held-out row 4.
 - There is no internal test set: validation drives early stopping and the threshold, so the
-  validation metrics are optimistic. The held-out set is the only untouched test, and with 24
-  pairs one pair changes accuracy by about 4 points.
+  validation metrics are optimistic. The held-out set is the only untouched test, and with 22
+  pairs one pair changes accuracy by about 4.5 points.
 - The split is grouped by API cluster but not stratified on the label (train 10.0%, val 8.8%
   incompatible).
 - Best epoch is 1: the model reached its best validation PR-AUC after a single epoch.
@@ -353,7 +359,7 @@ Files: project/final_model/data/heldout_pairs_repeated_in_start_dataset.csv and
 15. REPRODUCIBILITY
 ==============================================================================================
 - Inference is deterministic: re-scoring the checkpoint gives the same predictions on CPU and
-  GPU (probability differences around 1e-7), 20/24 every time.
+  GPU (probability differences around 1e-7), 18/22 every time.
 - Retraining with seed 42 uses the identical config but can differ slightly on another GPU or on
   CPU, so the held-out count may move by a pair. Other seeds give different models. For reported
   results, use the shipped checkpoint.
@@ -402,7 +408,7 @@ Graphical abstract, architecture VARIANT (1-D prior, no adaptive prior trust):
 18. HOW TO RUN (inside final_project/)
 ==============================================================================================
     pip install -r requirements.txt
-    python run.py evaluate                  # scores the shipped model, prints 20/24
+    python run.py evaluate                  # scores the shipped model, prints 18/22
     python run.py predict --csv pairs.csv   # needs API_Smiles, Excipient_Smiles columns
     python run.py train                     # retrain -> checkpoints/morgan_pgb_8020_retrain_seed42/
     python run.py train --seed 43 --device cpu

@@ -94,7 +94,7 @@ Synonym merges (by CID): 5281955 = 5284448 polysorbate 80 (two sorbitan ring dra
 
 train   rows= 2828 | incompatible= 274 ( 9.7%) | compatible= 2554 | unique APIs= 512 | unique excipients= 283 | API clusters= 491 | excipient clusters= 246 | excipient groups= 201
 val     rows=  716 | incompatible=  70 ( 9.8%) | compatible=  646 | unique APIs= 383 | unique excipients=  53 | API clusters= 368 | excipient clusters=  38 | excipient groups=  33
-heldout rows=   24 | incompatible=  12 (50.0%) | compatible=   12 | unique APIs=  21 | unique excipients=  18
+heldout rows=   22 | incompatible=  10 (45.5%) | compatible=   12 | unique APIs=  20 | unique excipients=  17
 
 API cluster overlap train<->val:       347 of 368 val API clusters
 API_CID overlap train<->val:           362 of 383 val APIs
@@ -103,10 +103,9 @@ excipient group overlap train<->val:   0 of 33 val excipient groups
 Excipient_CID overlap train<->val:     0 of 53 val excipients
 pair overlap train<->val:              0
 
-held-out APIs seen in train:           9 of 24 pairs
-held-out excipients seen in train:     15 of 24 pairs
-held-out pair also in train:           API_CID 5754 + Excipient_CID 11177
-held-out pair also in train:           API_CID 5754 + Excipient_CID 444041
+held-out APIs seen in train:           7 of 22 pairs
+held-out excipients seen in train:     13 of 22 pairs
+held-out set: 2 pairs also in train (API_CID 5754 + Excipient_CID 11177 / 444041) removed 2026-11-04
 
 train.csv: md5 8d7ba4a9f89a95c5df311715c609b097
 val.csv: md5 b098644379b06fcd2fc2ca40f4b3a0b1

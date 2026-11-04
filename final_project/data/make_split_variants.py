@@ -6,7 +6,7 @@ Build the three extra train / val splits next to the API group split in data/.
     data/excipient_new/               excipient group split, stratified: val excipients unseen in train
     data/api_excipient_new/           API + excipient group split: val API AND excipient unseen in train
 
-Each folder holds train.csv, val.csv, held_out_test_set.csv (the same 24 external pairs) and
+Each folder holds train.csv, val.csv, held_out_test_set.csv (the same 22 external pairs) and
 split_log.txt. Every train / val file keeps the API `cluster_id` column (used for the leave-own-cluster-out
 excipient priors) and adds `exc_cluster_id` and `exc_group_id`.
 

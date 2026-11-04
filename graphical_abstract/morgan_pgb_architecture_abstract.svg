@@ -1,0 +1,487 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+<defs>
+<marker id="ah-5E6575" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0.8 L9 5 L0 9.2 z" fill="#5E6575"/></marker>
+<marker id="ah-2B2F3A" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0.8 L9 5 L0 9.2 z" fill="#2B2F3A"/></marker>
+<marker id="ah-8A90A0" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0.8 L9 5 L0 9.2 z" fill="#8A90A0"/></marker>
+<marker id="ah-D65E55" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0.8 L9 5 L0 9.2 z" fill="#D65E55"/></marker>
+<marker id="ah-D6A04A" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0.8 L9 5 L0 9.2 z" fill="#D6A04A"/></marker>
+<marker id="ah-7E6BB5" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0.8 L9 5 L0 9.2 z" fill="#7E6BB5"/></marker>
+<marker id="ah-D9773F" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0.8 L9 5 L0 9.2 z" fill="#D9773F"/></marker>
+<filter id="sh" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="1.5" stdDeviation="1.6" flood-color="#000" flood-opacity="0.12"/></filter>
+</defs>
+<rect width="1600" height="1000" fill="#FFFFFF"/>
+<rect x="18" y="18" width="1166" height="646" rx="16" fill="none" stroke="#A7ACB8" stroke-width="1.4" stroke-dasharray="7 5"/>
+<text x="38" y="50" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="19" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="start">Input</text>
+<g filter="url(#sh)">
+<rect x="34" y="168" width="160" height="46" rx="23.0" fill="#F8B48C" stroke="#D9773F" stroke-width="1.4"/>
+</g>
+<text x="114.0" y="197.0" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="16" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">API SMILES</text>
+<text x="36" y="236" font-family="Consolas, 'Courier New', monospace" font-size="10.5" fill="#8A90A0" font-weight="normal" font-style="normal" text-anchor="start">CN(C)C(=N)N=C(N)N.Cl</text>
+<text x="36" y="251" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#8A90A0" font-weight="normal" font-style="italic" text-anchor="start">metformin hydrochloride</text>
+<g filter="url(#sh)">
+<rect x="34" y="470" width="160" height="46" rx="23.0" fill="#F8B48C" stroke="#D9773F" stroke-width="1.4"/>
+</g>
+<text x="114.0" y="499.0" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="16" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">Excipient SMILES</text>
+<text x="36" y="538" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#8A90A0" font-weight="normal" font-style="normal" text-anchor="start">lactose · Mg stearate · TiO₂ …</text>
+<path d="M 194 191 L 226 191" fill="none" stroke="#5E6575" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-5E6575)"/>
+<path d="M 194 493 L 210 493 L 210 262 L 226 262" fill="none" stroke="#5E6575" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-5E6575)"/>
+<path d="M 210 493 L 226 493" fill="none" stroke="#5E6575" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-5E6575)"/>
+<text x="354.0" y="68" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" fill="#2B2F3A" font-weight="normal" font-style="italic" text-anchor="middle">Salt-aware parsing</text>
+<rect x="230" y="78" width="248" height="262" rx="12" fill="#FFFFFF" stroke="#E7C2A6" stroke-width="1.3"/>
+<rect x="244" y="96" width="170" height="32" rx="6" fill="#F7F8FA" stroke="#D5D9E0" stroke-width="1"/>
+<text x="329" y="117" font-family="Consolas, 'Courier New', monospace" font-size="11.5" fill="#2B2F3A" font-weight="normal" font-style="normal" text-anchor="middle">CN(C)C(=N)N=C(N)N.Cl</text>
+<circle cx="444" cy="112" r="16" fill="#F5B7B0" stroke="#D65E55" stroke-width="1.2"/>
+<text x="444" y="117" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12.5" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">Cl⁻</text>
+<text x="354" y="148" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#8A90A0" font-weight="normal" font-style="italic" text-anchor="middle">split on '.'</text>
+<path d="M 300 130 L 300 164" fill="none" stroke="#5E6575" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-5E6575)"/>
+<path d="M 444 130 L 444 164" fill="none" stroke="#5E6575" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-5E6575)"/>
+<rect x="244" y="168" width="140" height="36" rx="7" fill="#9FC0EE" stroke="#5C86C9" stroke-width="1.2"/>
+<text x="314" y="191" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">Parent molecule</text>
+<rect x="396" y="168" width="68" height="36" rx="7" fill="#F9D2CD" stroke="#D65E55" stroke-width="1.2"/>
+<text x="430" y="191" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">Counter-ion</text>
+<rect x="244" y="218" width="220" height="50" rx="7" fill="#F7F8FA" stroke="#8A90A0" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="354" y="238" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="11.5" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">all fragments kept (not stripped)</text>
+<text x="354" y="256" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="middle">bits OR-ed · flags fire on any fragment</text>
+<text x="354" y="292" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="middle">+ salt context: fragments, metals,</text>
+<text x="354" y="307" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="middle">charges, inorganic heavy atoms</text>
+<text x="354" y="328" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#8A90A0" font-weight="normal" font-style="italic" text-anchor="middle">applied to API and excipient</text>
+<text x="354.0" y="376" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" fill="#2B2F3A" font-weight="normal" font-style="italic" text-anchor="middle">Excipient prior · reaction rules</text>
+<rect x="230" y="386" width="248" height="232" rx="12" fill="#FFFFFF" stroke="#D6A04A" stroke-width="1.3"/>
+<rect x="244" y="400" width="11" height="11" rx="2.5" fill="#E7B556" stroke="#FFFFFF" stroke-width="0.8"/>
+<text x="262" y="410" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="start">p_exact</text>
+<text x="326" y="410" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="start">smoothed incompatibility rate</text>
+<rect x="244" y="419" width="11" height="11" rx="2.5" fill="#E7B556" stroke="#FFFFFF" stroke-width="0.8"/>
+<text x="262" y="429" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="start">p_Δ</text>
+<text x="326" y="429" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="start">p_exact − global rate 0.094</text>
+<rect x="244" y="438" width="11" height="11" rx="2.5" fill="#E7B556" stroke="#FFFFFF" stroke-width="0.8"/>
+<text x="262" y="448" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="start">p_family</text>
+<text x="326" y="448" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="start">rate after removing water</text>
+<rect x="244" y="457" width="11" height="11" rx="2.5" fill="#E7B556" stroke="#FFFFFF" stroke-width="0.8"/>
+<text x="262" y="467" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="start">log(1+n)</text>
+<text x="326" y="467" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="start">training rows with excipient</text>
+<rect x="244" y="476" width="11" height="11" rx="2.5" fill="#E7B556" stroke="#FFFFFF" stroke-width="0.8"/>
+<text x="262" y="486" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="start">unseen</text>
+<text x="326" y="486" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="start">1 if not in training</text>
+<text x="244" y="514" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="9.8" fill="#8A90A0" font-weight="normal" font-style="italic" text-anchor="start">train labels only · leave-own-cluster-out</text>
+<path d="M 244 526 L 464 526" fill="none" stroke="#E3E6EB" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="244" y="546" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="11.5" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="start">Mechanism flags · 5 SMARTS rules</text>
+<circle cx="252" cy="564" r="7.5" fill="#F8B48C" stroke="#D9773F" stroke-width="1"/>
+<circle cx="274" cy="564" r="7.5" fill="#7FC6A4" stroke="#4E9E79" stroke-width="1"/>
+<circle cx="296" cy="564" r="7.5" fill="#7FC6A4" stroke="#4E9E79" stroke-width="1"/>
+<circle cx="318" cy="564" r="7.5" fill="#7FC6A4" stroke="#4E9E79" stroke-width="1"/>
+<circle cx="340" cy="564" r="7.5" fill="#7FC6A4" stroke="#4E9E79" stroke-width="1"/>
+<text x="368" y="568" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="start">API × excipient</text>
+<text x="244" y="588" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="start">Maillard · ester/amide hydrolysis · metal-</text>
+<text x="244" y="602" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="start">ion oxidation · salt displacement · Schiff base</text>
+<rect x="510" y="34" width="656" height="528" rx="14" fill="#EEF3FC" stroke="#B8C9EC" stroke-width="1.3"/>
+<text x="838.0" y="60" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="16" fill="#2B2F3A" font-weight="normal" font-style="italic" text-anchor="middle">Molecule tower</text>
+<text x="838.0" y="78" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="middle">one per molecule · API and excipient towers share the design, separate weights</text>
+<path d="M 478 191 L 520 191" fill="none" stroke="#5E6575" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-5E6575)"/>
+<path d="M 522 101 L 522 393.0" fill="none" stroke="#5E6575" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 522 121.0 L 536 121.0" fill="none" stroke="#5E6575" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-5E6575)"/>
+<g filter="url(#sh)">
+<rect x="538" y="92" width="262" height="58" rx="10" fill="#FFFFFF" stroke="#C9D3E6" stroke-width="1.1"/>
+</g>
+<rect x="550.0" y="104.0" width="8" height="10.5" rx="1.5" fill="#77C3A3"/>
+<rect x="559.5" y="104.0" width="8" height="10.5" rx="1.5" fill="#F6B98A"/>
+<rect x="569.0" y="104.0" width="8" height="10.5" rx="1.5" fill="#8DB2EA"/>
+<rect x="578.5" y="104.0" width="8" height="10.5" rx="1.5" fill="#B5E0CD"/>
+<rect x="588.0" y="104.0" width="8" height="10.5" rx="1.5" fill="#B79BE8"/>
+<rect x="550.0" y="116.5" width="8" height="10.5" rx="1.5" fill="#F6B98A"/>
+<rect x="559.5" y="116.5" width="8" height="10.5" rx="1.5" fill="#8DB2EA"/>
+<rect x="569.0" y="116.5" width="8" height="10.5" rx="1.5" fill="#B5E0CD"/>
+<rect x="578.5" y="116.5" width="8" height="10.5" rx="1.5" fill="#B79BE8"/>
+<rect x="588.0" y="116.5" width="8" height="10.5" rx="1.5" fill="#F09A9A"/>
+<rect x="550.0" y="129.0" width="8" height="10.5" rx="1.5" fill="#8DB2EA"/>
+<rect x="559.5" y="129.0" width="8" height="10.5" rx="1.5" fill="#B5E0CD"/>
+<rect x="569.0" y="129.0" width="8" height="10.5" rx="1.5" fill="#B79BE8"/>
+<rect x="578.5" y="129.0" width="8" height="10.5" rx="1.5" fill="#F09A9A"/>
+<rect x="588.0" y="129.0" width="8" height="10.5" rx="1.5" fill="#E6F4EE"/>
+<text x="610" y="119" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="start">Morgan FP</text>
+<text x="610" y="137" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="start">r = 2 · 1,024 bits</text>
+<path d="M 800 121.0 L 830 121.0" fill="none" stroke="#5E6575" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-5E6575)"/>
+<text x="818.0" y="135.0" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="9.5" fill="#8A90A0" font-weight="normal" font-style="normal" text-anchor="middle">Linear</text>
+<rect x="836" y="115.0" width="12" height="12" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="851" y="115.0" width="12" height="12" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="866" y="115.0" width="12" height="12" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="881" y="115.0" width="12" height="12" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="896" y="115.0" width="12" height="12" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="911" y="115.0" width="12" height="12" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="926" y="115.0" width="12" height="12" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="941" y="115.0" width="12" height="12" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<text x="836" y="109.0" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="start">64 values</text>
+<path d="M 957 121.0 L 1132 121.0" fill="none" stroke="#5E6575" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 522 189.0 L 536 189.0" fill="none" stroke="#5E6575" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-5E6575)"/>
+<g filter="url(#sh)">
+<rect x="538" y="160" width="262" height="58" rx="10" fill="#FFFFFF" stroke="#C9D3E6" stroke-width="1.1"/>
+</g>
+<line x1="552.0" y1="209" x2="552.0" y2="175" stroke="#8DB2EA" stroke-width="1.8"/>
+<line x1="554.9" y1="209" x2="554.9" y2="175" stroke="#8DB2EA" stroke-width="1.8"/>
+<line x1="557.8" y1="209" x2="557.8" y2="193" stroke="#D3DCEB" stroke-width="1.8"/>
+<line x1="560.7" y1="209" x2="560.7" y2="175" stroke="#8DB2EA" stroke-width="1.8"/>
+<line x1="563.6" y1="209" x2="563.6" y2="193" stroke="#D3DCEB" stroke-width="1.8"/>
+<line x1="566.5" y1="209" x2="566.5" y2="193" stroke="#D3DCEB" stroke-width="1.8"/>
+<line x1="569.4" y1="209" x2="569.4" y2="175" stroke="#8DB2EA" stroke-width="1.8"/>
+<line x1="572.3" y1="209" x2="572.3" y2="175" stroke="#8DB2EA" stroke-width="1.8"/>
+<line x1="575.2" y1="209" x2="575.2" y2="175" stroke="#8DB2EA" stroke-width="1.8"/>
+<line x1="578.1" y1="209" x2="578.1" y2="193" stroke="#D3DCEB" stroke-width="1.8"/>
+<line x1="581.0" y1="209" x2="581.0" y2="175" stroke="#8DB2EA" stroke-width="1.8"/>
+<line x1="583.9" y1="209" x2="583.9" y2="193" stroke="#D3DCEB" stroke-width="1.8"/>
+<line x1="586.8" y1="209" x2="586.8" y2="193" stroke="#D3DCEB" stroke-width="1.8"/>
+<line x1="589.7" y1="209" x2="589.7" y2="175" stroke="#8DB2EA" stroke-width="1.8"/>
+<line x1="592.6" y1="209" x2="592.6" y2="193" stroke="#D3DCEB" stroke-width="1.8"/>
+<line x1="595.5" y1="209" x2="595.5" y2="175" stroke="#8DB2EA" stroke-width="1.8"/>
+<text x="610" y="187" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="start">MACCS keys</text>
+<text x="610" y="205" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="start">167 structural keys</text>
+<path d="M 800 189.0 L 830 189.0" fill="none" stroke="#5E6575" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-5E6575)"/>
+<text x="818.0" y="203.0" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="9.5" fill="#8A90A0" font-weight="normal" font-style="normal" text-anchor="middle">Linear</text>
+<rect x="836" y="183.0" width="12" height="12" rx="2.5" fill="#8DB2EA" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="851" y="183.0" width="12" height="12" rx="2.5" fill="#8DB2EA" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="866" y="183.0" width="12" height="12" rx="2.5" fill="#8DB2EA" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="881" y="183.0" width="12" height="12" rx="2.5" fill="#8DB2EA" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="896" y="183.0" width="12" height="12" rx="2.5" fill="#8DB2EA" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="911" y="183.0" width="12" height="12" rx="2.5" fill="#8DB2EA" stroke="#FFFFFF" stroke-width="0.8"/>
+<text x="836" y="177.0" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="start">32 values</text>
+<path d="M 927 189.0 L 1132 189.0" fill="none" stroke="#5E6575" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 522 257.0 L 536 257.0" fill="none" stroke="#5E6575" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-5E6575)"/>
+<g filter="url(#sh)">
+<rect x="538" y="228" width="262" height="58" rx="10" fill="#FFFFFF" stroke="#C9D3E6" stroke-width="1.1"/>
+</g>
+<rect x="550.0" y="260" width="4.2" height="18" rx="1" fill="#F09A9A"/>
+<rect x="555.4" y="248" width="4.2" height="30" rx="1" fill="#8DB2EA"/>
+<rect x="560.8" y="266" width="4.2" height="12" rx="1" fill="#77C3A3"/>
+<rect x="566.2" y="252" width="4.2" height="26" rx="1" fill="#F6B98A"/>
+<rect x="571.6" y="244" width="4.2" height="34" rx="1" fill="#B79BE8"/>
+<rect x="577.0" y="258" width="4.2" height="20" rx="1" fill="#F09A9A"/>
+<rect x="582.4" y="269" width="4.2" height="9" rx="1" fill="#8DB2EA"/>
+<rect x="587.8" y="254" width="4.2" height="24" rx="1" fill="#77C3A3"/>
+<rect x="593.2" y="263" width="4.2" height="15" rx="1" fill="#F6B98A"/>
+<path d="M 549 278.5 L 599 278.5" fill="none" stroke="#8A90A0" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="610" y="255" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="start">RDKit descriptors</text>
+<text x="610" y="273" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="start">12 physicochemical values</text>
+<path d="M 800 257.0 L 830 257.0" fill="none" stroke="#5E6575" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-5E6575)"/>
+<text x="818.0" y="271.0" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="9.5" fill="#8A90A0" font-weight="normal" font-style="normal" text-anchor="middle">Linear</text>
+<rect x="836" y="251.0" width="12" height="12" rx="2.5" fill="#F09A9A" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="851" y="251.0" width="12" height="12" rx="2.5" fill="#F09A9A" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="866" y="251.0" width="12" height="12" rx="2.5" fill="#F09A9A" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="881" y="251.0" width="12" height="12" rx="2.5" fill="#F09A9A" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="896" y="251.0" width="12" height="12" rx="2.5" fill="#F09A9A" stroke="#FFFFFF" stroke-width="0.8"/>
+<text x="836" y="245.0" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="start">24 values</text>
+<path d="M 912 257.0 L 1132 257.0" fill="none" stroke="#5E6575" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 522 325.0 L 536 325.0" fill="none" stroke="#5E6575" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-5E6575)"/>
+<g filter="url(#sh)">
+<rect x="538" y="296" width="262" height="58" rx="10" fill="#FFFFFF" stroke="#C9D3E6" stroke-width="1.1"/>
+</g>
+<circle cx="554" cy="315" r="3.2" fill="#B79BE8" stroke="#9B80D6" stroke-width="0.9"/>
+<circle cx="562" cy="315" r="3.2" fill="#FFFFFF" stroke="#9B80D6" stroke-width="0.9"/>
+<circle cx="570" cy="315" r="3.2" fill="#B79BE8" stroke="#9B80D6" stroke-width="0.9"/>
+<circle cx="578" cy="315" r="3.2" fill="#B79BE8" stroke="#9B80D6" stroke-width="0.9"/>
+<circle cx="586" cy="315" r="3.2" fill="#FFFFFF" stroke="#9B80D6" stroke-width="0.9"/>
+<circle cx="594" cy="315" r="3.2" fill="#FFFFFF" stroke="#9B80D6" stroke-width="0.9"/>
+<circle cx="554" cy="327" r="3.2" fill="#B79BE8" stroke="#9B80D6" stroke-width="0.9"/>
+<circle cx="562" cy="327" r="3.2" fill="#B79BE8" stroke="#9B80D6" stroke-width="0.9"/>
+<circle cx="570" cy="327" r="3.2" fill="#FFFFFF" stroke="#9B80D6" stroke-width="0.9"/>
+<circle cx="578" cy="327" r="3.2" fill="#FFFFFF" stroke="#9B80D6" stroke-width="0.9"/>
+<circle cx="586" cy="327" r="3.2" fill="#B79BE8" stroke="#9B80D6" stroke-width="0.9"/>
+<circle cx="594" cy="327" r="3.2" fill="#FFFFFF" stroke="#9B80D6" stroke-width="0.9"/>
+<circle cx="554" cy="339" r="3.2" fill="#B79BE8" stroke="#9B80D6" stroke-width="0.9"/>
+<circle cx="562" cy="339" r="3.2" fill="#FFFFFF" stroke="#9B80D6" stroke-width="0.9"/>
+<circle cx="570" cy="339" r="3.2" fill="#FFFFFF" stroke="#9B80D6" stroke-width="0.9"/>
+<circle cx="578" cy="339" r="3.2" fill="#B79BE8" stroke="#9B80D6" stroke-width="0.9"/>
+<circle cx="586" cy="339" r="3.2" fill="#B79BE8" stroke="#9B80D6" stroke-width="0.9"/>
+<circle cx="594" cy="339" r="3.2" fill="#FFFFFF" stroke="#9B80D6" stroke-width="0.9"/>
+<text x="610" y="323" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="start">Chemistry flags</text>
+<text x="610" y="341" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="start">18 SMARTS: metals, acids, amines…</text>
+<path d="M 800 325.0 L 830 325.0" fill="none" stroke="#5E6575" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-5E6575)"/>
+<text x="818.0" y="339.0" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="9.5" fill="#8A90A0" font-weight="normal" font-style="normal" text-anchor="middle">Linear</text>
+<rect x="836" y="319.0" width="12" height="12" rx="2.5" fill="#B79BE8" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="851" y="319.0" width="12" height="12" rx="2.5" fill="#B79BE8" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="866" y="319.0" width="12" height="12" rx="2.5" fill="#B79BE8" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="881" y="319.0" width="12" height="12" rx="2.5" fill="#B79BE8" stroke="#FFFFFF" stroke-width="0.8"/>
+<text x="836" y="313.0" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="start">16 values</text>
+<path d="M 897 325.0 L 1132 325.0" fill="none" stroke="#5E6575" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 522 393.0 L 536 393.0" fill="none" stroke="#5E6575" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-5E6575)"/>
+<g filter="url(#sh)">
+<rect x="538" y="364" width="262" height="58" rx="10" fill="#FFFFFF" stroke="#C9D3E6" stroke-width="1.1"/>
+</g>
+<circle cx="563" cy="395" r="11" fill="#FBE3D2" stroke="#D9773F" stroke-width="1.1"/>
+<text x="563" y="401" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="16" fill="#D9773F" font-weight="bold" font-style="normal" text-anchor="middle">+</text>
+<circle cx="586" cy="395" r="11" fill="#E3ECFA" stroke="#5C86C9" stroke-width="1.1"/>
+<text x="586" y="400" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="16" fill="#5C86C9" font-weight="bold" font-style="normal" text-anchor="middle">−</text>
+<text x="610" y="391" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="start">Salt context + availability</text>
+<text x="610" y="409" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="start">8 counts / charges + 1 flag</text>
+<path d="M 800 393.0 L 830 393.0" fill="none" stroke="#5E6575" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-5E6575)"/>
+<text x="818.0" y="407.0" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="9.5" fill="#8A90A0" font-weight="normal" font-style="normal" text-anchor="middle">direct</text>
+<rect x="836" y="387.0" width="12" height="12" rx="2.5" fill="#F6B98A" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="851" y="387.0" width="12" height="12" rx="2.5" fill="#F6B98A" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="866" y="387.0" width="12" height="12" rx="2.5" fill="#F6B98A" stroke="#FFFFFF" stroke-width="0.8"/>
+<text x="836" y="381.0" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="start">9 values</text>
+<path d="M 882 393.0 L 1132 393.0" fill="none" stroke="#5E6575" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 1132 121.0 L 1132 470 L 1016 470" fill="none" stroke="#5E6575" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-5E6575)"/>
+<text x="560" y="474" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="start">Concat</text>
+<rect x="624" y="464" width="11" height="11" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="638" y="464" width="11" height="11" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="652" y="464" width="11" height="11" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="666" y="464" width="11" height="11" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="680" y="464" width="11" height="11" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="694" y="464" width="11" height="11" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="708" y="464" width="11" height="11" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="722" y="464" width="11" height="11" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="736" y="464" width="11" height="11" rx="2.5" fill="#8DB2EA" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="750" y="464" width="11" height="11" rx="2.5" fill="#8DB2EA" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="764" y="464" width="11" height="11" rx="2.5" fill="#8DB2EA" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="778" y="464" width="11" height="11" rx="2.5" fill="#8DB2EA" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="792" y="464" width="11" height="11" rx="2.5" fill="#8DB2EA" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="806" y="464" width="11" height="11" rx="2.5" fill="#8DB2EA" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="820" y="464" width="11" height="11" rx="2.5" fill="#F09A9A" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="834" y="464" width="11" height="11" rx="2.5" fill="#F09A9A" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="848" y="464" width="11" height="11" rx="2.5" fill="#F09A9A" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="862" y="464" width="11" height="11" rx="2.5" fill="#F09A9A" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="876" y="464" width="11" height="11" rx="2.5" fill="#F09A9A" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="890" y="464" width="11" height="11" rx="2.5" fill="#B79BE8" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="904" y="464" width="11" height="11" rx="2.5" fill="#B79BE8" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="918" y="464" width="11" height="11" rx="2.5" fill="#B79BE8" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="932" y="464" width="11" height="11" rx="2.5" fill="#B79BE8" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="946" y="464" width="11" height="11" rx="2.5" fill="#F6B98A" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="960" y="464" width="11" height="11" rx="2.5" fill="#F6B98A" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="974" y="464" width="11" height="11" rx="2.5" fill="#F6B98A" stroke="#FFFFFF" stroke-width="0.8"/>
+<text x="624" y="454" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="start">molecule features · 64 + 32 + 24 + 16 + 9 = 145 values</text>
+<path d="M 987 470 L 1016 470" fill="none" stroke="#5E6575" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 838 482 L 838 508" fill="none" stroke="#5E6575" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-5E6575)"/>
+<g filter="url(#sh)">
+<rect x="772" y="510" width="132" height="40" rx="9" fill="#BFE6CB" stroke="#5DAE76" stroke-width="1.3"/>
+</g>
+<text x="838" y="528" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">Mix</text>
+<text x="838" y="543" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="middle">Linear + LayerNorm</text>
+<text x="918" y="528" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="start">145 → 96</text>
+<text x="918" y="544" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="start">embedding h × 2 (API, excipient)</text>
+<path d="M 838 550 L 838 593" fill="none" stroke="#5E6575" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-5E6575)"/>
+<path d="M 478 594 L 720 594 L 720 606 L 825 606" fill="none" stroke="#5E6575" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-5E6575)"/>
+<text x="492" y="588" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="start">prior 5 + mechanism 5</text>
+<circle cx="838" cy="606" r="11" fill="#FFFFFF" stroke="#2B2F3A" stroke-width="1.5"/>
+<path d="M 831 606 L 845 606" fill="none" stroke="#2B2F3A" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 838 599 L 838 613" fill="none" stroke="#2B2F3A" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="870" y="600" width="12" height="12" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="885" y="600" width="12" height="12" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="900" y="600" width="12" height="12" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="915" y="600" width="12" height="12" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="930" y="600" width="12" height="12" rx="2.5" fill="#8DB2EA" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="945" y="600" width="12" height="12" rx="2.5" fill="#8DB2EA" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="960" y="600" width="12" height="12" rx="2.5" fill="#8DB2EA" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="975" y="600" width="12" height="12" rx="2.5" fill="#8DB2EA" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="990" y="600" width="12" height="12" rx="2.5" fill="#E7B556" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="1005" y="600" width="12" height="12" rx="2.5" fill="#E7B556" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="1020" y="600" width="12" height="12" rx="2.5" fill="#F8B48C" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="1035" y="600" width="12" height="12" rx="2.5" fill="#F8B48C" stroke="#FFFFFF" stroke-width="0.8"/>
+<text x="870" y="632" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="start">pair input: h_API 96 · h_exc 96 · prior 5 · mechanisms 5</text>
+<path d="M 838 617 L 838 700" fill="none" stroke="#5E6575" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-5E6575)"/>
+<rect x="498" y="702" width="686" height="250" rx="14" fill="#F3EEFB" stroke="#CDBCEB" stroke-width="1.3"/>
+<text x="841.0" y="728" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="16" fill="#2B2F3A" font-weight="normal" font-style="italic" text-anchor="middle">Prior-gated bilinear (PGB) interaction head</text>
+<g filter="url(#sh)">
+<rect x="514" y="746" width="100" height="150" rx="10" fill="#FFFFFF" stroke="#D3C8EC" stroke-width="1.1"/>
+</g>
+<rect x="525.0" y="770" width="10" height="10" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="537.0" y="770" width="10" height="10" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="549.0" y="770" width="10" height="10" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="567.0" y="770" width="10" height="10" rx="2.5" fill="#8DB2EA" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="579.0" y="770" width="10" height="10" rx="2.5" fill="#8DB2EA" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="591.0" y="770" width="10" height="10" rx="2.5" fill="#8DB2EA" stroke="#FFFFFF" stroke-width="0.8"/>
+<text x="564.0" y="808" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">Concat</text>
+<text x="564.0" y="826" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="middle">API ∥ Exc</text>
+<rect x="526" y="850" width="76" height="8" rx="4" fill="#ECE8F4"/>
+<rect x="526" y="850" width="76.0" height="8" rx="4" fill="#77C3A3"/>
+<text x="564.0" y="880" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">192</text>
+<g filter="url(#sh)">
+<rect x="625" y="746" width="100" height="150" rx="10" fill="#FFFFFF" stroke="#D3C8EC" stroke-width="1.1"/>
+</g>
+<rect x="636.0" y="770" width="8" height="8" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="646.0" y="770" width="8" height="8" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="656.0" y="770" width="8" height="8" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<circle cx="675.0" cy="774" r="7" fill="#FFFFFF" stroke="#2B2F3A" stroke-width="1.5"/>
+<circle cx="675.0" cy="774" r="2.6" fill="#2B2F3A"/>
+<rect x="686.0" y="770" width="8" height="8" rx="2.5" fill="#8DB2EA" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="696.0" y="770" width="8" height="8" rx="2.5" fill="#8DB2EA" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="706.0" y="770" width="8" height="8" rx="2.5" fill="#8DB2EA" stroke="#FFFFFF" stroke-width="0.8"/>
+<text x="675.0" y="808" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">Product</text>
+<text x="675.0" y="826" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="middle">API ⊙ Exc</text>
+<rect x="637" y="850" width="76" height="8" rx="4" fill="#ECE8F4"/>
+<rect x="637" y="850" width="38.0" height="8" rx="4" fill="#8DB2EA"/>
+<text x="675.0" y="880" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">96</text>
+<g filter="url(#sh)">
+<rect x="736" y="746" width="100" height="150" rx="10" fill="#FFFFFF" stroke="#D3C8EC" stroke-width="1.1"/>
+</g>
+<rect x="747.0" y="770" width="8" height="8" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="757.0" y="770" width="8" height="8" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="767.0" y="770" width="8" height="8" rx="2.5" fill="#77C3A3" stroke="#FFFFFF" stroke-width="0.8"/>
+<text x="786.0" y="779" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="16" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">−</text>
+<rect x="797.0" y="770" width="8" height="8" rx="2.5" fill="#8DB2EA" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="807.0" y="770" width="8" height="8" rx="2.5" fill="#8DB2EA" stroke="#FFFFFF" stroke-width="0.8"/>
+<rect x="817.0" y="770" width="8" height="8" rx="2.5" fill="#8DB2EA" stroke="#FFFFFF" stroke-width="0.8"/>
+<text x="786.0" y="808" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">Difference</text>
+<text x="786.0" y="826" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="middle">|API − Exc|</text>
+<rect x="748" y="850" width="76" height="8" rx="4" fill="#ECE8F4"/>
+<rect x="748" y="850" width="38.0" height="8" rx="4" fill="#F09A9A"/>
+<text x="786.0" y="880" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">96</text>
+<g filter="url(#sh)">
+<rect x="847" y="746" width="100" height="150" rx="10" fill="#FFFFFF" stroke="#D3C8EC" stroke-width="1.1"/>
+</g>
+<path d="M 861.0 760 L 883.0 767 L 883.0 775 L 861.0 782 Z" fill="#E4DBF6" stroke="#7E6BB5" stroke-width="1.1"/>
+<text x="871.0" y="775" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="9.5" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">U</text>
+<path d="M 933.0 760 L 911.0 767 L 911.0 775 L 933.0 782 Z" fill="#E4DBF6" stroke="#7E6BB5" stroke-width="1.1"/>
+<text x="923.0" y="775" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="9.5" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">V</text>
+<circle cx="897.0" cy="771" r="7" fill="#FFFFFF" stroke="#2B2F3A" stroke-width="1.5"/>
+<circle cx="897.0" cy="771" r="2.6" fill="#2B2F3A"/>
+<text x="897.0" y="808" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">Bilinear</text>
+<text x="897.0" y="826" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="middle">U·h ⊙ V·h</text>
+<rect x="859" y="850" width="76" height="8" rx="4" fill="#ECE8F4"/>
+<rect x="859" y="850" width="6.333333333333333" height="8" rx="4" fill="#B79BE8"/>
+<text x="897.0" y="880" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">rank 16</text>
+<g filter="url(#sh)">
+<rect x="958" y="746" width="100" height="150" rx="10" fill="#FCEFD6" stroke="#D6A04A" stroke-width="1.1"/>
+</g>
+<path d="M 978.0 784 C 996.0 784 1000.0 760 1038.0 760" fill="none" stroke="#D6A04A" stroke-width="2"/>
+<path d="M 976.0 786 L 1040.0 786" fill="none" stroke="#8A90A0" stroke-width="0.8" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="1008.0" y="808" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">Prior gate g</text>
+<text x="1008.0" y="826" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="middle">46 → 32 → 16 · σ</text>
+<text x="1008.0" y="880" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#D6A04A" font-weight="bold" font-style="normal" text-anchor="middle">16 gates</text>
+<g filter="url(#sh)">
+<rect x="1069" y="746" width="100" height="150" rx="10" fill="#FFFFFF" stroke="#D3C8EC" stroke-width="1.1"/>
+</g>
+<rect x="1089.0" y="760.0" width="9" height="26" rx="2.5" fill="#7E6BB5"/>
+<rect x="1106.0" y="764.0" width="9" height="18" rx="2.5" fill="#7E6BB5"/>
+<rect x="1123.0" y="768.0" width="9" height="10" rx="2.5" fill="#7E6BB5"/>
+<rect x="1140.0" y="770.5" width="9" height="5" rx="2.5" fill="#7E6BB5"/>
+<text x="1119.0" y="808" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">MLP</text>
+<text x="1119.0" y="826" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="middle">410 → 128 → 48 → 1</text>
+<text x="1119.0" y="880" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#7E6BB5" font-weight="bold" font-style="normal" text-anchor="middle">residual r</text>
+<path d="M 988 898 C 968 924, 937 924, 917 900" fill="none" stroke="#D6A04A" stroke-width="1.6" marker-end="url(#ah-D6A04A)"/>
+<text x="964" y="934" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#D6A04A" font-weight="bold" font-style="normal" text-anchor="middle">gated ⊙</text>
+<text x="516" y="938" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="start">192 + 96 + 96 + gated 16 + prior 5 + mechanisms 5 = 410 → MLP</text>
+<text x="1168" y="938" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#8A90A0" font-weight="normal" font-style="italic" text-anchor="end">236,219 parameters</text>
+<path d="M 1184 822 L 1197 822 L 1197 139 L 1243 139" fill="none" stroke="#5E6575" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-5E6575)"/>
+<text x="1203" y="814" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#7E6BB5" font-weight="bold" font-style="italic" text-anchor="start">r</text>
+<rect x="1212" y="34" width="350" height="520" rx="14" fill="#FDEFEE" stroke="#EBB3AE" stroke-width="1.3"/>
+<text x="1387.0" y="66" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">Prior-calibrated decision</text>
+<g filter="url(#sh)">
+<rect x="1246" y="106" width="282" height="66" rx="14" fill="#F6A097" stroke="#D65E55" stroke-width="1.4"/>
+</g>
+<text x="1387.0" y="134" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">Residual logit r</text>
+<text x="1387.0" y="154" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="11.5" fill="#3E3540" font-weight="normal" font-style="normal" text-anchor="middle">pair-interaction score from the PGB head</text>
+<path d="M 1387.0 174 L 1387.0 212" fill="none" stroke="#2B2F3A" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-2B2F3A)"/>
+<g filter="url(#sh)">
+<rect x="1246" y="214" width="282" height="66" rx="14" fill="#F6A097" stroke="#D65E55" stroke-width="1.4"/>
+</g>
+<text x="1387.0" y="242" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">Adaptive prior trust</text>
+<text x="1387.0" y="262" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="11.5" fill="#3E3540" font-weight="normal" font-style="normal" text-anchor="middle">w = σ(MLP(prior)) ∈ (0, 1)  · 5 → 8 → 1</text>
+<path d="M 1387.0 282 L 1387.0 320" fill="none" stroke="#2B2F3A" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-2B2F3A)"/>
+<g filter="url(#sh)">
+<rect x="1246" y="322" width="282" height="66" rx="14" fill="#F6A097" stroke="#D65E55" stroke-width="1.4"/>
+</g>
+<text x="1387.0" y="350" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">Logit fusion</text>
+<text x="1387.0" y="370" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="11.5" fill="#3E3540" font-weight="normal" font-style="normal" text-anchor="middle">z = r + w·logit(p_exact) + b</text>
+<path d="M 1387.0 390 L 1387.0 428" fill="none" stroke="#2B2F3A" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-2B2F3A)"/>
+<g filter="url(#sh)">
+<rect x="1246" y="430" width="282" height="66" rx="14" fill="#F6A097" stroke="#D65E55" stroke-width="1.4"/>
+</g>
+<text x="1387.0" y="458" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">Threshold calibration</text>
+<text x="1387.0" y="478" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="11.5" fill="#3E3540" font-weight="normal" font-style="normal" text-anchor="middle">P(incompatible) = σ(z) ≥ 0.671</text>
+<text x="1387.0" y="544" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#5E6575" font-weight="normal" font-style="italic" text-anchor="middle">t: best validation MCC with TNR ≥ 0.97</text>
+<path d="M 1387.0 554 L 1387.0 592" fill="none" stroke="#2B2F3A" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah-2B2F3A)"/>
+<rect x="1212" y="594" width="350" height="358" rx="14" fill="#F3EEFB" stroke="#CDBCEB" stroke-width="1.3"/>
+<rect x="1232" y="616" width="150" height="34" rx="17.0" fill="#F7B5AE" stroke="#D65E55" stroke-width="1.1"/>
+<text x="1307.0" y="638.04" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">Incompatible</text>
+<rect x="1394" y="616" width="148" height="34" rx="17.0" fill="#BFE6CB" stroke="#5DAE76" stroke-width="1.1"/>
+<text x="1468.0" y="638.04" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">Compatible</text>
+<rect x="1240" y="700" width="197.2739999999999" height="10" rx="5" fill="#BFE6CB"/>
+<rect x="1437.274" y="700" width="96.72600000000011" height="10" rx="5" fill="#F7B5AE"/>
+<path d="M 1437.274 692 L 1437.274 718" fill="none" stroke="#2B2F3A" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="3 2"/>
+<text x="1240" y="692" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#5E6575" font-weight="normal" font-style="normal" text-anchor="start">P(incompatible)</text>
+<text x="1437.274" y="730" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">t = 0.671</text>
+<text x="1240" y="730" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" fill="#8A90A0" font-weight="normal" font-style="normal" text-anchor="start">0</text>
+<text x="1534" y="730" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" fill="#8A90A0" font-weight="normal" font-style="normal" text-anchor="end">1</text>
+<circle cx="1480.6390000000001" cy="705" r="6.5" fill="#FFFFFF" stroke="#D65E55" stroke-width="2"/>
+<circle cx="1255.8466" cy="705" r="6.5" fill="#FFFFFF" stroke="#5DAE76" stroke-width="2"/>
+<circle cx="1246" cy="750" r="5" fill="#FFFFFF" stroke="#D65E55" stroke-width="2"/>
+<text x="1258" y="754" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#2B2F3A" font-weight="normal" font-style="normal" text-anchor="start">Trichlormethiazide + MgO  P = 0.82 → incompatible ✓</text>
+<circle cx="1246" cy="768" r="5" fill="#FFFFFF" stroke="#5DAE76" stroke-width="2"/>
+<text x="1258" y="772" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10.5" fill="#2B2F3A" font-weight="normal" font-style="normal" text-anchor="start">Celecoxib + TiO₂  P = 0.05 → compatible ✓</text>
+<text x="1232" y="806" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="start">External held-out test · 22 pairs</text>
+<rect x="1232" y="818" width="106" height="30" rx="15.0" fill="#D7CBF2" stroke="#9B86D3" stroke-width="1.1"/>
+<text x="1285.0" y="837.68" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">18 / 22</text>
+<rect x="1346" y="818" width="108" height="30" rx="15.0" fill="#BBD3F2" stroke="#5C86C9" stroke-width="1.1"/>
+<text x="1400.0" y="837.32" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">PR-AUC 0.94</text>
+<rect x="1462" y="818" width="80" height="30" rx="15.0" fill="#F9D3B6" stroke="#D9773F" stroke-width="1.1"/>
+<text x="1502.0" y="837.32" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">MCC 0.67</text>
+<rect x="1232" y="856" width="118" height="30" rx="15.0" fill="#BFE6CB" stroke="#5DAE76" stroke-width="1.1"/>
+<text x="1291.0" y="875.32" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">ROC-AUC 0.95</text>
+<rect x="1358" y="856" width="132" height="30" rx="15.0" fill="#F7B5AE" stroke="#D65E55" stroke-width="1.1"/>
+<text x="1424.0" y="875.32" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">0 false positives</text>
+<rect x="1498" y="856" width="44" height="30" rx="15.0" fill="#ECEAF2" stroke="#C3BFD0" stroke-width="1.1"/>
+<text x="1520.0" y="875.68" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#2B2F3A" font-weight="bold" font-style="normal" text-anchor="middle">…</text>
+<text x="1387.0" y="935" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="16" fill="#2B2F3A" font-weight="bold" font-style="italic" text-anchor="middle">Predicted compatibility</text>
+<path d="M 448 618 L 448 966 L 1582 966 L 1582 239 L 1532 239" fill="none" stroke="#8A90A0" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 5" marker-end="url(#ah-8A90A0)"/>
+<path d="M 1582 347 L 1532 347" fill="none" stroke="#8A90A0" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 5" marker-end="url(#ah-8A90A0)"/>
+<text x="820" y="986" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#5E6575" font-weight="normal" font-style="italic" text-anchor="middle">the excipient prior also gates the bilinear term and sets how far the final logit trusts p_exact</text>
+<line x1="137.27980021920982" y1="845.75" x2="110.0" y2="861.5" stroke="#C3C8D2" stroke-width="5" stroke-linecap="round"/>
+<line x1="110.0" y1="861.5" x2="82.72019978079018" y2="845.75" stroke="#C3C8D2" stroke-width="5" stroke-linecap="round"/>
+<line x1="82.72019978079018" y1="845.75" x2="82.72019978079018" y2="814.25" stroke="#C3C8D2" stroke-width="5" stroke-linecap="round"/>
+<line x1="82.72019978079018" y1="814.25" x2="110.0" y2="798.5" stroke="#C3C8D2" stroke-width="5" stroke-linecap="round"/>
+<line x1="110.0" y1="798.5" x2="137.27980021920982" y2="814.25" stroke="#C3C8D2" stroke-width="5" stroke-linecap="round"/>
+<line x1="137.27980021920982" y1="814.25" x2="137.27980021920982" y2="845.75" stroke="#C3C8D2" stroke-width="5" stroke-linecap="round"/>
+<line x1="137.27980021920982" y1="845.75" x2="168.8" y2="814.25" stroke="#C3C8D2" stroke-width="5" stroke-linecap="round"/>
+<line x1="168.8" y1="814.25" x2="196.10000000000002" y2="830.0" stroke="#C3C8D2" stroke-width="5" stroke-linecap="round"/>
+<line x1="82.72019978079018" y1="814.25" x2="51.199999999999996" y2="814.25" stroke="#C3C8D2" stroke-width="5" stroke-linecap="round"/>
+<line x1="110.0" y1="798.5" x2="110.0" y2="767.0" stroke="#C3C8D2" stroke-width="5" stroke-linecap="round"/>
+<circle cx="137.27980021920982" cy="845.75" r="9.450000000000001" fill="#F2C46D" opacity="0.92"/>
+<circle cx="134.1298002192098" cy="842.6" r="3.1500000000000004" fill="#FFFFFF" opacity="0.55"/>
+<circle cx="110.0" cy="861.5" r="9.450000000000001" fill="#F2C46D" opacity="0.92"/>
+<circle cx="106.85" cy="858.35" r="3.1500000000000004" fill="#FFFFFF" opacity="0.55"/>
+<circle cx="82.72019978079018" cy="845.75" r="9.450000000000001" fill="#8DB2EA" opacity="0.92"/>
+<circle cx="79.57019978079018" cy="842.6" r="3.1500000000000004" fill="#FFFFFF" opacity="0.55"/>
+<circle cx="82.72019978079018" cy="814.25" r="9.450000000000001" fill="#F2C46D" opacity="0.92"/>
+<circle cx="79.57019978079018" cy="811.1" r="3.1500000000000004" fill="#FFFFFF" opacity="0.55"/>
+<circle cx="110.0" cy="798.5" r="9.450000000000001" fill="#F2C46D" opacity="0.92"/>
+<circle cx="106.85" cy="795.35" r="3.1500000000000004" fill="#FFFFFF" opacity="0.55"/>
+<circle cx="137.27980021920982" cy="814.25" r="9.450000000000001" fill="#F2C46D" opacity="0.92"/>
+<circle cx="134.1298002192098" cy="811.1" r="3.1500000000000004" fill="#FFFFFF" opacity="0.55"/>
+<circle cx="168.8" cy="814.25" r="9.450000000000001" fill="#8DB2EA" opacity="0.92"/>
+<circle cx="165.65" cy="811.1" r="3.1500000000000004" fill="#FFFFFF" opacity="0.55"/>
+<circle cx="196.10000000000002" cy="830.0" r="9.450000000000001" fill="#F2C46D" opacity="0.92"/>
+<circle cx="192.95000000000002" cy="826.85" r="3.1500000000000004" fill="#FFFFFF" opacity="0.55"/>
+<circle cx="51.199999999999996" cy="814.25" r="9.450000000000001" fill="#F09A9A" opacity="0.92"/>
+<circle cx="48.05" cy="811.1" r="3.1500000000000004" fill="#FFFFFF" opacity="0.55"/>
+<circle cx="110.0" cy="767.0" r="9.450000000000001" fill="#B79BE8" opacity="0.92"/>
+<circle cx="106.85" cy="763.85" r="3.1500000000000004" fill="#FFFFFF" opacity="0.55"/>
+<text x="110" y="905" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#8A90A0" font-weight="bold" font-style="normal" text-anchor="middle">API</text>
+<line x1="398.0" y1="800.0" x2="384.0" y2="824.2487113059643" stroke="#C3C8D2" stroke-width="5" stroke-linecap="round"/>
+<line x1="384.0" y1="824.2487113059643" x2="356.0" y2="824.2487113059643" stroke="#C3C8D2" stroke-width="5" stroke-linecap="round"/>
+<line x1="356.0" y1="824.2487113059643" x2="342.0" y2="800.0" stroke="#C3C8D2" stroke-width="5" stroke-linecap="round"/>
+<line x1="342.0" y1="800.0" x2="356.0" y2="775.7512886940357" stroke="#C3C8D2" stroke-width="5" stroke-linecap="round"/>
+<line x1="356.0" y1="775.7512886940357" x2="384.0" y2="775.7512886940357" stroke="#C3C8D2" stroke-width="5" stroke-linecap="round"/>
+<line x1="384.0" y1="775.7512886940357" x2="398.0" y2="800.0" stroke="#C3C8D2" stroke-width="5" stroke-linecap="round"/>
+<line x1="384.0" y1="775.7512886940357" x2="422.0" y2="770.0" stroke="#C3C8D2" stroke-width="5" stroke-linecap="round"/>
+<line x1="342.0" y1="800.0" x2="318.0" y2="830.0" stroke="#C3C8D2" stroke-width="5" stroke-linecap="round"/>
+<line x1="356.0" y1="824.2487113059643" x2="370.0" y2="858.0" stroke="#C3C8D2" stroke-width="5" stroke-linecap="round"/>
+<circle cx="398.0" cy="800.0" r="9.0" fill="#F2C46D" opacity="0.92"/>
+<circle cx="395.0" cy="797.0" r="3.0" fill="#FFFFFF" opacity="0.55"/>
+<circle cx="384.0" cy="824.2487113059643" r="9.0" fill="#F09A9A" opacity="0.92"/>
+<circle cx="381.0" cy="821.2487113059643" r="3.0" fill="#FFFFFF" opacity="0.55"/>
+<circle cx="356.0" cy="824.2487113059643" r="9.0" fill="#F2C46D" opacity="0.92"/>
+<circle cx="353.0" cy="821.2487113059643" r="3.0" fill="#FFFFFF" opacity="0.55"/>
+<circle cx="342.0" cy="800.0" r="9.0" fill="#F2C46D" opacity="0.92"/>
+<circle cx="339.0" cy="797.0" r="3.0" fill="#FFFFFF" opacity="0.55"/>
+<circle cx="356.0" cy="775.7512886940357" r="9.0" fill="#F2C46D" opacity="0.92"/>
+<circle cx="353.0" cy="772.7512886940357" r="3.0" fill="#FFFFFF" opacity="0.55"/>
+<circle cx="384.0" cy="775.7512886940357" r="9.0" fill="#F2C46D" opacity="0.92"/>
+<circle cx="381.0" cy="772.7512886940357" r="3.0" fill="#FFFFFF" opacity="0.55"/>
+<circle cx="422.0" cy="770.0" r="9.0" fill="#F09A9A" opacity="0.92"/>
+<circle cx="419.0" cy="767.0" r="3.0" fill="#FFFFFF" opacity="0.55"/>
+<circle cx="318.0" cy="830.0" r="9.0" fill="#F09A9A" opacity="0.92"/>
+<circle cx="315.0" cy="827.0" r="3.0" fill="#FFFFFF" opacity="0.55"/>
+<circle cx="370.0" cy="858.0" r="9.0" fill="#F09A9A" opacity="0.92"/>
+<circle cx="367.0" cy="855.0" r="3.0" fill="#FFFFFF" opacity="0.55"/>
+<text x="370" y="905" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#8A90A0" font-weight="bold" font-style="normal" text-anchor="middle">excipient</text>
+<path d="M 215 828 L 300 816" fill="none" stroke="#8A90A0" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="4 4" marker-end="url(#ah-8A90A0)"/>
+<path d="M 300 816 L 215 828" fill="none" stroke="#8A90A0" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="4 4" marker-end="url(#ah-8A90A0)"/>
+<text x="258" y="808" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="18" fill="#D9773F" font-weight="bold" font-style="normal" text-anchor="middle">?</text>
+</svg>

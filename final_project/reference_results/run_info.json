@@ -12,10 +12,12 @@
   "data": {
     "train": {"path": "data/train.csv", "rows": 2770, "md5": "cfa2e256c21a15abd42f1f852ef94357"},
     "val": {"path": "data/val.csv", "rows": 774, "md5": "5ba1f79b6e5283a5350094c4b9b53edc"},
-    "heldout": {"path": "data/held_out_test_set.csv", "rows": 24, "md5": "acfd0c6ae9e19908f96dd7d1fdd3206a"}
+    "heldout": {"path": "data/held_out_test_set.csv", "rows": 22, "md5": "e89bbe19d0e94a47329dd826eb4b6b51"},
+    "heldout_original": {"rows": 24, "md5": "acfd0c6ae9e19908f96dd7d1fdd3206a", "note": "2 pairs also in train.csv (API_CID 5754 + Excipient_CID 11177 / 444041) removed 2026-11-04"}
   },
   "files": {
-    "val_metrics.json, heldout_metrics.json": "saved by the original run (heldout_metrics.json was saved there as test_metrics.json)",
-    "predictions_val.csv, predictions_heldout.csv, heldout_unseen_metrics.json": "re-scored from the shipped checkpoint on 2026-10-14 (CPU); confusion matrices and PR-AUC identical to the original metrics"
+    "val_metrics.json, heldout_metrics_24pairs.json": "saved by the original run on the original 24 held-out pairs (heldout_metrics_24pairs.json was saved there as test_metrics.json)",
+    "heldout_metrics.json, predictions_heldout.csv": "the 22-pair held-out set (2026-11-04): same model and predictions, the 2 pairs also in train dropped; heldout_metrics.json = heldout_unseen_metrics.json",
+    "predictions_val.csv, predictions_heldout_24pairs.csv, heldout_unseen_metrics.json": "re-scored from the shipped checkpoint on 2026-10-14 (CPU); confusion matrices and PR-AUC identical to the original metrics"
   }
 }

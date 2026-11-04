@@ -1,6 +1,6 @@
 """
 Final project: Morgan-PGB (Prior-Gated Bilinear head on Morgan + MACCS fingerprints),
-trained on the 80/20 split (train / val). Scores 20/24 on the held-out pairs.
+trained on the 80/20 split (train / val). Scores 18/22 on the held-out pairs.
 
 Everything this script needs is inside this folder; it can be moved anywhere.
 
@@ -22,7 +22,7 @@ Recipe (same as run_pgb_single.py --family morgan -> pgb_single_run() at git com
   - asymmetric focal loss (gamma+ 1.2, gamma- 2.5) with pos_weight, no balanced sampler
   - early stopping and LR schedule on val PR-AUC
   - threshold on val: best MCC with true-negative rate >= 0.97
-  - the 24 held-out pairs are only scored, never used for any choice
+  - the 22 held-out pairs are only scored, never used for any choice
 """
 
 import argparse
@@ -225,7 +225,7 @@ def evaluate(ckpt_dir, device_str=None):
     metrics = {s: metric_suite(probs[s], labels[s], threshold) for s in SPLITS}
     tables = {s: prediction_table(data[s], probs[s], labels[s], threshold) for s in SPLITS}
 
-    # held-out pairs the model never saw in training (2 of the 24 are also in train.csv)
+    # held-out pairs not also in train.csv (all 22 since the 2 overlapping pairs were removed on 2026-11-04)
     unseen = ~heldout_pairs_in_train(data["heldout"])
     metrics["heldout_unseen"] = metric_suite(probs["heldout"][unseen], labels["heldout"][unseen], threshold)
 
@@ -380,7 +380,7 @@ def rebuild_split():
     1. Butina-cluster the unique API SMILES (Morgan r=2, 2048 bits, distance cutoff 0.15) -> cluster_id
     2. GroupShuffleSplit(n_splits=1, test_size=0.2, random_state=42) over API clusters -> train / val
        (not stratified on the label)
-    The 24 held-out pairs are the external test set.
+    The 22 held-out pairs are the external test set.
     """
     import sklearn
     from rdkit import rdBase
@@ -453,7 +453,7 @@ def rebuild_split():
 
 # --------------------------------------------------------------------------- main
 def main():
-    p = argparse.ArgumentParser(description="Final Morgan-PGB model (80/20 split, 20/24 held-out).")
+    p = argparse.ArgumentParser(description="Final Morgan-PGB model (80/20 split, 18/22 held-out).")
     sub = p.add_subparsers(dest="cmd")
 
     t = sub.add_parser("train", help="train from scratch into checkpoints/morgan_pgb_8020_retrain_seed<seed>/, then evaluate")

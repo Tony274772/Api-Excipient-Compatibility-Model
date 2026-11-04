@@ -1,4 +1,7 @@
-"""Held-out comparison table: FormulationDE, DeInteract, Towards Safe and ARES on the 24 external pairs.
+"""Held-out comparison table: FormulationDE, DeInteract, Towards Safe and ARES on the 22 external pairs.
+
+All sources hold the original 24 pairs; rows 10 and 11 (Hydrocortisone + magnesium stearate /
+beta cyclodextrin, also in train.csv) are dropped before plotting, as in data/held_out_test_set.csv.
 
 Sources
   DeInteract    : extra work/metrics_4_models/heldout/Results_De_interact_heldout.csv
@@ -33,7 +36,7 @@ PAIRS = [
     ("Trichlormethiazide", "Magnesium oxide"), ("Tetracycline", "Calcium phosphate"),
     ("Fluvoxamine", "Lactose"), ("Acetazolamide", "Lactose"), ("Acetazolamide", "Mannitol"),
     ("Phenytoin sodium", "Lactose"), ("Phenytoin sodium", "Calcium sulfate"),
-    ("Hydrocortisone†", "Magnesium stearate"), ("Hydrocortisone†", "Beta cyclodextrin"),
+    ("Hydrocortisone", "Magnesium stearate"), ("Hydrocortisone", "Beta cyclodextrin"),
     ("Quercetin", "Magnesium carbonate"),
     ("Metformin hydrochloride", "Magnesium stearate"), ("Lamotrigine", "Sodium lauryl sulfate"),
     ("Gabapentin", "Mannitol"), ("Omeprazole", "Silicon dioxide"), ("Carbamazepine", "Propylene glycol"),
@@ -77,6 +80,14 @@ MODELS = [
     ("ARES", "prediction · P(incompatible), t = 0.671", ARES, True),
 ]
 
+# drop the 2 pairs that are also in train.csv (removed from data/held_out_test_set.csv on 2026-11-04)
+DROP = {9, 10}
+KEEP = [i for i in range(len(PAIRS)) if i not in DROP]
+PAIRS = [PAIRS[i] for i in KEEP]
+LABELS = [LABELS[i] for i in KEEP]
+MODELS = [(name, sub, [preds[i] for i in KEEP], ours) for name, sub, preds, ours in MODELS]
+N, N_INC = len(PAIRS), sum(LABELS)
+
 # ----- palette -----
 INK, MUTED, RULE = "#1b1f27", "#5b6270", "#e3e6eb"
 GREEN, RED = "#2a7f5f", "#c4412b"
@@ -90,7 +101,7 @@ X_NUM, X_NAME, X_LABEL = 100, 150, 900
 X_MODEL0, COL_W = 1090, 390
 ROW_H, SEC_H, HEAD_H = 56, 46, 240
 n_sec = 2
-BODY = 24 * ROW_H + n_sec * SEC_H
+BODY = N * ROW_H + n_sec * SEC_H
 FOOT_H = 260
 H = HEAD_H + BODY + FOOT_H
 
@@ -109,8 +120,8 @@ def T(x, y, s, size=13, color=INK, weight="normal", ha="left", style="normal"):
             family=FONT, style=style)
 
 
-T(60, 58, "Held-out test set: predictions on all 24 API–excipient pairs", 25, weight="bold")
-T(60, 112, "12 incompatible + 12 compatible external pairs. Each cell shows the model's call and its predicted "
+T(60, 58, f"Held-out test set: predictions on all {N} API–excipient pairs", 25, weight="bold")
+T(60, 112, f"{N_INC} incompatible + {N - N_INC} compatible external pairs. Each cell shows the model's call and its predicted "
            "probability of incompatibility; ✓ correct, ✕ wrong.", 13.5, MUTED)
 
 # ARES column highlight
@@ -152,7 +163,7 @@ def mark(x, y, ok):
 y = HEAD_H
 idx = 0
 stats = [dict(tp=0, tn=0, fp=0, fn=0) for _ in MODELS]
-for sec_title, rng in (("INCOMPATIBLE PAIRS (LABEL 1)", range(0, 12)), ("COMPATIBLE PAIRS (LABEL 0)", range(12, 24))):
+for sec_title, rng in (("INCOMPATIBLE PAIRS (LABEL 1)", range(0, N_INC)), ("COMPATIBLE PAIRS (LABEL 0)", range(N_INC, N))):
     T(X_NUM, y + SEC_H / 2, sec_title, 11.5, MUTED, weight="bold")
     y += SEC_H
     for r in rng:
@@ -184,26 +195,26 @@ ax.add_line(plt.Line2D([60, W - 60], [y, y], color=INK, lw=2.2))
 
 # footer summary
 T(X_NAME, y + 55, "Correct predictions", 18, weight="bold")
-T(X_NAME, y + 90, "out of 24 held-out pairs", 12.5, MUTED)
+T(X_NAME, y + 90, f"out of {N} held-out pairs", 12.5, MUTED)
 for i, (name, _, _, ours) in enumerate(MODELS):
     s = stats[i]
     n_ok = s["tp"] + s["tn"]
     cx = X_MODEL0 + i * COL_W + COL_W / 2
     T(cx - 40, y + 55, str(n_ok), 40, weight="bold", ha="center")
-    T(cx + 5, y + 66, "/24", 17, MUTED, ha="left")
+    T(cx + 5, y + 66, f"/{N}", 17, MUTED, ha="left")
     bx, bw = cx - 140, 280
     ax.add_patch(FancyBboxPatch((bx, y + 108), bw, 12, boxstyle="round,pad=0,rounding_size=6", fc="#e3e6eb", ec="none"))
-    ax.add_patch(FancyBboxPatch((bx, y + 108), bw * n_ok / 24, 12, boxstyle="round,pad=0,rounding_size=6",
+    ax.add_patch(FancyBboxPatch((bx, y + 108), bw * n_ok / N, 12, boxstyle="round,pad=0,rounding_size=6",
                                 fc=INK if ours else "#8b95a7", ec="none"))
-    T(cx, y + 145, f"{n_ok / 24:.1%} correct", 13.5, weight="bold", ha="center")
+    T(cx, y + 145, f"{n_ok / N:.1%} correct", 13.5, weight="bold", ha="center")
     T(cx, y + 172, f"TP {s['tp']} · TN {s['tn']} · FP {s['fp']} · FN {s['fn']}", 11.5, MUTED, ha="center")
 
 T(60, H - 38,
-  "† Pairs 10 and 11 also appear in the ARES training set (train.csv); on the 22 pairs it never saw, ARES scores 18/22.   "
+  "Two of the original 24 pairs (Hydrocortisone + magnesium stearate / beta cyclodextrin) are in the ARES training set and are left out.   "
   "DeInteract reports the probability of its predicted class; P(incompatible) is 1 − p for its Compatible calls.",
   11.5, MUTED)
 
 fig.savefig(OUT, dpi=100, facecolor="white")
 for (name, *_), s in zip(MODELS, stats):
-    print(f"{name:14s} {s['tp'] + s['tn']}/24  TP {s['tp']} TN {s['tn']} FP {s['fp']} FN {s['fn']}")
+    print(f"{name:14s} {s['tp'] + s['tn']}/{N}  TP {s['tp']} TN {s['tn']} FP {s['fp']} FN {s['fn']}")
 print("wrote", OUT)

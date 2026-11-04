@@ -1,7 +1,7 @@
 """
 Build an API group split with looser API clusters: Tanimoto similarity >= 0.6 instead of >= 0.85.
 
-    data/api_cluster06/    train.csv, val.csv, held_out_test_set.csv (the same 24 external pairs), split_log.txt
+    data/api_cluster06/    train.csv, val.csv, held_out_test_set.csv (the same 22 external pairs), split_log.txt
 
 Same recipe as the API group split in data/ (python run.py split), with one change:
   - Butina on API SMILES, Morgan r=2, 2048 bits, Tanimoto DISTANCE cutoff 0.4 (similarity >= 0.6) -> cluster_id

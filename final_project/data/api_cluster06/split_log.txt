@@ -1,0 +1,28 @@
+API GROUP SPLIT AT TANIMOTO >= 0.6 (80/20, val APIs and their close analogues unseen in train)
+
+Run 2026-11-03T14:41:22 by data/make_api_cluster06_split.py
+rdkit 2026.03.6 | scikit-learn 1.5.1 | pandas 2.2.2
+Input start_dataset.csv: 3544 pairs, 533 APIs, 336 excipients (md5 9572ba67ca8be7af5fee7a3c9911ccfe)
+Butina on API SMILES (Morgan r=2, 2048 bits, distance cutoff 0.40, similarity >= 0.6): 530 API SMILES -> 471 clusters (424 single-API, largest 4); at similarity >= 0.85 (data/): 512 clusters
+
+GroupShuffleSplit(n_splits=1, test_size=0.2, random_state=42) on cluster_id (95 of 471 API clusters in val)
+Not stratified on the label (same as data/).
+val APIs also in data/val.csv: 141 of 723 val rows
+
+train   rows= 2821 | incompatible= 256 ( 9.1%) | compatible= 2565 | unique APIs= 423 | unique excipients= 309 | API clusters= 376 | excipient clusters= 265 | excipient groups= 221
+val     rows=  723 | incompatible=  88 (12.2%) | compatible=  635 | unique APIs= 110 | unique excipients= 159 | API clusters=  95 | excipient clusters= 137 | excipient groups= 110
+heldout rows=   22 | incompatible=  10 (45.5%) | compatible=   12 | unique APIs=  20 | unique excipients=  17
+
+API cluster overlap train<->val:       0 of 95 val API clusters
+API_CID overlap train<->val:           0 of 110 val APIs
+excipient cluster overlap train<->val: 118 of 137 val excipient clusters
+excipient group overlap train<->val:   97 of 110 val excipient groups
+Excipient_CID overlap train<->val:     132 of 159 val excipients
+pair overlap train<->val:              0
+
+held-out APIs seen in train:           5 of 22 pairs
+held-out excipients seen in train:     19 of 22 pairs
+held-out set: 2 pairs also in train (API_CID 5754 + Excipient_CID 11177 / 444041) removed 2026-11-04
+
+train.csv: md5 47837b5f1cf125c568eb9edbc7f63b2e
+val.csv: md5 2216037b47abb56e2409c78da79c5b81
