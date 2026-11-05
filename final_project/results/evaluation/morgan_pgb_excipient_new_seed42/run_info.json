@@ -1,0 +1,30 @@
+{
+  "model": "Morgan-PGB",
+  "split_name": "excipient_new",
+  "split": "excipient group split (80/20, parent-compound excipient groups, label-stratified)",
+  "seed": 42,
+  "device": "cuda",
+  "data": {
+    "train": {
+      "path": "data/splits/excipient_new/train.csv",
+      "rows": 2828,
+      "md5": "8d7ba4a9f89a95c5df311715c609b097"
+    },
+    "val": {
+      "path": "data/splits/excipient_new/val.csv",
+      "rows": 716,
+      "md5": "b098644379b06fcd2fc2ca40f4b3a0b1"
+    },
+    "heldout": {
+      "path": "data/heldout/held_out_test_set.csv",
+      "rows": 22,
+      "md5": "e89bbe19d0e94a47329dd826eb4b6b51"
+    }
+  },
+  "epochs_trained": 13,
+  "best_epoch": 6,
+  "threshold_from_val": 0.974,
+  "tnr_floor": 0.97,
+  "finished": "2026-11-03T11:21:25",
+  "minutes": 2.88
+}

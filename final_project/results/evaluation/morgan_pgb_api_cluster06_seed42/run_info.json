@@ -1,0 +1,30 @@
+{
+  "model": "Morgan-PGB",
+  "split_name": "api_cluster06",
+  "split": "API group split at Tanimoto >= 0.6 (80/20, Butina API clusters incl. close analogues)",
+  "seed": 42,
+  "device": "cuda",
+  "data": {
+    "train": {
+      "path": "data/splits/api_cluster06/train.csv",
+      "rows": 2821,
+      "md5": "47837b5f1cf125c568eb9edbc7f63b2e"
+    },
+    "val": {
+      "path": "data/splits/api_cluster06/val.csv",
+      "rows": 723,
+      "md5": "2216037b47abb56e2409c78da79c5b81"
+    },
+    "heldout": {
+      "path": "data/heldout/held_out_test_set.csv",
+      "rows": 22,
+      "md5": "e89bbe19d0e94a47329dd826eb4b6b51"
+    }
+  },
+  "epochs_trained": 8,
+  "best_epoch": 1,
+  "threshold_from_val": 0.72,
+  "tnr_floor": 0.97,
+  "finished": "2026-11-03T14:43:58",
+  "minutes": 2.14
+}

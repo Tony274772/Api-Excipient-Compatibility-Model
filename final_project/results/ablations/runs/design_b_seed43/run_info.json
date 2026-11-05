@@ -1,0 +1,37 @@
+{
+  "model": "Morgan-PGB",
+  "ablation": "design_b",
+  "mech_set": "v1",
+  "description": "B. prior 5 -> 1 (p_exact only) in gate, MLP and prior trust; w kept + C. gate on the bilinear term removed, gated = bilinear (MLP input still 410) + G. availability flag and missing-fingerprint embedding removed from both towers (mix 145 -> 144) + H. 5 SMARTS mechanism flags removed from the head (gate 46 -> 41, MLP 410 -> 405)",
+  "parameters": 232683,
+  "prior_table": {
+    "lookup": "full",
+    "global_rate": 0.09963898916967509
+  },
+  "split": "API group split (80/20, Butina API clusters at Tanimoto >= 0.85, GroupShuffleSplit random_state=42)",
+  "seed": 43,
+  "device": "cuda",
+  "data": {
+    "train": {
+      "path": "data/splits/api_cluster/train.csv",
+      "rows": 2770,
+      "md5": "cfa2e256c21a15abd42f1f852ef94357"
+    },
+    "val": {
+      "path": "data/splits/api_cluster/val.csv",
+      "rows": 774,
+      "md5": "5ba1f79b6e5283a5350094c4b9b53edc"
+    },
+    "heldout": {
+      "path": "data/heldout/held_out_test_set.csv",
+      "rows": 22,
+      "md5": "e89bbe19d0e94a47329dd826eb4b6b51"
+    }
+  },
+  "epochs_trained": 9,
+  "best_epoch": 2,
+  "threshold_from_val": 0.707,
+  "tnr_floor": 0.97,
+  "finished": "2026-11-02T12:29:07",
+  "minutes": 1.96
+}

@@ -1,8 +1,18 @@
 # Tested with Python 3.12.7, torch 2.5.1 (CUDA and CPU), rdkit 2026.03.6, scikit-learn 1.5.1,
 # pandas 2.2.2, numpy 1.26.4, tqdm 4.66.5
+
+# model: train / evaluate / predict (run.py, scripts/ablations, scripts/benchmark, scripts/data)
 torch>=2.1
 rdkit>=2023.9.1
 scikit-learn>=1.3
 pandas>=2.0
 numpy>=1.24,<2
 tqdm>=4.60
+
+# SHAP analysis and figures (scripts/shap, scripts/figures); tested with shap 0.45.1, matplotlib 3.9.2, seaborn 0.13.2
+shap>=0.44
+matplotlib>=3.7
+seaborn>=0.12
+
+# tests (python -m pytest tests)
+pytest>=7

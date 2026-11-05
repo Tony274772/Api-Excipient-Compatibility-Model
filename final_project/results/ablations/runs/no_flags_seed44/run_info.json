@@ -1,0 +1,37 @@
+{
+  "model": "Morgan-PGB",
+  "ablation": "no_flags",
+  "mech_set": "v1",
+  "description": "I. all 18 chemistry flags removed from both towers (mix 145 -> 129) and the gate (46 -> 10)",
+  "parameters": 231387,
+  "prior_table": {
+    "lookup": "full",
+    "global_rate": 0.09963898916967509
+  },
+  "split": "API group split (80/20, Butina API clusters at Tanimoto >= 0.85, GroupShuffleSplit random_state=42)",
+  "seed": 44,
+  "device": "cuda",
+  "data": {
+    "train": {
+      "path": "data/splits/api_cluster/train.csv",
+      "rows": 2770,
+      "md5": "cfa2e256c21a15abd42f1f852ef94357"
+    },
+    "val": {
+      "path": "data/splits/api_cluster/val.csv",
+      "rows": 774,
+      "md5": "5ba1f79b6e5283a5350094c4b9b53edc"
+    },
+    "heldout": {
+      "path": "data/heldout/held_out_test_set.csv",
+      "rows": 22,
+      "md5": "e89bbe19d0e94a47329dd826eb4b6b51"
+    }
+  },
+  "epochs_trained": 9,
+  "best_epoch": 2,
+  "threshold_from_val": 0.882,
+  "tnr_floor": 0.97,
+  "finished": "2026-10-28T13:48:55",
+  "minutes": 4.77
+}

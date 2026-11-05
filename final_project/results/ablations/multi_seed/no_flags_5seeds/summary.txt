@@ -1,0 +1,36 @@
+no_flags: seeds [42, 43, 44, 45, 46]
+
+               model  threshold  heldout_correct  heldout_tp  heldout_tn  heldout_fp  heldout_fn  heldout_pr_auc  heldout_roc_auc  heldout_mcc  val_correct  val_pr_auc  val_roc_auc  val_mcc  val_f1
+             seed 42     0.6620          17.0000      6.0000     11.0000      1.0000      4.0000          0.9208           0.9333       0.5523     734.0000      0.6873       0.9233   0.6425  0.6610
+             seed 43     0.9140          15.0000      3.0000     12.0000      0.0000      7.0000          0.9073           0.9000       0.4353     732.0000      0.6782       0.9302   0.6016  0.5882
+             seed 44     0.8820          18.0000      6.0000     12.0000      0.0000      4.0000          0.9519           0.9500       0.6708     738.0000      0.7195       0.9432   0.6748  0.6842
+             seed 45     0.8520          18.0000      6.0000     12.0000      0.0000      4.0000          0.8984           0.8917       0.6708     734.0000      0.6951       0.9251   0.6285  0.6296
+             seed 46     0.9200          17.0000      5.0000     12.0000      0.0000      5.0000          0.9073           0.9000       0.5941     736.0000      0.7167       0.9390   0.6461  0.6275
+                mean     0.8460          17.0000      5.2000     11.8000      0.2000      4.8000          0.9172           0.9150       0.5847     734.8000      0.6994       0.9322   0.6387  0.6381
+                  sd     0.1064           1.2247      1.3038      0.4472      0.4472      1.3038          0.0210           0.0253       0.0978       2.2804      0.0181       0.0087   0.0267  0.0365
+ensemble (mean prob)     0.8350          17.0000      5.0000     12.0000      0.0000      5.0000          0.9228           0.9250       0.5941     736.0000      0.7226       0.9420   0.6491  0.6481
+
+Held-out predictions (ensemble threshold 0.835, from val):
+                   Api_name               Excipient_name  label  prob_seed42  prob_seed43  prob_seed44  prob_seed45  prob_seed46  prob_mean  prob_sd  votes_incompatible  pred_ensemble  correct_ensemble
+0                  Warfarin  Magnesium aluminum silicate      1        0.556        0.457        0.622        0.490        0.546      0.534    0.064                   0              0                 0
+1                 Phenytoin              Magnesium oxide      1        0.663        0.784        0.919        0.973        0.978      0.863    0.137                   4              1                 1
+2        Trichlormethiazide              Magnesium oxide      1        0.800        0.986        0.975        0.964        0.985      0.942    0.080                   5              1                 1
+3              Tetracycline            Calcium phosphate      1        0.696        0.554        0.806        0.745        0.930      0.746    0.139                   2              0                 0
+4               Fluvoxamine                      Lactose      1        0.564        0.851        0.896        0.860        0.884      0.811    0.139                   2              0                 0
+5             Acetazolamide                      Lactose      1        0.717        0.926        0.939        0.887        0.912      0.876    0.091                   4              1                 1
+6             Acetazolamide                     Mannitol      1        0.431        0.839        0.853        0.768        0.899      0.758    0.189                   0              0                 0
+7          Phenytoin sodium                      Lactose      1        0.505        0.485        0.646        0.730        0.595      0.592    0.101                   0              0                 0
+8          Phenytoin sodium              Calcium sulfate      1        0.793        0.834        0.932        0.961        0.970      0.898    0.079                   4              1                 1
+9                 Quercetin          Magnesium carbonate      1        0.716        0.971        0.976        0.953        0.965      0.916    0.112                   5              1                 1
+10  METFORMIN HYDROCHLORIDE           MAGNESIUM STEARATE      0        0.508        0.772        0.372        0.269        0.352      0.454    0.197                   0              0                 1
+11              LAMOTRIGINE        SODIUM LAURYL SULFATE      0        0.276        0.158        0.364        0.531        0.197      0.305    0.149                   0              0                 1
+12               GABAPENTIN                     MANNITOL      0        0.224        0.182        0.272        0.072        0.253      0.201    0.079                   0              0                 1
+13               OMEPRAZOLE              SILICON DIOXIDE      0        0.136        0.074        0.180        0.163        0.166      0.144    0.042                   0              0                 1
+14            CARBAMAZEPINE             PROPYLENE GLYCOL      0        0.267        0.283        0.223        0.515        0.679      0.393    0.196                   0              0                 1
+15      HYDROCHLOROTHIAZIDE                 STEARIC ACID      0        0.432        0.154        0.551        0.549        0.333      0.404    0.166                   0              0                 1
+16                CELECOXIB             TITANIUM DIOXIDE      0        0.054        0.063        0.091        0.067        0.095      0.074    0.018                   0              0                 1
+17               TOPIRAMATE                    TRIACETIN      0        0.174        0.359        0.264        0.265        0.411      0.295    0.092                   0              0                 1
+18            LEVETIRACETAM                         TALC      0        0.667        0.779        0.803        0.788        0.900      0.788    0.083                   1              0                 1
+19              FENOFIBRATE                      SUCROSE      0        0.349        0.710        0.772        0.647        0.781      0.652    0.177                   0              0                 1
+20              RISPERIDONE          LACTOSE MONOHYDRATE      0        0.205        0.763        0.700        0.696        0.752      0.623    0.236                   0              0                 1
+21               OLANZAPINE           MAGNESIUM STEARATE      0        0.362        0.449        0.471        0.792        0.843      0.583    0.218                   0              0                 1
