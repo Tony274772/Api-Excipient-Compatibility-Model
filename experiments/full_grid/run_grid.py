@@ -42,7 +42,7 @@ RESULTS = os.path.join(PROJECT_ROOT, "experiments", "results", "full_grid")
 CKPT = os.path.join(PROJECT_ROOT, "checkpoints", "full_grid")
 
 
-def make_config(g, seed, device, epochs):
+def make_config(g, seed, device, epochs, patience=None, min_delta=None):
     """The configuration this run name stands for, pointed at the 80/20 grid data."""
     c = Config()
     c.encoder, c.fusion, c.pooling, c.loss = g["encoder"], g["fusion"], g["pooling"], g["loss"]
@@ -70,6 +70,11 @@ def make_config(g, seed, device, epochs):
     if epochs:
         c.max_epochs = epochs
         c.pgb_max_epochs = epochs
+    if patience:
+        c.early_stop_patience = patience        # baseline trainer
+        c.pgb_early_stop_patience = patience    # PGB trainer
+    if min_delta is not None:
+        c.early_stop_min_delta = min_delta
     c.positive_prior = float(pd.read_csv(c.train_csv)["Outcome1"].mean())
     return c
 
@@ -78,7 +83,7 @@ def is_done(name):
     return os.path.exists(os.path.join(RESULTS, name, "val_metrics.json"))
 
 
-def run_one(name, seed=42, device="auto", epochs=None):
+def run_one(name, seed=42, device="auto", epochs=None, patience=None, min_delta=None):
     """Train and evaluate one configuration. Returns the run_info dict."""
     g = spec(name)
     out = os.path.join(RESULTS, name)
@@ -87,7 +92,7 @@ def run_one(name, seed=42, device="auto", epochs=None):
 
     t0 = time.time()
     seed_everything(seed)
-    config = make_config(g, seed, device, epochs)
+    config = make_config(g, seed, device, epochs, patience, min_delta)
     dev = get_device(config.device)
 
     from main import build_encoder
@@ -120,6 +125,9 @@ def run_one(name, seed=42, device="auto", epochs=None):
 
     info = dict(run=name, **{k: g[k] for k in ("encoder", "source", "fusion", "pooling", "loss", "pgb", "legacy")},
                 seed=seed, device=str(dev),
+                max_epochs=config.pgb_max_epochs if g["pgb"] else config.max_epochs,
+                early_stop_patience=config.pgb_early_stop_patience if g["pgb"] else config.early_stop_patience,
+                early_stop_min_delta=config.early_stop_min_delta,
                 parameters=sum(p.numel() for p in model.parameters()) if not g["pgb"] else None,
                 data={k: os.path.relpath(v, PROJECT_ROOT) for k, v in
                       [("train", config.train_csv), ("val", config.val_csv), ("heldout", config.test_csv)]},
@@ -140,7 +148,11 @@ def main():
     p.add_argument("--only", nargs="+", help="limit --all to these encoders, e.g. --only fixed_vector chemberta")
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--device", default=None)
-    p.add_argument("--epochs", type=int, default=None, help="cap epochs (smoke tests)")
+    p.add_argument("--epochs", type=int, default=None, help="cap max epochs (default 150 baseline / 40 PGB)")
+    p.add_argument("--patience", type=int, default=None,
+                   help="early-stopping patience in epochs (default 6 baseline / 7 PGB); lower stops sooner")
+    p.add_argument("--min-delta", type=float, default=None,
+                   help="val PR-AUC gain that counts as improvement (default 0.002); higher stops sooner")
     p.add_argument("--time-budget", type=float, default=None, help="stop starting new runs after N minutes")
     p.add_argument("--overwrite", action="store_true")
     args = p.parse_args()
@@ -156,7 +168,7 @@ def main():
 
     device = args.device or "auto"
     if args.run:
-        run_one(args.run, args.seed, device, args.epochs)
+        run_one(args.run, args.seed, device, args.epochs, args.patience, args.min_delta)
         return
     if not args.all:
         raise SystemExit("pass --run <name>, --all or --list")
@@ -173,7 +185,7 @@ def main():
             break
         print(f"\n[{i}/{len(todo)}] {name}  ({spent:.0f} min spent)", flush=True)
         try:
-            run_one(name, args.seed, device, args.epochs)
+            run_one(name, args.seed, device, args.epochs, args.patience, args.min_delta)
             done.append(name)
         except Exception as e:
             failed.append((name, f"{type(e).__name__}: {e}"))
