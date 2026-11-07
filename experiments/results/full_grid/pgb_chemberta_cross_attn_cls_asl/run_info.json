@@ -9,6 +9,9 @@
   "legacy": false,
   "seed": 42,
   "device": "cuda",
+  "max_epochs": 60,
+  "early_stop_patience": 7,
+  "early_stop_min_delta": 0.002,
   "parameters": null,
   "data": {
     "train": "data/grid_8020/train.csv",
@@ -20,6 +23,6 @@
     "val": 774,
     "heldout": 22
   },
-  "minutes": 2.08,
-  "finished": "2026-11-07T17:40:14"
+  "minutes": 3.15,
+  "finished": "2026-11-07T19:36:56"
 }
