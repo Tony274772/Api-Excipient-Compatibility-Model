@@ -1,0 +1,25 @@
+{
+  "run": "fixed_vector_maccs_concat_focal",
+  "encoder": "fixed_vector",
+  "source": "maccs",
+  "fusion": "concat",
+  "pooling": "global_gated_attention",
+  "loss": "focal",
+  "pgb": false,
+  "legacy": false,
+  "seed": 42,
+  "device": "cuda",
+  "parameters": 242961,
+  "data": {
+    "train": "data/grid_8020/train.csv",
+    "val": "data/grid_8020/val.csv",
+    "heldout": "data/grid_8020/test.csv"
+  },
+  "rows": {
+    "train": 2770,
+    "val": 774,
+    "heldout": 22
+  },
+  "minutes": 0.5,
+  "finished": "2026-11-07T17:19:43"
+}

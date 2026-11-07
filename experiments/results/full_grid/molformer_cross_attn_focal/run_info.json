@@ -1,0 +1,25 @@
+{
+  "run": "molformer_cross_attn_focal",
+  "encoder": "molformer",
+  "source": null,
+  "fusion": "cross_attn",
+  "pooling": "global_gated_attention",
+  "loss": "focal",
+  "pgb": false,
+  "legacy": true,
+  "seed": 42,
+  "device": "cuda",
+  "parameters": 45191185,
+  "data": {
+    "train": "data/grid_8020/train.csv",
+    "val": "data/grid_8020/val.csv",
+    "heldout": "data/grid_8020/test.csv"
+  },
+  "rows": {
+    "train": 2770,
+    "val": 774,
+    "heldout": 22
+  },
+  "minutes": 0.54,
+  "finished": "2026-11-07T17:51:32"
+}

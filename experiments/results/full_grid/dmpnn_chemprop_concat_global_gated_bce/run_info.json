@@ -1,0 +1,25 @@
+{
+  "run": "dmpnn_chemprop_concat_global_gated_bce",
+  "encoder": "dmpnn_chemprop",
+  "source": null,
+  "fusion": "concat",
+  "pooling": "global_gated_attention",
+  "loss": "bce",
+  "pgb": false,
+  "legacy": false,
+  "seed": 42,
+  "device": "cuda",
+  "parameters": 9920273,
+  "data": {
+    "train": "data/grid_8020/train.csv",
+    "val": "data/grid_8020/val.csv",
+    "heldout": "data/grid_8020/test.csv"
+  },
+  "rows": {
+    "train": 2770,
+    "val": 774,
+    "heldout": 22
+  },
+  "minutes": 0.95,
+  "finished": "2026-11-07T17:45:06"
+}

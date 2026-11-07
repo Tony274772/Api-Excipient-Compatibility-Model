@@ -1,0 +1,25 @@
+{
+  "run": "chemberta_cross_attn_pairwise_asl",
+  "encoder": "chemberta",
+  "source": null,
+  "fusion": "cross_attn",
+  "pooling": "explicit_pairwise",
+  "loss": "asl",
+  "pgb": false,
+  "legacy": false,
+  "seed": 42,
+  "device": "cuda",
+  "parameters": 4185473,
+  "data": {
+    "train": "data/grid_8020/train.csv",
+    "val": "data/grid_8020/val.csv",
+    "heldout": "data/grid_8020/test.csv"
+  },
+  "rows": {
+    "train": 2770,
+    "val": 774,
+    "heldout": 22
+  },
+  "minutes": 1.35,
+  "finished": "2026-11-07T17:36:56"
+}

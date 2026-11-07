@@ -1,0 +1,25 @@
+{
+  "run": "pretrained_gat_concat_cls_bce",
+  "encoder": "pretrained_gat",
+  "source": null,
+  "fusion": "concat",
+  "pooling": "cls",
+  "loss": "bce",
+  "pgb": false,
+  "legacy": false,
+  "seed": 42,
+  "device": "cuda",
+  "parameters": 1288457,
+  "data": {
+    "train": "data/grid_8020/train.csv",
+    "val": "data/grid_8020/val.csv",
+    "heldout": "data/grid_8020/test.csv"
+  },
+  "rows": {
+    "train": 2770,
+    "val": 774,
+    "heldout": 22
+  },
+  "minutes": 0.93,
+  "finished": "2026-11-07T18:01:01"
+}
