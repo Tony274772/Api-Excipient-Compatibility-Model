@@ -11,6 +11,7 @@ import numpy as np
 import torch
 from sklearn.metrics import (
     average_precision_score,
+    roc_auc_score,
     f1_score,
     matthews_corrcoef,
     precision_score,
@@ -122,9 +123,15 @@ def compute_metrics(probs: np.ndarray, labels: np.ndarray, threshold: float):
     recall = recall_score(labels_int, preds, zero_division=0)
     accuracy = accuracy_score(labels_int, preds)
     cm = confusion_matrix(labels_int, preds).tolist()
+    # ROC-AUC needs both classes present; it is undefined on a single-class split
+    try:
+        roc_auc = float(roc_auc_score(labels_int, probs)) if len(set(labels_int.tolist())) > 1 else float("nan")
+    except ValueError:
+        roc_auc = float("nan")
 
     return {
         "pr_auc": float(pr_auc),
+        "roc_auc": roc_auc,
         "f1": float(f1),
         "mcc": float(mcc),
         "precision": float(precision),
