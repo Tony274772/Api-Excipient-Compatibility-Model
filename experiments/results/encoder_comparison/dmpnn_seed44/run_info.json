@@ -1,0 +1,30 @@
+{
+  "family": "dmpnn",
+  "seed_run": "dmpnn_seed44",
+  "label": "D-MPNN (CheMeleon, frozen) + cross-attention, CLS pooling",
+  "representation_dim": 128,
+  "encoder": "dmpnn_chemprop",
+  "fusion": "cross_attn",
+  "pooling": "cls",
+  "seed": 44,
+  "device": "cuda",
+  "parameters_total": 10063227,
+  "parameters_trainable": 1348987,
+  "epochs_trained": 21,
+  "best_epoch": 14,
+  "max_epochs": 40,
+  "threshold_from_val": 0.588,
+  "tnr_floor": 0.97,
+  "data": {
+    "train": "C:\\Users\\pardhu\\Desktop\\ARES\\final_project\\data\\splits\\api_cluster\\train.csv",
+    "val": "C:\\Users\\pardhu\\Desktop\\ARES\\final_project\\data\\splits\\api_cluster\\val.csv",
+    "heldout": "C:\\Users\\pardhu\\Desktop\\ARES\\final_project\\data\\heldout\\held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 6.72,
+  "finished": "2026-11-06T06:30:45"
+}

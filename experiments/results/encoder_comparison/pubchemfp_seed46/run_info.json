@@ -1,0 +1,30 @@
+{
+  "family": "pubchemfp",
+  "seed_run": "pubchemfp_seed46",
+  "label": "PubChem fingerprint, 881 bits (precomputed lookup)",
+  "representation_dim": 881,
+  "encoder": "fixed_vector",
+  "fusion": "concat",
+  "pooling": "global_gated_attention",
+  "seed": 46,
+  "device": "cuda",
+  "parameters_total": 200571,
+  "parameters_trainable": 200571,
+  "epochs_trained": 13,
+  "best_epoch": 6,
+  "max_epochs": 40,
+  "threshold_from_val": 0.785,
+  "tnr_floor": 0.97,
+  "data": {
+    "train": "C:\\Users\\pardhu\\Desktop\\ARES\\final_project\\data\\splits\\api_cluster\\train.csv",
+    "val": "C:\\Users\\pardhu\\Desktop\\ARES\\final_project\\data\\splits\\api_cluster\\val.csv",
+    "heldout": "C:\\Users\\pardhu\\Desktop\\ARES\\final_project\\data\\heldout\\held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 3.71,
+  "finished": "2026-11-06T07:10:16"
+}

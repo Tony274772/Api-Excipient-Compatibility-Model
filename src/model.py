@@ -777,8 +777,13 @@ class PGBHead(nn.Module):
 
     def init_bias(self, global_rate: float, pgb_prior_offset: float = 0.2):
         """
-        Set the prior_bias so that at zero residual and a never-seen excipient
-        (p_exact = global_rate) the output is (1 + pgb_prior_offset) * log(p/(1-p)).
+        Set the prior_bias to pgb_prior_offset * log(p/(1-p)) at p = global_rate, so an untrained
+        model already leans towards "compatible".
+
+        At zero residual and a never-seen excipient the logit is then
+        (w + pgb_prior_offset) * log(p/(1-p)), where w = prior_trust_mlp(prior_vec) is about 0.5 at
+        initialisation (a sigmoid of a near-zero logit) — so roughly 0.7 * log(p/(1-p)), not
+        1.2 * log(p/(1-p)) as an earlier version of this docstring claimed.
         """
         if 0 < global_rate < 1:
             log_odds = np.log(global_rate / (1 - global_rate))

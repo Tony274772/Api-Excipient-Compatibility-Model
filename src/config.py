@@ -68,6 +68,9 @@ class Config:
     pgb_num_mechanisms: int = 5             # number of SMARTS mechanism rules (do not change)
     pgb_num_desc: int = 12                  # number of PGB descriptors (do not change)
     pgb_prior_vec_dim: int = 5              # [p_exact, p_delta, p_family, log_n, unseen]
+    pgb_normalize_salt: bool = False        # z-score the 8 salt-context values with train statistics.
+                                            # False reproduces every checkpoint trained before this
+                                            # option existed; new comparisons set it True.
 
     # --- PGB training overrides (only active when use_pgb_head=True) ---
     pgb_lr: float = 1.2e-3                  # LR for new PGB layers (tower, head)

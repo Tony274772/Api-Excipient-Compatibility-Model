@@ -1,0 +1,30 @@
+{
+  "family": "morgan",
+  "seed_run": "morgan_seed45",
+  "label": "Morgan fingerprint, radius 2, 1024 bits (salt-aware OR-fold)",
+  "representation_dim": 1024,
+  "encoder": "fixed_vector",
+  "fusion": "concat",
+  "pooling": "global_gated_attention",
+  "seed": 45,
+  "device": "cuda",
+  "parameters_total": 218875,
+  "parameters_trainable": 218875,
+  "epochs_trained": 9,
+  "best_epoch": 2,
+  "max_epochs": 40,
+  "threshold_from_val": 0.846,
+  "tnr_floor": 0.97,
+  "data": {
+    "train": "C:\\Users\\pardhu\\Desktop\\ARES\\final_project\\data\\splits\\api_cluster\\train.csv",
+    "val": "C:\\Users\\pardhu\\Desktop\\ARES\\final_project\\data\\splits\\api_cluster\\val.csv",
+    "heldout": "C:\\Users\\pardhu\\Desktop\\ARES\\final_project\\data\\heldout\\held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 1.92,
+  "finished": "2026-11-06T06:32:46"
+}

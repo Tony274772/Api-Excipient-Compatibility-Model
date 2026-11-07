@@ -1,0 +1,30 @@
+{
+  "family": "gat",
+  "seed_run": "gat_seed45",
+  "label": "Pretrained GAT (Stanford context-pred, frozen) + cross-attention, gated-attention pooling",
+  "representation_dim": 128,
+  "encoder": "pretrained_gat",
+  "fusion": "cross_attn",
+  "pooling": "global_gated_attention",
+  "seed": 45,
+  "device": "cuda",
+  "parameters_total": 1564019,
+  "parameters_trainable": 586619,
+  "epochs_trained": 10,
+  "best_epoch": 3,
+  "max_epochs": 40,
+  "threshold_from_val": 0.525,
+  "tnr_floor": 0.97,
+  "data": {
+    "train": "C:\\Users\\pardhu\\Desktop\\ARES\\final_project\\data\\splits\\api_cluster\\train.csv",
+    "val": "C:\\Users\\pardhu\\Desktop\\ARES\\final_project\\data\\splits\\api_cluster\\val.csv",
+    "heldout": "C:\\Users\\pardhu\\Desktop\\ARES\\final_project\\data\\heldout\\held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 3.76,
+  "finished": "2026-11-06T06:58:01"
+}

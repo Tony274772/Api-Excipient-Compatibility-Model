@@ -1,0 +1,29 @@
+{
+  "family": "mol2vec",
+  "label": "Mol2vec embedding, 300 dimensions (precomputed lookup)",
+  "representation_dim": 300,
+  "encoder": "fixed_vector",
+  "fusion": "concat",
+  "pooling": "global_gated_attention",
+  "seed": 42,
+  "device": "cuda",
+  "parameters_total": 126203,
+  "parameters_trainable": 126203,
+  "epochs_trained": 12,
+  "best_epoch": 5,
+  "max_epochs": 40,
+  "threshold_from_val": 0.788,
+  "tnr_floor": 0.97,
+  "data": {
+    "train": "C:\\Users\\pardhu\\Desktop\\ARES\\final_project\\data\\splits\\api_cluster\\train.csv",
+    "val": "C:\\Users\\pardhu\\Desktop\\ARES\\final_project\\data\\splits\\api_cluster\\val.csv",
+    "heldout": "C:\\Users\\pardhu\\Desktop\\ARES\\final_project\\data\\heldout\\held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 5.56,
+  "finished": "2026-11-05T13:28:42"
+}

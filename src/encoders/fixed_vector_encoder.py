@@ -23,10 +23,15 @@ class FixedVectorEncoder(nn.Module):
     is_sequence_capable = False
 
     # Default output dimensions per source type
+    # Used to size a zero vector when a lookup misses, and as encoder metadata. "morgan" and
+    # "maccs" are computed from SMILES in PGBDataset rather than looked up here, but they are
+    # listed so output_dim does not silently fall back to the 300 of mol2vec.
     _default_dims = {
         "mol2vec": 300,
         "pubchemfp": 881,
         "rdkit_descriptors": 21,
+        "morgan": 1024,
+        "maccs": 167,
     }
 
     def __init__(self, source: str = "mol2vec", vector_path: str = None, device: str = "cpu"):

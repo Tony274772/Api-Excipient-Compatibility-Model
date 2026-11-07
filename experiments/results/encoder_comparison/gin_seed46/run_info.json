@@ -1,0 +1,30 @@
+{
+  "family": "gin",
+  "seed_run": "gin_seed46",
+  "label": "Pretrained GIN (context-pred, frozen) + cross-attention, gated-attention pooling",
+  "representation_dim": 128,
+  "encoder": "pretrained_gin",
+  "fusion": "cross_attn",
+  "pooling": "global_gated_attention",
+  "seed": 46,
+  "device": "cuda",
+  "parameters_total": 586619,
+  "parameters_trainable": 586619,
+  "epochs_trained": 10,
+  "best_epoch": 3,
+  "max_epochs": 40,
+  "threshold_from_val": 0.856,
+  "tnr_floor": 0.97,
+  "data": {
+    "train": "C:\\Users\\pardhu\\Desktop\\ARES\\final_project\\data\\splits\\api_cluster\\train.csv",
+    "val": "C:\\Users\\pardhu\\Desktop\\ARES\\final_project\\data\\splits\\api_cluster\\val.csv",
+    "heldout": "C:\\Users\\pardhu\\Desktop\\ARES\\final_project\\data\\heldout\\held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 2.75,
+  "finished": "2026-11-06T07:24:29"
+}
