@@ -48,6 +48,19 @@ class MoLFormerEncoder(nn.Module):
         return super().to(device, *args, **kwargs)
 
     @torch.no_grad()
+
+    def train(self, mode: bool = True):
+        """Keep the frozen pretrained model in eval mode.
+
+        nn.Module.train() reaches every child, so without this the frozen MoLFormer transformer is switched back
+        into train mode once per epoch and its dropout becomes active. Because encode() caches one
+        embedding per SMILES, a molecule first seen during training would be cached with dropout
+        applied and that vector reused for evaluation.
+        """
+        super().train(mode)
+        self.model.eval()
+        return self
+
     def encode(self, smiles_batch: list[str]):
         """Encode a batch of SMILES strings.
         
