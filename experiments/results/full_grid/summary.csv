@@ -9,8 +9,8 @@ chemberta_cross_attn_global_gated_weighted_bce,chemberta,,cross_attn,global_gate
 chemberta_cross_attn_cls_focal,chemberta,,cross_attn,cls,focal,baseline,0.7206,0.938,0.6236,0.6569,0.6522,0.6618,0.9393,727,0.699,0.8083,0.45,0.7,0.7,0.7,0.7273,16/22,0.64,3914369.0
 pgb_fixed_vector_maccs_concat_asl,fixed_vector,maccs,concat,global_gated_attention,asl,PGB,0.7148,0.9356,0.6835,0.6903,0.8667,0.5735,0.9548,739,0.872,0.8583,0.5941,0.6667,1.0,0.5,0.7727,17/22,1.3,
 chemberta_cross_attn_pairwise_asl,chemberta,,cross_attn,explicit_pairwise,asl,baseline,0.7136,0.9369,0.6182,0.6525,0.6301,0.6765,0.9367,725,0.6441,0.7167,0.45,0.7,0.7,0.7,0.7273,16/22,1.4,4185473.0
-dmpnn_chemprop_concat_cls_asl,dmpnn_chemprop,,concat,cls,asl,baseline,0.712,0.9091,0.6797,0.6949,0.82,0.6029,0.9535,738,0.9022,0.9167,0.4485,0.6667,0.75,0.6,0.7273,16/22,1.34,9920273.0
 dmpnn_chemprop_concat_global_gated_asl,dmpnn_chemprop,,concat,global_gated_attention,asl,baseline,0.712,0.9092,0.6824,0.7,0.8077,0.6176,0.9535,738,0.9022,0.9167,0.4485,0.6667,0.75,0.6,0.7273,16/22,1.58,9920273.0
+dmpnn_chemprop_concat_cls_asl,dmpnn_chemprop,,concat,cls,asl,baseline,0.712,0.9091,0.6797,0.6949,0.82,0.6029,0.9535,738,0.9022,0.9167,0.4485,0.6667,0.75,0.6,0.7273,16/22,1.34,9920273.0
 chemberta_cross_attn_pairwise_bce,chemberta,,cross_attn,explicit_pairwise,bce,baseline,0.7117,0.9287,0.6314,0.6615,0.6935,0.6324,0.9432,730,0.7098,0.7333,0.3545,0.6316,0.6667,0.6,0.6818,15/22,1.39,4185473.0
 pgb_fixed_vector_mol2vec_concat_asl,fixed_vector,mol2vec,concat,global_gated_attention,asl,PGB,0.7109,0.9297,0.6425,0.661,0.78,0.5735,0.9483,734,0.8947,0.9,0.5164,0.5714,1.0,0.4,0.7273,16/22,2.47,
 chemberta_cross_attn_global_gated_focal,chemberta,,cross_attn,global_gated_attention,focal,baseline,0.7099,0.9423,0.6439,0.6719,0.7167,0.6324,0.9457,732,0.713,0.7333,0.3545,0.6316,0.6667,0.6,0.6818,15/22,0.65,4046977.0

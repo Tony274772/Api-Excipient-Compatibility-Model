@@ -42,7 +42,7 @@ RESULTS = os.path.join(PROJECT_ROOT, "experiments", "results", "full_grid")
 CKPT = os.path.join(PROJECT_ROOT, "checkpoints", "full_grid")
 
 
-def make_config(g, seed, device, epochs, patience=None, min_delta=None):
+def make_config(g, seed, device, epochs, patience=None, min_delta=None, results_root=RESULTS, ckpt_root=CKPT):
     """The configuration this run name stands for, pointed at the 80/20 grid data."""
     c = Config()
     c.encoder, c.fusion, c.pooling, c.loss = g["encoder"], g["fusion"], g["pooling"], g["loss"]
@@ -65,8 +65,8 @@ def make_config(g, seed, device, epochs, patience=None, min_delta=None):
     if g["source"] in ("mol2vec", "pubchemfp"):
         c.fixed_vector_path = os.path.join(PROJECT_ROOT, "data",
                                            "mol2vec_embeddings.csv" if g["source"] == "mol2vec" else "pubchem_fps.csv")
-    c.checkpoint_dir = os.path.join(CKPT, g["name"])
-    c.metrics_dir = os.path.join(RESULTS, g["name"])
+    c.checkpoint_dir = os.path.join(ckpt_root, g["name"])
+    c.metrics_dir = os.path.join(results_root, g["name"])
     if epochs:
         c.max_epochs = epochs
         c.pgb_max_epochs = epochs
@@ -83,16 +83,21 @@ def is_done(name):
     return os.path.exists(os.path.join(RESULTS, name, "val_metrics.json"))
 
 
-def run_one(name, seed=42, device="auto", epochs=None, patience=None, min_delta=None):
-    """Train and evaluate one configuration. Returns the run_info dict."""
+def run_one(name, seed=42, device="auto", epochs=None, patience=None, min_delta=None,
+            results_root=RESULTS, ckpt_root=CKPT):
+    """Train and evaluate one configuration. Returns the run_info dict.
+
+    results_root / ckpt_root default to the grid folders; the multi-seed runs point them elsewhere
+    so a second seed never overwrites the first.
+    """
     g = spec(name)
-    out = os.path.join(RESULTS, name)
+    out = os.path.join(results_root, name)
     os.makedirs(out, exist_ok=True)
-    os.makedirs(os.path.join(CKPT, name), exist_ok=True)
+    os.makedirs(os.path.join(ckpt_root, name), exist_ok=True)
 
     t0 = time.time()
     seed_everything(seed)
-    config = make_config(g, seed, device, epochs, patience, min_delta)
+    config = make_config(g, seed, device, epochs, patience, min_delta, results_root, ckpt_root)
     dev = get_device(config.device)
 
     from main import build_encoder
@@ -104,8 +109,8 @@ def run_one(name, seed=42, device="auto", epochs=None, patience=None, min_delta=
         from src.single_run import pgb_single_run
         config.heldout_csv = config.test_csv
         config.family = name
-        config.pgb_metrics_root = RESULTS
-        config.pgb_checkpoint_root = CKPT
+        config.pgb_metrics_root = results_root
+        config.pgb_checkpoint_root = ckpt_root
         pgb_single_run(config)
         val_m = json.load(open(os.path.join(out, "val_metrics.json")))
         test_m = json.load(open(os.path.join(out, "test_metrics.json")))

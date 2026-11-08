@@ -1,0 +1,67 @@
+model,group,head,seeds,val_pr,val_roc,val_mcc,val_f1,val_prec,val_rec,val_acc,val_corr,held
+chemberta_cross_attn_cls_bce,grid (1 seed),baseline,1,0.7627,0.942,0.7122,0.7344,0.7833,0.6912,0.9561,740.0,14.0
+pgb_dmpnn_chemprop_cross_attn_cls_asl,grid (1 seed),PGB,1,0.7545,0.9398,0.711,0.7037,0.95,0.5588,0.9587,742.0,19.0
+chemberta_cross_attn_global_gated_bce,grid (1 seed),baseline,1,0.7398,0.9427,0.6571,0.6825,0.7414,0.6324,0.9483,734.0,15.0
+pgb_molformer_cross_attn_global_gated_asl,grid (1 seed),PGB,1,0.7324,0.9449,0.6349,0.6061,0.9677,0.4412,0.9496,735.0,16.0
+dmpnn_chemprop_cross_attn_cls_asl,grid (1 seed),baseline,1,0.7317,0.9371,0.6445,0.6549,0.8222,0.5441,0.9496,735.0,16.0
+pgb_chemberta_cross_attn_cls_asl,grid (1 seed),PGB,1,0.7242,0.9393,0.6688,0.6604,0.9211,0.5147,0.9535,738.0,12.0
+chemberta_cross_attn_global_gated_weighted_bce,grid (1 seed),baseline,1,0.7239,0.9249,0.65,0.6797,0.6118,0.7647,0.9367,725.0,16.0
+chemberta_cross_attn_cls_focal,grid (1 seed),baseline,1,0.7206,0.938,0.6236,0.6569,0.6522,0.6618,0.9393,727.0,16.0
+pgb_fixed_vector_maccs_concat_asl,grid (1 seed),PGB,1,0.7148,0.9356,0.6835,0.6903,0.8667,0.5735,0.9548,739.0,17.0
+chemberta_cross_attn_pairwise_asl,grid (1 seed),baseline,1,0.7136,0.9369,0.6182,0.6525,0.6301,0.6765,0.9367,725.0,16.0
+dmpnn_chemprop_concat_global_gated_asl,grid (1 seed),baseline,1,0.712,0.9092,0.6824,0.7,0.8077,0.6176,0.9535,738.0,16.0
+dmpnn_chemprop_concat_cls_asl,grid (1 seed),baseline,1,0.712,0.9091,0.6797,0.6949,0.82,0.6029,0.9535,738.0,16.0
+chemberta_cross_attn_pairwise_bce,grid (1 seed),baseline,1,0.7117,0.9287,0.6314,0.6615,0.6935,0.6324,0.9432,730.0,15.0
+pgb_fixed_vector_mol2vec_concat_asl,grid (1 seed),PGB,1,0.7109,0.9297,0.6425,0.661,0.78,0.5735,0.9483,734.0,16.0
+chemberta_cross_attn_global_gated_focal,grid (1 seed),baseline,1,0.7099,0.9423,0.6439,0.6719,0.7167,0.6324,0.9457,732.0,15.0
+dmpnn_chemprop_cross_attn_cls_bce,grid (1 seed),baseline,1,0.7076,0.9247,0.5958,0.623,0.7037,0.5588,0.9406,728.0,19.0
+chemberta_cross_attn_cls_weighted_bce,grid (1 seed),baseline,1,0.7045,0.9153,0.6286,0.662,0.6351,0.6912,0.938,726.0,16.0
+pgb_fixed_vector_pubchemfp_concat_asl,grid (1 seed),PGB,1,0.7044,0.9414,0.6425,0.661,0.78,0.5735,0.9483,734.0,14.0
+pgb_pretrained_gat_cross_attn_global_gated_asl,grid (1 seed),PGB,1,0.7037,0.9394,0.6037,0.6357,0.6721,0.6029,0.9393,727.0,18.0
+chemberta_concat_asl,grid (1 seed),baseline,1,0.7014,0.9303,0.608,0.6434,0.6133,0.6765,0.9341,723.0,15.0
+chemberta_cross_attn_global_gated_asl,grid (1 seed),baseline,1,0.6922,0.9359,0.5926,0.6294,0.6,0.6618,0.9315,721.0,13.0
+dmpnn_chemprop_cross_attn_global_gated_asl,grid (1 seed),baseline,1,0.6914,0.9235,0.6619,0.6667,0.8605,0.5441,0.9522,737.0,18.0
+pretrained_gat_cross_attn_global_gated_asl,grid (1 seed),baseline,1,0.6863,0.9391,0.6106,0.6182,0.8095,0.5,0.9457,732.0,17.0
+pgb_fixed_vector_morgan_concat_asl,grid (1 seed),PGB,1,0.6859,0.9239,0.6393,0.6552,0.7917,0.5588,0.9483,734.0,18.0
+dmpnn_chemprop_concat_cls_bce,grid (1 seed),baseline,1,0.6854,0.9254,0.6206,0.6512,0.6885,0.6176,0.9419,729.0,18.0
+dmpnn_chemprop_concat_global_gated_bce,grid (1 seed),baseline,1,0.6854,0.9254,0.6206,0.6512,0.6885,0.6176,0.9419,729.0,18.0
+dmpnn_chemprop_cross_attn_global_gated_bce,grid (1 seed),baseline,1,0.683,0.9241,0.6031,0.6389,0.6053,0.6765,0.9328,722.0,16.0
+pretrained_gat_cross_attn_global_gated_bce,grid (1 seed),baseline,1,0.6718,0.9361,0.5724,0.6111,0.5789,0.6471,0.9276,718.0,17.0
+pretrained_gat_cross_attn_cls_bce,grid (1 seed),baseline,1,0.6401,0.8966,0.5623,0.5766,0.7442,0.4706,0.9393,727.0,15.0
+pretrained_gat_cross_attn_cls_asl,grid (1 seed),baseline,1,0.6341,0.898,0.5557,0.5957,0.5753,0.6176,0.9264,717.0,16.0
+molformer_cross_attn_pairwise_asl,grid (1 seed),baseline,1,0.6295,0.9096,0.5252,0.5649,0.5873,0.5441,0.9264,717.0,17.0
+fixed_vector_pubchemfp_concat_focal,grid (1 seed),baseline,1,0.6088,0.8898,0.5665,0.5841,0.7333,0.4853,0.9393,727.0,11.0
+molformer_cross_attn_global_gated_bce,grid (1 seed),baseline,1,0.6083,0.8935,0.5109,0.5548,0.4943,0.6324,0.9109,705.0,16.0
+molformer_cross_attn_focal,grid (1 seed),baseline,1,0.6061,0.8801,0.5241,0.56,0.614,0.5147,0.9289,719.0,13.0
+fixed_vector_pubchemfp_concat_weighted_bce,grid (1 seed),baseline,1,0.5974,0.8887,0.4889,0.5342,0.4624,0.6324,0.9031,699.0,12.0
+fixed_vector_pubchemfp_concat_bce,grid (1 seed),baseline,1,0.5947,0.886,0.5002,0.5441,0.5441,0.5441,0.9199,712.0,12.0
+fixed_vector_pubchemfp_concat_asl,grid (1 seed),baseline,1,0.5945,0.8918,0.5191,0.547,0.6531,0.4706,0.9315,721.0,13.0
+molformer_cross_attn_global_gated_asl,grid (1 seed),baseline,1,0.5934,0.8494,0.5475,0.5437,0.8,0.4118,0.9393,727.0,16.0
+fixed_vector_maccs_concat_weighted_bce,grid (1 seed),baseline,1,0.5877,0.8608,0.553,0.5873,0.6379,0.5441,0.9328,722.0,15.0
+fixed_vector_maccs_concat_asl,grid (1 seed),baseline,1,0.5862,0.8736,0.5651,0.5968,0.6607,0.5441,0.9354,724.0,15.0
+molformer_cross_attn_pairwise_bce,grid (1 seed),baseline,1,0.5823,0.8804,0.5128,0.5512,0.5932,0.5147,0.9264,717.0,16.0
+molformer_cross_attn_weighted_bce,grid (1 seed),baseline,1,0.5693,0.8489,0.508,0.531,0.6667,0.4412,0.9315,721.0,16.0
+molformer_concat_asl,grid (1 seed),baseline,1,0.5629,0.8762,0.5025,0.5225,0.6744,0.4265,0.9315,721.0,17.0
+fixed_vector_maccs_concat_bce,grid (1 seed),baseline,1,0.5617,0.8584,0.4915,0.5379,0.5065,0.5735,0.9134,707.0,15.0
+fixed_vector_mol2vec_concat_asl,grid (1 seed),baseline,1,0.5526,0.8938,0.458,0.4959,0.566,0.4412,0.9212,713.0,14.0
+fixed_vector_mol2vec_concat_focal,grid (1 seed),baseline,1,0.5463,0.882,0.4902,0.4902,0.7353,0.3676,0.9328,722.0,19.0
+fixed_vector_morgan_concat_asl,grid (1 seed),baseline,1,0.5347,0.8663,0.4749,0.5229,0.4706,0.5882,0.9057,701.0,14.0
+fixed_vector_mol2vec_concat_weighted_bce,grid (1 seed),baseline,1,0.5281,0.8743,0.4696,0.4909,0.6429,0.3971,0.9276,718.0,13.0
+fixed_vector_morgan_concat_bce,grid (1 seed),baseline,1,0.5141,0.8566,0.4563,0.5037,0.5075,0.5,0.9134,707.0,13.0
+fixed_vector_morgan_concat_focal,grid (1 seed),baseline,1,0.5139,0.8584,0.4695,0.5042,0.5882,0.4412,0.9238,715.0,13.0
+fixed_vector_maccs_concat_focal,grid (1 seed),baseline,1,0.5099,0.8443,0.4346,0.4868,0.4405,0.5441,0.8992,696.0,15.0
+pretrained_gat_concat_cls_asl,grid (1 seed),baseline,1,0.5096,0.8812,0.4635,0.5109,0.5072,0.5147,0.9134,707.0,17.0
+pretrained_gat_concat_global_gated_asl,grid (1 seed),baseline,1,0.5095,0.8812,0.4635,0.5109,0.5072,0.5147,0.9134,707.0,17.0
+pretrained_gat_concat_global_gated_bce,grid (1 seed),baseline,1,0.5074,0.8809,0.4314,0.4818,0.4783,0.4853,0.9083,703.0,15.0
+pretrained_gat_concat_cls_bce,grid (1 seed),baseline,1,0.5063,0.8805,0.4314,0.4818,0.4783,0.4853,0.9083,703.0,15.0
+fixed_vector_mol2vec_concat_bce,grid (1 seed),baseline,1,0.4949,0.8468,0.422,0.4688,0.5,0.4412,0.9121,706.0,10.0
+fixed_vector_morgan_concat_weighted_bce,grid (1 seed),baseline,1,0.3745,0.8268,0.4016,0.4568,0.3936,0.5441,0.8863,686.0,11.0
+cmp_chemberta,encoder comparison (5 seeds),PGB,5,0.7250757363039977,0.9366772204632561,0.6375499098650964,0.6586142645459718,0.7550280988858679,0.5882352941176471,0.9467700258397933,732.8,17.6
+cmp_dmpnn,encoder comparison (5 seeds),PGB,5,0.7188476794126013,0.9424137643726047,0.6393480424229621,0.6577183194912262,0.7601521493370085,0.5911764705882352,0.9467700258397933,732.8,17.0
+cmp_gat,encoder comparison (5 seeds),PGB,5,0.6880246629973062,0.9337318780203299,0.6202833929261521,0.6399637718565151,0.7496372460066743,0.5647058823529412,0.944702842377261,731.2,18.2
+cmp_gin,encoder comparison (5 seeds),PGB,5,0.6625187302897007,0.9264205965672389,0.5764233648062431,0.5963781276139504,0.7122355422355422,0.5264705882352941,0.938501291989664,726.4,18.2
+cmp_maccs,encoder comparison (5 seeds),PGB,5,0.720330510652586,0.9399808365272456,0.6350411855749196,0.6300947145480791,0.8702902085874221,0.5029411764705882,0.9485788113695091,734.2,17.6
+cmp_mol2vec,encoder comparison (5 seeds),PGB,5,0.7076168159803811,0.9422887852024662,0.6164246930370184,0.6148090806996813,0.8484187367299288,0.48529411764705876,0.9467700258397933,732.8,16.2
+cmp_molformer,encoder comparison (5 seeds),PGB,5,0.6774890831459601,0.9352649558406931,0.5837875631620839,0.5753543263035242,0.8428773871740468,0.44411764705882356,0.9428940568475452,729.8,15.6
+cmp_morgan,encoder comparison (5 seeds),PGB,5,0.6988949277317673,0.9419430094984168,0.6262994448304152,0.6518822580645162,0.7277289377289378,0.5911764705882353,0.9444444444444444,731.0,17.0
+cmp_pubchemfp,encoder comparison (5 seeds),PGB,5,0.7052493915114698,0.9354065989001832,0.631016928869716,0.6355631900436738,0.8312456683370406,0.5205882352941177,0.9478036175710594,733.6,17.2
