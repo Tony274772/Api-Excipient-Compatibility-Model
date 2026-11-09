@@ -1,5 +1,6 @@
 {
   "family": "dmpnn",
+  "seed_run": "dmpnn_seed42",
   "label": "D-MPNN (CheMeleon, frozen) + cross-attention, CLS pooling",
   "representation_dim": 128,
   "encoder": "dmpnn_chemprop",
@@ -12,18 +13,18 @@
   "epochs_trained": 11,
   "best_epoch": 4,
   "max_epochs": 40,
-  "threshold_from_val": 0.752,
+  "threshold_from_val": 0.7000000000000001,
   "tnr_floor": 0.97,
   "data": {
-    "train": "C:\\Users\\pardhu\\Desktop\\ARES\\final_project\\data\\splits\\api_cluster\\train.csv",
-    "val": "C:\\Users\\pardhu\\Desktop\\ARES\\final_project\\data\\splits\\api_cluster\\val.csv",
-    "heldout": "C:\\Users\\pardhu\\Desktop\\ARES\\final_project\\data\\heldout\\held_out_test_set.csv",
+    "train": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/train.csv",
+    "val": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/val.csv",
+    "heldout": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/heldout/held_out_test_set.csv",
     "rows": {
       "train": 2770,
       "val": 774,
       "heldout": 22
     }
   },
-  "minutes": 8.01,
-  "finished": "2026-11-05T13:52:32"
+  "minutes": 2.81,
+  "finished": "2026-11-09T05:46:48"
 }
