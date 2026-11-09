@@ -616,3 +616,62 @@ has been changed. The options, in order of cost:
 
 Until this is decided, every chemberta cell in the grid uses the tokenizer as it is, so chemberta
 rows are at least consistent with each other and with the 45 completed runs.
+
+---
+
+# APPENDIX C — What the encoders cannot see (from the pre-training audit)
+
+`audit_reps.py` classifies every case where two molecules receive a byte-identical vector. None of
+these wastes a run. All of them bound what a column can possibly resolve, and two are squarely
+about the chemistry this project is predicting.
+
+## 1. The graph encoders cannot tell an acid from its salt
+
+GIN and GAT give **identical** embeddings to each of these pairs:
+
+| | |
+|---|---|
+| `B(O)(O)O` / `B([O-])([O-])[O-]` | boric acid / borate |
+| `OS(=O)(=O)O` / `[O-]S(=O)(=O)[O-]` | sulfuric acid / sulfate |
+| citric acid / citrate | 7 such pairs for GIN, 5 for GAT |
+| tartaric acid / tartrate, maleic acid / maleate | |
+| `[Fe+2]` / `[Fe+3]`, `[Cu+2]` / `[Cu]`, `[Ag+]` / `[Ag]` | oxidation state invisible |
+
+Confirmed by construction: neutralising every formal charge makes each pair identical, so the
+collision is *entirely* the charge state. `PretrainAtomFeaturizer` does not carry formal charge
+into the representation these two encoders were pretrained with.
+
+For API–excipient compatibility this is not a detail. Free acid versus salt form is one of the
+distinctions the task is about. Any result for GIN or GAT is a result obtained while blind to it.
+
+## 2. ChemBERTa additionally cannot see stereochemistry or metals
+
+Already in Appendix B from the tokenizer side; the audit confirms it from the output side. Sorbitol
+and its stereoisomer collide; levetiracetam and its racemate collide; `[Ag+]`, `[Ag]`, `[Al]`,
+`[Hg]`, `[K]` and `[Li]` all share **one** vector; and silver nitrate collides with potassium
+nitrate, because the counterion token is dropped and only the nitrate survives.
+
+MoLFormer and D-MPNN have **no** unexplained collisions — MoLFormer separates all 861 identities.
+
+## 3. A data-hygiene issue in the source CSVs
+
+Six molecules are spelled twice, differing only by a leading or trailing space:
+` C1=CC=C(C=C1)O` and `C1=CC=C(C=C1)O`, `...[Na]` and `...[Na] `. RDKit parses both the same way,
+so no model is misled, but the dataset has 867 SMILES strings for 861 distinct chemical identities.
+This is why the shuffled controls derange over canonical identity rather than over strings.
+
+## 4. Resolution limits of the fingerprints
+
+Expected, reported for completeness: MACCS collides 28 groups of genuinely different molecules
+(167 bits for all of chemistry), PubChem 16, Morgan 7, Mol2vec 3. PubChem also has **235 of 881
+bits** that are never set on this dataset, costing 7,520 secondary parameters that cannot carry
+information; MACCS has 5 such bits. D-MPNN has 102 of 2048 channels that never vary.
+
+## Why none of this blocks the sweep
+
+The audit fails only on what would make a run's numbers **wrong**: a missing vector, a non-finite
+value, an all-zero vector, a wrong width, scaling not applied, or a broken derangement. A collision
+makes a column less informative, not incorrect, and every one above has a named cause. Calibrating
+it the other way — which the first two versions of this script did — produced an audit that
+reported 14 "problems" nobody could act on, immediately before a 25-hour sweep. That is worse than
+no audit, because it trains you to pass `--force`.

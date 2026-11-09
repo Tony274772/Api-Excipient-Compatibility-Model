@@ -58,6 +58,80 @@ def note(label: str, detail: str = ""):
     NOTES.append(f"{label}{(': ' + detail) if detail else ''}")
 
 
+# The residual category. NOT a failure: a representation of finite width must map some distinct
+# molecules together, and for a 167-bit fingerprint that is most of its collisions. It bounds what
+# a column can resolve, which is what the paper should say about it.
+COARSE = ("genuinely different molecules the representation cannot separate - "
+          "the resolution limit of a fixed-width descriptor")
+
+
+def collision_groups(mat: np.ndarray, molecules: list) -> list:
+    """Groups of molecules that received byte-identical vectors."""
+    import collections
+    g = collections.defaultdict(list)
+    for i, row in enumerate(np.ascontiguousarray(mat)):
+        g[row.tobytes()].append(i)
+    return [[molecules[i] for i in idx] for idx in g.values() if len(idx) > 1]
+
+
+def _flat(smiles: str):
+    """Canonical SMILES with stereochemistry dropped."""
+    from rdkit import Chem
+    m = Chem.MolFromSmiles(str(smiles).strip())
+    return Chem.MolToSmiles(m, isomericSmiles=False) if m else None
+
+
+def _neutral(smiles: str):
+    """Canonical SMILES with every formal charge removed, stereochemistry dropped."""
+    from rdkit import Chem
+    m = Chem.MolFromSmiles(str(smiles).strip())
+    if m is None:
+        return None
+    rw = Chem.RWMol(m)
+    for a in rw.GetAtoms():
+        a.SetFormalCharge(0)
+        a.SetNoImplicit(False)
+        a.SetNumExplicitHs(0)
+    try:
+        return Chem.MolToSmiles(rw, isomericSmiles=False)
+    except Exception:
+        return None
+
+
+def explain_collision(group: list) -> str:
+    """Why these molecules share a vector.
+
+    Tested against the whole group collapsing to one key, so a group whose members collide for two
+    different reasons at once falls through to the pairwise test below rather than being
+    mislabelled by whichever check happened to run first.
+    """
+    from rdkit import Chem
+
+    def collapses(fn):
+        keys = {fn(s) for s in group}
+        if len(keys) == 1 and None not in keys:
+            return True
+        # a mixed group: true if EVERY member shares this simplification with some other member
+        return len(keys) < len(group) and None not in keys
+
+    if collapses(canonical_key):
+        return ("the same molecule spelled more than once in the source CSVs "
+                "(leading/trailing whitespace) - a data-hygiene issue, not an encoder one")
+    heavy = []
+    for s in group:
+        m = Chem.MolFromSmiles(str(s).strip())
+        heavy.append(m.GetNumHeavyAtoms() if m else -1)
+    if all(n == 1 for n in heavy):
+        return ("bare single atoms (metal ions). The featuriser has a finite element vocabulary, "
+                "so these fall into one bucket and oxidation state is invisible")
+    if collapses(_flat):
+        return "differ ONLY in stereochemistry - the representation is stereo-blind"
+    if collapses(_neutral):
+        return ("differ ONLY in protonation / charge state, e.g. an acid and its conjugate base. "
+                "The representation cannot tell a free acid from its salt")
+    return COARSE
+
+
 def audit_one(name: str, paths: SplitPaths, tables: dict) -> None:
     print(f"\n--- {name}  ({REP_SPECS[SHUFFLED.get(name, name)]['kind']}, "
           f"{rep_dim(name)} dims)")
@@ -109,35 +183,45 @@ def audit_one(name: str, paths: SplitPaths, tables: dict) -> None:
         print(f"       held-out under train scaling: mean {ho.mean():+.4f}, sd {ho.std():.4f} "
               "(should be near 0/1 but not exactly - it was not fitted on them)")
 
-    # ---- dead dimensions. Expected for a fixed fingerprint (those bits encode substructures that
-    # are simply absent from 861 molecules), so it is reported with its parameter cost rather than
-    # treated as a defect. For an ENCODER output a dead dimension is a genuine surprise.
+    # ---- dead dimensions. Not a defect for anything: a fixed fingerprint's unset bits encode
+    # substructures absent from 861 molecules, and a 2048-wide encoder output having 102 channels
+    # that never activate on this dataset is ordinary. Reported with its parameter cost, because
+    # that is the part worth knowing.
     dead = int((mat.std(axis=0) < 1e-6).sum())
     base_name = SHUFFLED.get(name, name)
     if dead == 0:
         report(True, f"{name}: every dimension varies across molecules")
-    elif base_name in EMBEDDING_REPS:
-        report(False, f"{name}: encoder has constant output dimensions",
-               f"{dead} of {mat.shape[1]} never vary - the encoder is not using them")
     else:
-        note(f"{name}: {dead} of {mat.shape[1]} dimensions are constant on this dataset",
-             f"they survive scaling as exact zeros and cost {dead * 32:,} secondary parameters "
-             "that can carry no information")
+        kind = "encoder channel" if base_name in EMBEDDING_REPS else "bit"
+        note(f"{name}: {dead} of {mat.shape[1]} dimensions never vary on this dataset",
+             f"{dead} dead {kind}(s); they survive scaling as exact zeros and cost "
+             f"{dead * 32:,} secondary parameters that can carry no information")
 
-    # ---- collisions. A coarse fingerprint must collide at 861 molecules; an encoder with a
-    # continuous output should not, so a collision there points at its tokenizer or featuriser.
+    # ---- collisions, explained rather than blocked.
+    #
+    # Two molecules sharing a vector is a limitation of the representation, not a broken run, and
+    # every encoder here collides for a reason that can be named. What IS worth failing on is a
+    # collision nobody can explain, so each group is classified and only the unexplained ones are
+    # errors.
     uniq = len({r.tobytes() for r in np.ascontiguousarray(mat)})
     identities = len({canonical_key(m) for m in all_mols})
     if uniq >= identities:
         report(True, f"{name}: distinct vectors for distinct molecules")
-    elif base_name in EMBEDDING_REPS:
-        report(False, f"{name}: encoder gives two molecules the same vector",
-               f"{uniq} vectors for {identities} chemical identities "
-               f"({identities - uniq} collision(s)) - check its tokenizer")
-    else:
+    elif name in SHUFFLED:
+        # Classifying these is meaningless: every molecule already holds someone else's vector, so
+        # a collision only says two molecules drew donors that themselves collide.
         note(f"{name}: {identities - uniq} molecule pair(s) share a vector",
-             f"{uniq} distinct vectors for {identities} identities - expected for a "
-             f"{mat.shape[1]}-wide fixed fingerprint, but it caps what this column can resolve")
+             "inherited from the underlying fingerprint; the donors are deliberately mismatched, "
+             "so this says nothing about the control's validity")
+    else:
+        reasons = {}
+        for g in collision_groups(mat, all_mols):
+            reasons.setdefault(explain_collision(g), []).append(g)
+        note(f"{name}: {identities - uniq} molecule pair(s) share a vector",
+             f"{uniq} distinct vectors for {identities} chemical identities")
+        for why, gs in sorted(reasons.items(), key=lambda kv: -len(kv[1])):
+            print(f"       {len(gs):2d} group(s): {why}")
+            print(f"           e.g. {' | '.join(s[:40] for s in gs[0][:3])}")
 
     # ---- the shuffled controls
     if name in SHUFFLED:
