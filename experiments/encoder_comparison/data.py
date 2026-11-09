@@ -1,8 +1,8 @@
 """Data for the comparison: the ARES split, and one representation per family.
 
 The split is the one the shipped ARES model was trained on (train 2770 / val 774) and the
-external test set is the 22 held-out pairs. Both are read from the ARES project folder; pass
---data-root to point somewhere else.
+external test set is the 22 held-out pairs. Both are read from final_project/data in this
+repository; pass --data-root to point somewhere else.
 """
 
 import os
@@ -13,10 +13,12 @@ import pandas as pd
 from src.dataset import PGBDataset
 from src.features import maccs_bits, morgan_bits
 
-# Default: the ARES project folder, next to this repository.
+# Default: this repository's final_project/data. Its api_cluster train/val and the 22 held-out pairs
+# are byte-identical (same md5) to the ARES copy these runs originally read from
+# (<repo>/../../ARES/final_project/data), which does not exist on other machines such as the DGX.
 _HERE = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(os.path.dirname(_HERE))
-DEFAULT_DATA_ROOT = os.path.abspath(os.path.join(PROJECT_ROOT, "..", "..", "ARES", "final_project", "data"))
+DEFAULT_DATA_ROOT = os.path.join(PROJECT_ROOT, "final_project", "data")
 
 # Precomputed vector tables for the lookup families (live in this repository).
 VECTOR_FILES = {

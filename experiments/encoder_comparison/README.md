@@ -52,8 +52,8 @@ python -m experiments.encoder_comparison.collect --reveal-heldout
 ```
 
 Useful flags: `--seed N` (default 42), `--epochs N` (default 40, same for all),
-`--overwrite` to rerun a family, `--data-root <folder>` if the ARES project is not next to this
-repository, `--family <name>` for one of
+`--overwrite` to rerun a family, `--data-root <folder>` to read the split from somewhere other
+than `final_project/data`, `--family <name>` for one of
 `morgan, maccs, pubchemfp, mol2vec, molformer, chemberta, gin, gat, dmpnn`.
 
 ## What is held fixed

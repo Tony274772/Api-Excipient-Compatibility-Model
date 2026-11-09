@@ -259,7 +259,7 @@ def run_family(family: str, paths: SplitPaths, seed: int, device_str: str, epoch
 def main():
     p = argparse.ArgumentParser(description="Encoder-family comparison under one fixed protocol.")
     p.add_argument("--family", default="all", help=f"one of: {', '.join(ORDER)}, or 'all'")
-    p.add_argument("--data-root", default=None, help="folder holding splits/ and heldout/ (default: the ARES project)")
+    p.add_argument("--data-root", default=None, help="folder holding splits/ and heldout/ (default: final_project/data in this repo)")
     p.add_argument("--split", default="api_cluster", help="split folder name under <data-root>/splits/")
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--device", default=None, help="cuda | cpu (default: cuda if available). Use ONE device for all runs.")
