@@ -1,0 +1,25 @@
+data/grid_8020 with reagent rows removed (experiments/reagent_ablation/reagents.py)
+
+train  2770 ->  2714 rows | incompatible  276 ->  234 | removed 56 rows (42 incompatible = 15.2% of this split's incompatible)
+val     774 ->   758 rows | incompatible   68 ->   55 | removed 16 rows (13 incompatible = 19.1% of this split's incompatible)
+test     22 held-out pairs, copied unchanged (no reagent in it)
+
+removed per reagent:
+                        rows  incompatible
+reagent                                   
+aluminium (metal)          4             4
+carbonate ion              2             2
+formaldehyde               4             4
+glyceraldehyde             2             2
+hydrogen peroxide          4             3
+ozone                      8             8
+phosphate ion              3             3
+potassium hydroxide       16             3
+potassium nitrate          1             1
+potassium permanganate     9             9
+sodium hydroxide           9             6
+sulfate ion                2             2
+sulfuric acid              6             6
+zinc (metal)               2             2
+
+reagent CIDs: 516875 potassium permanganate, 24823 ozone, 1118 sulfuric acid, 14798 sodium hydroxide, 14797 potassium hydroxide, 784 hydrogen peroxide, 712 formaldehyde, 24434 potassium nitrate, 5359268 aluminium (metal), 23994 zinc (metal), 751 glyceraldehyde, 1061 phosphate ion, 1117 sulfate ion, 19660 carbonate ion

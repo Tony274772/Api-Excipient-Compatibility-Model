@@ -1,0 +1,73 @@
+API_CID,Excipient_CID,Outcome1,API_Smiles,Excipient_Smiles,cluster_id,split,reagent
+196,24434,1,C(CCC(=O)O)CC(=O)O,[N+](=O)([O-])[O-].[K+],511,train,potassium nitrate
+196,516875,1,C(CCC(=O)O)CC(=O)O,[O-][Mn](=O)(=O)=O.[K+],511,train,potassium permanganate
+196,24823,1,C(CCC(=O)O)CC(=O)O,[O-][O+]=O,511,train,ozone
+243,14798,1,C1=CC=C(C=C1)C(=O)O,[OH-].[Na+],510,train,sodium hydroxide
+244,516875,1,C1=CC=C(C=C1)CO,[O-][Mn](=O)(=O)=O.[K+],509,train,potassium permanganate
+244,24823,1,C1=CC=C(C=C1)CO,[O-][O+]=O,509,train,ozone
+244,1118,1,C1=CC=C(C=C1)CO,OS(=O)(=O)O,509,train,sulfuric acid
+2345,516875,1,C1=CC=C(C=C1)COC(=O)C2=CC=CC=C2,[O-][Mn](=O)(=O)=O.[K+],494,train,potassium permanganate
+2345,24823,1,C1=CC=C(C=C1)COC(=O)C2=CC=CC=C2,[O-][O+]=O,494,train,ozone
+2345,14797,1,C1=CC=C(C=C1)COC(=O)C2=CC=CC=C2,[OH-].[K+],494,train,potassium hydroxide
+2345,14798,1,C1=CC=C(C=C1)COC(=O)C2=CC=CC=C2,[OH-].[Na+],494,train,sodium hydroxide
+2450,5359268,1,C(C(CO)([N+](=O)[O-])Br)O,[Al],493,train,aluminium (metal)
+3026,14798,1,CCCCOC(=O)C1=CC=CC=C1C(=O)OCCCC,[OH-].[Na+],480,train,sodium hydroxide
+3026,1118,1,CCCCOC(=O)C1=CC=CC=C1C(=O)OCCCC,OS(=O)(=O)O,480,train,sulfuric acid
+3749,712,1,CCCCC1=NC2(CCCC2)C(=O)N1CC3=CC=C(C=C3)C4=CC=CC=C4C5=NNN=N5,C=O,461,train,formaldehyde
+6116,516875,1,CC(=O)[O-].CC(=O)[O-].[Ca+2],[O-][Mn](=O)(=O)=O.[K+],412,train,potassium permanganate
+6116,24823,1,CC(=O)[O-].CC(=O)[O-].[Ca+2],[O-][O+]=O,412,train,ozone
+6116,784,1,CC(=O)[O-].CC(=O)[O-].[Ca+2],OO,412,train,hydrogen peroxide
+7628,14798,1,B(O)(O)O,[OH-].[Na+],406,train,sodium hydroxide
+8753,5359268,1,CCCCCCCCCCCC[N+](C)(C)CC1=CC=CC=C1.[Cl-],[Al],405,train,aluminium (metal)
+8753,784,1,CCCCCCCCCCCC[N+](C)(C)CC1=CC=CC=C1.[Cl-],OO,405,train,hydrogen peroxide
+13144,1061,1,CC(C(=O)[O-])O.CC(C(=O)[O-])O.[Ca+2],[O-]P(=O)([O-])[O-],395,train,phosphate ion
+14250,14798,1,CCCCCCCCCCCCCC[N+](C)(C)C.[Br-],[OH-].[Na+],394,train,sodium hydroxide
+24497,5359268,1,[O-]S(=O)(=O)[O-].[Ca+2],[Al],385,train,aluminium (metal)
+25517,14797,1,[NH4+].[Cl-],[OH-].[K+],383,train,potassium hydroxide
+25517,1118,1,[NH4+].[Cl-],OS(=O)(=O)O,383,train,sulfuric acid
+31239,516875,1,CCCCCCCCCCCCCCCC[N+]1=CC=CC=C1.[Cl-],[O-][Mn](=O)(=O)=O.[K+],379,train,potassium permanganate
+31239,24823,1,CCCCCCCCCCCCCCCC[N+]1=CC=CC=C1.[Cl-],[O-][O+]=O,379,train,ozone
+31404,784,1,CC1=CC(=C(C(=C1)C(C)(C)C)O)C(C)(C)C,OO,378,train,hydrogen peroxide
+62698,516875,1,C(C1C(C(C(C(O1)OC2C(OC(C(C2O)O)OC3C(OC(C(C3O)O)O)CO)CO)O)O)O)O,[O-][Mn](=O)(=O)=O.[K+],349,train,potassium permanganate
+62698,24823,1,C(C1C(C(C(C(O1)OC2C(OC(C(C2O)O)OC3C(OC(C(C3O)O)O)CO)CO)O)O)O)O,[O-][O+]=O,349,train,ozone
+62937,14797,0,CC(C)NCC(COC1=CC=C(C=C1)CCOC)O.CC(C)NCC(COC1=CC=C(C=C1)CCOC)O.C(CC(=O)O)C(=O)O,[OH-].[K+],346,train,potassium hydroxide
+63013,784,0,CN(C)CC1CCCCC1(C2=CC(=CC=C2)OC)O.Cl,OO,344,train,hydrogen peroxide
+71424,14797,0,CCOC1=CC=CC=C1OCC2CNCCO2.Cl,[OH-].[K+],334,train,potassium hydroxide
+107970,14797,0,CCCCCCCCC1=CC=C(C=C1)CCC(CO)(CO)N,[OH-].[K+],321,train,potassium hydroxide
+148195,14797,0,C1CN(CCC1CC(=O)N2CCC(CC2)C3C4=C(CCC5=C3N=CC(=C5)Br)C=C(C=C4Br)Cl)C(=O)N,[OH-].[K+],305,train,potassium hydroxide
+214350,712,1,COC1=C(C=C(C=C1)Cl)[C@]2(C3=C(C=C(C=C3)C(F)(F)F)NC2=O)F,C=O,285,train,formaldehyde
+5311083,14798,0,CC1=CN=C(C(=C1OC)C)CS(=O)C2=NC3=C([N-]2)C=CC(=C3)OC.CC1=CN=C(C(=C1OC)C)CS(=O)C2=NC3=C([N-]2)C=CC(=C3)OC.[Mg+2],[OH-].[Na+],4,train,sodium hydroxide
+5362065,14797,0,C=CC1=C(N2C(C(C2=O)NC(=O)C(=NOCC(=O)O)C3=CSC(=N3)N)SC1)C(=O)O,[OH-].[K+],5,train,potassium hydroxide
+5486971,14797,0,CC(C)CC(CC(=O)O)CN,[OH-].[K+],223,train,potassium hydroxide
+6093208,1118,1,[OH-].[OH-].[Ca+2],OS(=O)(=O)O,221,train,sulfuric acid
+6328154,5359268,1,CC(=O)O.C(C(C(C(C(C=O)O)O)O)O)O.[Na],[Al],218,train,aluminium (metal)
+6328154,23994,1,CC(=O)O.C(C(C(C(C(C=O)O)O)O)O)O.[Na],[Zn],218,train,zinc (metal)
+9552079,712,1,C1=CC(=CC=C1NC(=NC(=NCCCCCCN=C(N)N=C(N)NC2=CC=C(C=C2)Cl)N)N)Cl,C=O,202,train,formaldehyde
+10176082,1061,1,[OH-].[OH-].[OH-].[Al+3],[O-]P(=O)([O-])[O-],174,train,phosphate ion
+10176082,1117,1,[OH-].[OH-].[OH-].[Al+3],[O-]S(=O)(=O)[O-],174,train,sulfate ion
+10176082,19660,1,[OH-].[OH-].[OH-].[Al+3],C(=O)([O-])[O-],174,train,carbonate ion
+11626560,14797,0,CC(C1=C(C=CC(=C1Cl)F)Cl)OC2=C(N=CC(=C2)C3=CN(N=C3)C4CCNCC4)N,[OH-].[K+],150,train,potassium hydroxide
+11644097,14797,0,C1C(C(C(C(N1)CO)O)O)O.Cl,[OH-].[K+],149,train,potassium hydroxide
+14055602,516875,1,COC1C(OC(C(C1O)O)OC2C(OC(C(C2O)O)OC)CO)CO,[O-][Mn](=O)(=O)=O.[K+],141,train,potassium permanganate
+14055602,24823,1,COC1C(OC(C(C1O)O)OC2C(OC(C(C2O)O)OC)CO)CO,[O-][O+]=O,141,train,ozone
+16158208,14797,0,CC1C(=O)NC2CSSCC3C(=O)NC(C(=O)NC(C(=O)NC(CSSCC(NC(=O)CNC(=O)C(NC2=O)C(C)O)C(=O)NC(CC4=CC=C(C=C4)O)C(=O)O)C(=O)NC(CSSCC(C(=O)N3)N)C(=O)NC(C(=O)N5CCCC5C(=O)N1)CC(=O)N)CC6=CC=C(C=C6)O)CCC(=O)O,[OH-].[K+],133,train,potassium hydroxide
+23699544,14798,0,CCOC1=NC2=CC=CC(=C2N1CC3=CC=C(C=C3)C4=CC=CC=C4C5=NOC(=O)[N-]5)C(=O)OCC6=C(OC(=O)O6)C.[K+],[OH-].[Na+],122,train,sodium hydroxide
+44630049,14798,1,C1(C(C(OC(C1O)OC2C(C(C(OC2C(=O)O)OC3C(C(C(OC3C(=O)[O-])O)O)O)O)O)C(=O)[O-])O)O.[Ca+2],[OH-].[Na+],94,train,sodium hydroxide
+134436906,14797,0,CC(C)(COC1=CN2C(=C(C=N2)C#N)C(=C1)C3=CN=C(C=C3)N4CC5CC(C4)N5CC6=CN=C(C=C6)OC)O,[OH-].[K+],28,train,potassium hydroxide
+135565082,14797,0,CN1C(=NC=N1)C2C(NC3=CC(=CC4=C3C2=NNC4=O)F)C5=CC=C(C=C5)F,[OH-].[K+],20,train,potassium hydroxide
+753,516875,1,C(C(CO)O)O,[O-][Mn](=O)(=O)=O.[K+],507,val,potassium permanganate
+1103,751,1,C(CCNCCCN)CNCCCN,C(C(C=O)O)O,506,val,glyceraldehyde
+2369,751,1,CC(C)NCC(COC1=CC=C(C=C1)CCOCC2CC2)O,C(C(C=O)O)O,10,val,glyceraldehyde
+4771,712,1,CC(C)(CC1=CC=CC=C1)N,C=O,439,val,formaldehyde
+10112,1118,1,C(=O)([O-])[O-].[Ca+2],OS(=O)(=O)O,398,val,sulfuric acid
+56959,14798,0,CC1=C(C(=CC=C1)C)NC(=O)CN2CCN(CC2)CC(COC3=CC=CC=C3OC)O,[OH-].[Na+],361,val,sodium hydroxide
+5284359,1061,1,[Cl-].[Cl-].[Ca+2],[O-]P(=O)([O-])[O-],238,val,phosphate ion
+5284359,1117,1,[Cl-].[Cl-].[Ca+2],[O-]S(=O)(=O)[O-],238,val,sulfate ion
+5284359,23994,1,[Cl-].[Cl-].[Ca+2],[Zn],238,val,zinc (metal)
+5284359,19660,1,[Cl-].[Cl-].[Ca+2],C(=O)([O-])[O-],238,val,carbonate ion
+6850754,516875,1,COC1C(C(C(OC1C(=O)O)OC2C(C(C(OC2C(=O)O)OC)O)O)O)O,[O-][Mn](=O)(=O)=O.[K+],209,val,potassium permanganate
+6850754,24823,1,COC1C(C(C(OC1C(=O)O)OC2C(C(C(OC2C(=O)O)OC)O)O)O)O,[O-][O+]=O,209,val,ozone
+6850754,14797,1,COC1C(C(C(OC1C(=O)O)OC2C(C(C(OC2C(=O)O)OC)O)O)O)O,[OH-].[K+],209,val,potassium hydroxide
+6850754,1118,1,COC1C(C(C(OC1C(=O)O)OC2C(C(C(OC2C(=O)O)OC)O)O)O)O,OS(=O)(=O)O,209,val,sulfuric acid
+56844015,14797,0,B1(OC(=O)C(O1)(CC(=O)O)CC(=O)O)C(CC(C)C)NC(=O)CNC(=O)C2=C(C=CC(=C2)Cl)Cl,[OH-].[K+],63,val,potassium hydroxide
+129073603,14797,0,CC1=CC(=NN1)NC2=NC(=NC(=C2)C)C3CCC(CC3)(C(=O)NC(C)C4=CN=C(C=C4)N5C=C(C=N5)F)OC,[OH-].[K+],30,val,potassium hydroxide
