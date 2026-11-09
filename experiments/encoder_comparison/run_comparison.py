@@ -112,7 +112,11 @@ def build_model(config: Config, family: str, encoder) -> PGBCompatibilityModel:
     """PGB model whose towers take exactly one representation."""
     s = spec(family)
     struct_dim = config.proj_dim if s["kind"] == "seq" else 0
-    towers = [ComparisonTower(struct_dim, s["primary_dim"], config.pgb_tower_dim, config.proj_dropout)
+    # Keyword arguments on purpose: ComparisonTower gained a secondary_dim parameter for the grid,
+    # and these 9 families must keep getting secondary_dim=0 whatever the signature does next.
+    towers = [ComparisonTower(struct_dim=struct_dim, primary_dim=s["primary_dim"],
+                              secondary_dim=0, pgb_dim=config.pgb_tower_dim,
+                              dropout=config.proj_dropout)
               for _ in range(2)]
     model = PGBCompatibilityModel(config, encoder, towers[0], towers[1])
     model.head.init_bias(global_rate=config.positive_prior, pgb_prior_offset=config.pgb_prior_offset)

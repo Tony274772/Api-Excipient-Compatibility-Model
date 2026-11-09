@@ -192,6 +192,26 @@ def pgb_train(model, train_loader, val_loader, config, device):
     best_ckpt_path = os.path.join(config.checkpoint_dir, "best_model.pt")
     history = {"train_loss": [], "val_pr_auc": [], "lr": []}
 
+    # Optional slim checkpoints: skip the frozen pretrained encoder, whose weights are identical
+    # to the public ones in every run. molformer is 173 MB and dmpnn 39 MB per run otherwise,
+    # about 14 GB over the 505-run grid. Everything NOT under the `encoder.` prefix is saved, so
+    # trainable parameters and the buffers of trainable modules are both kept.
+    save_trainable_only = bool(getattr(config, "pgb_save_trainable_only", False))
+    if save_trainable_only:
+        thawed = [n for n, p in model.named_parameters()
+                  if n.startswith("encoder.") and p.requires_grad]
+        if thawed:
+            raise RuntimeError(
+                "pgb_save_trainable_only drops everything under `encoder.`, but "
+                f"{len(thawed)} encoder parameter(s) require grad and would be lost "
+                f"(e.g. {thawed[:3]}). Freeze the encoder or save the full checkpoint.")
+
+    def _state_to_save():
+        sd = model.state_dict()
+        if not save_trainable_only:
+            return sd
+        return {k: v for k, v in sd.items() if not k.startswith("encoder.")}
+
     for epoch in range(1, config.pgb_max_epochs + 1):
         model.train()
         total_loss = 0.0
@@ -229,8 +249,9 @@ def pgb_train(model, train_loader, val_loader, config, device):
             best_pr_auc = val_pr_auc
             best_epoch  = epoch
             patience_counter = 0
-            torch.save({"epoch": epoch, "model_state_dict": model.state_dict(),
-                        "val_pr_auc": val_pr_auc, "config": config}, best_ckpt_path)
+            torch.save({"epoch": epoch, "model_state_dict": _state_to_save(),
+                        "val_pr_auc": val_pr_auc, "config": config,
+                        "trainable_only": save_trainable_only}, best_ckpt_path)
         else:
             patience_counter += 1
             if patience_counter >= config.pgb_early_stop_patience:
@@ -239,7 +260,18 @@ def pgb_train(model, train_loader, val_loader, config, device):
 
     print(f"\nPGB restoring best model from epoch {best_epoch} (PR-AUC={best_pr_auc:.4f})")
     ckpt = torch.load(best_ckpt_path, map_location=device, weights_only=False)
-    model.load_state_dict(ckpt["model_state_dict"])
+    if ckpt.get("trainable_only", False):
+        # The frozen encoder is missing from the file on purpose; it is already loaded in `model`
+        # from its pretrained checkpoint and was never updated, so strict=False restores exactly
+        # the layers that changed. Anything unexpected IN the file is still an error.
+        missing, unexpected = model.load_state_dict(ckpt["model_state_dict"], strict=False)
+        not_encoder = [k for k in missing if not k.startswith("encoder.")]
+        if not_encoder or unexpected:
+            raise RuntimeError(
+                f"slim checkpoint does not match the model: missing {not_encoder[:5]}, "
+                f"unexpected {list(unexpected)[:5]}")
+    else:
+        model.load_state_dict(ckpt["model_state_dict"])
     return model, history
 
 

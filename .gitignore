@@ -40,3 +40,12 @@ desktop.ini
 # Logs
 *.log
 wandb/
+
+# Encoder grid: regenerated artifacts, not results.
+# _embeddings is written by precompute_embeddings.py and _lookup by data.build_vector_lookup;
+# both are derived from files already in the repository and must be rebuilt on whichever machine
+# runs the sweep. Committing a CPU-built table and then reading it on the DGX is exactly the kind
+# of silent mismatch this grid is meant to avoid.
+experiments/results/encoder_grid/_embeddings/
+experiments/results/encoder_grid/_lookup/
+experiments/results/encoder_comparison/_lookup/

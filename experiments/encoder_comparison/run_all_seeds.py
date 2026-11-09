@@ -29,7 +29,25 @@ RUNNER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "run_compariso
 
 
 def is_done(family: str, seed: int) -> bool:
-    return os.path.exists(os.path.join(RESULTS_ROOT, run_name(family, seed), "val_metrics.json"))
+    """A run counts as done only when its LAST outputs exist, not its first.
+
+    run_comparison.py writes val_metrics.json first and the sealed held-out files last, so keying
+    on val_metrics.json alone marks a run killed in between as finished forever, with no held-out
+    metrics. The grid runner (run_grid.py) uses an explicit COMPLETE sentinel; this older script
+    stays as the record of how the 45 `none`-column runs were produced, so it only gains the
+    stricter check.
+    """
+    run = run_name(family, seed)
+    selection = os.path.join(RESULTS_ROOT, run)
+    sealed = os.path.join(RESULTS_ROOT, "_heldout_sealed", run)
+    required = [
+        os.path.join(selection, "val_metrics.json"),
+        os.path.join(selection, "run_info.json"),
+        os.path.join(selection, "predictions_val.csv"),
+        os.path.join(sealed, "heldout_metrics.json"),
+        os.path.join(sealed, "predictions_heldout.csv"),
+    ]
+    return all(os.path.exists(p) for p in required)
 
 
 def main():
