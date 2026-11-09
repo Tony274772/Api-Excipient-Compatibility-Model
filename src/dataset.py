@@ -200,11 +200,18 @@ class PGBNormStats:
     """
 
     def __init__(self, mean: np.ndarray, std: np.ndarray,
-                 salt_mean: np.ndarray = None, salt_std: np.ndarray = None):
+                 salt_mean: np.ndarray = None, salt_std: np.ndarray = None, salt_drop_water: bool = False):
         self.mean = mean
         self.std  = std
         self.salt_mean = salt_mean
         self.salt_std  = salt_std
+        # stored with the stats so a checkpoint always gets the salt context it was trained with
+        self.salt_drop_water = bool(salt_drop_water)
+
+    def salt(self, smiles: str) -> np.ndarray:
+        """Salt context for one SMILES, built and (if stats were stored) z-scored as at training."""
+        from src.features import salt_context as _salt
+        return self.normalize_salt(_salt(smiles, drop_water=self.salt_drop_water))
 
     @property
     def normalizes_salt(self) -> bool:
@@ -220,7 +227,8 @@ class PGBNormStats:
         return (x - self.salt_mean) / (self.salt_std + 1e-8)
 
     @classmethod
-    def from_smiles_list(cls, smiles_list: list[str], with_salt: bool = False) -> "PGBNormStats":
+    def from_smiles_list(cls, smiles_list: list[str], with_salt: bool = False,
+                         salt_drop_water: bool = False) -> "PGBNormStats":
         from src.features import pgb_descriptors as _pgb_desc
         vecs = [_pgb_desc(s) for s in smiles_list]
         vecs = [v for v in vecs if not np.isnan(v).all()]
@@ -230,16 +238,19 @@ class PGBNormStats:
         salt_mean = salt_std = None
         if with_salt:
             from src.features import salt_context as _salt
-            smat = np.stack([_salt(s) for s in smiles_list])
+            smat = np.stack([_salt(s, drop_water=salt_drop_water) for s in smiles_list])
             salt_mean = smat.mean(axis=0)
-            salt_std  = smat.std(axis=0)
-        return cls(mean, std, salt_mean, salt_std)
+            # a column that is constant on train would divide by ~0 for any other value: leave it unscaled
+            salt_std  = np.where(smat.std(axis=0) < 1e-6, 1.0, smat.std(axis=0))
+        return cls(mean, std, salt_mean, salt_std, salt_drop_water)
 
     def save(self, path: str):
         arrays = {"mean": self.mean, "std": self.std}
         if self.normalizes_salt:
             arrays["salt_mean"] = self.salt_mean
             arrays["salt_std"] = self.salt_std
+        if self.salt_drop_water:
+            arrays["salt_drop_water"] = np.array(1)
         np.savez(path, **arrays)
 
     @classmethod
@@ -248,7 +259,8 @@ class PGBNormStats:
         has_salt = "salt_mean" in data.files and "salt_std" in data.files
         return cls(data["mean"], data["std"],
                    data["salt_mean"] if has_salt else None,
-                   data["salt_std"] if has_salt else None)
+                   data["salt_std"] if has_salt else None,
+                   bool(data["salt_drop_water"]) if "salt_drop_water" in data.files else False)
 
 
 class PGBDataset(Dataset):
@@ -354,8 +366,8 @@ class PGBDataset(Dataset):
         api_desc_norm = np.nan_to_num(self.norm.normalize(api_desc_raw), nan=0.0)
         exc_desc_norm = np.nan_to_num(self.norm.normalize(exc_desc_raw), nan=0.0)
 
-        api_salt = self.norm.normalize_salt(salt_context(api_smi))
-        exc_salt = self.norm.normalize_salt(salt_context(exc_smi)) if exc_smi else np.zeros(8, dtype=np.float32)
+        api_salt = self.norm.salt(api_smi)
+        exc_salt = self.norm.salt(exc_smi) if exc_smi else np.zeros(8, dtype=np.float32)
 
         if self.row_priors is not None:
             prior_vec = self.row_priors[idx]

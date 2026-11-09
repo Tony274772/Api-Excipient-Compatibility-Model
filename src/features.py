@@ -196,8 +196,14 @@ def pgb_descriptors(smiles: str) -> np.ndarray:
     return np.array(vals, dtype=np.float32)
 
 
+def _is_water(m) -> bool:
+    atoms = m.GetAtoms()
+    return (m.GetNumHeavyAtoms() == 1 and atoms[0].GetAtomicNum() == 8
+            and atoms[0].GetFormalCharge() == 0 and atoms[0].GetTotalNumHs() == 2)
+
+
 @lru_cache(maxsize=10000)
-def salt_context(smiles: str) -> np.ndarray:
+def salt_context(smiles: str, drop_water: bool = False) -> np.ndarray:
     """
     8-dimensional salt/inorganic context vector.
     Features:
@@ -209,8 +215,14 @@ def salt_context(smiles: str) -> np.ndarray:
       5: organic_heavy_atoms
       6: inorganic_heavy_atoms
       7: has_counterion (1 if num_fragments > 1, else 0)
+
+    drop_water=True ignores water-of-hydration fragments, so a hydrate (lactose monohydrate) gets the
+    same vector as the anhydrous form instead of looking like a two-fragment salt. Off by default:
+    every model trained before this option existed used the vector with water counted.
     """
     mols = _parse_salt_aware(smiles)
+    if drop_water:
+        mols = [m for m in mols if not _is_water(m)] or mols    # pure water keeps its one fragment
     if not mols:
         return np.zeros(8, dtype=np.float32)
 

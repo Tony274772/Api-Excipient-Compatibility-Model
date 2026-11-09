@@ -121,7 +121,12 @@ def pgb_single_run(config: Config):
         train_fold["API_Smiles"].dropna().tolist() +
         train_fold["Excipient_Smiles"].dropna().tolist()
     ))
-    pgb_norm = PGBNormStats.from_smiles_list(all_train_smiles)
+    # salt-context z-scoring and water exclusion are opt-in (both default False = the original recipe)
+    pgb_norm = PGBNormStats.from_smiles_list(
+        all_train_smiles,
+        with_salt=getattr(run_config, "pgb_normalize_salt", False),
+        salt_drop_water=getattr(run_config, "pgb_salt_drop_water", False),
+    )
     pgb_norm.save(os.path.join(checkpoint_dir, "pgb_norm_stats.npz"))
 
     # 4. Build excipient prior from training rows (leave-cluster-out for training)
