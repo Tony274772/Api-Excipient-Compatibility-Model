@@ -1,0 +1,28 @@
+{
+  "run": "dmpnn_chemprop_cross_attn_cls_asl",
+  "encoder": "dmpnn_chemprop",
+  "source": null,
+  "fusion": "cross_attn",
+  "pooling": "cls",
+  "loss": "asl",
+  "pgb": false,
+  "legacy": false,
+  "seed": 42,
+  "device": "cuda",
+  "max_epochs": 150,
+  "early_stop_patience": 6,
+  "early_stop_min_delta": 0.002,
+  "parameters": 10053137,
+  "data": {
+    "train": "data/grid_8020/train.csv",
+    "val": "data/grid_8020/val.csv",
+    "heldout": "data/grid_8020/test.csv"
+  },
+  "rows": {
+    "train": 2770,
+    "val": 774,
+    "heldout": 22
+  },
+  "minutes": 1.58,
+  "finished": "2026-11-08T08:31:14"
+}

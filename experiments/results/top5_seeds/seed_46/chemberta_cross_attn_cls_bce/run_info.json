@@ -1,0 +1,28 @@
+{
+  "run": "chemberta_cross_attn_cls_bce",
+  "encoder": "chemberta",
+  "source": null,
+  "fusion": "cross_attn",
+  "pooling": "cls",
+  "loss": "bce",
+  "pgb": false,
+  "legacy": false,
+  "seed": 46,
+  "device": "cuda",
+  "max_epochs": 150,
+  "early_stop_patience": 6,
+  "early_stop_min_delta": 0.002,
+  "parameters": 3914369,
+  "data": {
+    "train": "data/grid_8020/train.csv",
+    "val": "data/grid_8020/val.csv",
+    "heldout": "data/grid_8020/test.csv"
+  },
+  "rows": {
+    "train": 2770,
+    "val": 774,
+    "heldout": 22
+  },
+  "minutes": 0.55,
+  "finished": "2026-11-08T07:59:14"
+}

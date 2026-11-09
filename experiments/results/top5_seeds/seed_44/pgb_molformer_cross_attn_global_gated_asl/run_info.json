@@ -1,0 +1,28 @@
+{
+  "run": "pgb_molformer_cross_attn_global_gated_asl",
+  "encoder": "molformer",
+  "source": null,
+  "fusion": "cross_attn",
+  "pooling": "global_gated_attention",
+  "loss": "asl",
+  "pgb": true,
+  "legacy": false,
+  "seed": 44,
+  "device": "cuda",
+  "max_epochs": 60,
+  "early_stop_patience": 7,
+  "early_stop_min_delta": 0.002,
+  "parameters": null,
+  "data": {
+    "train": "data/grid_8020/train.csv",
+    "val": "data/grid_8020/val.csv",
+    "heldout": "data/grid_8020/test.csv"
+  },
+  "rows": {
+    "train": 2770,
+    "val": 774,
+    "heldout": 22
+  },
+  "minutes": 2.51,
+  "finished": "2026-11-08T08:25:33"
+}
