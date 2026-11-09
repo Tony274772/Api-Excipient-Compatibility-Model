@@ -546,6 +546,23 @@ def main():
         print(f"\npartial cells ({len(partial)}) - not usable for a paired test yet:")
         print(partial[["block", "cell", "seeds", "expected"]].to_string(index=False))
 
+    # Cells with no runs at all never reach `coverage`, so they would otherwise be invisible and
+    # the matrix would look complete with a hole in it. Name them.
+    have = set(cov["cell"]) | set(ORDER)
+    absent = [c for c in all_cells() if c.name not in have]
+    if absent:
+        by_method = {}
+        for c in absent:
+            for m in (c.primary, c.secondary):
+                if m:
+                    by_method[m] = by_method.get(m, 0) + 1
+        print(f"\nNOT STARTED: {len(absent)} of {len(all_cells())} cells have no runs at all "
+              f"({len(absent) * 5} runs). This grid is INCOMPLETE; every table below is over what "
+              "exists, not over the design.")
+        worst = sorted(by_method.items(), key=lambda kv: -kv[1])[:5]
+        print("  methods most affected: "
+              + ", ".join(f"{m} ({n} cells)" for m, n in worst))
+
     print("\n" + "=" * 100)
     print("MATRIX  -  mean validation PR-AUC, rows = primary, columns = secondary")
     print("=" * 100)

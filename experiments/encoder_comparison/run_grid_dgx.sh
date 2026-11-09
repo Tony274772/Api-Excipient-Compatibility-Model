@@ -33,14 +33,26 @@ echo "encoder grid | $NGPU GPU(s) | max $EPOCHS epochs | blocks: $BLOCKS"
 echo "=============================================================================="
 
 # ---- step 0a: the 5 encoders' mean-pooled vectors, once. Skips tables that already exist.
+# A single encoder that cannot even be built (gin needs dgl and dgllife) must not abandon the
+# sweep: precompute refuses to WRITE a bad table, so a failure here means "no table", and
+# run_all_grid skips exactly the cells that needed it and names them. The remaining cells run.
 echo
 echo "--- step 0a: precompute the mean-pooled encoder embeddings"
+set +e
 CUDA_VISIBLE_DEVICES=0 "$PY" -m experiments.encoder_comparison.precompute_embeddings \
     --device cuda 2>&1 | tee "$LOGS/_precompute.log"
+precompute_rc=${PIPESTATUS[0]}
+set -e
+if (( precompute_rc != 0 )); then
+  echo
+  echo "  NOTE: at least one encoder has no embedding table (see $LOGS/_precompute.log)."
+  echo "        Its cells will be skipped and listed by name. Install what it needs, re-run"
+  echo "        precompute_embeddings, then re-run this script to fill them in."
+fi
 
 # ---- step 0b: audit every representation before anything long starts.
-# Exits non-zero on a blocking problem, so `set -e` stops the sweep here rather than after
-# 25 GPU-hours of runs reading a bad table.
+# Exits non-zero on a real data defect, so `set -e` stops the sweep here rather than after
+# 25 GPU-hours of runs reading a bad table. A missing table is reported as BLOCKED, not a defect.
 echo
 echo "--- step 0b: audit the representations"
 "$PY" -m experiments.encoder_comparison.audit_reps 2>&1 | tee "$LOGS/_audit.log"

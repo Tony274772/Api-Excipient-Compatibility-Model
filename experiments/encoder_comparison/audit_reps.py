@@ -162,16 +162,26 @@ def audit_one(name: str, paths: SplitPaths, tables: dict) -> None:
               "(recorded in every run_info.json for this column)")
 
 
+BLOCKED = []         # an encoder with no table: its cells cannot run, but the rest can
+
+
 def audit_embedding_tables() -> None:
+    """A missing table is a blocked dependency, not a data defect.
+
+    Kept out of PROBLEMS on purpose. precompute_embeddings refuses to WRITE a bad table, so a
+    missing one means the encoder could not be built at all - gin needs dgl and dgllife, for
+    instance. The cells that need it are skipped and reported; failing the whole audit would leave
+    the GPUs idle over a pip install.
+    """
     print("\n--- mean-pooled encoder tables")
     for name in EMBEDDING_REPS:
         path = embedding_table_path(name)
         if not os.path.exists(path):
-            report(False, f"{name}: table missing",
-                   "run precompute_embeddings.py before any grid training")
+            print(f"  BLOCKED {name}: no table - every cell using it will be skipped")
+            BLOCKED.append(name)
         else:
             size = os.path.getsize(path) / 1e6
-            report(True, f"{name}: table present", f"{path} ({size:.1f} MB)")
+            report(True, f"{name}: table present", f"{os.path.basename(path)} ({size:.1f} MB)")
 
 
 def main():
@@ -208,6 +218,21 @@ def main():
             report(False, f"{name}: crashed", f"{type(e).__name__}: {e}")
 
     print("\n" + "=" * 100)
+    if BLOCKED:
+        import importlib
+
+        from experiments.encoder_comparison.families import all_cells
+        n_cells = len([c for c in all_cells()
+                       if c.primary in BLOCKED or c.secondary in BLOCKED])
+        print(f"BLOCKED: {', '.join(BLOCKED)} has no embedding table, so {n_cells} of "
+              f"{len(all_cells())} cells ({n_cells * 5} runs) will be skipped.")
+        if "gin" in BLOCKED and importlib.util.find_spec("dgl") is None:
+            print("  gin needs dgl and dgllife (both are in requirements.txt):")
+            print("    pip install 'dgl>=1.1' 'dgllife>=0.3.2'")
+            print("  A CPU-only dgl wheel is fine - the encoder already runs the graph on CPU and "
+                  "moves the output to the GPU.")
+        print("  The remaining cells are unaffected and can run now.")
+        print()
     if NOTES:
         print(f"{len(NOTES)} observation(s) - true properties, not defects, worth having in the "
               "paper:")
