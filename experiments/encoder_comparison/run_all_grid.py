@@ -78,6 +78,7 @@ def unimportable_encoders(cells) -> dict:
 
     Only the import is attempted - no weights are loaded, so this costs nothing.
     """
+    from experiments.encoder_comparison.precompute_embeddings import check_local_weights
     from src.encoders import ENCODER_REGISTRY
     out = {}
     for name in sorted({c.primary for c in cells
@@ -85,7 +86,8 @@ def unimportable_encoders(cells) -> dict:
                         and FAMILIES.get(c.primary, {}).get("kind") == "seq"}):
         enc = FAMILIES[name]["encoder"]
         try:
-            ENCODER_REGISTRY[enc]
+            ENCODER_REGISTRY[enc]        # import only; loads no weights
+            check_local_weights(name)    # and the checkpoint it cannot download
         except Exception as e:
             out[name] = f"{type(e).__name__}: {e}"
     return out
@@ -194,8 +196,11 @@ def main():
         if missing:
             print(f"  no mean-pooled embedding table for: {', '.join(missing)}")
         for name, why in broken.items():
-            print(f"  {name}: its encoder cannot be imported - {why}")
-            if "dgl" in why:
+            print(f"  {name}: its encoder is unavailable - {why}")
+            # Only suggest the install when a module really is absent. "dgl" also appears in the
+            # data.dgl.ai download URL, so a substring test fires on a missing-weights message
+            # and tells you to install something you already have.
+            if "ModuleNotFoundError" in why or "No module named" in why:
                 print("    pip install 'dgl>=1.1' 'dgllife>=0.3.2'      "
                       "(both are in requirements.txt)")
                 print("    A CPU-only dgl wheel is fine: the encoder already runs the graph on "

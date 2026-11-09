@@ -65,12 +65,43 @@ def molecule_table(paths: SplitPaths) -> pd.DataFrame:
              .sort_values("smiles").reset_index(drop=True)
 
 
+# Weight files that are NOT fetched at run time and are NOT in git (models/pretrained/ is
+# gitignored, since these are large third-party checkpoints). MolFormer, ChemBERTa and CheMeleon
+# are pulled from HuggingFace on demand; GIN's come from data.dgl.ai, which is frequently
+# unreachable from a compute node, and dgllife then retries four times before giving up. Checking
+# first turns that into one clear sentence.
+LOCAL_WEIGHTS = {
+    "gin": ("models/pretrained/gin/gin_supervised_contextpred_pre_trained.pth",
+            "7.2 MB. Copy it from a machine that has it (it is gitignored, so `git pull` will "
+            "not bring it), or fetch it once with:\n"
+            "    mkdir -p models/pretrained/gin && curl -L -o "
+            "models/pretrained/gin/gin_supervised_contextpred_pre_trained.pth \\\n"
+            "      https://data.dgl.ai/dgllife/pre_trained/gin_supervised_contextpred.pth"),
+}
+
+
+def check_local_weights(name: str) -> None:
+    """Fail fast and clearly when an encoder needs a local checkpoint that is not there."""
+    if name not in LOCAL_WEIGHTS:
+        return
+    path, hint = LOCAL_WEIGHTS[name]
+    if os.path.isfile(os.path.join(PROJECT_ROOT, path)) or os.path.isfile(path):
+        return
+    raise RuntimeError(
+        f"{name} needs its pretrained weights at {path} and they are not there.\n"
+        f"  {hint}\n"
+        "  Without the file, dgllife tries to download it and the cells using this encoder are "
+        "skipped (by name) rather than failing one at a time.")
+
+
 def build_encoder(name: str, device):
     """The same frozen encoder the `none`-column runs used, in eval mode with gradients off."""
     import inspect
 
     from src.config import Config
     from src.encoders import ENCODER_REGISTRY
+
+    check_local_weights(name)
 
     spec = FAMILIES[name]
     config = Config()
