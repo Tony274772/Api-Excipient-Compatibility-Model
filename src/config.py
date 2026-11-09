@@ -137,6 +137,7 @@ class Config:
     # D-MPNN specific
     dmpnn_depth: int = 3
     dmpnn_bias: bool = False
+    chemeleon_depth: int = 6                # only used if the CheMeleon checkpoint has no hyper_parameters
     dmpnn_undirected: bool = False
     dmpnn_use_pretrained: bool = True
     dmpnn_pretrained_checkpoint: Optional[str] = "models/pretrained/chemeleon_mp.pt"

@@ -130,6 +130,7 @@ def run_one(name, seed=42, device="auto", epochs=None, patience=None, min_delta=
 
     info = dict(run=name, **{k: g[k] for k in ("encoder", "source", "fusion", "pooling", "loss", "pgb", "legacy")},
                 seed=seed, device=str(dev),
+                encoder_hparams=getattr(getattr(encoder, "_impl", None), "mp_hparams", None),
                 max_epochs=config.pgb_max_epochs if g["pgb"] else config.max_epochs,
                 early_stop_patience=config.pgb_early_stop_patience if g["pgb"] else config.early_stop_patience,
                 early_stop_min_delta=config.early_stop_min_delta,

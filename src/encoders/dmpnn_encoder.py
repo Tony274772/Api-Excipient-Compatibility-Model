@@ -273,10 +273,27 @@ class CheMeleonDMPNNEncoder(nn.Module):
             elif "model_state_dict" in checkpoint:
                 state_dict = checkpoint["model_state_dict"]
 
+        # Build the message-passing block from the hyperparameters the checkpoint was trained with.
+        # Depth is not visible in the weights (W_h is reused at every step), so building with
+        # only d_h silently ran CheMeleon at Chemprop's default depth 3 instead of its trained 6.
+        hparams = checkpoint.get("hyper_parameters") if isinstance(checkpoint, dict) else None
+        if hparams:
+            keep = ("d_v", "d_e", "d_h", "bias", "depth", "dropout", "activation", "undirected")
+            mp_kwargs = {k: hparams[k] for k in keep if k in hparams}
+            self.mp = BondMessagePassing(**mp_kwargs)
+            self.mp_hparams = mp_kwargs
+            print(f"CheMeleon message passing: d_h={self.mp.W_h.in_features}, depth={self.mp.depth}")
+            self._load_mp_state(state_dict)
+            self._output_dim = self.mp.W_o.out_features
+            self.featurizer = SimpleMoleculeMolGraphFeaturizer()
+            return
+
+        print("WARNING: CheMeleon checkpoint has no hyper_parameters; depth falls back to "
+              f"config.chemeleon_depth={getattr(config, 'chemeleon_depth', 6)}")
+
         # Determine hidden size from the checkpoint weights
         # Look for the weight matrix key patterns in BondMessagePassing
         hidden_size = None
-        depth = None
 
         # Try to infer from state dict keys
         for key, tensor in state_dict.items():
@@ -298,15 +315,15 @@ class CheMeleonDMPNNEncoder(nn.Module):
         if hidden_size is None:
             hidden_size = 300  # fallback
 
-        # Build the BondMessagePassing with matching architecture
-        try:
-            self.mp = BondMessagePassing(d_h=hidden_size)
-        except TypeError:
-            # Older chemprop API
-            self.mp = BondMessagePassing(hidden_size=hidden_size)
+        depth = getattr(config, "chemeleon_depth", 6)
+        self.mp = BondMessagePassing(d_h=hidden_size, depth=depth)
+        self.mp_hparams = {"d_h": hidden_size, "depth": depth}
+        self._load_mp_state(state_dict)
+        self._output_dim = hidden_size
+        self.featurizer = SimpleMoleculeMolGraphFeaturizer()
 
-        # Load the state dict
-        # Try to match keys — CheMeleon may store with or without prefix
+    def _load_mp_state(self, state_dict):
+        """Load CheMeleon weights into self.mp, stripping common key prefixes if needed."""
         try:
             self.mp.load_state_dict(state_dict, strict=True)
         except RuntimeError:
@@ -319,18 +336,8 @@ class CheMeleonDMPNNEncoder(nn.Module):
                     if new_key.startswith(prefix):
                         new_key = new_key[len(prefix):]
                 cleaned[new_key] = val
-            try:
-                self.mp.load_state_dict(cleaned, strict=True)
-            except RuntimeError:
-                # Try non-strict loading as last resort
-                missing, unexpected = self.mp.load_state_dict(cleaned, strict=False)
-                if missing:
-                    print(f"WARNING: CheMeleon checkpoint missing keys: {missing}")
-                if unexpected:
-                    print(f"WARNING: CheMeleon checkpoint unexpected keys: {unexpected}")
-
-        self._output_dim = hidden_size
-        self.featurizer = SimpleMoleculeMolGraphFeaturizer()
+            # No non-strict fallback: a partially loaded encoder is not CheMeleon
+            self.mp.load_state_dict(cleaned, strict=True)
 
     @property
     def output_dim(self) -> int:
