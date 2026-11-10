@@ -1,0 +1,42 @@
+{
+  "cell": "floor",
+  "seed_run": "floor_seed43",
+  "block": "floor",
+  "label": "FLOOR: no molecular description at all - descriptors, flags, salt, excipient prior and mechanism flags only",
+  "note": "is any molecular description worth anything?",
+  "primary": null,
+  "primary_rep": null,
+  "primary_dim": 0,
+  "primary_scaled": null,
+  "secondary": null,
+  "secondary_dim": 0,
+  "secondary_scaled": null,
+  "secondary_shuffle_sha1": "",
+  "description_block_params": 0,
+  "no_cross_attn": false,
+  "cross_attention": false,
+  "encoder": "fixed_vector",
+  "fusion": "concat",
+  "pooling": null,
+  "seed": 43,
+  "device": "cuda",
+  "parameters_total": 75131,
+  "parameters_trainable": 75131,
+  "epochs_trained": 9,
+  "best_epoch": 2,
+  "max_epochs": 40,
+  "threshold_from_val": 0.802,
+  "tnr_floor": 0.97,
+  "data": {
+    "train": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/train.csv",
+    "val": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/val.csv",
+    "heldout": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/heldout/held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 1.28,
+  "finished": "2026-11-09T21:17:55"
+}

@@ -1,0 +1,42 @@
+{
+  "cell": "gin__pool_cls",
+  "seed_run": "gin__pool_cls_seed44",
+  "block": "pooling",
+  "label": "gin + cross-attention, cls pooling (pooling control)",
+  "note": "gin: cls instead of global_gated_attention",
+  "primary": "gin",
+  "primary_rep": null,
+  "primary_dim": 128,
+  "primary_scaled": null,
+  "secondary": null,
+  "secondary_dim": 0,
+  "secondary_scaled": null,
+  "secondary_shuffle_sha1": "",
+  "description_block_params": 0,
+  "no_cross_attn": false,
+  "cross_attention": true,
+  "encoder": "pretrained_gin",
+  "fusion": "cross_attn",
+  "pooling": "cls",
+  "seed": 44,
+  "device": "cuda",
+  "parameters_total": 454011,
+  "parameters_trainable": 454011,
+  "epochs_trained": 9,
+  "best_epoch": 2,
+  "max_epochs": 40,
+  "threshold_from_val": 0.8,
+  "tnr_floor": 0.97,
+  "data": {
+    "train": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/train.csv",
+    "val": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/val.csv",
+    "heldout": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/heldout/held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 1.1,
+  "finished": "2026-11-09T21:29:12"
+}

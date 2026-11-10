@@ -1,0 +1,42 @@
+{
+  "cell": "chemberta__x_pubchemfp",
+  "seed_run": "chemberta__x_pubchemfp_seed46",
+  "block": "fp_secondary",
+  "label": "ChemBERTa embedding (frozen) + cross-attention, CLS pooling  +  secondary: PubChem fingerprint, 881 bits",
+  "note": "",
+  "primary": "chemberta",
+  "primary_rep": null,
+  "primary_dim": 128,
+  "primary_scaled": null,
+  "secondary": "pubchemfp",
+  "secondary_dim": 881,
+  "secondary_scaled": false,
+  "secondary_shuffle_sha1": "",
+  "description_block_params": 28224,
+  "no_cross_attn": false,
+  "cross_attention": true,
+  "encoder": "chemberta",
+  "fusion": "cross_attn",
+  "pooling": "cls",
+  "seed": 46,
+  "device": "cuda",
+  "parameters_total": 3987179,
+  "parameters_trainable": 559739,
+  "epochs_trained": 11,
+  "best_epoch": 4,
+  "max_epochs": 40,
+  "threshold_from_val": 0.889,
+  "tnr_floor": 0.97,
+  "data": {
+    "train": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/train.csv",
+    "val": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/val.csv",
+    "heldout": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/heldout/held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 1.45,
+  "finished": "2026-11-10T00:05:39"
+}

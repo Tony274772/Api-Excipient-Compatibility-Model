@@ -1,0 +1,42 @@
+{
+  "cell": "maccs__x_molformer",
+  "seed_run": "maccs__x_molformer_seed45",
+  "block": "emb_secondary",
+  "label": "MACCS keys, 167 bits (salt-aware OR-fold)  +  secondary: MoLFormer-XL mean-pooled embedding, 768-d (frozen)",
+  "note": "",
+  "primary": "maccs",
+  "primary_rep": "maccs",
+  "primary_dim": 167,
+  "primary_scaled": false,
+  "secondary": "molformer",
+  "secondary_dim": 768,
+  "secondary_scaled": true,
+  "secondary_shuffle_sha1": "",
+  "description_block_params": 35360,
+  "no_cross_attn": false,
+  "cross_attention": false,
+  "encoder": "fixed_vector",
+  "fusion": "concat",
+  "pooling": null,
+  "seed": 45,
+  "device": "cuda",
+  "parameters_total": 164667,
+  "parameters_trainable": 164667,
+  "epochs_trained": 11,
+  "best_epoch": 4,
+  "max_epochs": 40,
+  "threshold_from_val": 0.8190000000000001,
+  "tnr_floor": 0.97,
+  "data": {
+    "train": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/train.csv",
+    "val": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/val.csv",
+    "heldout": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/heldout/held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 1.16,
+  "finished": "2026-11-10T01:24:44"
+}

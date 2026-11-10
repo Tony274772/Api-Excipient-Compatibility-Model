@@ -1,0 +1,1 @@
+{"run": "mol2vec__x_pubchemfp_seed42", "val_pr_auc": 0.6826599027103185, "finished": "2026-11-09T23:38:38"}

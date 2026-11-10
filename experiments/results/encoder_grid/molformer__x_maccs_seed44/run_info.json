@@ -1,0 +1,42 @@
+{
+  "cell": "molformer__x_maccs",
+  "seed_run": "molformer__x_maccs_seed44",
+  "block": "fp_secondary",
+  "label": "MoLFormer-XL embedding (frozen) + cross-attention, gated-attention pooling  +  secondary: MACCS keys, 167 bits",
+  "note": "",
+  "primary": "molformer",
+  "primary_rep": null,
+  "primary_dim": 128,
+  "primary_scaled": null,
+  "secondary": "maccs",
+  "secondary_dim": 167,
+  "secondary_scaled": false,
+  "secondary_shuffle_sha1": "",
+  "description_block_params": 5376,
+  "no_cross_attn": false,
+  "cross_attention": true,
+  "encoder": "molformer",
+  "fusion": "cross_attn",
+  "pooling": "global_gated_attention",
+  "seed": 44,
+  "device": "cuda",
+  "parameters_total": 45218299,
+  "parameters_trainable": 843259,
+  "epochs_trained": 11,
+  "best_epoch": 4,
+  "max_epochs": 40,
+  "threshold_from_val": 0.588,
+  "tnr_floor": 0.97,
+  "data": {
+    "train": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/train.csv",
+    "val": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/val.csv",
+    "heldout": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/heldout/held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 1.58,
+  "finished": "2026-11-09T23:47:19"
+}

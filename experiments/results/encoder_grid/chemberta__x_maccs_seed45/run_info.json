@@ -1,0 +1,42 @@
+{
+  "cell": "chemberta__x_maccs",
+  "seed_run": "chemberta__x_maccs_seed45",
+  "block": "fp_secondary",
+  "label": "ChemBERTa embedding (frozen) + cross-attention, CLS pooling  +  secondary: MACCS keys, 167 bits",
+  "note": "",
+  "primary": "chemberta",
+  "primary_rep": null,
+  "primary_dim": 128,
+  "primary_scaled": null,
+  "secondary": "maccs",
+  "secondary_dim": 167,
+  "secondary_scaled": false,
+  "secondary_shuffle_sha1": "",
+  "description_block_params": 5376,
+  "no_cross_attn": false,
+  "cross_attention": true,
+  "encoder": "chemberta",
+  "fusion": "cross_attn",
+  "pooling": "cls",
+  "seed": 45,
+  "device": "cuda",
+  "parameters_total": 3941483,
+  "parameters_trainable": 514043,
+  "epochs_trained": 8,
+  "best_epoch": 1,
+  "max_epochs": 40,
+  "threshold_from_val": 0.799,
+  "tnr_floor": 0.97,
+  "data": {
+    "train": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/train.csv",
+    "val": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/val.csv",
+    "heldout": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/heldout/held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 1.15,
+  "finished": "2026-11-10T00:00:53"
+}

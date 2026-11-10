@@ -1,0 +1,42 @@
+{
+  "cell": "mol2vec__x_maccs",
+  "seed_run": "mol2vec__x_maccs_seed43",
+  "block": "fp_secondary",
+  "label": "Mol2vec embedding, 300 dimensions (precomputed lookup)  +  secondary: MACCS keys, 167 bits",
+  "note": "",
+  "primary": "mol2vec",
+  "primary_rep": "mol2vec",
+  "primary_dim": 300,
+  "primary_scaled": true,
+  "secondary": "maccs",
+  "secondary_dim": 167,
+  "secondary_scaled": false,
+  "secondary_shuffle_sha1": "",
+  "description_block_params": 24640,
+  "no_cross_attn": false,
+  "cross_attention": false,
+  "encoder": "fixed_vector",
+  "fusion": "concat",
+  "pooling": null,
+  "seed": 43,
+  "device": "cuda",
+  "parameters_total": 143227,
+  "parameters_trainable": 143227,
+  "epochs_trained": 8,
+  "best_epoch": 1,
+  "max_epochs": 40,
+  "threshold_from_val": 0.895,
+  "tnr_floor": 0.97,
+  "data": {
+    "train": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/train.csv",
+    "val": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/val.csv",
+    "heldout": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/heldout/held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 0.93,
+  "finished": "2026-11-09T23:35:43"
+}

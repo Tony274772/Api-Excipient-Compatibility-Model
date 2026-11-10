@@ -1,0 +1,42 @@
+{
+  "cell": "pubchemfp__x_shuf_morgan",
+  "seed_run": "pubchemfp__x_shuf_morgan_seed44",
+  "block": "shuffled",
+  "label": "PubChem fingerprint, 881 bits (precomputed lookup)  +  secondary: Morgan fingerprint, radius 2, 1024 bits - SHUFFLED control (fixed derangement, same parameter count, zero information)",
+  "note": "capacity control: same parameters, zero information",
+  "primary": "pubchemfp",
+  "primary_rep": "pubchemfp",
+  "primary_dim": 881,
+  "primary_scaled": false,
+  "secondary": "shuf_morgan",
+  "secondary_dim": 1024,
+  "secondary_scaled": false,
+  "secondary_shuffle_sha1": "b9367a734e09",
+  "description_block_params": 89248,
+  "no_cross_attn": false,
+  "cross_attention": false,
+  "encoder": "fixed_vector",
+  "fusion": "concat",
+  "pooling": null,
+  "seed": 44,
+  "device": "cuda",
+  "parameters_total": 272443,
+  "parameters_trainable": 272443,
+  "epochs_trained": 8,
+  "best_epoch": 1,
+  "max_epochs": 40,
+  "threshold_from_val": 0.849,
+  "tnr_floor": 0.97,
+  "data": {
+    "train": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/train.csv",
+    "val": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/val.csv",
+    "heldout": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/heldout/held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 0.98,
+  "finished": "2026-11-09T21:58:41"
+}

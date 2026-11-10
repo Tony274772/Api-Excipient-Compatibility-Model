@@ -1,0 +1,42 @@
+{
+  "cell": "pubchemfp__x_maccs",
+  "seed_run": "pubchemfp__x_maccs_seed45",
+  "block": "fp_secondary",
+  "label": "PubChem fingerprint, 881 bits (precomputed lookup)  +  secondary: MACCS keys, 167 bits",
+  "note": "",
+  "primary": "pubchemfp",
+  "primary_rep": "pubchemfp",
+  "primary_dim": 881,
+  "primary_scaled": false,
+  "secondary": "maccs",
+  "secondary_dim": 167,
+  "secondary_scaled": false,
+  "secondary_shuffle_sha1": "",
+  "description_block_params": 61824,
+  "no_cross_attn": false,
+  "cross_attention": false,
+  "encoder": "fixed_vector",
+  "fusion": "concat",
+  "pooling": null,
+  "seed": 45,
+  "device": "cuda",
+  "parameters_total": 217595,
+  "parameters_trainable": 217595,
+  "epochs_trained": 10,
+  "best_epoch": 3,
+  "max_epochs": 40,
+  "threshold_from_val": 0.644,
+  "tnr_floor": 0.97,
+  "data": {
+    "train": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/train.csv",
+    "val": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/val.csv",
+    "heldout": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/heldout/held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 1.12,
+  "finished": "2026-11-09T23:26:51"
+}

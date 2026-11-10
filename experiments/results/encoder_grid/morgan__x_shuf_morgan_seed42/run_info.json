@@ -1,0 +1,42 @@
+{
+  "cell": "morgan__x_shuf_morgan",
+  "seed_run": "morgan__x_shuf_morgan_seed42",
+  "block": "shuffled",
+  "label": "Morgan fingerprint, radius 2, 1024 bits (salt-aware OR-fold)  +  secondary: Morgan fingerprint, radius 2, 1024 bits - SHUFFLED control (fixed derangement, same parameter count, zero information)",
+  "note": "capacity control: same parameters, zero information",
+  "primary": "morgan",
+  "primary_rep": "morgan",
+  "primary_dim": 1024,
+  "primary_scaled": false,
+  "secondary": "shuf_morgan",
+  "secondary_dim": 1024,
+  "secondary_scaled": false,
+  "secondary_shuffle_sha1": "b9367a734e09",
+  "description_block_params": 98400,
+  "no_cross_attn": false,
+  "cross_attention": false,
+  "encoder": "fixed_vector",
+  "fusion": "concat",
+  "pooling": null,
+  "seed": 42,
+  "device": "cuda",
+  "parameters_total": 290747,
+  "parameters_trainable": 290747,
+  "epochs_trained": 10,
+  "best_epoch": 3,
+  "max_epochs": 40,
+  "threshold_from_val": 0.797,
+  "tnr_floor": 0.97,
+  "data": {
+    "train": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/train.csv",
+    "val": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/val.csv",
+    "heldout": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/heldout/held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 1.15,
+  "finished": "2026-11-09T21:45:22"
+}

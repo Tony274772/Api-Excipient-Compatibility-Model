@@ -1,0 +1,42 @@
+{
+  "cell": "dmpnn__x_molformer",
+  "seed_run": "dmpnn__x_molformer_seed45",
+  "block": "emb_secondary",
+  "label": "D-MPNN (CheMeleon, frozen) + cross-attention, CLS pooling  +  secondary: MoLFormer-XL mean-pooled embedding, 768-d (frozen)",
+  "note": "",
+  "primary": "dmpnn",
+  "primary_rep": null,
+  "primary_dim": 128,
+  "primary_scaled": null,
+  "secondary": "molformer",
+  "secondary_dim": 768,
+  "secondary_scaled": true,
+  "secondary_shuffle_sha1": "",
+  "description_block_params": 24608,
+  "no_cross_attn": false,
+  "cross_attention": true,
+  "encoder": "dmpnn_chemprop",
+  "fusion": "cross_attn",
+  "pooling": "cls",
+  "seed": 45,
+  "device": "cuda",
+  "parameters_total": 10118715,
+  "parameters_trainable": 1404475,
+  "epochs_trained": 10,
+  "best_epoch": 3,
+  "max_epochs": 40,
+  "threshold_from_val": 0.859,
+  "tnr_floor": 0.97,
+  "data": {
+    "train": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/train.csv",
+    "val": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/val.csv",
+    "heldout": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/heldout/held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 1.85,
+  "finished": "2026-11-10T03:27:31"
+}

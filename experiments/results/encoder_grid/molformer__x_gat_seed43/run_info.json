@@ -1,0 +1,42 @@
+{
+  "cell": "molformer__x_gat",
+  "seed_run": "molformer__x_gat_seed43",
+  "block": "emb_secondary",
+  "label": "MoLFormer-XL embedding (frozen) + cross-attention, gated-attention pooling  +  secondary: Pretrained GAT mean-pooled embedding, 300-d (frozen)",
+  "note": "",
+  "primary": "molformer",
+  "primary_rep": null,
+  "primary_dim": 128,
+  "primary_scaled": null,
+  "secondary": "gat",
+  "secondary_dim": 300,
+  "secondary_scaled": true,
+  "secondary_shuffle_sha1": "",
+  "description_block_params": 9632,
+  "no_cross_attn": false,
+  "cross_attention": true,
+  "encoder": "molformer",
+  "fusion": "cross_attn",
+  "pooling": "global_gated_attention",
+  "seed": 43,
+  "device": "cuda",
+  "parameters_total": 45226811,
+  "parameters_trainable": 851771,
+  "epochs_trained": 9,
+  "best_epoch": 2,
+  "max_epochs": 40,
+  "threshold_from_val": 0.809,
+  "tnr_floor": 0.97,
+  "data": {
+    "train": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/train.csv",
+    "val": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/val.csv",
+    "heldout": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/heldout/held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 1.5,
+  "finished": "2026-11-10T02:22:18"
+}

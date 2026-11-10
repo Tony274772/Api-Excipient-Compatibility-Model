@@ -1,0 +1,42 @@
+{
+  "cell": "maccs__x_shuf_maccs",
+  "seed_run": "maccs__x_shuf_maccs_seed44",
+  "block": "shuffled",
+  "label": "MACCS keys, 167 bits (salt-aware OR-fold)  +  secondary: MACCS keys, 167 bits - SHUFFLED control (fixed derangement, same parameter count, zero information)",
+  "note": "capacity control: same parameters, zero information",
+  "primary": "maccs",
+  "primary_rep": "maccs",
+  "primary_dim": 167,
+  "primary_scaled": false,
+  "secondary": "shuf_maccs",
+  "secondary_dim": 167,
+  "secondary_scaled": false,
+  "secondary_shuffle_sha1": "b9367a734e09",
+  "description_block_params": 16128,
+  "no_cross_attn": false,
+  "cross_attention": false,
+  "encoder": "fixed_vector",
+  "fusion": "concat",
+  "pooling": null,
+  "seed": 44,
+  "device": "cuda",
+  "parameters_total": 126203,
+  "parameters_trainable": 126203,
+  "epochs_trained": 8,
+  "best_epoch": 2,
+  "max_epochs": 40,
+  "threshold_from_val": 0.836,
+  "tnr_floor": 0.97,
+  "data": {
+    "train": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/train.csv",
+    "val": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/val.csv",
+    "heldout": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/heldout/held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 0.89,
+  "finished": "2026-11-09T21:50:38"
+}

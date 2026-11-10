@@ -1,0 +1,42 @@
+{
+  "cell": "gin__x_dmpnn",
+  "seed_run": "gin__x_dmpnn_seed44",
+  "block": "emb_secondary",
+  "label": "Pretrained GIN (context-pred, frozen) + cross-attention, gated-attention pooling  +  secondary: D-MPNN (CheMeleon) mean-pooled embedding, 2048-d (frozen)",
+  "note": "",
+  "primary": "gin",
+  "primary_rep": null,
+  "primary_dim": 128,
+  "primary_scaled": null,
+  "secondary": "dmpnn",
+  "secondary_dim": 2048,
+  "secondary_scaled": true,
+  "secondary_shuffle_sha1": "",
+  "description_block_params": 65568,
+  "no_cross_attn": false,
+  "cross_attention": true,
+  "encoder": "pretrained_gin",
+  "fusion": "cross_attn",
+  "pooling": "global_gated_attention",
+  "seed": 44,
+  "device": "cuda",
+  "parameters_total": 724027,
+  "parameters_trainable": 724027,
+  "epochs_trained": 9,
+  "best_epoch": 2,
+  "max_epochs": 40,
+  "threshold_from_val": 0.655,
+  "tnr_floor": 0.97,
+  "data": {
+    "train": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/train.csv",
+    "val": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/val.csv",
+    "heldout": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/heldout/held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 1.3,
+  "finished": "2026-11-10T02:59:39"
+}

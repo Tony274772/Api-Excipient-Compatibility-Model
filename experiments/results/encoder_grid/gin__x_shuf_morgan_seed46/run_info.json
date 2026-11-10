@@ -1,0 +1,42 @@
+{
+  "cell": "gin__x_shuf_morgan",
+  "seed_run": "gin__x_shuf_morgan_seed46",
+  "block": "shuffled",
+  "label": "Pretrained GIN (context-pred, frozen) + cross-attention, gated-attention pooling  +  secondary: Morgan fingerprint, radius 2, 1024 bits - SHUFFLED control (fixed derangement, same parameter count, zero information)",
+  "note": "capacity control: same parameters, zero information",
+  "primary": "gin",
+  "primary_rep": null,
+  "primary_dim": 128,
+  "primary_scaled": null,
+  "secondary": "shuf_morgan",
+  "secondary_dim": 1024,
+  "secondary_scaled": false,
+  "secondary_shuffle_sha1": "b9367a734e09",
+  "description_block_params": 32800,
+  "no_cross_attn": false,
+  "cross_attention": true,
+  "encoder": "pretrained_gin",
+  "fusion": "cross_attn",
+  "pooling": "global_gated_attention",
+  "seed": 46,
+  "device": "cuda",
+  "parameters_total": 658491,
+  "parameters_trainable": 658491,
+  "epochs_trained": 8,
+  "best_epoch": 1,
+  "max_epochs": 40,
+  "threshold_from_val": 0.888,
+  "tnr_floor": 0.97,
+  "data": {
+    "train": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/train.csv",
+    "val": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/val.csv",
+    "heldout": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/heldout/held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 1.11,
+  "finished": "2026-11-09T22:25:58"
+}

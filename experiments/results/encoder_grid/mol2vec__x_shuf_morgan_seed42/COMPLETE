@@ -1,0 +1,1 @@
+{"run": "mol2vec__x_shuf_morgan_seed42", "val_pr_auc": 0.6756498091606242, "finished": "2026-11-09T22:03:10"}

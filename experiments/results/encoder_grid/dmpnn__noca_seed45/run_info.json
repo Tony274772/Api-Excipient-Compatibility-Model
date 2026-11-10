@@ -1,0 +1,42 @@
+{
+  "cell": "dmpnn__noca",
+  "seed_run": "dmpnn__noca_seed45",
+  "block": "no_cross_attn",
+  "label": "dmpnn mean-pooled embedding as a fixed primary vector, NO cross-attention",
+  "note": "is the encoder good, or is cross-attention good?",
+  "primary": "dmpnn",
+  "primary_rep": "dmpnn",
+  "primary_dim": 2048,
+  "primary_scaled": true,
+  "secondary": null,
+  "secondary_dim": 0,
+  "secondary_scaled": null,
+  "secondary_shuffle_sha1": "",
+  "description_block_params": 131136,
+  "no_cross_attn": true,
+  "cross_attention": false,
+  "encoder": "fixed_vector",
+  "fusion": "concat",
+  "pooling": "cls",
+  "seed": 45,
+  "device": "cuda",
+  "parameters_total": 349947,
+  "parameters_trainable": 349947,
+  "epochs_trained": 13,
+  "best_epoch": 6,
+  "max_epochs": 40,
+  "threshold_from_val": 0.936,
+  "tnr_floor": 0.97,
+  "data": {
+    "train": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/train.csv",
+    "val": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/val.csv",
+    "heldout": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/heldout/held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 1.38,
+  "finished": "2026-11-09T22:59:02"
+}
