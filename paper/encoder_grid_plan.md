@@ -364,7 +364,7 @@ Main number: **validation PR-AUC**, mean over the 5 seeds. Held-out stays sealed
 | 8 | Does order matter? | A + B vs B + A | Because 64-wide is not 32-wide |
 | 9 | Two-encoder models | the 20 deep+deep cells, split into cross-architecture (12: transformer+graph) and same-architecture (8) | If two encoders help, is it because they see different things? |
 | 10 | Averages | a two-way model over primary, secondary, their interaction, with seed as a random effect | Best primary over all columns, best secondary over all rows, and whether the best secondary depends on the primary |
-| 11 | Reproduction | morgan + maccs here vs `final_project` `full_5seeds` (0.710) | Do the two code paths agree? If not, this grid's numbers are canonical |
+| 11 | Reproduction | morgan + maccs here vs `final_project` `full_5seeds` (0.6999; first drafted as 0.710, which was wrong) | Do the two code paths agree? If not, this grid's numbers are canonical |
 
 Test 7 note: the column counts are uneven because the diagonal is skipped. A fingerprint row has 3
 fingerprint columns and 5 encoder columns; a deep row has 4 and 4. Report per-row means with their
@@ -558,64 +558,75 @@ parameter count is reported rather than argued away.
 
 ---
 
-# APPENDIX B — Found while building the code: ChemBERTa is not reading SMILES
+# APPENDIX B — ChemBERTa-77M-MTR cannot read chlorine, bromine, charges, salts or stereochemistry
 
-`audit_reps.py` flagged ChemBERTa for giving two different molecules the same vector. Chasing it
-down produced a finding that is **not** about the grid, and that is bigger than the grid.
+*Rewritten after a second investigation. The first version of this appendix said the problem was a
+broken local tokenizer and that fixing the tokenizer "might do better". **Both statements were
+wrong**: the published checkpoint was pretrained this way, and a tokenizer fix would make it worse.*
 
-## What the tokenizer does
+## What ChemBERTa receives
 
-The local snapshot at `models/pretrained/chemberta` loads as a `RobertaTokenizer`, which applies
-byte-level BPE to the SMILES string. The vocabulary is correct and contains `[Na+]`, `[Cl-]`,
-`[C@H]`, `[O-]` as single tokens. **The tokenizer never produces them.** It splits bracketed atoms
-into characters and then drops whatever is not in the vocabulary on its own:
+The tokenizer is a byte-level BPE with **zero merge rules**, so it can only emit single
+characters. Any character not in the vocabulary on its own is dropped silently:
 
 | SMILES | What ChemBERTa receives |
 |---|---|
-| `[Na+].[Cl-]` | `N . C -` — sodium becomes **nitrogen**, chloride becomes **carbon** |
-| `CCCCCCCCCCCCOS(=O)(=O)[O-].[Na+]` | `... O - . N` — SDS's sodium becomes nitrogen |
-| `C([C@H](O)CO)O` | `C ( C ( O ) C O ) O` — **stereochemistry silently gone** |
-| `[Ag+]`, `[Ag]`, `[Al]`, `[Hg]`, `[K]`, `[Li]` | **nothing at all** — only `[CLS] [SEP]` |
+| `CCl` | `C C` — **chlorine becomes carbon** |
+| `CBr` | `C B` — **bromine becomes boron** |
+| `[Na+].[Cl-]` | `N . C -` — sodium becomes nitrogen, chloride becomes carbon |
+| `C([C@H](O)CO)O` | `C ( C ( O ) C O ) O` — stereochemistry gone |
+| `[Ag+]`, `[K]`, `[Li]` | nothing at all, only `[CLS] [SEP]` |
 
-Six molecules in this dataset are bare metal ions, and to ChemBERTa they are the empty string, so
-all six get one identical embedding. Silver nitrate and potassium nitrate also collide. This is the
-whole of the 5-collision warning.
+In this dataset, **393 of the 867 molecules (45%)** contain chlorine, bromine or a bracketed atom
+and are misread: 175 contain Cl, 19 Br, 233 a bracketed atom.
 
-Verified with `tokenizer.json` loaded directly through `PreTrainedTokenizerFast`, so it is the
-saved snapshot that is wrong, not the class it is loaded with.
+## It is the published model, not a local bug
 
-**MoLFormer is correct** — it returns `[Na+]`, `[Cl-]`, `[C@H]`, `[O-]` as proper single tokens.
-This is specific to ChemBERTa.
+The vocabulary holds 543 multi-character tokens (`Cl`, `Br`, `[Na+]`, `[C@H]`, `[O-]` …), which
+suggested that pretraining used a proper SMILES tokenizer and only the saved file was broken. The
+embedding matrix says otherwise. A token the model never saw in pretraining keeps its random
+initial embedding (expected norm 0.02 × √384 ≈ 0.39):
 
-## Why it matters beyond the grid
+| Tokens | Embedding norm | Trained? |
+|---|---|---|
+| `[unused1..10]` (never used by any scheme) | 0.355 | no |
+| all **543** multi-character tokens | **0.35 – 0.43** (median 0.39) | **no — none of them** |
+| 28 single-character tokens (`C c ( ) O = N 1` …) | ~6 (median 6.11) | yes |
+| `.` `/` `\` `~` `*` | 0.37 – 0.40 | no |
 
-ChemBERTa is the current **leader** on validation PR-AUC (0.7251, mean of 5 seeds), and that number
-was earned while reading sodium as nitrogen and ignoring every stereocentre. For an
-API–excipient compatibility task where counterions and salt forms are a large part of the chemistry,
-that is not a small defect.
+**Not one multi-character token was ever trained.** ChemBERTa-77M-MTR was pretrained with this
+same character-level tokenization, so it never learned chlorine, bromine, a charge, a counterion
+or a stereocentre as anything distinct. The untrained `.` also says its pretraining SMILES were
+desalted to one fragment, and the untrained `/` and `\` say they had no E/Z stereochemistry.
 
-Two readings, both worth stating:
+For contrast, **MoLFormer** has fully trained embeddings for all of these: `Cl` 27.4, `Br` 27.3,
+`[Na+]` 26.5, `[C@H]` 27.8, `.` 28.5, against `C` 28.0.
 
-1. The number is real but the label is wrong. Whatever ChemBERTa is contributing, it is not
-   coming from the chemistry the SMILES encodes. It is closer to a coarse atom-count /
-   heavy-atom-skeleton feature than to a pretrained chemical language model.
-2. Fixed, it might do better. The vocabulary is right there; only the tokenization is broken.
+## Why the obvious fix is wrong
 
-## What is NOT being done about it here
+Switching to a regex SMILES tokenizer would make ChemBERTa emit `[Na+]`, `Cl` and `[C@H]` — and
+every one of those would be looked up as a **random, never-trained vector**. For 45% of the
+molecules, real signal would be replaced with noise. The current runs are, in fact, using the
+checkpoint exactly as it was trained. The blindness is a property of the published model and
+cannot be fixed at the tokenizer.
 
-Replacing the tokenizer changes ChemBERTa's input completely, which **invalidates the 45 completed
-`none`-column runs** for that family and makes the old and new chemberta numbers incomparable. That
-is a decision about the project's baseline, not a code fix to slip into a grid runner, so nothing
-has been changed. The options, in order of cost:
+## What it means for the results
+
+ChemBERTa ranks near the top on validation, and it got there while unable to tell chlorine from
+carbon, a salt from its free acid, or one stereoisomer from another. Whatever it contributes is
+closer to a coarse skeleton / atom-count feature than to the chemistry this task is about. Any
+ChemBERTa number in the paper should carry this as a stated limitation.
+
+## The real options
 
 | Option | Cost | What it buys |
 |---|---|---|
-| Report it as a limitation, change nothing | 0 runs | Honest, and the grid stays internally consistent |
-| Fix the tokenizer, rerun chemberta's `none` column | 5 runs | A correct chemberta single-method number |
-| Fix it and treat `chemberta_fixed` as a 10th method | 5 + its grid cells | Both numbers, and the difference is itself a result |
+| Keep it and report the limitation | 0 runs | Honest; the grid stays as run |
+| Replace it with a ChemBERTa checkpoint pretrained with a working SMILES tokenizer, verified by this same embedding check before any training | download + verification + 21 cells / 105 runs | A ChemBERTa that actually reads the input |
+| Drop ChemBERTa and choose among models whose encoders read the full SMILES | 0 runs | Avoids the problem entirely |
 
-Until this is decided, every chemberta cell in the grid uses the tokenizer as it is, so chemberta
-rows are at least consistent with each other and with the 45 completed runs.
+The 21 cells involving ChemBERTa are `chemberta`, `chemberta__pool_gated`, `chemberta__noca`, the
+10 `chemberta__x_*` cells (including both shuffled controls) and the 8 `*__x_chemberta` cells.
 
 ---
 
@@ -675,3 +686,96 @@ makes a column less informative, not incorrect, and every one above has a named 
 it the other way — which the first two versions of this script did — produced an audit that
 reported 14 "problems" nobody could act on, immediately before a 25-hour sweep. That is worse than
 no audit, because it trains you to pass `--force`.
+
+---
+
+# APPENDIX D — What each pretrained encoder was actually trained to read
+
+Appendix B found that ChemBERTa cannot read 45% of this dataset. That raised an obvious question:
+**do the other four learned encoders have the same kind of problem?** `audit_pretrained.py` answers
+it systematically. Appendix C asked what the encoders *produce*; this asks what they can *receive*.
+
+## The test
+
+An input the model never saw during pretraining keeps its random initial weights. The encoder still
+returns a number, nothing errors, and `audit_reps.py` sees a perfectly healthy vector — but that
+part of the molecule is noise, not chemistry.
+
+A weight row counts as untrained when every value in it is still inside the initialiser's range:
+
+| Initialiser | Bound used |
+|---|---|
+| `xavier_uniform_(fan_in, fan_out)` | `sqrt(6 / (fan_in + fan_out))` |
+| `nn.Linear` default | `1 / sqrt(in_features)` |
+| `nn.Embedding` N(0,1) | compared against rows that cannot occur |
+
+Rows 101–118 of a 120-row atom table (Fermium onward) are the control: no chemistry corpus contains
+them. For both GIN and GAT those rows reach **exactly** the xavier bound of 0.1195, so the test
+separates trained from untrained with no grey zone.
+
+Comparing embedding *norms* does not work here, and an earlier version of this audit got GAT wrong
+that way: GAT's trained rows have norms of 0.8–2.3 while its untrained rows sit at 1.19, so the two
+overlap completely. The max-absolute-value test is the one that separates them.
+
+## Results
+
+| Encoder | Verdict | What it cannot read | Molecules affected |
+|---|---|---|---|
+| **molformer** | **clean** | nothing | **0 of 867** |
+| mol2vec | minor | 0.6% of substructures unknown | 9 molecules are 100% unknown |
+| gin | major | 13 of 29 elements never trained | 80 (9%) |
+| dmpnn | major | degree-0 atoms, i.e. disconnected ions | 160 (18%) |
+| gat | **critical** | 18 of 29 elements never trained | 158 (18%) |
+| chemberta | **critical** | Cl, Br, every bracketed atom, charges, stereochemistry | **393 (45%)** |
+
+### MoLFormer — the only clean encoder
+Zero unknown tokens, and its tokens rebuild every SMILES exactly, so nothing is dropped. All 85
+tokens the dataset uses are trained (lowest norm 25.7 against a vocabulary minimum of 25.6). Four
+molecules exceed its nominal 202-token window, which is harmless: MoLFormer uses **rotary** position
+embeddings, which extend to any length. Verified by encoding the 526-token molecule successfully.
+
+### GAT — worst of the graph encoders
+Never trained on **Na (65 molecules), Ca (27), Mg (16), Fe (14), Al (13), K (12)**, Zn, Ag, Cu, Hg,
+H, Li, Mn, La, Co, Cr, Pb, Ti. Sodium alone appears in 65 molecules. Every one of those atoms
+contributes a random vector. This compounds the charge-blindness in Appendix C: GAT cannot tell an
+acid from its salt, and it has also never learned the counterion.
+
+### GIN — same failure, smaller
+Never trained on Ca, Mg, Fe, K, Cu, Hg, Li, Mn, La, Co, Cr, Pb, Ti — 13 elements, 80 molecules.
+Unlike GAT it did learn Na, Al, Zn, Ag and H.
+
+### D-MPNN (CheMeleon) — a different and more interesting gap
+Every element the dataset uses is trained, including Ag, Hg, Pb and La through the `OTHER` slot. But
+two of the 50 atom-feature slots the data needs were never trained: **`deg=0`, used by 158
+molecules**, and `nH=4`, used by 3. A degree-0 atom is a disconnected ion — `[Na+]`, `[Cl-]`,
+`[Ca+2]` in a salt. CheMeleon's pretraining set evidently held no salts, so for 18% of this dataset
+the counterion is read through a never-trained feature. The dataset contains 318 multi-fragment
+molecules, so this matters here far more than it would elsewhere.
+
+### Mol2vec — mild, and it degrades gracefully
+252 of 43,849 substructure tokens (0.6%) are unknown. Crucially, unknown tokens fall back to
+Mol2vec's **own trained `UNK` vector**, not to a random one, so the failure is graceful rather than
+silent noise. Nine molecules are 100% unknown and therefore all receive the identical UNK vector:
+`[Al]`, `[Cu+2]`, `[Cu]`, `[Hg]`, `[K]`, `[Li]` and three others. 39 molecules are above 25%
+unknown.
+
+## The pattern
+
+Every one of these is the same failure: **a pretraining corpus of neutral, single-fragment organic
+molecules, applied to a dataset where 318 of 867 molecules are salts and 194 carry a formal
+charge.** The excipients are where this bites — magnesium stearate, calcium phosphate, sodium lauryl
+sulfate are exactly the molecules these encoders were never trained on.
+
+This also reframes the grid's headline result. The finding was that no molecular representation
+beats the no-description floor by much. Part of the reason is now visible: four of the five
+pretrained encoders cannot read the counterions that distinguish one excipient from another.
+
+## What this does not change
+
+The five encoders were run exactly as published. These are properties of the released checkpoints,
+not bugs in this code, and none of them can be fixed by changing how the encoder is called —
+Appendix B shows why the obvious tokenizer fix makes ChemBERTa worse rather than better.
+
+The five encoders in `src/encoders/` that the grid does not use (`attentivefp`, `gatv2`, `gine`,
+`pna`, `dmpnn_scratch`) load no pretrained weights, so this question does not arise for them. The
+three fingerprints (Morgan, MACCS, PubChem) are rule-based and read every element directly.

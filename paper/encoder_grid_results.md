@@ -212,8 +212,9 @@ PubChem is the second-best secondary (0.7069), ahead of all four encoders. Morga
 secondary (0.6803). The two-way interaction model could not be fitted: with the diagonal skipped
 the design matrix is singular, so only marginal means are reported.
 
-**11. Reproduction.** `morgan + maccs` scores 0.6924 here against 0.710 in `final_project`
-`full_5seeds` — a difference of −0.0176, **inside** the 0.022 detectable bound. The two code paths
+**11. Reproduction.** `morgan + maccs` scores 0.6924 here against **0.6999** in `final_project`
+`full_5seeds` (an earlier draft quoted 0.710, which was wrong) — a paired difference of −0.0075,
+p = 0.62, **inside** the 0.022 detectable bound. The two code paths
 agree. This grid's numbers are canonical for this comparison.
 
 ---
@@ -275,8 +276,11 @@ than omitted because it was ineligible.
 5. **MACCS keys, at 167 bits, match a pretrained transformer** and beat every graph network.
 6. **Noise in the secondary slot is actively harmful** — all 18 shuffled controls hurt, and they
    occupy the bottom of the ranking.
-7. Three limitations belong next to these numbers, all in the plan's appendices: ChemBERTa's
-   tokenizer reads `[Na+]` as nitrogen and drops stereochemistry (Appendix B); GIN and GAT cannot
+7. Three limitations belong next to these numbers, all in the plan's appendices: the published
+   ChemBERTa-77M-MTR checkpoint was pretrained with a character-level tokenizer, so it reads
+   chlorine as carbon, bromine as boron and `[Na+]` as nitrogen, and drops charges and
+   stereochemistry — 45% of this dataset's molecules are misread, and a tokenizer fix cannot help
+   because the model never trained those tokens (Appendix B); GIN and GAT cannot
    distinguish an acid from its conjugate base (Appendix C); and 5 seeds cannot resolve anything
    below 0.022 (Part 7).
 

@@ -50,7 +50,22 @@ METRIC = "pr_auc"
 SD_PAIRED_DIFF = 0.0132
 
 # final_project full_5seeds mean validation PR-AUC for Morgan+MACCS, for the reproduction check.
-FINAL_PROJECT_FULL = 0.710
+FINAL_PROJECT_RUNS = os.path.join(PROJECT_ROOT, "final_project", "results", "ablations", "runs")
+
+
+def final_project_full_series() -> dict:
+    """{seed: val PR-AUC} for final_project's shipped Morgan+MACCS model (`full`), read from disk.
+
+    Read rather than hard-coded: the earlier constant 0.710 was wrong (the true 5-seed mean is
+    0.6999), and it made the reproduction gap look 2.3x larger than it is.
+    """
+    out = {}
+    for s in SEEDS:
+        p = os.path.join(FINAL_PROJECT_RUNS, f"full_seed{s}", "val_metrics.json")
+        if os.path.exists(p):
+            with open(p) as f:
+                out[s] = json.load(f)[METRIC]
+    return out
 
 
 # --------------------------------------------------------------------------- loading
@@ -395,8 +410,8 @@ def test_reproduction(df):
     s = cell_series(df, "morgan__x_maccs")
     mean = np.mean(list(s.values())) if s else np.nan
     return {"cell": "morgan__x_maccs", "n_seeds": len(s), "grid_mean": mean,
-            "final_project_full_5seeds": FINAL_PROJECT_FULL,
-            "difference": mean - FINAL_PROJECT_FULL if s else np.nan}
+            **{k: v for k, v in paired_test(s, final_project_full_series()).items()
+               if k in ("mean_b", "delta", "sd_diff", "p_t")}}
 
 
 # --------------------------------------------------------------------------- decision rule
@@ -624,7 +639,7 @@ def main():
     rep = test_reproduction(df)
     for k, v in rep.items():
         print(f"  {k:28s} {v}")
-    if rep["n_seeds"] and abs(rep["difference"]) > 0.02:
+    if rep["n_seeds"] and abs(rep["delta"]) > 0.02:
         print("  NOTE: the two code paths disagree by more than 0.02. This grid's numbers are "
               "canonical for this comparison; say so rather than mixing the tables.")
 
