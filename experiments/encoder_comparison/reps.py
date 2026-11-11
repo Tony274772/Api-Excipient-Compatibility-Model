@@ -59,6 +59,9 @@ REP_SPECS = {
 SHUFFLED = {
     "shuf_maccs":  "maccs",
     "shuf_morgan": "morgan",
+    # Not a grid cell: the capacity control of experiments/ablations_chemberta (shuf_pubchemfp).
+    # shuffled_cells() lists the two grid controls explicitly, so adding it changes no grid run.
+    "shuf_pubchemfp": "pubchemfp",
 }
 
 # Encoders whose averaged embedding needs precompute_embeddings.py to have been run.
