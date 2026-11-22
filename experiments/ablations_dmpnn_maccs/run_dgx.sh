@@ -16,6 +16,7 @@
 #   step 1   the other 22 variants x 5 seeds, sharded over the GPUs
 #   step 2   collect (validation only) + chemical subset diagnostics. Held-out stays sealed.
 set -euo pipefail
+export PYTHONUNBUFFERED=1
 
 cd "$(dirname "$0")/../.."
 PY=${PY:-python}
@@ -43,9 +44,26 @@ sweep () {   # sweep <tag> <run_seeds args...>
         --device cuda --epochs "$EPOCHS" > "$LOGS/_sweep_${tag}.log" 2>&1 &
     pids+=($!)
   fi
-  echo "  running (pids ${pids[*]}); follow with: tail -f $LOGS/_sweep_${tag}*.log"
+  echo "  Workers running on $NGPU GPU(s) (pids ${pids[*]}). Live progress in this terminal:"
+
+  cleanup() {
+    for p in "${pids[@]}"; do
+      kill "$p" 2>/dev/null || true
+    done
+  }
+  trap cleanup INT TERM
+
+  # Stream live epoch-by-epoch progress directly in this terminal
+  "$PY" -m experiments.ablations_dmpnn_maccs.progress --monitor --pids "${pids[@]}" "$@" || true
+
+  trap - INT TERM
+
   local fail=0
-  for p in "${pids[@]}"; do wait "$p" || fail=1; done
+  for p in "${pids[@]}"; do
+    if ! wait "$p"; then
+      fail=1
+    fi
+  done
   "$PY" -m experiments.ablations_dmpnn_maccs.run_seeds "$@" --dry-run | head -1
   if (( fail )); then
     echo "  NOTE: at least one run failed (logs in $LOGS/). Re-run this script to retry them."
@@ -58,6 +76,19 @@ echo "--- step 0: full x 5 seeds"
 sweep full --ablations full
 "$PY" -m experiments.ablations_dmpnn_maccs.collect --ablations full | sed -n '/Step 0/,/^## Abl/p'
 if [[ -z "${SKIP_REPRO_CHECK:-}" ]]; then
+  if [[ ! -f "experiments/results/ablations_dmpnn_maccs/reproduction.csv" ]]; then
+    echo "=============================================================================="
+    echo "STEP 0 FAILED: reproduction.csv was not created because baseline runs failed."
+    echo "Check latest log output:"
+    echo "=============================================================================="
+    for l in "$LOGS"/*.txt; do
+      if [[ -f "$l" ]]; then
+        echo "--- Log: $l ---"
+        tail -n 15 "$l"
+      fi
+    done
+    exit 1
+  fi
   if ! "$PY" -c "
 import pandas as pd
 df = pd.read_csv('experiments/results/ablations_dmpnn_maccs/reproduction.csv')

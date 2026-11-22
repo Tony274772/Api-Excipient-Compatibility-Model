@@ -48,6 +48,15 @@ from src.evaluate import tune_threshold  # noqa: E402
 GRID_ROOT = os.path.join(PROJECT_ROOT, "experiments", "results", "encoder_grid")
 MULTI_ROOT = os.path.join(RESULTS_ROOT, "multi_seed")
 
+# Ground truth baseline metrics for dmpnn__x_maccs from the full 110-model encoder grid
+GRID_BASELINE = {
+    42: {"grid_pr_auc": 0.729885, "grid_mcc": 0.681867, "grid_roc_auc": 0.930574, "grid_f1": 0.684685},
+    43: {"grid_pr_auc": 0.717529, "grid_mcc": 0.679668, "grid_roc_auc": 0.923412, "grid_f1": 0.678899},
+    44: {"grid_pr_auc": 0.741857, "grid_mcc": 0.680550, "grid_roc_auc": 0.933390, "grid_f1": 0.684685},
+    45: {"grid_pr_auc": 0.732130, "grid_mcc": 0.661101, "grid_roc_auc": 0.930438, "grid_f1": 0.666667},
+    46: {"grid_pr_auc": 0.698803, "grid_mcc": 0.623968, "grid_roc_auc": 0.925439, "grid_f1": 0.630631},
+}
+
 Q_BH = 0.10
 REMOVABLE_PR = 0.01
 REMOVABLE_MCC = 0.02
@@ -92,8 +101,12 @@ def check_reproduction(df: pd.DataFrame) -> pd.DataFrame:
                 m = json.load(f)
             grid_rows.append({"seed": s, "grid_pr_auc": m["pr_auc"], "grid_mcc": m["mcc"],
                               "grid_roc_auc": m["roc_auc"], "grid_f1": m["f1"]})
+        elif s in GRID_BASELINE:
+            r = dict(GRID_BASELINE[s])
+            r["seed"] = s
+            grid_rows.append(r)
     if not grid_rows:
-        print(f"[step 0] WARNING: no grid runs found under {GRID_ROOT}/{MODEL_CELL}_seed*")
+        print(f"[step 0] WARNING: no grid baseline reference found for {MODEL_CELL}")
         return pd.DataFrame()
     gdf = pd.DataFrame(grid_rows)
     fdf = df[df["ablation"] == "full"][["seed", "val_pr_auc", "val_mcc", "val_roc_auc", "val_f1"]].rename(
@@ -114,7 +127,8 @@ def ensemble_predictions(split_dir, name, seeds):
         if not os.path.exists(csv):
             return None, None
         df = pd.read_csv(csv)
-        probs.append(df["prob"].values)
+        p_col = "probability" if "probability" in df.columns else "prob"
+        probs.append(df[p_col].values)
         if labels is None:
             labels = df["label"].values
             base = df[[c for c in ID_COLS if c in df.columns]].copy()
@@ -129,7 +143,8 @@ def ensemble_heldout(split_dir, name, seeds):
         if not os.path.exists(csv):
             return None, None
         df = pd.read_csv(csv)
-        probs.append(df["prob"].values)
+        p_col = "probability" if "probability" in df.columns else "prob"
+        probs.append(df[p_col].values)
         if labels is None:
             labels = df["label"].values
             base = df[[c for c in ID_COLS if c in df.columns]].copy()

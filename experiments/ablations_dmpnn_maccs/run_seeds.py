@@ -81,25 +81,25 @@ def main():
     for k, (a, s) in enumerate(todo, 1):
         name = run_name(a, s)
         log = os.path.join(LOG_DIR, f"{name}.txt")
-        cmd = [sys.executable, "-m", "experiments.ablations_dmpnn_maccs.run_ablation",
+        cmd = [sys.executable, "-u", "-m", "experiments.ablations_dmpnn_maccs.run_ablation",
                "--ablation", a, "--seed", str(s), "--device", args.device,
                "--epochs", str(args.epochs)]
         if args.data_root:
             cmd += ["--data-root", args.data_root]
         if args.overwrite:
             cmd.append("--overwrite")
-        print(f"[{k}/{len(todo)}] {name} -> {log}")
+        print(f"[{k}/{len(todo)}] {name} -> {log}", flush=True)
         with open(log, "w") as f:
             code = subprocess.call(cmd, stdout=f, stderr=subprocess.STDOUT)
         if code != 0:
-            print(f"   FAILED (exit {code}); see {log}")
+            print(f"   FAILED (exit {code}); see {log}", flush=True)
             failed.append((name, code))
             if args.stop_on_failure:
                 break
         else:
             with open(log) as f:
                 last = [line.strip() for line in f if "DONE" in line or "val PR-AUC" in line]
-                print(f"   {last[-1] if last else 'done'}")
+                print(f"   {last[-1] if last else 'done'}", flush=True)
 
     mins = round((time.time() - t0) / 60, 1)
     print(f"\nQueue finished in {mins} min. {len(todo) - len(failed)} succeeded, {len(failed)} failed.")

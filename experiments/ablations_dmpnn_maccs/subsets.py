@@ -12,6 +12,7 @@ Usage:
 """
 
 import argparse
+import json
 import os
 import sys
 
@@ -68,8 +69,9 @@ def score_subset(df_preds: pd.DataFrame, mask: pd.Series, threshold: float) -> d
     n_pos = int(sub["label"].sum())
     if n == 0 or n_pos == 0 or n_pos == n:
         return {"n": n, "n_pos": n_pos, "pr_auc": np.nan, "mcc": np.nan}
-    pr = float(average_precision_score(sub["label"], sub["prob"]))
-    pred_bin = (sub["prob"] >= threshold).astype(int)
+    p_col = "probability" if "probability" in sub.columns else "prob"
+    pr = float(average_precision_score(sub["label"], sub[p_col]))
+    pred_bin = (sub[p_col] >= threshold).astype(int)
     mcc = float(matthews_corrcoef(sub["label"], pred_bin))
     return {"n": n, "n_pos": n_pos, "pr_auc": pr, "mcc": mcc}
 
@@ -85,11 +87,12 @@ def main():
     val_df = pd.read_csv(paths.val)
     val_classes = [pair_class(r["API_Smiles"], r["Excipient_Smiles"]) for _, r in val_df.iterrows()]
     val_df["subset"] = val_classes
+    val_label_col = "Outcome1" if "Outcome1" in val_df.columns else "label"
 
     print("=" * 90)
     print("Validation set chemical subset distribution:")
     for sub, count in val_df["subset"].value_counts().items():
-        pos = val_df[val_df["subset"] == sub]["label"].sum()
+        pos = int(val_df[val_df["subset"] == sub][val_label_col].sum())
         print(f"  {sub:20s}: {count:4d} pairs ({pos:3d} positive, {pos/count*100:.1f}%)")
     print("=" * 90)
 

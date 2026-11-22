@@ -271,13 +271,21 @@ def run(ablation: str, seed: int, device_str: str = "auto", epochs: int = 40,
         json.dump(val_metrics, f, indent=2)
     with open(os.path.join(out_dir, "training_history.json"), "w") as f:
         json.dump(history, f, indent=2)
-    val_preds_df = prediction_table(paths.val, val_probs, threshold)
-    val_preds_df.to_csv(os.path.join(out_dir, "predictions_val.csv"), index=False)
+    prediction_table(val_df, val_probs, val_labels, threshold).to_csv(
+        os.path.join(out_dir, "predictions_val.csv"), index=False)
 
     with open(os.path.join(sealed_dir, "heldout_metrics.json"), "w") as f:
         json.dump(ho_metrics, f, indent=2)
-    ho_preds_df = prediction_table(paths.heldout, ho_probs, threshold)
-    ho_preds_df.to_csv(os.path.join(sealed_dir, "predictions_heldout.csv"), index=False)
+    prediction_table(ho_df, ho_probs, ho_labels, threshold).to_csv(
+        os.path.join(sealed_dir, "predictions_heldout.csv"), index=False)
+
+    for d, files in ((out_dir, ["val_metrics.json", "run_info.json", "training_history.json",
+                                "predictions_val.csv"]),
+                     (sealed_dir, ["heldout_metrics.json", "predictions_heldout.csv"])):
+        for f in files:
+            p = os.path.join(d, f)
+            if not os.path.exists(p) or os.path.getsize(p) == 0:
+                raise RuntimeError(f"[{name}] missing or empty output {p}")
 
     trainable_state = {k: v.cpu() for k, v in model.state_dict().items()
                        if not k.startswith("encoder.")}
