@@ -1,0 +1,241 @@
+pair_id,molecule_a,role_a,group_a,molecule_b,role_b,group_b,morgan_tanimoto,morgan_cosine,chemberta_cosine,chemberta_tanimoto,abs_diff_cosine,abs_diff_tanimoto
+1,Aspirin,API,Clean Organic NSAID,Acetaminophen,API,Clean Organic Analgesic,0.2286,0.3746,0.8951,0.7955,0.5204,0.567
+2,Aspirin,API,Clean Organic NSAID,Ibuprofen,API,Clean Organic NSAID,0.1951,0.3266,0.9239,0.8223,0.5973,0.6271
+3,Aspirin,API,Clean Organic NSAID,Naproxen,API,Clean Organic NSAID,0.2045,0.3411,0.8774,0.7787,0.5363,0.5741
+4,Aspirin,API,Clean Organic NSAID,Phenytoin,API,Clean Organic Hydantoin,0.1795,0.3046,0.6717,0.4957,0.3671,0.3162
+5,Aspirin,API,Clean Organic NSAID,Citric acid,Excipient,Clean Organic Acid,0.1143,0.2108,0.7256,0.4431,0.5147,0.3288
+6,Aspirin,API,Clean Organic NSAID,Benzoic acid,Excipient,Clean Organic Acid,0.3571,0.5455,0.9377,0.8795,0.3921,0.5224
+7,Aspirin,API,Clean Organic NSAID,Baclofen,API,Monochlorinated API,0.1591,0.275,0.9104,0.7859,0.6354,0.6268
+8,Aspirin,API,Clean Organic NSAID,Diclofenac,API,Dichlorinated API,0.2045,0.3411,0.8135,0.6605,0.4724,0.456
+9,Aspirin,API,Clean Organic NSAID,Trichlormethiazide,API,Trichlorinated API,0.069,0.1325,0.754,0.5997,0.6216,0.5307
+10,Aspirin,API,Clean Organic NSAID,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,0.2812,0.4456,0.952,0.9005,0.5065,0.6193
+11,Aspirin,API,Clean Organic NSAID,Sodium citrate,Excipient,Sodium Salt of Citric acid,0.0789,0.1485,0.722,0.3744,0.5735,0.2955
+12,Aspirin,API,Clean Organic NSAID,Glucose hydrate,Excipient,Sugar / Polyol Excipient,0.0244,0.0481,0.8245,0.675,0.7764,0.6506
+13,Aspirin,API,Clean Organic NSAID,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),0.1212,0.2265,0.8354,0.6103,0.6089,0.4891
+14,Aspirin,API,Clean Organic NSAID,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),0.0333,0.0772,0.3623,0.2204,0.2852,0.187
+15,Aspirin,API,Clean Organic NSAID,Magnesium oxide,Excipient,Inorganic Metal Oxide,0.0385,0.1179,0.2367,0.1339,0.1189,0.0954
+16,Acetaminophen,API,Clean Organic Analgesic,Aspirin,API,Clean Organic NSAID,0.2286,0.3746,0.8951,0.7955,0.5204,0.567
+17,Acetaminophen,API,Clean Organic Analgesic,Ibuprofen,API,Clean Organic NSAID,0.1892,0.3212,0.8848,0.7101,0.5636,0.5209
+18,Acetaminophen,API,Clean Organic Analgesic,Naproxen,API,Clean Organic NSAID,0.1707,0.2982,0.8847,0.7637,0.5865,0.593
+19,Acetaminophen,API,Clean Organic Analgesic,Phenytoin,API,Clean Organic Hydantoin,0.1081,0.1956,0.7786,0.5919,0.583,0.4838
+20,Acetaminophen,API,Clean Organic Analgesic,Citric acid,Excipient,Clean Organic Acid,0.0968,0.1777,0.5563,0.2768,0.3786,0.18
+21,Acetaminophen,API,Clean Organic Analgesic,Benzoic acid,Excipient,Clean Organic Acid,0.2222,0.3679,0.8765,0.7757,0.5086,0.5535
+22,Acetaminophen,API,Clean Organic Analgesic,Baclofen,API,Monochlorinated API,0.15,0.2649,0.8677,0.6688,0.6028,0.5188
+23,Acetaminophen,API,Clean Organic Analgesic,Diclofenac,API,Dichlorinated API,0.1707,0.2982,0.8421,0.6556,0.5439,0.4848
+24,Acetaminophen,API,Clean Organic Analgesic,Trichlormethiazide,API,Trichlorinated API,0.0556,0.1116,0.7717,0.598,0.6601,0.5424
+25,Acetaminophen,API,Clean Organic Analgesic,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,0.2,0.3338,0.9101,0.7936,0.5762,0.5936
+26,Acetaminophen,API,Clean Organic Analgesic,Sodium citrate,Excipient,Sodium Salt of Citric acid,0.0909,0.1669,0.6289,0.2739,0.462,0.183
+27,Acetaminophen,API,Clean Organic Analgesic,Glucose hydrate,Excipient,Sugar / Polyol Excipient,0.0278,0.0541,0.8158,0.6217,0.7618,0.5939
+28,Acetaminophen,API,Clean Organic Analgesic,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),0.1429,0.2545,0.7449,0.4616,0.4904,0.3188
+29,Acetaminophen,API,Clean Organic Analgesic,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),0.04,0.0867,0.4074,0.248,0.3207,0.208
+30,Acetaminophen,API,Clean Organic Analgesic,Magnesium oxide,Excipient,Inorganic Metal Oxide,0.0476,0.1325,0.2471,0.1406,0.1146,0.0929
+31,Ibuprofen,API,Clean Organic NSAID,Aspirin,API,Clean Organic NSAID,0.1951,0.3266,0.9239,0.8223,0.5973,0.6271
+32,Ibuprofen,API,Clean Organic NSAID,Acetaminophen,API,Clean Organic Analgesic,0.1892,0.3212,0.8848,0.7101,0.5636,0.5209
+33,Ibuprofen,API,Clean Organic NSAID,Naproxen,API,Clean Organic NSAID,0.4211,0.5942,0.8942,0.7919,0.2999,0.3709
+34,Ibuprofen,API,Clean Organic NSAID,Phenytoin,API,Clean Organic Hydantoin,0.119,0.2132,0.6697,0.5023,0.4565,0.3832
+35,Ibuprofen,API,Clean Organic NSAID,Citric acid,Excipient,Clean Organic Acid,0.1429,0.2582,0.6784,0.4631,0.4202,0.3203
+36,Ibuprofen,API,Clean Organic NSAID,Benzoic acid,Excipient,Clean Organic Acid,0.2188,0.3742,0.8703,0.7203,0.4961,0.5016
+37,Ibuprofen,API,Clean Organic NSAID,Baclofen,API,Monochlorinated API,0.2683,0.4234,0.9699,0.9398,0.5465,0.6716
+38,Ibuprofen,API,Clean Organic NSAID,Diclofenac,API,Dichlorinated API,0.1739,0.2971,0.8446,0.731,0.5475,0.5571
+39,Ibuprofen,API,Clean Organic NSAID,Trichlormethiazide,API,Trichlorinated API,0.0678,0.1298,0.8291,0.7008,0.6993,0.633
+40,Ibuprofen,API,Clean Organic NSAID,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,0.2,0.3395,0.9444,0.8823,0.6049,0.6823
+41,Ibuprofen,API,Clean Organic NSAID,Sodium citrate,Excipient,Sodium Salt of Citric acid,0.1053,0.194,0.7833,0.5058,0.5893,0.4005
+42,Ibuprofen,API,Clean Organic NSAID,Glucose hydrate,Excipient,Sugar / Polyol Excipient,0.1026,0.1886,0.8492,0.7379,0.6606,0.6353
+43,Ibuprofen,API,Clean Organic NSAID,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),0.1875,0.3328,0.8859,0.7588,0.5531,0.5713
+44,Ibuprofen,API,Clean Organic NSAID,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),0.0323,0.0756,0.2721,0.1558,0.1965,0.1235
+45,Ibuprofen,API,Clean Organic NSAID,Magnesium oxide,Excipient,Inorganic Metal Oxide,0.037,0.1155,0.1015,0.0512,0.014,0.0141
+46,Naproxen,API,Clean Organic NSAID,Aspirin,API,Clean Organic NSAID,0.2045,0.3411,0.8774,0.7787,0.5363,0.5741
+47,Naproxen,API,Clean Organic NSAID,Acetaminophen,API,Clean Organic Analgesic,0.1707,0.2982,0.8847,0.7637,0.5865,0.593
+48,Naproxen,API,Clean Organic NSAID,Ibuprofen,API,Clean Organic NSAID,0.4211,0.5942,0.8942,0.7919,0.2999,0.3709
+49,Naproxen,API,Clean Organic NSAID,Phenytoin,API,Clean Organic Hydantoin,0.1333,0.2375,0.8315,0.7058,0.594,0.5725
+50,Naproxen,API,Clean Organic NSAID,Citric acid,Excipient,Clean Organic Acid,0.1,0.1918,0.6567,0.403,0.4649,0.303
+51,Naproxen,API,Clean Organic NSAID,Benzoic acid,Excipient,Clean Organic Acid,0.1944,0.3474,0.9354,0.8655,0.588,0.671
+52,Naproxen,API,Clean Organic NSAID,Baclofen,API,Monochlorinated API,0.2174,0.3574,0.861,0.7312,0.5037,0.5138
+53,Naproxen,API,Clean Organic NSAID,Diclofenac,API,Dichlorinated API,0.1373,0.2414,0.9475,0.8821,0.7061,0.7449
+54,Naproxen,API,Clean Organic NSAID,Trichlormethiazide,API,Trichlorinated API,0.0806,0.1506,0.715,0.5557,0.5644,0.4751
+55,Naproxen,API,Clean Organic NSAID,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,0.1795,0.3153,0.8932,0.8064,0.578,0.6269
+56,Naproxen,API,Clean Organic NSAID,Sodium citrate,Excipient,Sodium Salt of Citric acid,0.0698,0.1351,0.6213,0.3234,0.4862,0.2536
+57,Naproxen,API,Clean Organic NSAID,Glucose hydrate,Excipient,Sugar / Polyol Excipient,0.0682,0.1313,0.7231,0.5566,0.5918,0.4885
+58,Naproxen,API,Clean Organic NSAID,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),0.1667,0.309,0.6969,0.4801,0.3879,0.3134
+59,Naproxen,API,Clean Organic NSAID,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),0.0286,0.0702,0.3989,0.2491,0.3288,0.2206
+60,Naproxen,API,Clean Organic NSAID,Magnesium oxide,Excipient,Inorganic Metal Oxide,0.0323,0.1072,0.2704,0.1546,0.1632,0.1224
+61,Phenytoin,API,Clean Organic Hydantoin,Aspirin,API,Clean Organic NSAID,0.1795,0.3046,0.6717,0.4957,0.3671,0.3162
+62,Phenytoin,API,Clean Organic Hydantoin,Acetaminophen,API,Clean Organic Analgesic,0.1081,0.1956,0.7786,0.5919,0.583,0.4838
+63,Phenytoin,API,Clean Organic Hydantoin,Ibuprofen,API,Clean Organic NSAID,0.119,0.2132,0.6697,0.5023,0.4565,0.3832
+64,Phenytoin,API,Clean Organic Hydantoin,Naproxen,API,Clean Organic NSAID,0.1333,0.2375,0.8315,0.7058,0.594,0.5725
+65,Phenytoin,API,Clean Organic Hydantoin,Citric acid,Excipient,Clean Organic Acid,0.1212,0.2202,0.4706,0.274,0.2504,0.1527
+66,Phenytoin,API,Clean Organic Hydantoin,Benzoic acid,Excipient,Clean Organic Acid,0.2414,0.3989,0.7693,0.6003,0.3704,0.3589
+67,Phenytoin,API,Clean Organic Hydantoin,Baclofen,API,Monochlorinated API,0.1395,0.2462,0.621,0.4472,0.3748,0.3076
+68,Phenytoin,API,Clean Organic Hydantoin,Diclofenac,API,Dichlorinated API,0.186,0.3167,0.7914,0.6536,0.4747,0.4675
+69,Phenytoin,API,Clean Organic Hydantoin,Trichlormethiazide,API,Trichlorinated API,0.0714,0.1383,0.5258,0.3559,0.3875,0.2845
+70,Phenytoin,API,Clean Organic Hydantoin,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,0.2188,0.362,0.6946,0.5303,0.3327,0.3115
+71,Phenytoin,API,Clean Organic Hydantoin,Sodium citrate,Excipient,Sodium Salt of Citric acid,0.0541,0.1034,0.39,0.194,0.2866,0.1399
+72,Phenytoin,API,Clean Organic Hydantoin,Glucose hydrate,Excipient,Sugar / Polyol Excipient,0.0,0.0,0.5654,0.3934,0.5654,0.3934
+73,Phenytoin,API,Clean Organic Hydantoin,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),0.0294,0.0591,0.4402,0.2682,0.3811,0.2388
+74,Phenytoin,API,Clean Organic Hydantoin,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),0.0357,0.0806,0.3574,0.2167,0.2768,0.181
+75,Phenytoin,API,Clean Organic Hydantoin,Magnesium oxide,Excipient,Inorganic Metal Oxide,0.0417,0.1231,0.3336,0.1937,0.2105,0.152
+76,Citric acid,Excipient,Clean Organic Acid,Aspirin,API,Clean Organic NSAID,0.1143,0.2108,0.7256,0.4431,0.5147,0.3288
+77,Citric acid,Excipient,Clean Organic Acid,Acetaminophen,API,Clean Organic Analgesic,0.0968,0.1777,0.5563,0.2768,0.3786,0.18
+78,Citric acid,Excipient,Clean Organic Acid,Ibuprofen,API,Clean Organic NSAID,0.1429,0.2582,0.6784,0.4631,0.4202,0.3203
+79,Citric acid,Excipient,Clean Organic Acid,Naproxen,API,Clean Organic NSAID,0.1,0.1918,0.6567,0.403,0.4649,0.303
+80,Citric acid,Excipient,Clean Organic Acid,Phenytoin,API,Clean Organic Hydantoin,0.1212,0.2202,0.4706,0.274,0.2504,0.1527
+81,Citric acid,Excipient,Clean Organic Acid,Benzoic acid,Excipient,Clean Organic Acid,0.2083,0.345,0.742,0.4356,0.3969,0.2272
+82,Citric acid,Excipient,Clean Organic Acid,Baclofen,API,Monochlorinated API,0.1667,0.2981,0.6194,0.4151,0.3213,0.2485
+83,Citric acid,Excipient,Clean Organic Acid,Diclofenac,API,Dichlorinated API,0.1579,0.2877,0.6046,0.3918,0.3169,0.2339
+84,Citric acid,Excipient,Clean Organic Acid,Trichlormethiazide,API,Trichlorinated API,0.0192,0.0419,0.5384,0.3161,0.4965,0.2968
+85,Citric acid,Excipient,Clean Organic Acid,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,0.1429,0.2505,0.6907,0.442,0.4402,0.2992
+86,Citric acid,Excipient,Clean Organic Acid,Sodium citrate,Excipient,Sodium Salt of Citric acid,0.3333,0.501,0.763,0.5989,0.262,0.2655
+87,Citric acid,Excipient,Clean Organic Acid,Glucose hydrate,Excipient,Sugar / Polyol Excipient,0.0645,0.1217,0.6372,0.4223,0.5155,0.3578
+88,Citric acid,Excipient,Clean Organic Acid,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),0.12,0.2148,0.6768,0.5033,0.4619,0.3833
+89,Citric acid,Excipient,Clean Organic Acid,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),0.0476,0.0976,0.3833,0.2033,0.2857,0.1557
+90,Citric acid,Excipient,Clean Organic Acid,Magnesium oxide,Excipient,Inorganic Metal Oxide,0.0588,0.1491,0.2631,0.1198,0.1141,0.0609
+91,Benzoic acid,Excipient,Clean Organic Acid,Aspirin,API,Clean Organic NSAID,0.3571,0.5455,0.9377,0.8795,0.3921,0.5224
+92,Benzoic acid,Excipient,Clean Organic Acid,Acetaminophen,API,Clean Organic Analgesic,0.2222,0.3679,0.8765,0.7757,0.5086,0.5535
+93,Benzoic acid,Excipient,Clean Organic Acid,Ibuprofen,API,Clean Organic NSAID,0.2188,0.3742,0.8703,0.7203,0.4961,0.5016
+94,Benzoic acid,Excipient,Clean Organic Acid,Naproxen,API,Clean Organic NSAID,0.1944,0.3474,0.9354,0.8655,0.588,0.671
+95,Benzoic acid,Excipient,Clean Organic Acid,Phenytoin,API,Clean Organic Hydantoin,0.2414,0.3989,0.7693,0.6003,0.3704,0.3589
+96,Benzoic acid,Excipient,Clean Organic Acid,Citric acid,Excipient,Clean Organic Acid,0.2083,0.345,0.742,0.4356,0.3969,0.2272
+97,Benzoic acid,Excipient,Clean Organic Acid,Baclofen,API,Monochlorinated API,0.2059,0.36,0.8366,0.6593,0.4765,0.4534
+98,Benzoic acid,Excipient,Clean Organic Acid,Diclofenac,API,Dichlorinated API,0.2647,0.4467,0.876,0.7304,0.4294,0.4657
+99,Benzoic acid,Excipient,Clean Organic Acid,Trichlormethiazide,API,Trichlorinated API,0.0612,0.1301,0.672,0.4954,0.5419,0.4342
+100,Benzoic acid,Excipient,Clean Organic Acid,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,0.55,0.713,0.9184,0.83,0.2054,0.28
+101,Benzoic acid,Excipient,Clean Organic Acid,Sodium citrate,Excipient,Sodium Salt of Citric acid,0.1481,0.2593,0.6439,0.3039,0.3846,0.1557
+102,Benzoic acid,Excipient,Clean Organic Acid,Glucose hydrate,Excipient,Sugar / Polyol Excipient,0.0323,0.063,0.7467,0.5614,0.6837,0.5292
+103,Benzoic acid,Excipient,Clean Organic Acid,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),0.125,0.2224,0.7125,0.4588,0.4901,0.3338
+104,Benzoic acid,Excipient,Clean Organic Acid,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),0.05,0.101,0.4178,0.2607,0.3168,0.2107
+105,Benzoic acid,Excipient,Clean Organic Acid,Magnesium oxide,Excipient,Inorganic Metal Oxide,0.0625,0.1543,0.3543,0.2152,0.2,0.1527
+106,Baclofen,API,Monochlorinated API,Aspirin,API,Clean Organic NSAID,0.1591,0.275,0.9104,0.7859,0.6354,0.6268
+107,Baclofen,API,Monochlorinated API,Acetaminophen,API,Clean Organic Analgesic,0.15,0.2649,0.8677,0.6688,0.6028,0.5188
+108,Baclofen,API,Monochlorinated API,Ibuprofen,API,Clean Organic NSAID,0.2683,0.4234,0.9699,0.9398,0.5465,0.6716
+109,Baclofen,API,Monochlorinated API,Naproxen,API,Clean Organic NSAID,0.2174,0.3574,0.861,0.7312,0.5037,0.5138
+110,Baclofen,API,Monochlorinated API,Phenytoin,API,Clean Organic Hydantoin,0.1395,0.2462,0.621,0.4472,0.3748,0.3076
+111,Baclofen,API,Monochlorinated API,Citric acid,Excipient,Clean Organic Acid,0.1667,0.2981,0.6194,0.4151,0.3213,0.2485
+112,Baclofen,API,Monochlorinated API,Benzoic acid,Excipient,Clean Organic Acid,0.2059,0.36,0.8366,0.6593,0.4765,0.4534
+113,Baclofen,API,Monochlorinated API,Diclofenac,API,Dichlorinated API,0.2444,0.3931,0.8248,0.7004,0.4317,0.4559
+114,Baclofen,API,Monochlorinated API,Trichlormethiazide,API,Trichlorinated API,0.1404,0.2498,0.8218,0.6835,0.572,0.5432
+115,Baclofen,API,Monochlorinated API,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,0.2222,0.3734,0.9536,0.8879,0.5802,0.6657
+116,Baclofen,API,Monochlorinated API,Sodium citrate,Excipient,Sodium Salt of Citric acid,0.1,0.1867,0.7795,0.519,0.5928,0.419
+117,Baclofen,API,Monochlorinated API,Glucose hydrate,Excipient,Sugar / Polyol Excipient,0.0714,0.1361,0.8509,0.7391,0.7148,0.6676
+118,Baclofen,API,Monochlorinated API,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),0.1111,0.2135,0.8977,0.7894,0.6842,0.6783
+119,Baclofen,API,Monochlorinated API,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),0.0303,0.0727,0.2364,0.1316,0.1637,0.1013
+120,Baclofen,API,Monochlorinated API,Magnesium oxide,Excipient,Inorganic Metal Oxide,0.0345,0.1111,0.0588,0.0286,0.0523,0.0059
+121,Diclofenac,API,Dichlorinated API,Aspirin,API,Clean Organic NSAID,0.2045,0.3411,0.8135,0.6605,0.4724,0.456
+122,Diclofenac,API,Dichlorinated API,Acetaminophen,API,Clean Organic Analgesic,0.1707,0.2982,0.8421,0.6556,0.5439,0.4848
+123,Diclofenac,API,Dichlorinated API,Ibuprofen,API,Clean Organic NSAID,0.1739,0.2971,0.8446,0.731,0.5475,0.5571
+124,Diclofenac,API,Dichlorinated API,Naproxen,API,Clean Organic NSAID,0.1373,0.2414,0.9475,0.8821,0.7061,0.7449
+125,Diclofenac,API,Dichlorinated API,Phenytoin,API,Clean Organic Hydantoin,0.186,0.3167,0.7914,0.6536,0.4747,0.4675
+126,Diclofenac,API,Dichlorinated API,Citric acid,Excipient,Clean Organic Acid,0.1579,0.2877,0.6046,0.3918,0.3169,0.2339
+127,Diclofenac,API,Dichlorinated API,Benzoic acid,Excipient,Clean Organic Acid,0.2647,0.4467,0.876,0.7304,0.4294,0.4657
+128,Diclofenac,API,Dichlorinated API,Baclofen,API,Monochlorinated API,0.2444,0.3931,0.8248,0.7004,0.4317,0.4559
+129,Diclofenac,API,Dichlorinated API,Trichlormethiazide,API,Trichlorinated API,0.1167,0.2109,0.7088,0.5443,0.498,0.4277
+130,Diclofenac,API,Dichlorinated API,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,0.2432,0.4053,0.8392,0.7147,0.4339,0.4714
+131,Diclofenac,API,Dichlorinated API,Sodium citrate,Excipient,Sodium Salt of Citric acid,0.0952,0.1802,0.603,0.3474,0.4228,0.2521
+132,Diclofenac,API,Dichlorinated API,Glucose hydrate,Excipient,Sugar / Polyol Excipient,0.0444,0.0875,0.6841,0.5199,0.5965,0.4754
+133,Diclofenac,API,Dichlorinated API,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),0.0769,0.1545,0.6498,0.4621,0.4953,0.3852
+134,Diclofenac,API,Dichlorinated API,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),0.0286,0.0702,0.3621,0.2188,0.2919,0.1902
+135,Diclofenac,API,Dichlorinated API,Magnesium oxide,Excipient,Inorganic Metal Oxide,0.0323,0.1072,0.2129,0.1139,0.1057,0.0817
+136,Trichlormethiazide,API,Trichlorinated API,Aspirin,API,Clean Organic NSAID,0.069,0.1325,0.754,0.5997,0.6216,0.5307
+137,Trichlormethiazide,API,Trichlorinated API,Acetaminophen,API,Clean Organic Analgesic,0.0556,0.1116,0.7717,0.598,0.6601,0.5424
+138,Trichlormethiazide,API,Trichlorinated API,Ibuprofen,API,Clean Organic NSAID,0.0678,0.1298,0.8291,0.7008,0.6993,0.633
+139,Trichlormethiazide,API,Trichlorinated API,Naproxen,API,Clean Organic NSAID,0.0806,0.1506,0.715,0.5557,0.5644,0.4751
+140,Trichlormethiazide,API,Trichlorinated API,Phenytoin,API,Clean Organic Hydantoin,0.0714,0.1383,0.5258,0.3559,0.3875,0.2845
+141,Trichlormethiazide,API,Trichlorinated API,Citric acid,Excipient,Clean Organic Acid,0.0192,0.0419,0.5384,0.3161,0.4965,0.2968
+142,Trichlormethiazide,API,Trichlorinated API,Benzoic acid,Excipient,Clean Organic Acid,0.0612,0.1301,0.672,0.4954,0.5419,0.4342
+143,Trichlormethiazide,API,Trichlorinated API,Baclofen,API,Monochlorinated API,0.1404,0.2498,0.8218,0.6835,0.572,0.5432
+144,Trichlormethiazide,API,Trichlorinated API,Diclofenac,API,Dichlorinated API,0.1167,0.2109,0.7088,0.5443,0.498,0.4277
+145,Trichlormethiazide,API,Trichlorinated API,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,0.0577,0.118,0.7878,0.6498,0.6697,0.5921
+146,Trichlormethiazide,API,Trichlorinated API,Sodium citrate,Excipient,Sodium Salt of Citric acid,0.0185,0.0393,0.6886,0.3845,0.6492,0.366
+147,Trichlormethiazide,API,Trichlorinated API,Glucose hydrate,Excipient,Sugar / Polyol Excipient,0.0182,0.0382,0.7521,0.5971,0.7138,0.579
+148,Trichlormethiazide,API,Trichlorinated API,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),0.0408,0.09,0.7885,0.5934,0.6986,0.5525
+149,Trichlormethiazide,API,Trichlorinated API,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),0.0714,0.1839,0.3366,0.2023,0.1527,0.1309
+150,Trichlormethiazide,API,Trichlorinated API,Magnesium oxide,Excipient,Inorganic Metal Oxide,0.025,0.0937,0.0125,0.0062,0.0812,0.0188
+151,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,Aspirin,API,Clean Organic NSAID,0.2812,0.4456,0.952,0.9005,0.5065,0.6193
+152,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,Acetaminophen,API,Clean Organic Analgesic,0.2,0.3338,0.9101,0.7936,0.5762,0.5936
+153,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,Ibuprofen,API,Clean Organic NSAID,0.2,0.3395,0.9444,0.8823,0.6049,0.6823
+154,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,Naproxen,API,Clean Organic NSAID,0.1795,0.3153,0.8932,0.8064,0.578,0.6269
+155,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,Phenytoin,API,Clean Organic Hydantoin,0.2188,0.362,0.6946,0.5303,0.3327,0.3115
+156,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,Citric acid,Excipient,Clean Organic Acid,0.1429,0.2505,0.6907,0.442,0.4402,0.2992
+157,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,Benzoic acid,Excipient,Clean Organic Acid,0.55,0.713,0.9184,0.83,0.2054,0.28
+158,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,Baclofen,API,Monochlorinated API,0.2222,0.3734,0.9536,0.8879,0.5802,0.6657
+159,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,Diclofenac,API,Dichlorinated API,0.2432,0.4053,0.8392,0.7147,0.4339,0.4714
+160,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,Trichlormethiazide,API,Trichlorinated API,0.0577,0.118,0.7878,0.6498,0.6697,0.5921
+161,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,Sodium citrate,Excipient,Sodium Salt of Citric acid,0.2143,0.3529,0.7562,0.4347,0.4032,0.2204
+162,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,Glucose hydrate,Excipient,Sugar / Polyol Excipient,0.0294,0.0572,0.8525,0.734,0.7954,0.7046
+163,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),0.2,0.3363,0.8777,0.7035,0.5414,0.5035
+164,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),0.0909,0.1833,0.3382,0.2035,0.1549,0.1126
+165,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,Magnesium oxide,Excipient,Inorganic Metal Oxide,0.0526,0.14,0.188,0.1021,0.0479,0.0495
+166,Sodium citrate,Excipient,Sodium Salt of Citric acid,Aspirin,API,Clean Organic NSAID,0.0789,0.1485,0.722,0.3744,0.5735,0.2955
+167,Sodium citrate,Excipient,Sodium Salt of Citric acid,Acetaminophen,API,Clean Organic Analgesic,0.0909,0.1669,0.6289,0.2739,0.462,0.183
+168,Sodium citrate,Excipient,Sodium Salt of Citric acid,Ibuprofen,API,Clean Organic NSAID,0.1053,0.194,0.7833,0.5058,0.5893,0.4005
+169,Sodium citrate,Excipient,Sodium Salt of Citric acid,Naproxen,API,Clean Organic NSAID,0.0698,0.1351,0.6213,0.3234,0.4862,0.2536
+170,Sodium citrate,Excipient,Sodium Salt of Citric acid,Phenytoin,API,Clean Organic Hydantoin,0.0541,0.1034,0.39,0.194,0.2866,0.1399
+171,Sodium citrate,Excipient,Sodium Salt of Citric acid,Citric acid,Excipient,Clean Organic Acid,0.3333,0.501,0.763,0.5989,0.262,0.2655
+172,Sodium citrate,Excipient,Sodium Salt of Citric acid,Benzoic acid,Excipient,Clean Organic Acid,0.1481,0.2593,0.6439,0.3039,0.3846,0.1557
+173,Sodium citrate,Excipient,Sodium Salt of Citric acid,Baclofen,API,Monochlorinated API,0.1,0.1867,0.7795,0.519,0.5928,0.419
+174,Sodium citrate,Excipient,Sodium Salt of Citric acid,Diclofenac,API,Dichlorinated API,0.0952,0.1802,0.603,0.3474,0.4228,0.2521
+175,Sodium citrate,Excipient,Sodium Salt of Citric acid,Trichlormethiazide,API,Trichlorinated API,0.0185,0.0393,0.6886,0.3845,0.6492,0.366
+176,Sodium citrate,Excipient,Sodium Salt of Citric acid,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,0.2143,0.3529,0.7562,0.4347,0.4032,0.2204
+177,Sodium citrate,Excipient,Sodium Salt of Citric acid,Glucose hydrate,Excipient,Sugar / Polyol Excipient,0.0606,0.1143,0.7464,0.4694,0.632,0.4088
+178,Sodium citrate,Excipient,Sodium Salt of Citric acid,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),0.2,0.3363,0.859,0.6837,0.5226,0.4837
+179,Sodium citrate,Excipient,Sodium Salt of Citric acid,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),0.0909,0.1833,0.1209,0.0504,0.0625,0.0405
+180,Sodium citrate,Excipient,Sodium Salt of Citric acid,Magnesium oxide,Excipient,Inorganic Metal Oxide,0.0526,0.14,-0.0529,-0.0186,0.1929,0.0713
+181,Glucose hydrate,Excipient,Sugar / Polyol Excipient,Aspirin,API,Clean Organic NSAID,0.0244,0.0481,0.8245,0.675,0.7764,0.6506
+182,Glucose hydrate,Excipient,Sugar / Polyol Excipient,Acetaminophen,API,Clean Organic Analgesic,0.0278,0.0541,0.8158,0.6217,0.7618,0.5939
+183,Glucose hydrate,Excipient,Sugar / Polyol Excipient,Ibuprofen,API,Clean Organic NSAID,0.1026,0.1886,0.8492,0.7379,0.6606,0.6353
+184,Glucose hydrate,Excipient,Sugar / Polyol Excipient,Naproxen,API,Clean Organic NSAID,0.0682,0.1313,0.7231,0.5566,0.5918,0.4885
+185,Glucose hydrate,Excipient,Sugar / Polyol Excipient,Phenytoin,API,Clean Organic Hydantoin,0.0,0.0,0.5654,0.3934,0.5654,0.3934
+186,Glucose hydrate,Excipient,Sugar / Polyol Excipient,Citric acid,Excipient,Clean Organic Acid,0.0645,0.1217,0.6372,0.4223,0.5155,0.3578
+187,Glucose hydrate,Excipient,Sugar / Polyol Excipient,Benzoic acid,Excipient,Clean Organic Acid,0.0323,0.063,0.7467,0.5614,0.6837,0.5292
+188,Glucose hydrate,Excipient,Sugar / Polyol Excipient,Baclofen,API,Monochlorinated API,0.0714,0.1361,0.8509,0.7391,0.7148,0.6676
+189,Glucose hydrate,Excipient,Sugar / Polyol Excipient,Diclofenac,API,Dichlorinated API,0.0444,0.0875,0.6841,0.5199,0.5965,0.4754
+190,Glucose hydrate,Excipient,Sugar / Polyol Excipient,Trichlormethiazide,API,Trichlorinated API,0.0182,0.0382,0.7521,0.5971,0.7138,0.579
+191,Glucose hydrate,Excipient,Sugar / Polyol Excipient,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,0.0294,0.0572,0.8525,0.734,0.7954,0.7046
+192,Glucose hydrate,Excipient,Sugar / Polyol Excipient,Sodium citrate,Excipient,Sodium Salt of Citric acid,0.0606,0.1143,0.7464,0.4694,0.632,0.4088
+193,Glucose hydrate,Excipient,Sugar / Polyol Excipient,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),0.0333,0.0654,0.8566,0.7148,0.7912,0.6814
+194,Glucose hydrate,Excipient,Sugar / Polyol Excipient,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),0.0,0.0,0.2979,0.1732,0.2979,0.1732
+195,Glucose hydrate,Excipient,Sugar / Polyol Excipient,Magnesium oxide,Excipient,Inorganic Metal Oxide,0.0,0.0,0.1306,0.0669,0.1306,0.0669
+196,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),Aspirin,API,Clean Organic NSAID,0.1212,0.2265,0.8354,0.6103,0.6089,0.4891
+197,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),Acetaminophen,API,Clean Organic Analgesic,0.1429,0.2545,0.7449,0.4616,0.4904,0.3188
+198,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),Ibuprofen,API,Clean Organic NSAID,0.1875,0.3328,0.8859,0.7588,0.5531,0.5713
+199,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),Naproxen,API,Clean Organic NSAID,0.1667,0.309,0.6969,0.4801,0.3879,0.3134
+200,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),Phenytoin,API,Clean Organic Hydantoin,0.0294,0.0591,0.4402,0.2682,0.3811,0.2388
+201,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),Citric acid,Excipient,Clean Organic Acid,0.12,0.2148,0.6768,0.5033,0.4619,0.3833
+202,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),Benzoic acid,Excipient,Clean Organic Acid,0.125,0.2224,0.7125,0.4588,0.4901,0.3338
+203,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),Baclofen,API,Monochlorinated API,0.1111,0.2135,0.8977,0.7894,0.6842,0.6783
+204,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),Diclofenac,API,Dichlorinated API,0.0769,0.1545,0.6498,0.4621,0.4953,0.3852
+205,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),Trichlormethiazide,API,Trichlorinated API,0.0408,0.09,0.7885,0.5934,0.6986,0.5525
+206,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,0.2,0.3363,0.8777,0.7035,0.5414,0.5035
+207,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),Sodium citrate,Excipient,Sodium Salt of Citric acid,0.2,0.3363,0.859,0.6837,0.5226,0.4837
+208,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),Glucose hydrate,Excipient,Sugar / Polyol Excipient,0.0333,0.0654,0.8566,0.7148,0.7912,0.6814
+209,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),0.1765,0.3145,0.2379,0.1254,0.0765,0.0511
+210,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),Magnesium oxide,Excipient,Inorganic Metal Oxide,0.0667,0.1601,0.0232,0.0103,0.137,0.0564
+211,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),Aspirin,API,Clean Organic NSAID,0.0333,0.0772,0.3623,0.2204,0.2852,0.187
+212,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),Acetaminophen,API,Clean Organic Analgesic,0.04,0.0867,0.4074,0.248,0.3207,0.208
+213,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),Ibuprofen,API,Clean Organic NSAID,0.0323,0.0756,0.2721,0.1558,0.1965,0.1235
+214,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),Naproxen,API,Clean Organic NSAID,0.0286,0.0702,0.3989,0.2491,0.3288,0.2206
+215,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),Phenytoin,API,Clean Organic Hydantoin,0.0357,0.0806,0.3574,0.2167,0.2768,0.181
+216,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),Citric acid,Excipient,Clean Organic Acid,0.0476,0.0976,0.3833,0.2033,0.2857,0.1557
+217,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),Benzoic acid,Excipient,Clean Organic Acid,0.05,0.101,0.4178,0.2607,0.3168,0.2107
+218,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),Baclofen,API,Monochlorinated API,0.0303,0.0727,0.2364,0.1316,0.1637,0.1013
+219,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),Diclofenac,API,Dichlorinated API,0.0286,0.0702,0.3621,0.2188,0.2919,0.1902
+220,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),Trichlormethiazide,API,Trichlorinated API,0.0714,0.1839,0.3366,0.2023,0.1527,0.1309
+221,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,0.0909,0.1833,0.3382,0.2035,0.1549,0.1126
+222,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),Sodium citrate,Excipient,Sodium Salt of Citric acid,0.0909,0.1833,0.1209,0.0504,0.0625,0.0405
+223,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),Glucose hydrate,Excipient,Sugar / Polyol Excipient,0.0,0.0,0.2979,0.1732,0.2979,0.1732
+224,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),0.1765,0.3145,0.2379,0.1254,0.0765,0.0511
+225,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),Magnesium oxide,Excipient,Inorganic Metal Oxide,0.1111,0.2182,0.6073,0.4287,0.389,0.3176
+226,Magnesium oxide,Excipient,Inorganic Metal Oxide,Aspirin,API,Clean Organic NSAID,0.0385,0.1179,0.2367,0.1339,0.1189,0.0954
+227,Magnesium oxide,Excipient,Inorganic Metal Oxide,Acetaminophen,API,Clean Organic Analgesic,0.0476,0.1325,0.2471,0.1406,0.1146,0.0929
+228,Magnesium oxide,Excipient,Inorganic Metal Oxide,Ibuprofen,API,Clean Organic NSAID,0.037,0.1155,0.1015,0.0512,0.014,0.0141
+229,Magnesium oxide,Excipient,Inorganic Metal Oxide,Naproxen,API,Clean Organic NSAID,0.0323,0.1072,0.2704,0.1546,0.1632,0.1224
+230,Magnesium oxide,Excipient,Inorganic Metal Oxide,Phenytoin,API,Clean Organic Hydantoin,0.0417,0.1231,0.3336,0.1937,0.2105,0.152
+231,Magnesium oxide,Excipient,Inorganic Metal Oxide,Citric acid,Excipient,Clean Organic Acid,0.0588,0.1491,0.2631,0.1198,0.1141,0.0609
+232,Magnesium oxide,Excipient,Inorganic Metal Oxide,Benzoic acid,Excipient,Clean Organic Acid,0.0625,0.1543,0.3543,0.2152,0.2,0.1527
+233,Magnesium oxide,Excipient,Inorganic Metal Oxide,Baclofen,API,Monochlorinated API,0.0345,0.1111,0.0588,0.0286,0.0523,0.0059
+234,Magnesium oxide,Excipient,Inorganic Metal Oxide,Diclofenac,API,Dichlorinated API,0.0323,0.1072,0.2129,0.1139,0.1057,0.0817
+235,Magnesium oxide,Excipient,Inorganic Metal Oxide,Trichlormethiazide,API,Trichlorinated API,0.025,0.0937,0.0125,0.0062,0.0812,0.0188
+236,Magnesium oxide,Excipient,Inorganic Metal Oxide,Sodium benzoate,Excipient,Sodium Salt of Benzoic acid,0.0526,0.14,0.188,0.1021,0.0479,0.0495
+237,Magnesium oxide,Excipient,Inorganic Metal Oxide,Sodium citrate,Excipient,Sodium Salt of Citric acid,0.0526,0.14,-0.0529,-0.0186,0.1929,0.0713
+238,Magnesium oxide,Excipient,Inorganic Metal Oxide,Glucose hydrate,Excipient,Sugar / Polyol Excipient,0.0,0.0,0.1306,0.0669,0.1306,0.0669
+239,Magnesium oxide,Excipient,Inorganic Metal Oxide,Calcium lactate,Excipient,Organic Divalent Salt (Ca+2),0.0667,0.1601,0.0232,0.0103,0.137,0.0564
+240,Magnesium oxide,Excipient,Inorganic Metal Oxide,Calcium sulfate,Excipient,Inorganic Sulfate Salt (Ca+2),0.1111,0.2182,0.6073,0.4287,0.389,0.3176

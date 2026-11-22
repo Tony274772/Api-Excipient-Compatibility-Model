@@ -1,0 +1,122 @@
+row_id,API_CID,api_name,Excipient_CID,excipient_name,Outcome1,reason,API_Smiles,Excipient_Smiles
+0,196,Adipic Acid,24434,Potassium Nitrate,1,Excipient:lab_reagent,C(CCC(=O)O)CC(=O)O,[N+](=O)([O-])[O-].[K+]
+1,196,Adipic Acid,516875,Potassium Permanganate,1,Excipient:lab_reagent,C(CCC(=O)O)CC(=O)O,[O-][Mn](=O)(=O)=O.[K+]
+2,196,Adipic Acid,24823,Ozone,1,Excipient:lab_reagent,C(CCC(=O)O)CC(=O)O,[O-][O+]=O
+3,196,Adipic Acid,14793,Lead dioxide,1,Excipient:lab_reagent,C(CCC(=O)O)CC(=O)O,O=[Pb]=O
+6,244,Benzyl Alcohol,516875,Potassium Permanganate,1,Excipient:lab_reagent,C1=CC=C(C=C1)CO,[O-][Mn](=O)(=O)=O.[K+]
+7,244,Benzyl Alcohol,24823,Ozone,1,Excipient:lab_reagent,C1=CC=C(C=C1)CO,[O-][O+]=O
+9,244,Benzyl Alcohol,1118,Sulfuric Acid,1,Excipient:lab_reagent,C1=CC=C(C=C1)CO,OS(=O)(=O)O
+12,753,Glycerol,516875,Potassium Permanganate,1,Excipient:lab_reagent,C(C(CO)O)O,[O-][Mn](=O)(=O)=O.[K+]
+13,753,Glycerol,6426889,Potassium Chlorate,1,Excipient:lab_reagent,C(C(CO)O)O,[O-]Cl(=O)=O.[K+]
+14,753,Glycerol,14915,Chromium Trioxide,1,Excipient:lab_reagent,C(C(CO)O)O,O=[Cr](=O)=O
+15,1103,Spermine,751,Glyceraldehyde,1,Excipient:lab_reagent,C(CCNCCCN)CNCCCN,C(C(C=O)O)O
+26,1983,Acetaminophen,14778,Calcium Oxide,1,Excipient:lab_reagent,CC(=O)NC1=CC=C(C=C1)O,O=[Ca]
+36,1983,Acetaminophen,1264,(2-{[4-({4-[(4-Formylamino-1-methyl-1h-imidazole-2-carbonyl)-amino]-1-methyl-1h-imidazole-2-carbonyl}-amino)-1-methyl-1h-imidazole-2-carbonyl]-amino}-ethyl)-dimethyl-ammonium,0,Excipient:research_chemical,CC(=O)NC1=CC=C(C=C1)O,CN1C=C(N=C1C(=O)NC2=CN(C(=N2)C(=O)NC3=CN(C(=N3)C(=O)NCC[NH+](C)C)C)C)NC=O
+102,2345,Benzyl Benzoate,516875,Potassium Permanganate,1,Excipient:lab_reagent,C1=CC=C(C=C1)COC(=O)C2=CC=CC=C2,[O-][Mn](=O)(=O)=O.[K+]
+103,2345,Benzyl Benzoate,24823,Ozone,1,Excipient:lab_reagent,C1=CC=C(C=C1)COC(=O)C2=CC=CC=C2,[O-][O+]=O
+106,2369,Betaxolol,751,Glyceraldehyde,1,Excipient:lab_reagent,CC(C)NCC(COC1=CC=C(C=C1)CCOCC2CC2)O,C(C(C=O)O)O
+116,2450,Bronopol,5359268,Aluminum,1,Excipient:elemental,C(C(CO)([N+](=O)[O-])Br)O,[Al]
+119,2450,Bronopol,5460613,Mercapto,1,Excipient:invalid_structure,C(C(CO)([N+](=O)[O-])Br)O,[SH]
+162,3026,Dibutyl Phthalate,943,Nitrate,1,Excipient:bare_ion,CCCCOC(=O)C1=CC=CC=C1C(=O)OCCCC,[N+](=O)([O-])[O-]
+164,3026,Dibutyl Phthalate,24526,Chlorine,1,Excipient:lab_reagent,CCCCOC(=O)C1=CC=CC=C1C(=O)OCCCC,ClCl
+165,3026,Dibutyl Phthalate,1118,Sulfuric Acid,1,Excipient:lab_reagent,CCCCOC(=O)C1=CC=CC=C1C(=O)OCCCC,OS(=O)(=O)O
+218,3478,Glipizide,21257725,"2-Amino-2-(hydroxymethyl)propane-1,3-diol;2-(2-(bis(carboxymethyl)amino)ethyl-(carboxymethyl)amino)acetic acid;boric acid",1,Excipient:lab_reagent,CC1=CN=C(C=N1)C(=O)NCCC2=CC=C(C=C2)S(=O)(=O)NC(=O)NC3CCCCC3,B(O)(O)O.C(CN(CC(=O)O)CC(=O)O)N(CC(=O)O)CC(=O)O.C(C(CO)(CO)N)O
+232,3559,Haloperidol,237332,5-(Hydroxymethyl)furfural,1,Excipient:degradant,C1CN(CCC1(C2=CC=C(C=C2)Cl)O)CCCC(=O)C3=CC=C(C=C3)F,C1=C(OC(=C1)C=O)CO
+265,3749,Irbesartan,712,Formaldehyde,1,Excipient:lab_reagent,CCCCC1=NC2(CCCC2)C(=O)N1CC3=CC=C(C=C3)C4=CC=CC=C4C5=NNN=N5,C=O
+390,4763,Phenobarbital,6635,Chlorfenson,0,Excipient:lab_reagent,CCC1(C(=O)NC(=O)NC1=O)C2=CC=CC=C2,C1=CC(=CC=C1OS(=O)(=O)C2=CC=C(C=C2)Cl)Cl
+394,4771,Phentermine,712,Formaldehyde,1,Excipient:lab_reagent,CC(C)(CC1=CC=CC=C1)N,C=O
+480,5665,Vigabatrin,237332,5-(Hydroxymethyl)furfural,1,Excipient:degradant,C=CC(CCC(=O)O)N,C1=C(OC(=C1)C=O)CO
+498,5962,L-Lysine,104748,Bisulfite,0,Excipient:bare_ion,C(CCN)CC(C(=O)O)N,OS(=O)[O-]
+538,6116,Calcium Acetate,516875,Potassium Permanganate,1,Excipient:lab_reagent,CC(=O)[O-].CC(=O)[O-].[Ca+2],[O-][Mn](=O)(=O)=O.[K+]
+539,6116,Calcium Acetate,24823,Ozone,1,Excipient:lab_reagent,CC(=O)[O-].CC(=O)[O-].[Ca+2],[O-][O+]=O
+540,6116,Calcium Acetate,784,Hydrogen Peroxide,1,Excipient:lab_reagent,CC(=O)[O-].CC(=O)[O-].[Ca+2],OO
+546,6253,Cytarabine,31296,Dibromochloromethane,0,Excipient:lab_reagent,C1=CN(C(=O)N=C1N)C2C(C(C(O2)CO)O)O,C(Cl)(Br)Br
+549,6354,Ethylene Oxide,9989226,Alumina,1,API:lab_reagent,C1CO1,[O-2].[O-2].[O-2].[Al+3].[Al+3]
+551,7628,Boric Acid,5462222,Potassium,1,Excipient:elemental,B(O)(O)O,[K]
+553,8753,Benzododecinium Chloride,5359268,Aluminum,1,Excipient:elemental,CCCCCCCCCCCC[N+](C)(C)CC1=CC=CC=C1.[Cl-],[Al]
+554,8753,Benzododecinium Chloride,30165,Iodide Ion,1,Excipient:bare_ion,CCCCCCCCCCCC[N+](C)(C)CC1=CC=CC=C1.[Cl-],[I-]
+555,8753,Benzododecinium Chloride,943,Nitrate,1,Excipient:bare_ion,CCCCCCCCCCCC[N+](C)(C)CC1=CC=CC=C1.[Cl-],[N+](=O)([O-])[O-]
+557,8753,Benzododecinium Chloride,31348,Citrate,1,Excipient:bare_ion,CCCCCCCCCCCC[N+](C)(C)CC1=CC=CC=C1.[Cl-],C(C(=O)[O-])C(CC(=O)[O-])(C(=O)[O-])O
+558,8753,Benzododecinium Chloride,3806114,"2,3-Dihydroxybutanedioate",1,Excipient:bare_ion,CCCCCCCCCCCC[N+](C)(C)CC1=CC=CC=C1.[Cl-],C(C(C(=O)[O-])O)(C(=O)[O-])O
+562,8753,Benzododecinium Chloride,784,Hydrogen Peroxide,1,Excipient:lab_reagent,CCCCCCCCCCCC[N+](C)(C)CC1=CC=CC=C1.[Cl-],OO
+563,8857,Ethyl Acetate,21226445,Aluminium lithium hydride,1,Excipient:lab_reagent,CCOC(=O)C,[H-].[H-].[H-].[H-].[Li+].[Al+3]
+564,8857,Ethyl Acetate,219520,2-(Chloromethyl)furan,1,Excipient:lab_reagent,CCOC(=O)C,C1=COC(=C1)CCl
+565,8857,Ethyl Acetate,23665647,Potassium tert-butoxide,1,Excipient:lab_reagent,CCOC(=O)C,CC(C)(C)[O-].[K+]
+566,8857,Ethyl Acetate,24638,Chlorosulfonic acid,1,Excipient:lab_reagent,CCOC(=O)C,OS(=O)(=O)Cl
+572,9280,Methylphenidate Hydrochloride,47932,"2-(2',4'-Diaminophenoxy)ethanol dihydrochloride",0,Excipient:invalid_structure,COC(=O)C(C1CCCCN1)C2=CC=CC=C2.Cl,C1=CC(=C(C=C1N)N)OCCO.Cl.Cl
+602,9550,Diazomethane,24497,Calcium Sulfate,1,API:lab_reagent,C=[N+]=[N-],[O-]S(=O)(=O)[O-].[Ca+2]
+603,10112,Calcium Carbonate,1118,Sulfuric Acid,1,Excipient:lab_reagent,C(=O)([O-])[O-].[Ca+2],OS(=O)(=O)O
+619,13144,Calcium Lactate,1061,Phosphate,1,Excipient:bare_ion,CC(C(=O)[O-])O.CC(C(=O)[O-])O.[Ca+2],[O-]P(=O)([O-])[O-]
+625,14250,Tetradecyltrimethylammonium bromide,807,Iodine,1,Excipient:lab_reagent,CCCCCCCCCCCCCC[N+](C)(C)C.[Br-],II
+627,14985,alpha-Tocopherol,104755,Silver cation,1,Excipient:bare_ion,CC1=C(C2=C(CCC(O2)(C)CCCC(C)CCCC(C)CCCC(C)C)C(=C1O)C)C,[Ag+]
+628,14985,alpha-Tocopherol,27099,Copper(2+),1,Excipient:bare_ion,CC1=C(C2=C(CCC(O2)(C)CCCC(C)CCCC(C)CCCC(C)C)C(=C1O)C)C,[Cu+2]
+629,14985,alpha-Tocopherol,27284,Ferrous cation,1,Excipient:bare_ion,CC1=C(C2=C(CCC(O2)(C)CCCC(C)CCCC(C)CCCC(C)C)C(=C1O)C)C,[Fe+2]
+630,14985,alpha-Tocopherol,29936,Ferric cation,1,Excipient:bare_ion,CC1=C(C2=C(CCC(O2)(C)CCCC(C)CCCC(C)CCCC(C)C)C(=C1O)C)C,[Fe+3]
+631,14986,Tocopherols,23954,Silver,1,Excipient:elemental,CC1=C(C=C2CCC(OC2=C1C)(C)CCCC(C)CCCC(C)CCCC(C)C)O,[Ag]
+632,14986,Tocopherols,23978,Copper,1,Excipient:elemental,CC1=C(C=C2CCC(OC2=C1C)(C)CCCC(C)CCCC(C)CCCC(C)C)O,[Cu]
+633,14986,Tocopherols,15908632,Acetone peroxide,1,Excipient:lab_reagent,CC1=C(C=C2CCC(OC2=C1C)(C)CCCC(C)CCCC(C)CCCC(C)C)O,CC(C)(OO)OO
+650,24497,Calcium Sulfate,5359268,Aluminum,1,Excipient:elemental,[O-]S(=O)(=O)[O-].[Ca+2],[Al]
+651,24497,Calcium Sulfate,5462309,Phosphorus,1,Excipient:elemental,[O-]S(=O)(=O)[O-].[Ca+2],[P]
+653,25517,Ammonium Chloride,22985,Ammonium nitrate,1,Excipient:lab_reagent,[NH4+].[Cl-],[NH4+].[N+](=O)([O-])[O-]
+654,25517,Ammonium Chloride,6426889,Potassium Chlorate,1,Excipient:lab_reagent,[NH4+].[Cl-],[O-]Cl(=O)=O.[K+]
+656,25517,Ammonium Chloride,1118,Sulfuric Acid,1,Excipient:lab_reagent,[NH4+].[Cl-],OS(=O)(=O)O
+674,31239,Cetylpyridinium Chloride,516875,Potassium Permanganate,1,Excipient:lab_reagent,CCCCCCCCCCCCCCCC[N+]1=CC=CC=C1.[Cl-],[O-][Mn](=O)(=O)=O.[K+]
+675,31239,Cetylpyridinium Chloride,24823,Ozone,1,Excipient:lab_reagent,CCCCCCCCCCCCCCCC[N+]1=CC=CC=C1.[Cl-],[O-][O+]=O
+678,31404,"2,6-Di-tert-butyl-4-methylphenol",24401,Permanganate,1,Excipient:bare_ion,CC1=CC(=C(C(=C1)C(C)(C)C)O)C(C)(C)C,[O-][Mn](=O)(=O)=O
+679,31404,"2,6-Di-tert-butyl-4-methylphenol",784,Hydrogen Peroxide,1,Excipient:lab_reagent,CC1=CC(=C(C(=C1)C(C)(C)C)O)C(C)(C)C,OO
+680,31703,Doxorubicin,31296,Dibromochloromethane,0,Excipient:lab_reagent,CC1C(C(CC(O1)OC2CC(CC3=C2C(=C4C(=C3O)C(=O)C5=C(C4=O)C(=CC=C5)OC)O)(C(=O)CO)O)N)O,C(Cl)(Br)Br
+693,34359,Carbidopa,261,Butanal,1,Excipient:lab_reagent,CC(CC1=CC(=C(C=C1)O)O)(C(=O)O)NN,CCCC=O
+717,41684,Nitazoxanide,47932,"2-(2',4'-Diaminophenoxy)ethanol dihydrochloride",0,Excipient:invalid_structure,CC(=O)OC1=CC=CC=C1C(=O)NC2=NC=C(S2)[N+](=O)[O-],C1=CC(=C(C=C1N)N)OCCO.Cl.Cl
+735,44093,Captopril,977,Oxygen,1,Excipient:lab_reagent,CC(CS)C(=O)N1CCCC1C(=O)O,O=O
+833,60606,Clopidogrel,102503,DL-2-Benzamido-5-guanidino-N-2-naphthylvaleramide hydrochloride,0,Excipient:research_chemical,COC(=O)C(C1=CC=CC=C1Cl)N2CCC3=C(C2)C=CS3,C1=CC=C(C=C1)C(=O)NC(CCCN=C(N)N)C(=O)NC2=CC3=CC=CC=C3C=C2.Cl
+897,62698,Dextrin,516875,Potassium Permanganate,1,Excipient:lab_reagent,C(C1C(C(C(C(O1)OC2C(OC(C(C2O)O)OC3C(OC(C(C3O)O)O)CO)CO)O)O)O)O,[O-][Mn](=O)(=O)=O.[K+]
+898,62698,Dextrin,24823,Ozone,1,Excipient:lab_reagent,C(C1C(C(C(C(O1)OC2C(OC(C(C2O)O)OC3C(OC(C(C3O)O)O)CO)CO)O)O)O)O,[O-][O+]=O
+931,63013,Tramadol Hydrochloride,784,Hydrogen Peroxide,0,Excipient:lab_reagent,CN(C)CC1CCCCC1(C2=CC(=CC=C2)OC)O.Cl,OO
+964,71412,Labetalol Hydrochloride,138843,"Phosphine, methylidyne-",0,Excipient:invalid_structure,CC(CCC1=CC=CC=C1)NCC(C2=CC(=C(C=C2)O)C(=O)N)O.Cl,C#P
+1078,119607,Valdecoxib,101418447,Methanidylidynephosphane,0,Excipient:invalid_structure,CC1=C(C(=NO1)C2=CC=CC=C2)C3=CC=C(C=C3)S(=O)(=O)N,[C-]#P
+1082,119607,Valdecoxib,160041,"Chryseno(4,5-bcd)thiophene-4,4-dioxide",0,Excipient:research_chemical,CC1=C(C(=NO1)C2=CC=CC=C2)C3=CC=C(C=C3)S(=O)(=O)N,C1=CC=C2C3=C4C(=CC2=C1)S(=O)(=O)C5=CC=CC(=C54)C=C3
+1104,121892,Ezogabine,47932,"2-(2',4'-Diaminophenoxy)ethanol dihydrochloride",0,Excipient:invalid_structure,CCOC(=O)NC1=C(C=C(C=C1)NCC2=CC=C(C=C2)F)N,C1=CC(=C(C=C1N)N)OCCO.Cl.Cl
+1229,156391,Naproxen,6635,Chlorfenson,0,Excipient:lab_reagent,CC(C1=CC2=C(C=C1)C=C(C=C2)OC)C(=O)O,C1=CC(=CC=C1OS(=O)(=O)C2=CC=C(C=C2)Cl)Cl
+1344,214350,Bms 204352,712,Formaldehyde,1,Excipient:lab_reagent,COC1=C(C=C(C=C1)Cl)[C@]2(C3=C(C=C(C=C3)C(F)(F)F)NC2=O)F,C=O
+1562,3014803,Trimethanolamine,3028194,Lithium,0,Excipient:elemental,C(N(CO)CO)O,[Li]
+1610,5280443,Apigenin,14778,Calcium Oxide,1,Excipient:lab_reagent,C1=CC(=CC=C1C2=CC(=O)C3=C(C=C(C=C3O2)O)O)O,O=[Ca]
+1628,5281040,Montelukast,374707,"3-[(4,5-Dimethyl-1-nitroacridin-9-yl)amino]propyl-hydroxy-dimethylazanium;chloride;hydrochloride",0,Excipient:research_chemical,CC(C)(C1=CC=CC=C1CCC(C2=CC=CC(=C2)C=CC3=NC4=C(C=CC(=C4)Cl)C=C3)SCC5(CC5)CC(=O)O)O,CC1=C2C(=CC=C1)C(=C3C(=CC=C(C3=N2)C)[N+](=O)[O-])NCCC[N+](C)(C)O.Cl.[Cl-]
+1662,5284359,Calcium Chloride,1061,Phosphate,1,Excipient:bare_ion,[Cl-].[Cl-].[Ca+2],[O-]P(=O)([O-])[O-]
+1663,5284359,Calcium Chloride,1117,Sulfate Ion,1,Excipient:bare_ion,[Cl-].[Cl-].[Ca+2],[O-]S(=O)(=O)[O-]
+1664,5284359,Calcium Chloride,23994,Zinc,1,Excipient:elemental,[Cl-].[Cl-].[Ca+2],[Zn]
+1665,5284359,Calcium Chloride,19660,Carbonate Ion,1,Excipient:bare_ion,[Cl-].[Cl-].[Ca+2],C(=O)([O-])[O-]
+1666,5284359,Calcium Chloride,3806114,"2,3-Dihydroxybutanedioate",1,Excipient:bare_ion,[Cl-].[Cl-].[Ca+2],C(C(C(=O)[O-])O)(C(=O)[O-])O
+1689,5288227,Maleate(2-),6134,beta-Lactose,1,API:bare_ion,C(=CC(=O)[O-])C(=O)[O-],C(C1C(C(C(C(O1)OC2C(OC(C(C2O)O)O)CO)O)O)O)O
+1690,5288826,Morphine,977,Oxygen,1,Excipient:lab_reagent,CN1CCC23C4C1CC5=C2C(=C(C=C5)O)OC3C(C=C4)O,O=O
+1835,6093208,Calcium Hydroxide,5462309,Phosphorus,1,Excipient:elemental,[OH-].[OH-].[Ca+2],[P]
+1836,6093208,Calcium Hydroxide,6375,Nitromethane,1,Excipient:lab_reagent,[OH-].[OH-].[Ca+2],C[N+](=O)[O-]
+1837,6093208,Calcium Hydroxide,7923,Maleic Anhydride,1,Excipient:lab_reagent,[OH-].[OH-].[Ca+2],C1=CC(=O)OC1=O
+1838,6093208,Calcium Hydroxide,6587,Nitroethane,1,Excipient:lab_reagent,[OH-].[OH-].[Ca+2],CC[N+](=O)[O-]
+1839,6093208,Calcium Hydroxide,7903,1-Nitropropane,1,Excipient:lab_reagent,[OH-].[OH-].[Ca+2],CCC[N+](=O)[O-]
+1840,6093208,Calcium Hydroxide,1118,Sulfuric Acid,1,Excipient:lab_reagent,[OH-].[OH-].[Ca+2],OS(=O)(=O)O
+1855,6328154,Sodium carboxymethyl cellulose,5359268,Aluminum,1,Excipient:elemental,CC(=O)O.C(C(C(C(C(C=O)O)O)O)O)O.[Na],[Al]
+1856,6328154,Sodium carboxymethyl cellulose,23931,Mercury,1,Excipient:elemental,CC(=O)O.C(C(C(C(C(C=O)O)O)O)O)O.[Na],[Hg]
+1857,6328154,Sodium carboxymethyl cellulose,23994,Zinc,1,Excipient:elemental,CC(=O)O.C(C(C(C(C(C=O)O)O)O)O)O.[Na],[Zn]
+1914,6850754,Kaltostat,516875,Potassium Permanganate,1,Excipient:lab_reagent,COC1C(C(C(OC1C(=O)O)OC2C(C(C(OC2C(=O)O)OC)O)O)O)O,[O-][Mn](=O)(=O)=O.[K+]
+1915,6850754,Kaltostat,24823,Ozone,1,Excipient:lab_reagent,COC1C(C(C(OC1C(=O)O)OC2C(C(C(OC2C(=O)O)OC)O)O)O)O,[O-][O+]=O
+1917,6850754,Kaltostat,1118,Sulfuric Acid,1,Excipient:lab_reagent,COC1C(C(C(OC1C(=O)O)OC2C(C(C(OC2C(=O)O)OC)O)O)O)O,OS(=O)(=O)O
+1960,9552079,Chlorhexidine,24470,Silver Nitrate,1,Excipient:lab_reagent,C1=CC(=CC=C1NC(=NC(=NCCCCCCN=C(N)N=C(N)NC2=CC=C(C=C2)Cl)N)N)Cl,[N+](=O)([O-])[O-].[Ag+]
+1961,9552079,Chlorhexidine,24462,Copper Sulfate,1,Excipient:lab_reagent,C1=CC(=CC=C1NC(=NC(=NCCCCCCN=C(N)N=C(N)NC2=CC=C(C=C2)Cl)N)N)Cl,[O-]S(=O)(=O)[O-].[Cu+2]
+1963,9552079,Chlorhexidine,712,Formaldehyde,1,Excipient:lab_reagent,C1=CC(=CC=C1NC(=NC(=NCCCCCCN=C(N)N=C(N)NC2=CC=C(C=C2)Cl)N)N)Cl,C=O
+2124,9989226,Alumina,24268,Sodium Nitrate,1,Excipient:lab_reagent,[O-2].[O-2].[O-2].[Al+3].[Al+3],[N+](=O)([O-])[O-].[Na+]
+2125,9989226,Alumina,6354,Ethylene Oxide,1,Excipient:lab_reagent,[O-2].[O-2].[O-2].[Al+3].[Al+3],C1CO1
+2184,10176082,Aluminum Hydroxide,1061,Phosphate,1,Excipient:bare_ion,[OH-].[OH-].[OH-].[Al+3],[O-]P(=O)([O-])[O-]
+2185,10176082,Aluminum Hydroxide,1117,Sulfate Ion,1,Excipient:bare_ion,[OH-].[OH-].[OH-].[Al+3],[O-]S(=O)(=O)[O-]
+2186,10176082,Aluminum Hydroxide,26574,Borate,1,Excipient:bare_ion,[OH-].[OH-].[OH-].[Al+3],B([O-])([O-])[O-]
+2187,10176082,Aluminum Hydroxide,19660,Carbonate Ion,1,Excipient:bare_ion,[OH-].[OH-].[OH-].[Al+3],C(=O)([O-])[O-]
+2454,14055602,"2-[4,5-Dihydroxy-2-(hydroxymethyl)-6-methoxyoxan-3-yl]oxy-6-(hydroxymethyl)-5-methoxyoxane-3,4-diol",516875,Potassium Permanganate,1,Excipient:lab_reagent,COC1C(OC(C(C1O)O)OC2C(OC(C(C2O)O)OC)CO)CO,[O-][Mn](=O)(=O)=O.[K+]
+2455,14055602,"2-[4,5-Dihydroxy-2-(hydroxymethyl)-6-methoxyoxan-3-yl]oxy-6-(hydroxymethyl)-5-methoxyoxane-3,4-diol",24823,Ozone,1,Excipient:lab_reagent,COC1C(OC(C(C1O)O)OC2C(OC(C(C2O)O)OC)CO)CO,[O-][O+]=O
+2493,16004692,Macitentan,47932,"2-(2',4'-Diaminophenoxy)ethanol dihydrochloride",0,Excipient:invalid_structure,CCCNS(=O)(=O)NC1=C(C(=NC=N1)OCCOC2=NC=C(C=N2)Br)C3=CC=C(C=C3)Br,C1=CC(=C(C=C1N)N)OCCO.Cl.Cl
+2569,17397714,"N-[(2-methoxyphenyl)methyl]-5-phenyl-1,2-oxazole-3-carboxamide",47932,"2-(2',4'-Diaminophenoxy)ethanol dihydrochloride",0,Excipient:invalid_structure,COC1=CC=CC=C1CNC(=O)C2=NOC(=C2)C3=CC=CC=C3,C1=CC(=C(C=C1N)N)OCCO.Cl.Cl
+2579,17747012,Esomeprazole magnesium dihydrate,138843,"Phosphine, methylidyne-",0,Excipient:invalid_structure,CC1=CN=C(C(=C1OC)C)CS(=O)C2=NC3=C([N-]2)C=CC(=C3)OC.CC1=CN=C(C(=C1OC)C)CS(=O)C2=NC3=C([N-]2)C=CC(=C3)OC.O.O.[Mg+2],C#P
+2979,46700777,Siponimod Fumarate,47932,"2-(2',4'-Diaminophenoxy)ethanol dihydrochloride",0,Excipient:invalid_structure,CCC1=C(C=CC(=C1)C(=NOCC2=CC(=C(C=C2)C3CCCCC3)C(F)(F)F)C)CN4CC(C4)C(=O)O.CCC1=C(C=CC(=C1)C(=NOCC2=CC(=C(C=C2)C3CCCCC3)C(F)(F)F)C)CN4CC(C4)C(=O)O.C(=CC(=O)O)C(=O)O,C1=CC(=C(C=C1N)N)OCCO.Cl.Cl
+3120,54675850,Salicylate,8753,Benzododecinium Chloride,1,API:bare_ion,C1=CC=C(C(=C1)C(=O)O)[O-],CCCCCCCCCCCC[N+](C)(C)CC1=CC=CC=C1.[Cl-]
+3371,78357807,Osimertinib Mesylate,21256123,Nanoparticles,0,Excipient:bare_ion,CN1C=C(C2=CC=CC=C21)C3=NC(=NC=C3)NC4=C(C=C(C(=C4)NC(=O)C=C)N(C)CCN(C)C)OC.CS(=O)(=O)O,[O-2].[O-2].[O-2].[O-2].[Fe+2].[Fe+2].[Fe+2]
+3437,121494085,Sucralfate (USAN:USP:INN:BAN:JAN),6635,Chlorfenson,0,Excipient:lab_reagent,C(C1C(C(C(C(O1)OC2(C(C(C(O2)COS(=O)(=O)O[Al])OS(=O)(=O)O[Al])OS(=O)(=O)O[Al])COS(=O)(=O)O[Al])OS(=O)(=O)O[Al])OS(=O)(=O)O[Al])OS(=O)(=O)O[Al])OS(=O)(=O)O[Al].O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.[Al],C1=CC(=CC=C1OS(=O)(=O)C2=CC=C(C=C2)Cl)Cl
+3475,129893883,"perchloric acid;(2E)-1,3,3-trimethyl-2-[(2E)-2-[2-phenyl-3-[(E)-2-(1,3,3-trimethylindol-1-ium-2-yl)ethenyl]cyclohex-2-en-1-ylidene]ethylidene]indole",25517,Ammonium Chloride,1,API:research_chemical,CC1(C2=CC=CC=C2[N+](=C1C=CC3=C(C(=CC=C4C(C5=CC=CC=C5N4C)(C)C)CCC3)C6=CC=CC=C6)C)C.OCl(=O)(=O)=O,[NH4+].[Cl-]
+3517,135449331,Eltrombopag olamine,47932,"2-(2',4'-Diaminophenoxy)ethanol dihydrochloride",0,Excipient:invalid_structure,CC1=C(C=C(C=C1)N2C(=O)C(=C(N2)C)N=NC3=CC=CC(=C3O)C4=CC(=CC=C4)C(=O)O)C.C(CO)N.C(CO)N,C1=CC(=C(C=C1N)N)OCCO.Cl.Cl

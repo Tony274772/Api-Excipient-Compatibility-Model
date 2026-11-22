@@ -1,0 +1,28 @@
+row_id,kept_row_id,API_CID,api_name,Excipient_CID,excipient_name,Outcome1
+98,97,2284,Baclofen,5780,Sorbitol,0
+310,309,4044,Mefenamic Acid,16211032,Deae-cellulose,0
+475,474,5639,Urapidil,16211032,Deae-cellulose,0
+531,529,6084,Papaverine Hydrochloride,16211032,Deae-cellulose,0
+764,762,54891,Quinapril Hydrochloride,16211032,Deae-cellulose,0
+1536,120,1549000,Levocetirizine,6251,Mannitol,0
+1537,122,1549000,Levocetirizine,23706213,Sodium carboxymethylcellulose,0
+1705,1140,5311083,Magnesium omeprazole,5988,Sucrose,0
+1709,1142,5311083,Magnesium omeprazole,131751496,Tolpovidone I 131,0
+1713,1143,5311083,Magnesium omeprazole,33258,E129,0
+1714,1144,5311083,Magnesium omeprazole,123706,"4-(1-Aminopropyl)-N,N,3-trimethylaniline",0
+1716,1146,5311083,Magnesium omeprazole,11177,Magnesium Stearate,0
+1721,1148,5311083,Magnesium omeprazole,6506,Triethyl Citrate,0
+1722,1149,5311083,Magnesium omeprazole,26924,Supreme,0
+1723,1150,5311083,Magnesium omeprazole,26042,Titanium dioxide,0
+1967,282,9578005,Dexlansoprazole,5988,Sucrose,0
+1968,283,9578005,Dexlansoprazole,11029,Magnesium Carbonate,0
+1969,284,9578005,Dexlansoprazole,174,Ethylene Glycol,0
+1971,288,9578005,Dexlansoprazole,123706,"4-(1-Aminopropyl)-N,N,3-trimethylaniline",0
+1974,281,9578005,Dexlansoprazole,26924,Supreme,0
+1975,292,9578005,Dexlansoprazole,24261,Silica,0
+1976,293,9578005,Dexlansoprazole,26042,Titanium dioxide,0
+2418,2402,11673085,Lorcaserin Hydrochloride,5780,Sorbitol,0
+2588,2587,18004026,"N,N-Dimethyl-2-(6-methyl-2-(p-tolyl)imidazo[1,2-a]pyridin-3-yl)acetamide 2,3-dihydroxysuccinate",5780,Sorbitol,0
+2618,2617,23668479,Raltegravir Potassium,5780,Sorbitol,0
+2807,2806,25102846,Cabozantinib S-malate,294,GlyTouCan:G06348JD,0
+2816,2806,25102846,Cabozantinib S-malate,84571,alpha-D-lactose,0

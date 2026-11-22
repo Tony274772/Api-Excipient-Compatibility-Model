@@ -1,0 +1,21 @@
+row_id,API_CID,api_name,Excipient_CID,excipient_name,Outcome1,API_parent,Excipient_parent
+271,3825,Ketoprofen,6134,beta-Lactose,1,CC(C(=O)O)c1cccc(C(=O)c2ccccc2)c1,OCC1OC(OC2C(CO)OC(O)C(O)C2O)C(O)C(O)C1O
+278,3825,Ketoprofen,104938,alpha-Lactose monohydrate,0,CC(C(=O)O)c1cccc(C(=O)c2ccccc2)c1,OCC1OC(OC2C(CO)OC(O)C(O)C2O)C(O)C(O)C1O
+136,2783,Clenbuterol,6134,beta-Lactose,1,CC(C)(C)NCC(O)c1cc(Cl)c(N)c(Cl)c1,OCC1OC(OC2C(CO)OC(O)C(O)C2O)C(O)C(O)C1O
+142,2783,Clenbuterol,104938,alpha-Lactose monohydrate,0,CC(C)(C)NCC(O)c1cc(Cl)c(N)c(Cl)c1,OCC1OC(OC2C(CO)OC(O)C(O)C2O)C(O)C(O)C1O
+408,4927,Promethazine,11177,Magnesium Stearate,1,CC(CN1c2ccccc2Sc2ccccc21)N(C)C,CCCCCCCCCCCCCCCCCC(=O)O
+509,6014,Promethazine Hydrochloride,11177,Magnesium Stearate,0,CC(CN1c2ccccc2Sc2ccccc21)N(C)C,CCCCCCCCCCCCCCCCCC(=O)O
+407,4927,Promethazine,6251,Mannitol,1,CC(CN1c2ccccc2Sc2ccccc21)N(C)C,OCC(O)C(O)C(O)C(O)CO
+501,6014,Promethazine Hydrochloride,6251,Mannitol,0,CC(CN1c2ccccc2Sc2ccccc21)N(C)C,OCC(O)C(O)C(O)C(O)CO
+1544,3001055,Ranitidine,6134,beta-Lactose,1,CNC(=C[N+](=O)[O-])NCCSCc1ccc(CN(C)C)o1,OCC1OC(OC2C(CO)OC(O)C(O)C2O)C(O)C(O)C1O
+1547,3001055,Ranitidine,104938,alpha-Lactose monohydrate,0,CNC(=C[N+](=O)[O-])NCCSCc1ccc(CN(C)C)o1,OCC1OC(OC2C(CO)OC(O)C(O)C2O)C(O)C(O)C1O
+203,3386,Fluoxetine,6134,beta-Lactose,1,CNCCC(Oc1ccc(C(F)(F)F)cc1)c1ccccc1,OCC1OC(OC2C(CO)OC(O)C(O)C2O)C(O)C(O)C1O
+204,3386,Fluoxetine,104938,alpha-Lactose monohydrate,0,CNCCC(Oc1ccc(C(F)(F)F)cc1)c1ccccc1,OCC1OC(OC2C(CO)OC(O)C(O)C2O)C(O)C(O)C1O
+396,4908,Primaquine,6134,beta-Lactose,1,COc1cc(NC(C)CCCN)c2ncccc2c1,OCC1OC(OC2C(CO)OC(O)C(O)C2O)C(O)C(O)C1O
+398,4908,Primaquine,104938,alpha-Lactose monohydrate,0,COc1cc(NC(C)CCCN)c2ncccc2c1,OCC1OC(OC2C(CO)OC(O)C(O)C2O)C(O)C(O)C1O
+586,9433,Aminophylline,6134,beta-Lactose,1,Cn1c(=O)c2[nH]cnc2n(C)c1=O,OCC1OC(OC2C(CO)OC(O)C(O)C2O)C(O)C(O)C1O
+587,9433,Aminophylline,104938,alpha-Lactose monohydrate,0,Cn1c(=O)c2[nH]cnc2n(C)c1=O,OCC1OC(OC2C(CO)OC(O)C(O)C2O)C(O)C(O)C1O
+2600,23665037,Levothyroxine sodium pentahydrate,24748,Carmellose (JP17/NF/INN),1,NC(Cc1cc(I)c(Oc2cc(I)c(O)c(I)c2)c(I)c1)C(=O)O,O=CC(O)C(O)C(O)C(O)CO
+2605,23665037,Levothyroxine sodium pentahydrate,23706213,Sodium carboxymethylcellulose,0,NC(Cc1cc(I)c(Oc2cc(I)c(O)c(I)c2)c(I)c1)C(=O)O,O=CC(O)C(O)C(O)C(O)CO
+167,3033,Diclofenac,11177,Magnesium Stearate,0,O=C(O)Cc1ccccc1Nc1c(Cl)cccc1Cl,CCCCCCCCCCCCCCCCCC(=O)O
+1607,5018304,Diclofenac sodium,11177,Magnesium Stearate,1,O=C(O)Cc1ccccc1Nc1c(Cl)cccc1Cl,CCCCCCCCCCCCCCCCCC(=O)O

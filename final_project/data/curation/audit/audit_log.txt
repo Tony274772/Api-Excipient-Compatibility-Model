@@ -1,0 +1,80 @@
+curate_dataset.py  2026-11-11 13:53  rdkit 2026.03.5  pandas 2.0.3
+
+raw: data/raw/start_dataset.csv sha256 583f19c4ada9f9c2a71958e930e2591b414460892151eb5332e7898ca86f8cdb (= upstream dataset.csv)
+     3544 rows, 533 API CIDs, 336 excipient CIDs, 344 incompatible (9.7%)
+     missing values: 0
+
+1. SMILES whitespace
+   API: 0 rows stripped (0 CIDs: [])
+   Excipient: 4 rows stripped (4 CIDs: [996, 11029, 11177, 6328154])
+
+2. Structure validity and identifier consistency
+   API: 0 unparseable SMILES
+   API: CIDs with more than one SMILES after stripping: 0
+   API: SMILES that differ from the PubChem connectivity SMILES of their CID: 1 ['214350 Bms 204352']
+   Excipient: 0 unparseable SMILES
+   Excipient: CIDs with more than one SMILES after stripping: 0
+   Excipient: SMILES that differ from the PubChem connectivity SMILES of their CID: 0 []
+   SMILES with any stereo mark: 1 of 838 (the data is stereo-blind: enantiomers, epimers and anomers share one SMILES)
+   exact duplicate rows: 0; duplicate (API_CID, Excipient_CID) pairs: 0; self pairs: 0
+   pairs present in both orders (A,B) and (B,A): [(6354, 9989226)] [('Ethylene Oxide', 'Alumina')]
+   CIDs used both as API and as excipient: 19
+
+3. Curation (data/curation/molecule_curation.csv)
+   removed 121 rows (98 incompatible = 28.5% of all incompatible rows); by category:
+      lab_reagent            67 rows, 61 incompatible
+      bare_ion               23 rows, 21 incompatible
+      elemental              13 rows, 12 incompatible
+      invalid_structure      11 rows, 1 incompatible
+      research_chemical       5 rows, 1 incompatible
+      degradant               2 rows, 2 incompatible
+   repaired SMILES on 153 rows: 4-(1-Aminopropyl)-N,N,3-trimethylaniline (CID 123706) 55 rows, Lactose, anhydrous (CID 3037558) 12 rows, Tolpovidone I 131 (CID 131751496) 86 rows
+   flags kept in the data (rows carrying each flag):
+      API       multi_api                56
+      API       non_drug_api             36
+      Excipient polymer_surrogate       838
+      Excipient approximate_structure   228
+      Excipient repaired                153
+      Excipient processing_solvent       40
+      Excipient strong_base              29
+      Excipient drug_as_excipient        18
+      Excipient colourant_uncertain       9
+
+4. Structure-level duplicates (identical canonical API and excipient SMILES = identical model input)
+   26 structure pairs occur more than once (53 rows); label conflicts: 0
+   collapsed 27 rows (first row of each group kept); dropped 0 conflicting rows
+   API structures shared by more than one CID (3): Omeprazole Magnesium = Magnesium omeprazole; Lansoprazole = Dexlansoprazole; Cetirizine = Levocetirizine
+   Excipient structures shared by more than one CID (6): Hydroxyethyl cellulose = 4-(1-Aminopropyl)-N,N,3-trim = 1-[[(2R,3R,4S,5R)-3,4,5-tris; 1-Palmitoyl-2-linoleoylphosp = Asolectin; 2-(2-(3,4-Bis(2-hydroxyethox = Polysorbate 40 (USAN:INN:BAN; Sodium 3,4,5,6-tetrahydroxyo = sodium (2R,3R,4R,5R,6S)-3,4,; Mannitol = Sorbitol; beta-Lactose = alpha-D-lactose = Deae-cellulose = GlyTouCan:G06348JD = Lactose, anhydrous = beta-Maltose
+
+5. Parent-level label conflicts (salt / hydrate / solvate forms of the same pair; kept, reported)
+   10 parent pairs with conflicting labels (20 rows):
+      Ketoprofen + beta-Lactose = 1 | Ketoprofen + alpha-Lactose monohydrate = 0
+      Clenbuterol + beta-Lactose = 1 | Clenbuterol + alpha-Lactose monohydrate = 0
+      Promethazine + Magnesium Stearate = 1 | Promethazine Hydrochlori + Magnesium Stearate = 0
+      Promethazine + Mannitol = 1 | Promethazine Hydrochlori + Mannitol = 0
+      Ranitidine + beta-Lactose = 1 | Ranitidine + alpha-Lactose monohydrate = 0
+      Fluoxetine + beta-Lactose = 1 | Fluoxetine + alpha-Lactose monohydrate = 0
+      Primaquine + beta-Lactose = 1 | Primaquine + alpha-Lactose monohydrate = 0
+      Aminophylline + beta-Lactose = 1 | Aminophylline + alpha-Lactose monohydrate = 0
+      Levothyroxine sodium pen + Carmellose (JP17/NF/INN) = 1 | Levothyroxine sodium pen + Sodium carboxymethylcellul = 0
+      Diclofenac + Magnesium Stearate = 0 | Diclofenac sodium + Magnesium Stearate = 1
+   lactose CIDs (same structure up to hydrate water): GlyTouCan:G06348JD 12 rows / 0 incompatible, GlyTouCan:G07017AJ 3 rows / 0 incompatible, beta-Lactose 59 rows / 22 incompatible, alpha-D-lactose 3 rows / 0 incompatible, alpha-Lactose monohydrate 142 rows / 3 incompatible, Lactose, anhydrous 12 rows / 0 incompatible
+
+6. Label / identity confounding (how much the molecule identity alone predicts the label)
+   [raw] 3544 rows, 344 incompatible (9.7%)
+     API        533 molecules: 374 only-compatible (2965 rows, median 8 rows each), 122 only-incompatible (260 rows, median 1), 37 mixed (319 rows) | leave-one-out identity ROC-AUC 0.952
+     Excipient  336 molecules: 181 only-compatible (1437 rows, median 2 rows each), 100 only-incompatible (169 rows, median 1), 55 mixed (1938 rows) | leave-one-out identity ROC-AUC 0.850
+     trivial baselines, ROC-AUC: smaller API molecular weight -> incompatible 0.759; fewer rows per API -> incompatible 0.819
+   [clean] 3396 rows, 246 incompatible (7.2%)
+     API        508 molecules: 375 only-compatible (2928 rows, median 8 rows each), 97 only-incompatible (167 rows, median 1), 36 mixed (301 rows) | leave-one-out identity ROC-AUC 0.933
+     Excipient  270 molecules: 169 only-compatible (1397 rows, median 2 rows each), 47 only-incompatible (76 rows, median 1), 54 mixed (1923 rows) | leave-one-out identity ROC-AUC 0.814
+     trivial baselines, ROC-AUC: smaller API molecular weight -> incompatible 0.728; fewer rows per API -> incompatible 0.807
+
+7. Outputs
+   clean.csv        3396 rows, 246 incompatible (7.2%), 508 APIs, 270 excipients
+   clean_strict.csv 3061 rows, 206 incompatible (6.7%), 480 APIs, 238 excipients  (drops flags ['approximate_structure', 'colourant_uncertain', 'drug_as_excipient', 'multi_api', 'non_drug_api'])
+   [clean_strict] 3061 rows, 206 incompatible (6.7%)
+     API        480 molecules: 367 only-compatible (2641 rows, median 7 rows each), 77 only-incompatible (129 rows, median 1), 36 mixed (291 rows) | leave-one-out identity ROC-AUC 0.922
+     Excipient  238 molecules: 156 only-compatible (1255 rows, median 2 rows each), 34 only-incompatible (56 rows, median 1), 48 mixed (1750 rows) | leave-one-out identity ROC-AUC 0.795
+     trivial baselines, ROC-AUC: smaller API molecular weight -> incompatible 0.709; fewer rows per API -> incompatible 0.766
+   held-out pairs (22) whose parent pair occurs in clean.csv: 0

@@ -1,0 +1,187 @@
+cid,role,name,category,action,repair_from_cid,repair_smiles,rationale
+516875,Excipient,Potassium permanganate,lab_reagent,remove,,,Strong oxidant used in forced-degradation and synthesis; not a formulation excipient
+24401,Excipient,Permanganate ion,bare_ion,remove,,,Counter-ion-free oxidant anion; not a material that can be in a formulation
+24823,Excipient,Ozone,lab_reagent,remove,,,Gaseous oxidant; not an excipient
+784,Excipient,Hydrogen peroxide,lab_reagent,remove,,,Oxidative stress reagent; not an excipient
+6426889,Excipient,Potassium chlorate,lab_reagent,remove,,,Strong oxidant; not an excipient
+14915,Excipient,Chromium trioxide,lab_reagent,remove,,,Strong oxidant (Cr VI); not an excipient
+14793,Excipient,Lead dioxide,lab_reagent,remove,,,Oxidant / toxic heavy metal oxide; not an excipient
+15908632,Excipient,Acetone peroxide,lab_reagent,remove,,,Explosive peroxide; not an excipient
+24434,Excipient,Potassium nitrate,lab_reagent,remove,,,Oxidiser used as reagent in the source studies; not an oral-solid excipient
+24268,Excipient,Sodium nitrate,lab_reagent,remove,,,Oxidiser; not an excipient
+24470,Excipient,Silver nitrate,lab_reagent,remove,,,Analytical / oxidising reagent; not an excipient
+22985,Excipient,Ammonium nitrate,lab_reagent,remove,,,Oxidiser; not an excipient
+977,Excipient,Oxygen,lab_reagent,remove,,,Atmospheric gas (oxidative stress condition); not an excipient
+24526,Excipient,Chlorine,lab_reagent,remove,,,Reactive gas; not an excipient
+807,Excipient,Iodine,lab_reagent,remove,,,Elemental halogen reagent; not an excipient
+1118,Excipient,Sulfuric acid,lab_reagent,remove,,,Concentrated mineral acid (acid stress); not an excipient
+24638,Excipient,Chlorosulfonic acid,lab_reagent,remove,,,Synthesis reagent; not an excipient
+23665647,Excipient,Potassium tert-butoxide,lab_reagent,remove,,,Synthesis base; not an excipient
+21226445,Excipient,Lithium aluminium hydride,lab_reagent,remove,,,Synthesis reducing agent; not an excipient
+14778,Excipient,Calcium oxide,lab_reagent,remove,,,Quicklime (reactive desiccant / base); not a pharmacopoeial excipient
+24462,Excipient,Copper sulfate,lab_reagent,remove,,,Reagent / catalyst; not an excipient
+712,Excipient,Formaldehyde,lab_reagent,remove,,,Reactive aldehyde; appears only as a degradation impurity
+751,Excipient,Glyceraldehyde,lab_reagent,remove,,,Reactive aldehyde used to model Maillard reaction; not an excipient
+261,Excipient,Butanal,lab_reagent,remove,,,Reactive aldehyde; not an excipient
+6375,Excipient,Nitromethane,lab_reagent,remove,,,Solvent / reagent; not an excipient
+6587,Excipient,Nitroethane,lab_reagent,remove,,,Solvent / reagent; not an excipient
+7903,Excipient,1-Nitropropane,lab_reagent,remove,,,Solvent / reagent; not an excipient
+7923,Excipient,Maleic anhydride,lab_reagent,remove,,,Acylating reagent; not an excipient
+219520,Excipient,2-(Chloromethyl)furan,lab_reagent,remove,,,Alkylating reagent; not an excipient
+237332,Excipient,5-(Hydroxymethyl)furfural,degradant,remove,,,Sugar degradation product; an impurity not an excipient
+31296,Excipient,Dibromochloromethane,lab_reagent,remove,,,Halogenated solvent / water-disinfection by-product; not an excipient
+6635,Excipient,Chlorfenson,lab_reagent,remove,,,Acaricide (pesticide); not an excipient
+6354,both,Ethylene oxide,lab_reagent,remove,,,Gaseous sterilant / alkylating agent; neither an API nor an excipient
+9550,API,Diazomethane,lab_reagent,remove,,,Methylating reagent; not a drug
+21257725,Excipient,Tris-borate-EDTA,lab_reagent,remove,,,Electrophoresis buffer mixture; not an excipient
+5359268,Excipient,Aluminium (metal),elemental,remove,,,Bare metal; not an excipient
+23994,Excipient,Zinc (metal),elemental,remove,,,Bare metal; not an excipient
+3028194,Excipient,Lithium (metal),elemental,remove,,,Bare metal; not an excipient
+5462222,Excipient,Potassium (metal),elemental,remove,,,Bare alkali metal; not an excipient
+23954,Excipient,Silver (metal),elemental,remove,,,Bare metal; not an excipient
+23931,Excipient,Mercury (metal),elemental,remove,,,Bare metal; not an excipient
+23978,Excipient,Copper (metal),elemental,remove,,,Bare metal; not an excipient
+5462309,Excipient,Phosphorus,elemental,remove,,,Elemental phosphorus; not an excipient
+1061,Excipient,Phosphate ion,bare_ion,remove,,,Counter-ion-free anion; the real material (a phosphate salt) is not specified
+1117,Excipient,Sulfate ion,bare_ion,remove,,,Counter-ion-free anion
+19660,Excipient,Carbonate ion,bare_ion,remove,,,Counter-ion-free anion
+104748,Excipient,Bisulfite ion,bare_ion,remove,,,Counter-ion-free anion
+26574,Excipient,Borate ion,bare_ion,remove,,,Counter-ion-free anion
+31348,Excipient,Citrate ion,bare_ion,remove,,,Counter-ion-free anion
+943,Excipient,Nitrate ion,bare_ion,remove,,,Counter-ion-free anion
+3806114,Excipient,Tartrate dianion,bare_ion,remove,,,Counter-ion-free anion
+27099,Excipient,Copper(2+),bare_ion,remove,,,Counter-ion-free cation
+27284,Excipient,Iron(2+),bare_ion,remove,,,Counter-ion-free cation
+29936,Excipient,Iron(3+),bare_ion,remove,,,Counter-ion-free cation
+30165,Excipient,Iodide ion,bare_ion,remove,,,Counter-ion-free anion
+104755,Excipient,Silver(1+),bare_ion,remove,,,Counter-ion-free cation
+21256123,Excipient,Iron oxide nanoparticles,bare_ion,remove,,,Charge-unbalanced ion list (net charge -2); not a defined material
+5288227,API,Maleate(2-),bare_ion,remove,,,Counter-ion of a salt entered as the API; the parent drug is unknown
+54675850,API,Salicylate,bare_ion,remove,,,Anion entered as the API; the parent drug (salicylic acid or a salt) is unknown
+5460613,Excipient,Mercapto radical,invalid_structure,remove,,,[SH] radical; no excipient has this structure (PubChem name-lookup error)
+138843,Excipient,Methylidynephosphine,invalid_structure,remove,,,C#P; no excipient has this structure (PubChem name-lookup error)
+101418447,Excipient,Methanidylidynephosphane,invalid_structure,remove,,,[C-]#P; no excipient has this structure (PubChem name-lookup error)
+47932,Excipient,"2-(2,4-Diaminophenoxy)ethanol 2HCl",invalid_structure,remove,,,Oxidative hair-dye intermediate; not a listed drug excipient and the intended excipient cannot be identified
+1264,Excipient,Netropsin-like imidazole polyamide,research_chemical,remove,,,DNA-binding research compound; not an excipient
+160041,Excipient,"Chryseno(4,5-bcd)thiophene 4,4-dioxide",research_chemical,remove,,,Polycyclic research chemical; not an excipient
+102503,Excipient,BANA (DL-benzoyl-arginine-2-naphthylamide HCl),research_chemical,remove,,,Protease substrate (lab reagent); not an excipient
+374707,Excipient,Nitroacridine N-oxide,research_chemical,remove,,,Research antitumour compound; not an excipient
+129893883,API,Heptamethine cyanine perchlorate,research_chemical,remove,,,Near-IR fluorescent dye; not a drug
+131751496,Excipient,Povidone,wrong_structure,repair,,CCN1CCCC1=O,"PubChem 'Tolpovidone I 131' encodes the polymer with phosphorus atoms as chain-end placeholders (C1CC(=O)N(C1)C(CP)P); replaced by the H-capped saturated repeat unit (N-ethyl-2-pyrrolidone). Not merged with the N-vinylpyrrolidone monomer (CID 6917): the same APIs are tested against both with different labels, so they are different materials (povidone vs crospovidone)"
+123706,Excipient,Hydroxypropyl cellulose,wrong_structure,repair,71306830,,"Name lookup hit a PubChem synonym ('2-Hydroxypropyl cellulose') attached to an unrelated aniline (4-(1-aminopropyl)-N,N,3-trimethylaniline); replaced by the hydroxypropyl-glucose oligomer already in the data (CID 71306830)"
+3037558,Excipient,"Lactose, anhydrous",wrong_structure,repair,6134,,Encoded as the open-chain glycosyl-aldose; replaced by the ring form used for every other lactose entry
+5746,Excipient,Mitomycin C,drug_as_excipient,flag,,,Cytotoxic drug in the excipient column; this is a drug-drug pair
+16204922,Excipient,Warfarin sodium,drug_as_excipient,flag,,,Drug in the excipient column
+23663939,Excipient,Novobiocin sodium,drug_as_excipient,flag,,,Drug in the excipient column
+5959,Excipient,Chloramphenicol,drug_as_excipient,flag,,,Drug in the excipient column
+441374,Excipient,Kanamycin A sulfate,drug_as_excipient,flag,,,Drug in the excipient column
+131411,Excipient,Umifenovir,drug_as_excipient,flag,,,Drug in the excipient column
+5311498,Excipient,Cyanocobalamin,drug_as_excipient,flag,,,Vitamin / drug in the excipient column
+44134661,Excipient,ATP disodium,drug_as_excipient,flag,,,Nucleotide / drug in the excipient column
+154724046,Excipient,ATP disodium,drug_as_excipient,flag,,,Nucleotide / drug in the excipient column
+135350084,Excipient,Quinoline oxamide kinase inhibitor,drug_as_excipient,flag,,,Investigational drug in the excipient column
+4764,Excipient,Phenolphthalein,drug_as_excipient,flag,,,Laxative drug / indicator in the excipient column
+105075,Excipient,Ferrous sulfate,drug_as_excipient,flag,,,Iron supplement (API) in the excipient column
+8753,API,Benzalkonium (benzododecinium) chloride,non_drug_api,flag,,,Preservative in the API column
+196,API,Adipic acid,non_drug_api,flag,,,Excipient / chemical in the API column
+2450,API,Bronopol,non_drug_api,flag,,,Preservative in the API column
+14250,API,Tetradecyltrimethylammonium bromide,non_drug_api,flag,,,Surfactant / preservative in the API column
+14985,API,alpha-Tocopherol,non_drug_api,flag,,,Antioxidant excipient in the API column
+14986,API,Tocopherols,non_drug_api,flag,,,Antioxidant excipient in the API column
+86472,API,alpha-Tocopherol acetate,non_drug_api,flag,,,Antioxidant excipient in the API column
+134601,API,Aspartame,non_drug_api,flag,,,Sweetener (excipient) in the API column
+3026,API,Dibutyl phthalate,non_drug_api,flag,,,Plasticiser (excipient) in the API column
+244,API,Benzyl alcohol,non_drug_api,flag,,,Preservative / solvent (excipient) in the API column
+8857,API,Ethyl acetate,non_drug_api,flag,,,Solvent in the API column
+6850754,API,Alginate,non_drug_api,flag,,,Polymer excipient in the API column
+66370,API,Glucose monohydrate,non_drug_api,flag,,,Sugar (excipient) in the API column
+753,API,Glycerol,non_drug_api,flag,,,Excipient in the API column
+31404,API,Butylated hydroxytoluene,non_drug_api,flag,,,Antioxidant excipient in the API column
+62698,API,Dextrin,non_drug_api,flag,,,Polymer excipient in the API column
+9989226,API,Alumina,non_drug_api,flag,,,Inorganic excipient / adsorbent in the API column
+6917,API,N-Vinyl-2-pyrrolidone (povidone),non_drug_api,flag,,,Polymer excipient (as monomer) in the API column
+6328154,API,Sodium carboxymethylcellulose,non_drug_api,flag,,,Polymer excipient in the API column
+24497,API,Calcium sulfate,non_drug_api,flag,,,Inorganic filler in the API column
+14055602,API,Methylcellulose,non_drug_api,flag,,,Polymer excipient in the API column
+243,API,Benzoic acid,non_drug_api,flag,,,Preservative in the API column
+3014803,API,Trometamol-like triol amine,non_drug_api,flag,,,Buffer in the API column
+7628,API,Boric acid,non_drug_api,flag,,,Buffer / preservative in the API column
+5977,API,Chlorobutanol,non_drug_api,flag,,,Preservative in the API column
+1103,API,Spermine,non_drug_api,flag,,,Biogenic polyamine (reagent) in the API column
+6474107,API,Digitonin,non_drug_api,flag,,,Detergent / lab reagent in the API column
+5284359,API,Calcium chloride,non_drug_api,flag,,,Inorganic salt in the API column
+6093208,API,Calcium hydroxide,non_drug_api,flag,,,Inorganic base in the API column
+25517,API,Ammonium chloride,non_drug_api,flag,,,Inorganic salt in the API column
+44630049,API,Calcium alginate / polyuronate,non_drug_api,flag,,,Polymer salt in the API column
+305,API,Choline (cation),non_drug_api,flag,,,Nutrient cation without counter-ion in the API column
+44232548,API,Quad tablet (4-drug combination),multi_api,flag,,,Fixed-dose combination encoded as one mixture SMILES
+72722243,API,Ivacaftor + tezacaftor,multi_api,flag,,,Fixed-dose combination encoded as one mixture SMILES
+71494926,API,Ivacaftor + lumacaftor,multi_api,flag,,,Fixed-dose combination encoded as one mixture SMILES
+9874560,API,Dienogest + estradiol valerate,multi_api,flag,,,Fixed-dose combination encoded as one mixture SMILES
+6450800,API,Artemether + lumefantrine,multi_api,flag,,,Fixed-dose combination encoded as one mixture SMILES
+118988661,API,Citric acid + MgO + sodium picosulfate,multi_api,flag,,,Fixed-dose combination encoded as one mixture SMILES
+24755604,API,Sacubitril + valsartan (LCZ696),multi_api,flag,,,Fixed-dose combination encoded as one mixture SMILES
+104840,Excipient,Cremophor EL,approximate_structure,flag,,,Encoded as a C5 polyol (C5H12O4); the PEG-35 castor-oil ester is not represented
+56841934,Excipient,Colloidal ferric oxide,approximate_structure,flag,,,Encoded as neutral Fe atoms plus water (O.O.O.[Fe].[Fe]); not iron oxide
+445709,Excipient,Iron oxide (as Fe + 3 H2O),approximate_structure,flag,,,Encoded as a neutral Fe atom plus water; not iron oxide
+14789,Excipient,Iron oxide (Fe3O4 as mixed encoding),approximate_structure,flag,,,Mixed neutral Fe / O[Fe]=O encoding
+6328154,Excipient,Sodium carboxymethylcellulose,approximate_structure,flag,,,Encoded as open-chain glucose + acetic acid + neutral Na; no carboxymethyl ether
+6581,Excipient,Acrylic acid (carbomer),polymer_surrogate,flag,,,Polymer represented by its monomer
+4093,Excipient,Methacrylic acid,polymer_surrogate,flag,,,Polymer represented by its monomer
+6658,Excipient,Methyl methacrylate,polymer_surrogate,flag,,,Polymer represented by its monomer
+7904,Excipient,Vinyl acetate,polymer_surrogate,flag,,,Polymer represented by its monomer
+11199,Excipient,Vinyl alcohol (polyvinyl alcohol),polymer_surrogate,flag,,,Polymer represented by its monomer
+22146182,Excipient,Polyvinyl alcohol-acetate,polymer_surrogate,flag,,,Polymer represented by its monomers
+3082248,Excipient,PVA-co-NVP,polymer_surrogate,flag,,,Copolymer represented by its monomers
+270885,Excipient,PVP / eicosene copolymer,polymer_surrogate,flag,,,Copolymer represented by its monomers
+104804,Excipient,Methacrylate copolymer,polymer_surrogate,flag,,,Copolymer represented by its monomers
+107665,Excipient,Methacrylic acid-ethyl acrylate copolymer,polymer_surrogate,flag,,,Copolymer represented by its monomers
+104931,Excipient,Ammonio methacrylate copolymer,polymer_surrogate,flag,,,Copolymer represented by its monomers
+3082361,Excipient,Methacrylate copolymer,polymer_surrogate,flag,,,Copolymer represented by its monomers
+161821,Excipient,Polyvinyl acetate phthalate,polymer_surrogate,flag,,,Polymer represented by its monomers
+93374,Excipient,Melamine-formaldehyde,polymer_surrogate,flag,,,Resin represented by a monomer adduct
+6917,Excipient,N-Vinyl-2-pyrrolidone (povidone/crospovidone),polymer_surrogate,flag,,,Polymer represented by its monomer
+14055602,Excipient,Methylcellulose,polymer_surrogate,flag,,,Polymer represented by a methylated disaccharide
+23706213,Excipient,Sodium carboxymethylcellulose,polymer_surrogate,flag,,,Polymer represented by a monomer unit
+24748,Excipient,Carmellose,polymer_surrogate,flag,,,Polymer represented by a monomer unit
+24832091,Excipient,Ethylcellulose (Aquacoat),polymer_surrogate,flag,,,Polymer represented by an oligomer
+24832095,Excipient,Hypromellose,polymer_surrogate,flag,,,Polymer represented by an oligomer
+121950,Excipient,Hypromellose acetate succinate,polymer_surrogate,flag,,,Polymer represented by a monomer unit
+57503849,Excipient,Hypromellose,polymer_surrogate,flag,,,Polymer represented by an oligomer
+4327536,Excipient,Hydroxyethyl cellulose,approximate_structure,flag,,,"PubChem structure carries hydroxypropyl, not hydroxyethyl, groups (identical SMILES to CID 71306830)"
+71306830,Excipient,Hydroxypropyl cellulose oligomer,polymer_surrogate,flag,,,Polymer represented by an oligomer
+16211032,Excipient,Cellulose (MCC / DEAE-cellulose),polymer_surrogate,flag,,,Polymer represented by cellobiose (identical SMILES to lactose / maltose)
+86278134,Excipient,Starch / glucan,polymer_surrogate,flag,,,Polymer represented by an oligosaccharide
+62698,Excipient,Dextrin,polymer_surrogate,flag,,,Polymer represented by a trisaccharide
+16213095,Excipient,Hydroxyethyl starch,polymer_surrogate,flag,,,Polymer represented by an oligomer
+5281955,Excipient,Polysorbate 80,polymer_surrogate,flag,,,PEG chains truncated to one unit
+5284448,Excipient,Polysorbate 80,polymer_surrogate,flag,,,PEG chains truncated to one unit
+443314,Excipient,Polysorbate,polymer_surrogate,flag,,,PEG chains truncated to one unit
+92329579,Excipient,Polysorbate 40,polymer_surrogate,flag,,,PEG chains truncated to one unit
+6850749,Excipient,Shellac,polymer_surrogate,flag,,,Natural resin represented by aleuritic + shellolic acid
+71853,Excipient,Chitosan,polymer_surrogate,flag,,,Polymer represented by an oligomer
+441476,Excipient,Pectin,polymer_surrogate,flag,,,Polymer represented by one galacturonic acid unit
+14109413,Excipient,Acacia,polymer_surrogate,flag,,,Natural gum represented by an arbitrary small molecule
+72041,Excipient,Acemannan,polymer_surrogate,flag,,,Polysaccharide represented by an oligomer
+131750926,Excipient,Xanthan gum,polymer_surrogate,flag,,,Polysaccharide represented by an oligomer
+146156863,Excipient,Hydroxypropyl betadex,polymer_surrogate,flag,,,Variable-substitution cyclodextrin given one structure
+6433516,Excipient,Simethicone,polymer_surrogate,flag,,,Silicone polymer represented by a trisiloxane
+24705,Excipient,Dimethicone (octamethyltrisiloxane),polymer_surrogate,flag,,,Silicone polymer represented by a trisiloxane
+62551,Excipient,Pentaethylene glycol (PEG),polymer_surrogate,flag,,,Polyethylene glycol represented by a pentamer
+174,Excipient,Ethylene glycol (PEG / macrogol),polymer_surrogate,flag,,,Polyethylene glycol represented by its monomer (ethylene glycol itself is not an oral excipient)
+14798,Excipient,Sodium hydroxide,strong_base,flag,,,Pharmacopoeial pH adjuster but most incompatible rows come from base-stress experiments
+14797,Excipient,Potassium hydroxide,strong_base,flag,,,Pharmacopoeial pH adjuster but incompatible rows come from base-stress experiments
+222,Excipient,Ammonia,strong_base,flag,,,Gas; ammonia solution is a pH adjuster
+3776,Excipient,Isopropanol,processing_solvent,flag,,,Granulation / coating solvent removed during manufacture
+702,Excipient,Ethanol,processing_solvent,flag,,,Granulation / coating solvent
+263,Excipient,1-Butanol,processing_solvent,flag,,,Coating / ink solvent
+887,Excipient,Methanol,processing_solvent,flag,,,Processing solvent
+180,Excipient,Acetone,processing_solvent,flag,,,Processing solvent
+6344,Excipient,Dichloromethane,processing_solvent,flag,,,Processing solvent
+12449,Excipient,Brilliant green,colourant_uncertain,flag,,,Triarylmethane stain; not an approved pharmaceutical colourant
+62344,Excipient,Acridine orange,colourant_uncertain,flag,,,Fluorescent stain; not an approved pharmaceutical colourant
+17734,Excipient,HC Blue 1,colourant_uncertain,flag,,,Hair dye; not an approved pharmaceutical colourant (likely name-lookup error)
+8578,Excipient,o-Tolylazo-2-naphthylamine,colourant_uncertain,flag,,,Delisted azo colour; identity of intended colourant doubtful
+89597,Excipient,Pigment Yellow 81,colourant_uncertain,flag,,,Industrial pigment; identity of intended colourant doubtful
+135436510,Excipient,Amido black,colourant_uncertain,flag,,,Protein stain; identity of intended colourant doubtful
+19116,Excipient,Azo fuchsine,colourant_uncertain,flag,,,Histology stain; identity of intended colourant doubtful

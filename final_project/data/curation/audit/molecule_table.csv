@@ -1,0 +1,870 @@
+role,cid,name,formula,rows,incompatible,curation,n_fragments,net_charge,has_carbon,has_metal,has_radical,has_stereo,mol_wt,smiles
+API,196,Adipic Acid,C6H10O4,4,4,flag:non_drug_api,1,0,True,False,False,False,146.1,C(CCC(=O)O)CC(=O)O
+API,243,Benzoic Acid,C7H6O2,2,2,flag:non_drug_api,1,0,True,False,False,False,122.1,C1=CC=C(C=C1)C(=O)O
+API,244,Benzyl Alcohol,C7H8O,4,4,flag:non_drug_api,1,0,True,False,False,False,108.1,C1=CC=C(C=C1)CO
+API,305,Choline,C5H14NO+,2,2,flag:non_drug_api,1,1,True,False,False,False,104.2,C[N+](C)(C)CCO
+API,753,Glycerol,C3H8O3,3,3,flag:non_drug_api,1,0,True,False,False,False,92.1,C(C(CO)O)O
+API,1103,Spermine,C10H26N4,1,1,flag:non_drug_api,1,0,True,False,False,False,202.3,C(CCNCCCN)CNCCCN
+API,1727,4-Aminopyridine,C5H6N2,5,0,,1,0,True,False,False,False,94.1,C1=CN=CC=C1N
+API,1775,Phenytoin,C15H12N2O2,1,1,,1,0,True,False,False,False,252.3,C1=CC=C(C=C1)C2(C(=O)NC(=O)N2)C3=CC=CC=C3
+API,1983,Acetaminophen,C8H9NO2,18,5,,1,0,True,False,False,False,151.2,CC(=O)NC1=CC=C(C=C1)O
+API,2082,Albendazole,C12H15N3O2S,14,1,,1,0,True,False,False,False,265.3,CCCSC1=CC2=C(C=C1)N=C(N2)NC(=O)OC
+API,2083,Salbutamol,C13H21NO3,6,0,,1,0,True,False,False,False,239.3,CC(C)(C)NCC(C1=CC(=C(C=C1)O)CO)O
+API,2130,Amantadine,C10H17N,14,0,,1,0,True,False,False,False,151.3,C1C2CC3CC1CC(C2)(C3)N
+API,2132,Ambroxol,C13H18Br2N2O,1,1,,1,0,True,False,False,False,378.1,C1CC(CCC1NCC2=C(C(=CC(=C2)Br)Br)N)O
+API,2162,Amlodipine,C20H25ClN2O5,1,1,,1,0,True,False,False,False,408.9,CCOC(=O)C1=C(NC(=C(C1C2=CC=CC=C2Cl)C(=O)OC)C)COCCN
+API,2244,Aspirin,C9H8O4,4,4,,1,0,True,False,False,False,180.2,CC(=O)OC1=CC=CC=C1C(=O)O
+API,2249,Atenolol,C14H22N2O3,16,7,,1,0,True,False,False,False,266.3,CC(C)NCC(COC1=CC=C(C=C1)CC(=O)N)O
+API,2284,Baclofen,C10H12ClNO2,6,1,,1,0,True,False,False,False,213.7,C1=CC(=CC=C1C(CC(=O)O)CN)Cl
+API,2345,Benzyl Benzoate,C14H12O2,4,4,,1,0,True,False,False,False,212.2,C1=CC=C(C=C1)COC(=O)C2=CC=CC=C2
+API,2369,Betaxolol,C18H29NO3,10,1,,1,0,True,False,False,False,307.4,CC(C)NCC(COC1=CC=C(C=C1)CCOCC2CC2)O
+API,2450,Bronopol,C3H6BrNO4,4,4,flag:non_drug_api,1,0,True,False,False,False,200.0,C(C(CO)([N+](=O)[O-])Br)O
+API,2678,Cetirizine,C21H25ClN2O3,4,0,,1,0,True,False,False,False,388.9,C1CN(CCN1CCOCC(=O)O)C(C2=CC=CC=C2)C3=CC=C(C=C3)Cl
+API,2712,"7-Chloro-2-(methylimino)-5-phenyl-2,3-dihydro-4H-1,4-benzodiazepin-4-ol",C16H14ClN3O,1,1,,1,0,True,False,False,False,299.8,CN=C1CN(C(=C2C=C(C=CC2=N1)Cl)C3=CC=CC=C3)O
+API,2723,"4-Chloro-3,5-dimethylphenol",C8H9ClO,1,1,,1,0,True,False,False,False,156.6,CC1=CC(=CC(=C1Cl)C)O
+API,2726,Chlorpromazine,C17H19ClN2S,1,1,,1,0,True,False,False,False,318.9,CN(C)CCCN1C2=CC=CC=C2SC3=C1C=C(C=C3)Cl
+API,2727,Chlorpropamide,C10H13ClN2O3S,2,2,,1,0,True,False,False,False,276.7,CCCNC(=O)NS(=O)(=O)C1=CC=C(C=C1)Cl
+API,2756,Cimetidine,C10H16N6S,4,1,,1,0,True,False,False,False,252.3,CC1=C(N=CN1)CSCCNC(=NC)NC#N
+API,2764,Ciprofloxacin,C17H18FN3O3,3,0,,1,0,True,False,False,False,331.3,C1CC1N2C=C(C(=O)C3=CC(=C(C=C32)N4CCNCC4)F)C(=O)O
+API,2783,Clenbuterol,C12H18Cl2N2O,9,6,,1,0,True,False,False,False,277.2,CC(C)(C)NCC(C1=CC(=C(C(=C1)Cl)N)Cl)O
+API,2789,Clobazam,C16H13ClN2O2,5,0,,1,0,True,False,False,False,300.7,CN1C(=O)CC(=O)N(C2=C1C=CC(=C2)Cl)C3=CC=CC=C3
+API,2802,Clonazepam,C15H10ClN3O3,5,0,,1,0,True,False,False,False,315.7,C1C(=O)NC2=C(C=C(C=C2)[N+](=O)[O-])C(=N1)C3=CC=CC=C3Cl
+API,2972,Deferiprone,C7H9NO2,5,0,,1,0,True,False,False,False,139.2,CC1=C(C(=O)C=CN1C)O
+API,3007,Amphetamine,C9H13N,2,2,,1,0,True,False,False,False,135.2,CC(CC1=CC=CC=C1)N
+API,3026,Dibutyl Phthalate,C16H22O4,4,4,flag:non_drug_api,1,0,True,False,False,False,278.3,CCCCOC(=O)C1=CC=CC=C1C(=O)OCCCC
+API,3033,Diclofenac,C14H11Cl2NO2,8,1,,1,0,True,False,False,False,296.2,C1=CC=C(C(=C1)CC(=O)O)NC2=C(C=CC=C2Cl)Cl
+API,3059,Diflunisal,C13H8F2O3,1,1,,1,0,True,False,False,False,250.2,C1=CC(=C(C=C1C2=C(C=C(C=C2)F)F)C(=O)O)O
+API,3151,Domperidone,C22H24ClN5O2,7,0,,1,0,True,False,False,False,425.9,C1CN(CCC1N2C3=C(C=C(C=C3)Cl)NC2=O)CCCN4C5=CC=CC=C5NC4=O
+API,3162,Doxylamine,C17H22N2O,4,4,,1,0,True,False,False,False,270.4,CC(C1=CC=CC=C1)(C2=CC=CC=N2)OCCN(C)C
+API,3278,Ethacrynic Acid,C13H12Cl2O4,1,0,,1,0,True,False,False,False,303.1,CCC(=C)C(=O)C1=C(C(=C(C=C1)OCC(=O)O)Cl)Cl
+API,3308,Etodolac,C17H21NO3,10,0,,1,0,True,False,False,False,287.4,CCC1=C2C(=CC=C1)C3=C(N2)C(OCC3)(CC)CC(=O)O
+API,3333,Felodipine,C18H19Cl2NO4,5,0,,1,0,True,False,False,False,384.3,CCOC(=O)C1=C(NC(=C(C1C2=C(C(=CC=C2)Cl)Cl)C(=O)OC)C)C
+API,3365,Fluconazole,C13H12F2N6O,1,1,,1,0,True,False,False,False,306.3,C1=CC(=C(C=C1F)F)C(CN2C=NC=N2)(CN3C=NC=N3)O
+API,3386,Fluoxetine,C17H18F3NO,5,1,,1,0,True,False,False,False,309.3,CNCCC(C1=CC=CC=C1)OC2=CC=C(C=C2)C(F)(F)F
+API,3475,Gliclazide,C15H21N3O3S,3,1,,1,0,True,False,False,False,323.4,CC1=CC=C(C=C1)S(=O)(=O)NC(=O)NN2CC3CCCC3C2
+API,3476,"1H-Pyrrole-1-carboxamide, 3-ethyl-2,5-dihydro-4-methyl-N-2-4-(trans-4-methylcyclohexyl)aminocarbonylaminosulfonylphenylethyl-2-oxo-",C24H34N4O5S,7,0,,1,0,True,False,False,False,490.6,CCC1=C(CN(C1=O)C(=O)NCCC2=CC=C(C=C2)S(=O)(=O)NC(=O)NC3CCC(CC3)C)C
+API,3478,Glipizide,C21H27N5O4S,7,3,,1,0,True,False,False,False,445.5,CC1=CN=C(C=N1)C(=O)NCCC2=CC=C(C=C2)S(=O)(=O)NC(=O)NC3CCCCC3
+API,3488,Glibenclamide,C23H28ClN3O5S,6,1,,1,0,True,False,False,False,494.0,COC1=C(C=C(C=C1)Cl)C(=O)NCCC2=CC=C(C=C2)S(=O)(=O)NC(=O)NC3CCCCC3
+API,3559,Haloperidol,C21H23ClFNO2,2,2,,1,0,True,False,False,False,375.9,C1CN(CCC1(C2=CC=C(C=C2)Cl)O)CCCC(=O)C3=CC=C(C=C3)F
+API,3599,Miltefosine,C21H46NO4P,7,0,,1,0,True,False,False,False,407.6,CCCCCCCCCCCCCCCCOP(=O)([O-])OCC[N+](C)(C)C
+API,3639,Hydrochlorothiazide,C7H8ClN3O4S2,4,0,,1,0,True,False,False,False,297.7,C1NC2=CC(=C(C=C2S(=O)(=O)N1)S(=O)(=O)N)Cl
+API,3672,"Ibuprofen, (+-)-",C13H18O2,13,6,,1,0,True,False,False,False,206.3,CC(C)CC1=CC=C(C=C1)C(C)C(=O)O
+API,3715,Indomethacin,C19H16ClNO4,8,5,,1,0,True,False,False,False,357.8,CC1=C(C2=C(N1C(=O)C3=CC=C(C=C3)Cl)C=CC(=C2)OC)CC(=O)O
+API,3749,Irbesartan,C25H28N6O,1,1,,1,0,True,False,False,False,428.5,CCCCC1=NC2(CCCC2)C(=O)N1CC3=CC=C(C=C3)C4=CC=CC=C4C5=NNN=N5
+API,3784,Isradipine,C19H21N3O5,5,0,,1,0,True,False,False,False,371.4,CC1=C(C(C(=C(N1)C)C(=O)OC(C)C)C2=CC=CC3=NON=C32)C(=O)OC
+API,3825,Ketoprofen,C16H14O3,10,7,,1,0,True,False,False,False,254.3,CC(C1=CC(=CC=C1)C(=O)C2=CC=CC=C2)C(=O)O
+API,3883,Lansoprazole,C16H14F3N3O2S,13,0,,1,0,True,False,False,False,369.4,CC1=C(C=CN=C1CS(=O)C2=NC3=CC=CC=C3N2)OCC(F)(F)F
+API,3884,Npc216413,C15H14O3,4,4,,1,0,True,False,False,False,242.3,CC(=CCC1=C(C2=CC=CC=C2C(=O)C1=O)O)C
+API,3885,Beta-Lapachone,C15H14O3,1,1,,1,0,True,False,False,False,242.3,CC1(CCC2=C(O1)C3=CC=CC=C3C(=O)C2=O)C
+API,3955,Loperamide,C29H33ClN2O2,1,1,,1,0,True,False,False,False,477.0,CN(C)C(=O)C(CCN1CCC(CC1)(C2=CC=C(C=C2)Cl)O)(C3=CC=CC=C3)C4=CC=CC=C4
+API,3957,Loratadine,C22H23ClN2O2,9,0,,1,0,True,False,False,False,382.9,CCOC(=O)N1CCC(=C2C3=C(CCC4=C2N=CC=C4)C=C(C=C3)Cl)CC1
+API,4044,Mefenamic Acid,C15H15NO2,4,0,,1,0,True,False,False,False,241.3,CC1=C(C(=CC=C1)NC2=CC=CC=C2C(=O)O)C
+API,4075,5-Aminosalicylic Acid,C7H7NO3,11,1,,1,0,True,False,False,False,153.1,C1=CC(=C(C=C1N)C(=O)O)O
+API,4091,Metformin,C4H11N5,2,2,,1,0,True,False,False,False,129.2,CN(C)C(=N)N=C(N)N
+API,4168,Metoclopramide,C14H22ClN3O2,5,0,,1,0,True,False,False,False,299.8,CCN(CC)CCNC(=O)C1=CC(=C(C=C1OC)N)Cl
+API,4173,Metronidazole,C6H9N3O3,13,1,,1,0,True,False,False,False,171.2,CC1=NC=C(N1CCO)[N+](=O)[O-]
+API,4409,Nabumetone,C15H16O2,3,0,,1,0,True,False,False,False,228.3,CC(=O)CCC1=CC2=C(C=C1)C=C(C=C2)OC
+API,4421,Nalidixic Acid,C12H12N2O3,1,1,,1,0,True,False,False,False,232.2,CCN1C=C(C(=O)C2=C1N=C(C=C2)C)C(=O)O
+API,4463,Nevirapine,C15H14N4O,2,0,,1,0,True,False,False,False,266.3,CC1=C2C(=NC=C1)N(C3=C(C=CC=N3)C(=O)N2)C4CC4
+API,4485,Nifedipine,C17H18N2O6,5,0,,1,0,True,False,False,False,346.3,CC1=C(C(C(=C(N1)C)C(=O)OC)C2=CC=CC=C2[N+](=O)[O-])C(=O)OC
+API,4495,Nimesulide,C13H12N2O5S,6,0,,1,0,True,False,False,False,308.3,CS(=O)(=O)NC1=C(C=C(C=C1)[N+](=O)[O-])OC2=CC=CC=C2
+API,4510,Nitroglycerin,C3H5N3O9,2,0,,1,0,True,False,False,False,227.1,C(C(CO[N+](=O)[O-])O[N+](=O)[O-])O[N+](=O)[O-]
+API,4539,Norfloxacin,C16H18FN3O3,6,1,,1,0,True,False,False,False,319.3,CCN1C=C(C(=O)C2=CC(=C(C=C21)N3CCNCC3)F)C(=O)O
+API,4583,Ofloxacin,C18H20FN3O4,4,0,,1,0,True,False,False,False,361.4,CC1COC2=C3N1C=C(C(=O)C3=CC(=C2N4CCN(CC4)C)F)C(=O)O
+API,4614,Oxaprozin,C18H15NO3,10,0,,1,0,True,False,False,False,293.3,C1=CC=C(C=C1)C2=C(OC(=N2)CCC(=O)O)C3=CC=CC=C3
+API,4631,Oxprenolol,C15H23NO3,4,4,,1,0,True,False,False,False,265.4,CC(C)NCC(COC1=CC=CC=C1OCC=C)O
+API,4680,Papaverine,C20H21NO4,1,1,,1,0,True,False,False,False,339.4,COC1=C(C=C(C=C1)CC2=NC=CC3=CC(=C(C=C32)OC)OC)OC
+API,4763,Phenobarbital,C12H12N2O3,6,0,,1,0,True,False,False,False,232.2,CCC1(C(=O)NC(=O)NC1=O)C2=CC=CC=C2
+API,4771,Phentermine,C10H15N,1,1,,1,0,True,False,False,False,149.2,CC(C)(CC1=CC=CC=C1)N
+API,4814,Picotamide,C21H20N4O3,1,1,,1,0,True,False,False,False,376.4,COC1=C(C=C(C=C1)C(=O)NCC2=CN=CC=C2)C(=O)NCC3=CN=CC=C3
+API,4908,Primaquine,C15H21N3O,10,2,,1,0,True,False,False,False,259.4,CC(CCCN)NC1=C2C(=CC(=C1)OC)C=CC=N2
+API,4927,Promethazine,C17H20N2S,3,3,,1,0,True,False,False,False,284.4,CC(CN1C2=CC=CC=C2SC3=CC=CC=C31)N(C)C
+API,5035,Raloxifene,C28H27NO4S,6,0,,1,0,True,False,False,False,473.6,C1CCN(CC1)CCOC2=CC=C(C=C2)C(=O)C3=C(SC4=C3C=CC(=C4)O)C5=CC=C(C=C5)O
+API,5073,Risperidone,C23H27FN4O2,1,1,,1,0,True,False,False,False,410.5,CC1=C(C(=O)N2CCCCC2=N1)CCN3CCC(CC3)C4=NOC5=C4C=CC(=C5)F
+API,5090,Rofecoxib,C17H14O4S,3,0,,1,0,True,False,False,False,314.4,CS(=O)(=O)C1=CC=C(C=C1)C2=C(C(=O)OC2)C3=CC=CC=C3
+API,5311,Vorinostat,C14H20N2O3,5,0,,1,0,True,False,False,False,264.3,C1=CC=C(C=C1)NC(=O)CCCCCCC(=O)NO
+API,5339,Sulfasalazine,C18H14N4O5S,3,0,,1,0,True,False,False,False,398.4,C1=CC=NC(=C1)NS(=O)(=O)C2=CC=C(C=C2)N=NC3=CC(=C(C=C3)O)C(=O)O
+API,5340,Sulfathiazole,C9H9N3O2S2,1,1,,1,0,True,False,False,False,255.3,C1=CC(=CC=C1N)S(=O)(=O)NC2=NC=CS2
+API,5391,Temazepam,C16H13ClN2O2,15,4,,1,0,True,False,False,False,300.7,CN1C2=C(C=C(C=C2)Cl)C(=NC(C1=O)O)C3=CC=CC=C3
+API,5479,Tinidazole,C8H13N3O4S,10,0,,1,0,True,False,False,False,247.3,CCS(=O)(=O)CCN1C(=NC=C1[N+](=O)[O-])C
+API,5483,Tiopronin,C5H9NO3S,7,0,,1,0,True,False,False,False,163.2,CC(C(=O)NCC(=O)O)S
+API,5487,Tizanidine,C9H8ClN5S,5,0,,1,0,True,False,False,False,253.7,C1CN=C(N1)NC2=C(C=CC3=NSN=C32)Cl
+API,5509,Tolmetin,C15H15NO3,7,0,,1,0,True,False,False,False,257.3,CC1=CC=C(C=C1)C(=O)C2=CC=C(N2C)CC(=O)O
+API,5560,Trichlormethiazide,C8H8Cl3N3O4S2,1,1,,1,0,True,False,False,False,380.7,C1=C2C(=CC(=C1Cl)S(=O)(=O)N)S(=O)(=O)NC(N2)C(Cl)Cl
+API,5639,Urapidil,C20H29N5O3,7,0,,1,0,True,False,False,False,387.5,CN1C(=CC(=O)N(C1=O)C)NCCCN2CCN(CC2)C3=CC=CC=C3OC
+API,5665,Vigabatrin,C6H11NO2,1,1,,1,0,True,False,False,False,129.2,C=CC(CCC(=O)O)N
+API,5717,Zafirlukast,C31H33N3O6S,4,0,,1,0,True,False,False,False,575.7,CC1=CC=CC=C1S(=O)(=O)NC(=O)C2=CC(=C(C=C2)CC3=CN(C4=C3C=C(C=C4)NC(=O)OC5CCCC5)C)OC
+API,5743,Dexamethasone,C22H29FO5,3,0,,1,0,True,False,False,False,392.5,CC1CC2C3CCC4=CC(=O)C=CC4(C3(C(CC2(C1(C(=O)CO)O)C)O)F)C
+API,5750,Meperidine Hydrochloride,C15H22ClNO2,2,0,,2,0,True,False,False,False,283.8,CCOC(=O)C1(CCN(CC1)C)C2=CC=CC=C2.Cl
+API,5754,Cortisol,C21H30O5,2,2,,1,0,True,False,False,False,362.5,CC12CCC(=O)C=C1CCC3C2C(CC4(C3CCC4(C(=O)CO)O)C)O
+API,5833,Spironolactone,C24H32O4S,2,2,,1,0,True,False,False,False,416.6,CC(=O)SC1CC2=CC(=O)CCC2(C3C1C4CCC5(C4(CC3)C)CCC(=O)O5)C
+API,5904,Penicillin G,C16H18N2O4S,1,1,,1,0,True,False,False,False,334.4,CC1(C(N2C(S1)C(C2=O)NC(=O)CC3=CC=CC=C3)C(=O)O)C
+API,5962,L-Lysine,C6H14N2O2,4,0,,1,0,True,False,False,False,146.2,C(CCN)CC(C(=O)O)N
+API,5977,Chlorobutanol,C4H7Cl3O,2,2,flag:non_drug_api,1,0,True,False,False,False,177.5,CC(C)(C(Cl)(Cl)Cl)O
+API,6014,Promethazine Hydrochloride,C17H21ClN2S,16,0,,2,0,True,False,False,False,320.9,CC(CN1C2=CC=CC=C2SC3=CC=CC=C31)N(C)C.Cl
+API,6018,Tetrabenazine,C19H27NO3,4,0,,1,0,True,False,False,False,317.4,CC(C)CC1CN2CCC3=CC(=C(C=C3C2CC1=O)OC)OC
+API,6055,Amphetamine Sulfate,C18H28N2O4S,8,0,,3,0,True,False,False,False,368.5,CC(CC1=CC=CC=C1)N.CC(CC1=CC=CC=C1)N.OS(=O)(=O)O
+API,6084,Papaverine Hydrochloride,C20H22ClNO4,5,0,,2,0,True,False,False,False,375.9,COC1=C(C=C(C=C1)CC2=NC=CC3=CC(=C(C=C32)OC)OC)OC.Cl
+API,6112,Lipoic acid,C8H14O2S2,4,4,,1,0,True,False,False,False,206.3,C1CSSC1CCCCC(=O)O
+API,6116,Calcium Acetate,C4H6CaO4,3,3,,3,0,True,True,False,False,158.2,CC(=O)[O-].CC(=O)[O-].[Ca+2]
+API,6196,Oxacillin,C19H19N3O5S,1,1,,1,0,True,False,False,False,401.4,CC1=C(C(=NO1)C2=CC=CC=C2)C(=O)NC3C4N(C3=O)C(C(S4)(C)C)C(=O)O
+API,6249,Ampicillin,C16H19N3O4S,3,3,,1,0,True,False,False,False,349.4,CC1(C(N2C(S1)C(C2=O)NC(=O)C(C3=CC=CC=C3)N)C(=O)O)C
+API,6253,Cytarabine,C9H13N3O5,4,0,,1,0,True,False,False,False,243.2,C1=CN(C(=O)N=C1N)C2C(C(C(O2)CO)O)O
+API,6354,Ethylene Oxide,C2H4O,1,1,remove:lab_reagent,1,0,True,False,False,False,44.1,C1CO1
+API,6917,N-vinyl-2-pyrrolidone,C6H9NO,1,1,flag:non_drug_api,1,0,True,False,False,False,111.1,C=CN1CCCC1=O
+API,7628,Boric Acid,BH3O3,2,2,flag:non_drug_api,1,0,False,False,False,False,61.8,B(O)(O)O
+API,8753,Benzododecinium Chloride,C21H38ClN,10,10,flag:non_drug_api,2,0,True,False,False,False,340.0,CCCCCCCCCCCC[N+](C)(C)CC1=CC=CC=C1.[Cl-]
+API,8857,Ethyl Acetate,C4H8O2,4,4,flag:non_drug_api,1,0,True,False,False,False,88.1,CCOC(=O)C
+API,9280,Methylphenidate Hydrochloride,C14H20ClNO2,15,0,,2,0,True,False,False,False,269.8,COC(=O)C(C1CCCCN1)C2=CC=CC=C2.Cl
+API,9351,Hydralazine Hydrochloride,C8H9ClN4,4,4,,2,0,True,False,False,False,196.6,C1=CC=C2C(=C1)C=NN=C2NN.Cl
+API,9433,Aminophylline,C16H24N10O4,7,1,,3,0,True,False,False,False,420.4,CN1C2=C(C(=O)N(C1=O)C)NC=N2.CN1C2=C(C(=O)N(C1=O)C)NC=N2.C(CN)N
+API,9444,Azacytidine,C8H12N4O5,9,0,,1,0,True,False,False,False,244.2,C1=NC(=NC(=O)N1C2C(C(C(O2)CO)O)O)N
+API,9550,Diazomethane,CH2N2,1,1,remove:lab_reagent,1,0,True,False,False,False,42.0,C=[N+]=[N-]
+API,10112,Calcium Carbonate,CCaO3,1,1,,2,0,True,True,False,False,100.1,C(=O)([O-])[O-].[Ca+2]
+API,11065,Amitriptyline Hydrochloride,C20H24ClN,7,0,,2,0,True,False,False,False,313.9,CN(C)CCC=C1C2=CC=CC=C2CCC3=CC=CC=C31.Cl
+API,12035,N-Acetyl-L-Cysteine,C5H9NO3S,4,0,,1,0,True,False,False,False,163.2,CC(=O)NC(CS)C(=O)O
+API,12560,Erythromycin,C37H67NO13,4,4,,1,0,True,False,False,False,733.9,CCC1C(C(C(C(=O)C(CC(C(C(C(C(C(=O)O1)C)OC2CC(C(C(O2)C)O)(C)OC)C)OC3C(C(CC(O3)C)N(C)C)O)(C)O)C)C)O)(C)O
+API,13144,Calcium Lactate,C6H10CaO6,1,1,,3,0,True,True,False,False,218.2,CC(C(=O)[O-])O.CC(C(=O)[O-])O.[Ca+2]
+API,14219,Metformin Hydrochloride,C4H12ClN5,3,0,,2,0,True,False,False,False,165.6,CN(C)C(=N)N=C(N)N.Cl
+API,14250,Tetradecyltrimethylammonium bromide,C17H38BrN,4,4,flag:non_drug_api,2,0,True,False,False,False,336.4,CCCCCCCCCCCCCC[N+](C)(C)C.[Br-]
+API,14985,alpha-Tocopherol,C29H50O2,4,4,flag:non_drug_api,1,0,True,False,False,False,430.7,CC1=C(C2=C(CCC(O2)(C)CCCC(C)CCCC(C)CCCC(C)C)C(=C1O)C)C
+API,14986,Tocopherols,C28H48O2,4,4,flag:non_drug_api,1,0,True,False,False,False,416.7,CC1=C(C=C2CCC(OC2=C1C)(C)CCCC(C)CCCC(C)CCCC(C)C)O
+API,16078,Tetrahydrocannabinol,C21H30O2,1,1,,1,0,True,False,False,False,314.5,CCCCCC1=CC(=C2C3C=C(CCC3C(OC2=C1)(C)C)C)O
+API,16961,Dexamethasone Sodium Phosphate,C22H28FNa2O8P,1,1,,3,0,True,True,False,False,516.4,CC1CC2C3CCC4=CC(=O)C=CC4(C3(C(CC2(C1(C(=O)COP(=O)([O-])[O-])O)C)O)F)C.[Na+].[Na+]
+API,17506,Etamsylate,C10H17NO5S,1,1,,2,0,True,False,False,False,263.3,CCNCC.C1=CC(=C(C=C1O)S(=O)(=O)O)O
+API,18283,Stavudine,C10H12N2O4,7,0,,1,0,True,False,False,False,224.2,CC1=CN(C(=O)NC1=O)C2C=CC(O2)CO
+API,20058,"2',3',5'-tri-O-acetyluridine",C15H18N2O9,2,0,,1,0,True,False,False,False,370.3,CC(=O)OCC1C(C(C(O1)N2C=CC(=O)NC2=O)OC(=O)C)OC(=O)C
+API,20279,Cladribine,C10H12ClN5O3,3,0,,1,0,True,False,False,False,285.7,C1C(C(OC1N2C=NC3=C(N=C(N=C32)Cl)N)CO)O
+API,24497,Calcium Sulfate,CaO4S,2,2,flag:non_drug_api,2,0,False,True,False,False,136.1,[O-]S(=O)(=O)[O-].[Ca+2]
+API,25215,Tetrazepam,C16H17ClN2O,1,0,,1,0,True,False,False,False,288.8,CN1C(=O)CN=C(C2=C1C=CC(=C2)Cl)C3=CCCCC3
+API,25517,Ammonium Chloride,ClH4N,4,4,flag:non_drug_api,2,0,False,False,False,False,53.5,[NH4+].[Cl-]
+API,27447,Cephalexin,C16H17N3O4S,8,3,,1,0,True,False,False,False,347.4,CC1=C(N2C(C(C2=O)NC(=O)C(C3=CC=CC=C3)N)SC1)C(=O)O
+API,27661,Isosorbide Mononitrate,C6H9NO6,1,1,,1,0,True,False,False,False,191.1,C1C(C2C(O1)C(CO2)O[N+](=O)[O-])O
+API,30667,Lofexidine Hydrochloride,C11H13Cl3N2O,8,0,,2,0,True,False,False,False,295.6,CC(C1=NCCN1)OC2=C(C=CC=C2Cl)Cl.Cl
+API,31239,Cetylpyridinium Chloride,C21H38ClN,4,4,,2,0,True,False,False,False,340.0,CCCCCCCCCCCCCCCC[N+]1=CC=CC=C1.[Cl-]
+API,31404,"2,6-Di-tert-butyl-4-methylphenol",C15H24O,2,2,flag:non_drug_api,1,0,True,False,False,False,220.4,CC1=CC(=C(C(=C1)C(C)(C)C)O)C(C)(C)C
+API,31703,Doxorubicin,C27H29NO11,4,0,,1,0,True,False,False,False,543.5,CC1C(C(CC(O1)OC2CC(CC3=C2C(=C4C(=C3O)C(=O)C5=C(C4=O)C(=CC=C5)OC)O)(C(=O)CO)O)N)O
+API,33613,Amoxicillin,C16H19N3O5S,1,1,,1,0,True,False,False,False,365.4,CC1(C(N2C(S1)C(C2=O)NC(=O)C(C3=CC=C(C=C3)O)N)C(=O)O)C
+API,34312,Oxcarbazepine,C15H12N2O2,7,0,,1,0,True,False,False,False,252.3,C1C2=CC=CC=C2N(C3=CC=CC=C3C1=O)C(=O)N
+API,34359,Carbidopa,C10H14N2O4,5,2,,1,0,True,False,False,False,226.2,CC(CC1=CC(=C(C=C1)O)O)(C(=O)O)NN
+API,35370,Zidovudine,C10H13N5O4,7,0,,1,0,True,False,False,False,267.2,CC1=CN(C(=O)NC1=O)C2CC(C(O2)CO)N=[N+]=[N-]
+API,40632,Pirfenidone,C12H11NO,9,0,,1,0,True,False,False,False,185.2,CC1=CN(C(=O)C=C1)C2=CC=CC=C2
+API,41684,Nitazoxanide,C12H9N3O5S,13,0,,1,0,True,False,False,False,307.3,CC(=O)OC1=CC=CC=C1C(=O)NC2=NC=C(S2)[N+](=O)[O-]
+API,41693,Sufentanil,C22H30N2O2S,6,0,,1,0,True,False,False,False,386.6,CCC(=O)N(C1=CC=CC=C1)C2(CCN(CC2)CCC3=CC=CS3)COC
+API,41774,"(3R,4R,5S,6R)-5-(((2R,3R,4R,5S,6R)-5-(((2R,3R,4S,5S,6R)-3,4-dihydroxy-6-methyl-5-(((1S,4R,5S,6S)-4,5,6-trihydroxy-3-(hydroxymethyl)cyclohex-2-en-1-yl)amino)oxan-2-yl)oxy)-3,4-dihydroxy-6-(hydroxymethyl)oxan-2-yl)oxy)-6-(hydroxymethyl)oxane-2,3,4-triol",C25H43NO18,1,1,,1,0,True,False,False,False,645.6,CC1C(C(C(C(O1)OC2C(OC(C(C2O)O)OC3C(OC(C(C3O)O)O)CO)CO)O)O)NC4C=C(C(C(C4O)O)O)CO
+API,44093,Captopril,C9H15NO3S,6,3,,1,0,True,False,False,False,217.3,CC(CS)C(=O)N1CCCC1C(=O)O
+API,47576,Ketoconazole,C26H28Cl2N4O4,1,1,,1,0,True,False,False,False,531.4,CC(=O)N1CCN(CC1)C2=CC=C(C=C2)OCC3COC(O3)(CN4C=CN=C4)C5=C(C=C(C=C5)Cl)Cl
+API,51039,Cefaclor,C15H14ClN3O4S,5,0,,1,0,True,False,False,False,367.8,C1C(=C(N2C(S1)C(C2=O)NC(=O)C(C3=CC=CC=C3)N)C(=O)O)Cl
+API,51081,Pefloxacin,C17H20FN3O3,1,1,,1,0,True,False,False,False,333.4,CCN1C=C(C(=O)C2=CC(=C(C=C21)N3CCN(CC3)C)F)C(=O)O
+API,51634,Miglustat,C10H21NO4,4,0,,1,0,True,False,False,False,219.3,CCCCN1CC(C(C(C1CO)O)O)O
+API,54840,Atomoxetine Hydrochloride,C17H22ClNO,12,0,,2,0,True,False,False,False,291.8,CC1=CC=CC=C1OC(CCNC)C2=CC=CC=C2.Cl
+API,54891,Quinapril Hydrochloride,C25H31ClN2O5,6,0,,2,0,True,False,False,False,475.0,CCOC(=O)C(CCC1=CC=CC=C1)NC(C)C(=O)N2CC3=CC=CC=C3CC2C(=O)O.Cl
+API,54892,Quinapril,C25H30N2O5,2,2,,1,0,True,False,False,False,438.5,CCOC(=O)C(CCC1=CC=CC=C1)NC(C)C(=O)N2CC3=CC=CC=C3CC2C(=O)O
+API,54900,Raloxifene Hydrochloride,C28H28ClNO4S,11,0,,2,0,True,False,False,False,510.1,C1CCN(CC1)CCOC2=CC=C(C=C2)C(=O)C3=C(SC4=C3C=CC(=C4)O)C5=CC=C(C=C5)O.Cl
+API,55245,Mifepristone,C29H35NO2,13,0,,1,0,True,False,False,False,429.6,CC#CC1(CCC2C1(CC(C3=C4CCC(=O)C=C4CCC23)C5=CC=C(C=C5)N(C)C)C)O
+API,55891,"(2S,4S)-4-cyclohexyl-1-[2-[(2-methyl-1-propanoyloxypropoxy)-(4-phenylbutyl)phosphoryl]acetyl]pyrrolidine-2-carboxylic acid",C30H46NO7P,1,1,,1,0,True,False,False,False,563.7,CCC(=O)OC(C(C)C)OP(=O)(CCCCC1=CC=CC=C1)CC(=O)N2CC(CC2C(=O)O)C3CCCCC3
+API,56959,Ranolazine,C24H33N3O4,13,0,,1,0,True,False,False,False,427.5,CC1=C(C(=CC=C1)C)NC(=O)CN2CCN(CC2)CC(COC3=CC=CC=C3OC)O
+API,59248,"2',6'-Acetoxylidide, 2-(N'-(2-(diethylamino)ethyl)acetamido)-, hydrochloride",C18H30ClN3O2,4,0,,2,0,True,False,False,False,355.9,CC[NH+](CC)CCN(CC(=O)NC1=C(C=CC=C1C)C)C(=O)C.[Cl-]
+API,59768,Esmolol,C16H25NO4,2,2,,1,0,True,False,False,False,295.4,CC(C)NCC(COC1=CC=C(C=C1)CCC(=O)OC)O
+API,59772,Sumatriptan Succinate,C18H27N3O6S,8,0,,2,0,True,False,False,False,413.5,CNS(=O)(=O)CC1=CC2=C(C=C1)NC=C2CCN(C)C.C(CC(=O)O)C(=O)O
+API,60560,Pioglitazone Hydrochloride,C19H21ClN2O3S,5,0,,2,0,True,False,False,False,392.9,CCC1=CN=C(C=C1)CCOC2=CC=C(C=C2)CC3C(=O)NC(=O)S3.Cl
+API,60606,Clopidogrel,C16H16ClNO2S,10,2,,1,0,True,False,False,False,321.8,COC(=O)C(C1=CC=CC=C1Cl)N2CCC3=C(C2)C=CS3
+API,60795,Aripiprazole,C23H27Cl2N3O2,14,0,,1,0,True,False,False,False,448.4,C1CC(=O)NC2=C1C=CC(=C2)OCCCCN3CCN(CC3)C4=C(C(=CC=C4)Cl)Cl
+API,60822,Atorvastatin Calcium,C66H68CaF2N4O10,4,0,,3,0,True,True,False,False,1155.4,CC(C)C1=C(C(=C(N1CCC(CC(CC(=O)[O-])O)O)C2=CC=C(C=C2)F)C3=CC=CC=C3)C(=O)NC4=CC=CC=C4.CC(C)C1=C(C(=C(N1CCC(CC(CC(=O)[O-])O)O)C2=CC=C(C=C2)F)C3=CC=CC=C3)C(=O)NC4=CC=CC=C4.[Ca+2]
+API,60825,Lamivudine,C8H11N3O3S,10,0,,1,0,True,False,False,False,229.3,C1C(OC(S1)CO)N2C=CC(=NC2=O)N
+API,60834,Duloxetine Hydrochloride,C18H20ClNOS,8,0,,2,0,True,False,False,False,333.9,CNCCC(C1=CC=CS1)OC2=CC=CC3=CC=CC=C32.Cl
+API,60846,Valsartan,C24H29N5O3,5,0,,1,0,True,False,False,False,435.5,CCCCC(=O)N(CC1=CC=C(C=C1)C2=CC=CC=C2C3=NNN=N3)C(C(C)C)C(=O)O
+API,60871,Adefovir Dipivoxil,C20H32N5O8P,11,1,,1,0,True,False,False,False,501.5,CC(C)(C)C(=O)OCOP(=O)(COCCN1C=NC2=C(N=CN=C21)N)OCOC(=O)C(C)(C)C
+API,60877,Emtricitabine,C8H10FN3O3S,8,0,,1,0,True,False,False,False,247.3,C1C(OC(S1)CO)N2C=C(C(=NC2=O)N)F
+API,62698,Dextrin,C18H32O16,2,2,flag:non_drug_api,1,0,True,False,False,False,504.4,C(C1C(C(C(C(O1)OC2C(OC(C(C2O)O)OC3C(OC(C(C3O)O)O)CO)CO)O)O)O)O
+API,62882,Propranolol Hydrochloride,C16H22ClNO2,1,1,,2,0,True,False,False,False,295.8,CC(C)NCC(COC1=CC=CC2=CC=CC=C21)O.Cl
+API,62923,Venlafaxine Hydrochloride,C17H28ClNO2,4,0,,2,0,True,False,False,False,313.9,CN(C)CC(C1=CC=C(C=C1)OC)C2(CCCCC2)O.Cl
+API,62937,Metoprolol Succinate,C34H56N2O10,11,0,,3,0,True,False,False,False,652.8,CC(C)NCC(COC1=CC=C(C=C1)CCOC)O.CC(C)NCC(COC1=CC=C(C=C1)CCOC)O.C(CC(=O)O)C(=O)O
+API,62969,Verapamil Hydrochloride,C27H39ClN2O4,5,0,,2,0,True,False,False,False,491.1,CC(C)C(CCCN(C)CCC1=CC(=C(C=C1)OC)OC)(C#N)C2=CC(=C(C=C2)OC)OC.Cl
+API,63013,Tramadol Hydrochloride,C16H26ClNO2,12,0,,2,0,True,False,False,False,299.8,CN(C)CC1CCCCC1(C2=CC(=CC=C2)OC)O.Cl
+API,64139,Efavirenz,C14H9ClF3NO2,3,0,,1,0,True,False,False,False,315.7,C1CC1C#CC2(C3=C(C=CC(=C3)Cl)NC(=O)O2)C(F)(F)F
+API,65157,"Testosterone, undecanoate",C30H48O3,9,0,,1,0,True,False,False,False,456.7,CCCCCCCCCCC(=O)OC1CCC2C1(CCC3C2CCC4=CC(=O)CCC34C)C
+API,65999,Telmisartan,C33H30N4O2,4,0,,1,0,True,False,False,False,514.6,CCCC1=NC2=C(N1CC3=CC=C(C=C3)C4=CC=CC=C4C(=O)O)C=C(C=C2C)C5=NC6=CC=CC=C6N5C
+API,66370,alpha-D-Glucose monohydrate,C6H14O7,4,4,flag:non_drug_api,2,0,True,False,False,False,198.2,C(C1C(C(C(C(O1)O)O)O)O)O.O
+API,68704,Ibuproxam,C13H19NO2,2,2,,1,0,True,False,False,False,221.3,CC(C)CC1=CC=C(C=C1)C(C)C(=O)NO
+API,68844,Brinzolamide,C12H21N3O5S3,1,1,,1,0,True,False,False,False,383.5,CCNC1CN(S(=O)(=O)C2=C1C=C(S2)S(=O)(=O)N)CCCOC
+API,71329,Dofetilide,C19H27N3O5S2,4,0,,1,0,True,False,False,False,441.6,CN(CCC1=CC=C(C=C1)NS(=O)(=O)C)CCOC2=CC=C(C=C2)NS(=O)(=O)C
+API,71360,Iloperidone,C24H27FN2O4,5,0,,1,0,True,False,False,False,426.5,CC(=O)C1=CC(=C(C=C1)OCCCN2CCC(CC2)C3=NOC4=C3C=CC(=C4)F)OC
+API,71412,Labetalol Hydrochloride,C19H25ClN2O3,6,0,,2,0,True,False,False,False,364.9,CC(CCC1=CC=CC=C1)NCC(C2=CC(=C(C=C2)O)C(=O)N)O.Cl
+API,71424,Viloxazine Hydrochloride,C13H20ClNO3,12,0,,2,0,True,False,False,False,273.8,CCOC1=CC=CC=C1OCC2CNCCO2.Cl
+API,71616,Voriconazole,C16H14F3N5O,10,0,,1,0,True,False,False,False,349.3,CC(C1=NC=NC=C1F)C(CN2C=NC=N2)(C3=C(C=C(C=C3)F)F)O
+API,71764,Alfuzosin Hydrochloride,C19H28ClN5O4,8,0,,2,0,True,False,False,False,425.9,CN(CCCNC(=O)C1CCCO1)C2=NC3=CC(=C(C=C3C(=N2)N)OC)OC.Cl
+API,71771,Aceclofenac,C16H13Cl2NO4,1,1,,1,0,True,False,False,False,354.2,C1=CC=C(C(=C1)CC(=O)OCC(=O)O)NC2=C(C=CC=C2Cl)Cl
+API,73491,Fosfomycin Sodium,C3H5Na2O4P,1,1,,3,0,True,True,False,False,182.0,CC1C(O1)P(=O)([O-])[O-].[Na+].[Na+]
+API,74990,Irinotecan Hydrochloride,C33H39ClN4O6,1,1,,2,0,True,False,False,False,623.1,CCC1=C2CN3C(=CC4=C(C3=O)COC(=O)C4(CC)O)C2=NC5=C1C=C(C=C5)OC(=O)N6CCC(CC6)N7CCCCC7.Cl
+API,77997,Rizatriptan Benzoate,C22H25N5O2,5,0,,2,0,True,False,False,False,391.5,CN(C)CCC1=CNC2=C1C=C(C=C2)CN3C=NC=N3.C1=CC=C(C=C1)C(=O)O
+API,78000,Tamiflu,C16H31N2O8P,5,0,,2,0,True,False,False,False,410.4,CCC(CC)OC1C=C(CC(C1NC(=O)C)N)C(=O)OCC.OP(=O)(O)O
+API,84003,Ketorolac Tromethamine,C19H24N2O6,7,0,,2,0,True,False,False,False,376.4,C1CN2C(=CC=C2C(=O)C3=CC=CC=C3)C1C(=O)O.C(C(CO)(CO)N)O
+API,84029,Clarithromycin,C38H69NO13,2,0,,1,0,True,False,False,False,748.0,CCC1C(C(C(C(=O)C(CC(C(C(C(C(C(=O)O1)C)OC2CC(C(C(O2)C)O)(C)OC)C)OC3C(C(CC(O3)C)N(C)C)O)(C)OC)C)C)O)(C)O
+API,84724,"5-Amino-1,3,4-thiadiazole-2-sulfonamide",C2H4N4O2S2,1,1,,1,0,True,False,False,False,180.2,C1(=NN=C(S1)S(=O)(=O)N)N
+API,86472,Alpha-Tocopherol Acetate,C31H52O3,1,1,flag:non_drug_api,1,0,True,False,False,False,472.8,CC1=C(C(=C(C2=C1OC(CC2)(C)CCCC(C)CCCC(C)CCCC(C)C)C)OC(=O)C)C
+API,91270,Moexipril,C27H34N2O7,2,2,,1,0,True,False,False,False,498.6,CCOC(=O)C(CCC1=CC=CC=C1)NC(C)C(=O)N2CC3=CC(=C(C=C3CC2C(=O)O)OC)OC
+API,91558,Quinine Hydrochloride,C20H25ClN2O2,1,1,,2,0,True,False,False,False,360.9,COC1=CC2=C(C=CN=C2C=C1)C(C3CC4CCN3CC4C=C)O.Cl
+API,92974,Droxidopa,C9H11NO5,9,0,,1,0,True,False,False,False,213.2,C1=CC(=C(C=C1C(C(C(=O)O)N)O)O)O
+API,93095,Fosfomycin calcium,C3H5CaO4P,1,1,,2,0,True,True,False,False,176.1,CC1C(O1)P(=O)([O-])[O-].[Ca+2]
+API,104865,Bosentan,C27H29N5O6S,6,0,,1,0,True,False,False,False,551.6,CC(C)(C)C1=CC=C(C=C1)S(=O)(=O)NC2=C(C(=NC(=N2)C3=NC=CC=N3)OCCO)OC4=CC=CC=C4OC
+API,107952,Betaxolol Hydrochloride,C18H30ClNO3,4,0,,2,0,True,False,False,False,343.9,CC(C)NCC(COC1=CC=C(C=C1)CCOCC2CC2)O.Cl
+API,107970,Fingolimod,C19H33NO2,10,0,,1,0,True,False,False,False,307.5,CCCCCCCCC1=CC=C(C=C1)CCC(CO)(CO)N
+API,110635,Tadalafil,C22H19N3O4,8,0,,1,0,True,False,False,False,389.4,CN1CC(=O)N2C(C1=O)CC3=C(C2C4=CC5=C(C=C4)OCO5)NC6=CC=CC=C36
+API,115355,Nitisinone,C14H10F3NO5,3,0,,1,0,True,False,False,False,329.2,C1CC(=O)C(C(=O)C1)C(=O)C2=C(C=C(C=C2)C(F)(F)F)[N+](=O)[O-]
+API,115366,Clopidogrel Bisulfate,C16H18ClNO6S2,10,0,,2,0,True,False,False,False,419.9,COC(=O)C(C1=CC=CC=C1Cl)N2CCC3=C(C2)C=CS3.OS(=O)(=O)O
+API,119607,Valdecoxib,C16H14N2O3S,11,0,,1,0,True,False,False,False,314.4,CC1=C(C(=NO1)C2=CC=CC=C2)C3=CC=C(C=C3)S(=O)(=O)N
+API,121396,Carglumic Acid,C6H10N2O5,5,0,,1,0,True,False,False,False,190.2,C(CC(=O)O)C(C(=O)O)NC(=O)N
+API,121587,Galantamine Hydrobromide,C17H22BrNO3,9,0,,2,0,True,False,False,False,368.3,CN1CCC23C=CC(CC2OC4=C(C=CC(=C34)C1)OC)O.Br
+API,121892,Ezogabine,C16H18FN3O2,10,0,,1,0,True,False,False,False,303.3,CCOC(=O)NC1=C(C=C(C=C1)NCC2=CC=C(C=C2)F)N
+API,123603,"(2R,3'R)-2-methyl-1'-azaspiro((1,3)oxathiolane-5,3'-bicyclo(2.2.2)octane) hydrochloride",C10H18ClNOS,3,0,,2,0,True,False,False,False,235.8,CC1OC2(CN3CCC2CC3)CS1.Cl
+API,124087,Desloratadine,C19H19ClN2,9,0,,1,0,True,False,False,False,310.8,C1CC2=C(C=CC(=C2)Cl)C(=C3CCNCC3)C4=C1C=CC=N4
+API,129228,Rufinamide,C10H8F2N4O,11,0,,1,0,True,False,False,False,238.2,C1=CC(=C(C(=C1)F)CN2C=C(N=N2)C(=O)N)F
+API,129791,Itopride Hydrochloride,C20H27ClN2O4,4,0,,2,0,True,False,False,False,394.9,CN(C)CCOC1=CC=C(C=C1)CNC(=O)C2=CC(=C(C=C2)OC)OC.Cl
+API,130564,Omeprazole Magnesium,C34H36MgN6O6S2,11,0,,3,0,True,True,False,False,713.1,CC1=CN=C(C(=C1OC)C)CS(=O)C2=NC3=C([N-]2)C=CC(=C3)OC.CC1=CN=C(C(=C1OC)C)CS(=O)C2=NC3=C([N-]2)C=CC(=C3)OC.[Mg+2]
+API,130881,Olmesartan Medoxomil,C29H30N6O6,12,0,,1,0,True,False,False,False,558.6,CCCC1=NC(=C(N1CC2=CC=C(C=C2)C3=CC=CC=C3C4=NNN=N4)C(=O)OCC5=C(OC(=O)O5)C)C(C)(C)O
+API,130904,Ulipristal Acetate,C30H37NO4,4,0,,1,0,True,False,False,False,475.6,CC(=O)C1(CCC2C1(CC(C3=C4CCC(=O)C=C4CCC23)C5=CC=C(C=C5)N(C)C)C)OC(=O)C
+API,134018,Febuxostat,C16H16N2O3S,11,0,,1,0,True,False,False,False,316.4,CC1=C(SC(=N1)C2=CC(=C(C=C2)OCC(C)C)C#N)C(=O)O
+API,134601,Aspartame,C14H18N2O5,4,4,flag:non_drug_api,1,0,True,False,False,False,294.3,COC(=O)C(CC1=CC=CC=C1)NC(=O)C(CC(=O)O)N
+API,134780,Pomalidomide,C13H11N3O4,7,0,,1,0,True,False,False,False,273.2,C1CC(=O)NC(=O)C1N2C(=O)C3=C(C2=O)C(=CC=C3)N
+API,148195,Lonafarnib,C27H31Br2ClN4O2,12,0,,1,0,True,False,False,False,638.8,C1CN(CCC1CC(=O)N2CCC(CC2)C3C4=C(CCC5=C3N=CC(=C5)Br)C=C(C=C4Br)Cl)C(=O)N
+API,150311,Ezetimibe,C24H21F2NO3,6,0,,1,0,True,False,False,False,409.4,C1=CC(=CC=C1C2C(C(=O)N2C3=CC=C(C=C3)F)CCC(C4=CC=C(C=C4)F)O)O
+API,154256,Bazedoxifene Acetate,C32H38N2O5,19,0,,2,0,True,False,False,False,530.7,CC1=C(N(C2=C1C=C(C=C2)O)CC3=CC=C(C=C3)OCCN4CCCCCC4)C5=CC=C(C=C5)O.CC(=O)O
+API,156391,Naproxen,C14H14O3,6,1,,1,0,True,False,False,False,230.3,CC(C1=CC2=C(C=C1)C=C(C=C2)OC)C(=O)O
+API,156418,Cinacalcet Hydrochloride,C22H23ClF3N,5,0,,2,0,True,False,False,False,393.9,CC(C1=CC=CC2=CC=CC=C21)NCCCC3=CC(=CC=C3)C(F)(F)F.Cl
+API,157920,Lubiprostone,C20H32F2O5,3,0,,1,0,True,False,False,False,390.5,CCCCC(C1(CCC2C(O1)CC(=O)C2CCCCCCC(=O)O)O)(F)F
+API,158550,Atazanavir Sulfate,C38H54N6O11S,9,0,,2,0,True,False,False,False,802.9,CC(C)(C)C(C(=O)NC(CC1=CC=CC=C1)C(CN(CC2=CC=C(C=C2)C3=CC=CC=N3)NC(=O)C(C(C)(C)C)NC(=O)OC)O)NC(=O)OC.OS(=O)(=O)O
+API,158781,Olmesartan,C24H26N6O3,6,0,,1,0,True,False,False,False,446.5,CCCC1=NC(=C(N1CC2=CC=C(C=C2)C3=CC=CC=C3C4=NNN=N4)C(=O)O)C(C)(C)O
+API,159269,Telbivudine,C10H14N2O5,7,0,,1,0,True,False,False,False,242.2,CC1=CN(C(=O)NC1=O)C2CC(C(O2)CO)O
+API,163701,Milnacipran Hydrochloride,C15H23ClN2O,9,0,,2,0,True,False,False,False,282.8,CCN(CC)C(=O)C1(CC1CN)C2=CC=CC=C2.Cl
+API,163761,Tafenoquine Succinate,C28H34F3N3O7,6,0,,2,0,True,False,False,False,581.6,CC1=CC(=NC2=C1C(=C(C=C2NC(C)CCCN)OC)OC3=CC=CC(=C3)C(F)(F)F)OC.C(CC(=O)O)C(=O)O
+API,168924,Lanthanum carbonate anhydrous,C3La2O9,2,0,,5,0,True,True,False,False,457.8,C(=O)([O-])[O-].C(=O)([O-])[O-].C(=O)([O-])[O-].[La+3].[La+3]
+API,169535,Ferric Maltol,C18H15FeO9,12,0,,4,0,True,True,True,False,431.2,CC1=C(C(=O)C=CO1)[O-].CC1=C(C(=O)C=CO1)[O-].CC1=C(C(=O)C=CO1)[O-].[Fe+3]
+API,176871,Erlotinib Hydrochloride,C22H24ClN3O4,6,0,,2,0,True,False,False,False,429.9,COCCOC1=C(C=C2C(=C1)C(=NC=N2)NC3=CC=CC(=C3)C#C)OCCOC.Cl
+API,179344,Eslicarbazepine Acetate,C17H16N2O3,3,0,,1,0,True,False,False,False,296.3,CC(=O)OC1CC2=CC=CC=C2N(C3=CC=CC=C13)C(=O)N
+API,181458,Memantine Hydrochloride,C12H22ClN,15,0,,2,0,True,False,False,False,215.8,CC12CC3CC(C1)(CC(C3)(C2)N)C.Cl
+API,189729,Ceronapril,C21H33N2O6P,2,2,,1,0,True,False,False,False,440.5,C1CC(N(C1)C(=O)C(CCCCN)OP(=O)(CCCCC2=CC=CC=C2)O)C(=O)O
+API,193962,Etravirine,C20H15BrN6O,10,0,,1,0,True,False,False,False,435.3,CC1=CC(=CC(=C1OC2=NC(=NC(=C2Br)N)NC3=CC=C(C=C3)C#N)C)C#N
+API,208902,Ramelteon,C16H21NO2,9,0,,1,0,True,False,False,False,259.3,CCC(=O)NCCC1CCC2=C1C3=C(C=C2)OCC3
+API,214348,Deferasirox,C21H15N3O4,8,0,,1,0,True,False,False,False,373.4,C1=CC=C(C(=C1)C2=NN(C(=N2)C3=CC=CC=C3O)C4=CC=C(C=C4)C(=O)O)O
+API,214350,Bms 204352,C16H10ClF4NO2,1,1,,1,0,True,False,False,True,359.7,COC1=C(C=C(C=C1)Cl)[C@]2(C3=C(C=C(C=C3)C(F)(F)F)NC2=O)F
+API,216237,Tolvaptan,C26H25ClN2O3,6,0,,1,0,True,False,False,False,449.0,CC1=CC=CC=C1C(=O)NC2=CC(=C(C=C2)C(=O)N3CCCC(C4=C3C=CC(=C4)Cl)O)C
+API,216326,Lenalidomide,C13H13N3O3,7,0,,1,0,True,False,False,False,259.3,C1CC(=O)NC(=O)C1N2CC3=C(C2=O)C=CC=C3N
+API,216457,Solifenacin Succinate,C27H32N2O6,8,0,,2,0,True,False,False,False,480.6,C1CN2CCC1C(C2)OC(=O)N3CCC4=CC=CC=C4C3C5=CC=CC=C5.C(CC(=O)O)C(=O)O
+API,219025,Dronedarone Hydrochloride,C31H45ClN2O5S,8,0,,2,0,True,False,False,False,593.2,CCCCC1=C(C2=C(O1)C=CC(=C2)NS(=O)(=O)C)C(=O)C3=CC=C(C=C3)OCCCN(CCCC)CCCC.Cl
+API,219078,Lacosamide,C13H18N2O3,13,0,,1,0,True,False,False,False,250.3,CC(=O)NC(COC)C(=O)NCC1=CC=CC=C1
+API,221493,Cholic Acid,C24H40O5,4,0,,1,0,True,False,False,False,408.6,CC(CCC(=O)O)C1CCC2C1(C(CC3C2C(CC4C3(CCC(C4)O)C)O)O)C
+API,406563,Sorafenib Tosylate,C28H24ClF3N4O6S,14,0,,2,0,True,False,False,False,637.0,CC1=CC=C(C=C1)S(=O)(=O)O.CNC(=O)C1=NC=CC(=C1)OC2=CC=C(C=C2)NC(=O)NC3=CC(=C(C=C3)Cl)C(F)(F)F
+API,441074,Quinidine,C20H24N2O2,5,0,,1,0,True,False,False,False,324.4,COC1=CC2=C(C=CN=C2C=C1)C(C3CC4CCN3CC4C=C)O
+API,441300,Abacavir,C14H18N6O,6,0,,1,0,True,False,False,False,286.3,C1CC1NC2=C3C(=NC(=N2)N)N(C=N3)C4CC(C=C4)CO
+API,441308,Metoprolol Tartrate,C34H56N2O12,7,0,,3,0,True,False,False,False,684.8,CC(C)NCC(COC1=CC=C(C=C1)CCOC)O.CC(C)NCC(COC1=CC=C(C=C1)CCOC)O.C(C(C(=O)O)O)(C(=O)O)O
+API,441358,Nortriptyline Hydrochloride,C19H22ClN,6,0,,2,0,True,False,False,False,299.8,CNCCC=C1C2=CC=CC=C2CCC3=CC=CC=C31.Cl
+API,443872,Eplerenone,C24H30O6,14,0,,1,0,True,False,False,False,414.5,CC12CCC(=O)C=C1CC(C3C24C(O4)CC5(C3CCC56CCC(=O)O6)C)C(=O)OC
+API,443953,Erythromycin ethyl succinate,C43H75NO16,4,1,,1,0,True,False,False,False,862.1,CCC1C(C(C(C(=O)C(CC(C(C(C(C(C(=O)O1)C)OC2CC(C(C(O2)C)O)(C)OC)C)OC3C(C(CC(O3)C)N(C)C)OC(=O)CCC(=O)OCC)(C)O)C)C)O)(C)O
+API,444030,Darifenacin Hydrobromide,C28H31BrN2O2,6,0,,2,0,True,False,False,False,507.5,C1CN(CC1C(C2=CC=CC=C2)(C3=CC=CC=C3)C(=O)N)CCC4=CC5=C(C=C4)OCC5.Br
+API,445643,Tacrolimus,C44H69NO12,14,0,,1,0,True,False,False,False,804.0,CC1CC(C2C(CC(C(O2)(C(=O)C(=O)N3CCCCC3C(=O)OC(C(C(CC(=O)C(C=C(C1)C)CC=C)O)C)C(=CC4CCC(C(C4)OC)O)C)O)C)OC)OC
+API,446987,Fosfomycin,C3H7O4P,3,3,,1,0,True,False,False,False,138.1,CC1C(O1)P(=O)(O)O
+API,447043,Azithromycin,C38H72N2O12,5,0,,1,0,True,False,False,False,749.0,CCC1C(C(C(N(CC(CC(C(C(C(C(C(=O)O1)C)OC2CC(C(C(O2)C)O)(C)OC)C)OC3C(C(CC(O3)C)N(C)C)O)(C)O)C)C)C)O)(C)O
+API,447715,Obeticholic Acid,C26H44O4,6,0,,1,0,True,False,False,False,420.6,CCC1C2CC(CCC2(C3CCC4(C(C3C1O)CCC4C(C)CCC(=O)O)C)C)O
+API,449193,Roflumilast,C17H14Cl2F2N2O3,7,0,,1,0,True,False,False,False,403.2,C1CC1COC2=C(C=CC(=C2)C(=O)NC3=C(C=NC=C3Cl)Cl)OC(F)F
+API,456199,Pretomanid,C14H12F3N3O5,6,0,,1,0,True,False,False,False,359.3,C1C(COC2=NC(=CN21)[N+](=O)[O-])OCC3=CC=C(C=C3)OC(F)(F)F
+API,464205,Tenofovir,C9H14N5O4P,4,0,,1,0,True,False,False,False,287.2,CC(CN1C=NC2=C(N=CN=C21)N)OCP(=O)(O)O
+API,493570,Riboflavin,C17H20N4O6,1,1,,1,0,True,False,False,False,376.4,CC1=CC2=C(C=C1C)N(C3=NC(=O)NC(=O)C3=N2)CC(C(C(CO)O)O)O
+API,637568,Dimethyl Fumarate,C6H8O4,10,0,,1,0,True,False,False,False,144.1,COC(=O)C=CC(=O)OC
+API,656631,Eletriptan Hydrobromide,C22H27BrN2O2S,10,0,,2,0,True,False,False,False,463.4,CN1CCCC1CC2=CNC3=C2C=C(C=C3)CCS(=O)(=O)C4=CC=CC=C4.Br
+API,969472,Eszopiclone,C17H17ClN6O3,10,0,,1,0,True,False,False,False,388.8,CN1CCN(CC1)C(=O)OC2C3=NC=CN=C3C(=O)N2C4=NC=C(C=C4)Cl
+API,1349907,Methimazole,C4H6N2S,7,0,,1,0,True,False,False,False,114.2,CN1C=CNC1=S
+API,1549000,Levocetirizine,C21H25ClN2O3,6,0,,1,0,True,False,False,False,388.9,C1CN(CCN1CCOCC(=O)O)C(C2=CC=CC=C2)C3=CC=C(C=C3)Cl
+API,2724385,Digoxin,C41H64O14,1,1,,1,0,True,False,False,False,780.9,CC1C(C(CC(O1)OC2C(OC(CC2O)OC3C(OC(CC3O)OC4CCC5(C(C4)CCC6C5CC(C7(C6(CCC7C8=CC(=O)OC8)O)C)O)C)C)C)O)O
+API,3000540,Lincomycin,C18H34N2O6S,1,1,,1,0,True,False,False,False,406.5,CCCC1CC(N(C1)C)C(=O)NC(C2C(C(C(C(O2)SC)O)O)O)C(C)O
+API,3001055,Ranitidine,C13H22N4O3S,11,3,,1,0,True,False,False,False,314.4,CNC(=C[N+](=O)[O-])NCCSCC1=CC=C(O1)CN(C)C
+API,3002977,(3H)maraviroc,C29H41F2N5O,7,0,,1,0,True,False,False,False,513.7,CC1=NN=C(N1C2CC3CCC(C2)N3CCC(C4=CC=CC=C4)NC(=O)C5CCC(CC5)(F)F)C(C)C
+API,3014803,Trimethanolamine,C3H9NO3,2,0,flag:non_drug_api,1,0,True,False,False,False,107.1,C(N(CO)CO)O
+API,3033332,Ranitidine Hydrochloride,C13H23ClN4O3S,1,1,,2,0,True,False,False,False,350.9,CNC(=C[N+](=O)[O-])NCCSCC1=CC=C(O1)CN(C)C.Cl
+API,3033637,Nizax,C12H21N5O2S2,4,0,,1,0,True,False,False,False,331.5,CNC(=C[N+](=O)[O-])NCCSCC1=CSC(=N1)CN(C)C
+API,3033924,Levofloxacin Hydrate,C36H42F2N6O9,4,0,,3,0,True,False,False,False,740.8,CC1COC2=C3N1C=C(C(=O)C3=CC(=C2N4CCN(CC4)C)F)C(=O)O.CC1COC2=C3N1C=C(C(=O)C3=CC(=C2N4CCN(CC4)C)F)C(=O)O.O
+API,3036505,Ospemifene,C24H23ClO2,9,0,,1,0,True,False,False,False,378.9,C1=CC=C(C=C1)C(=C(C2=CC=CC=C2)C3=CC=C(C=C3)OCCO)CCCl
+API,3045381,Ivabradine Hydrochloride,C27H37ClN2O5,5,0,,2,0,True,False,False,False,505.1,CN(CCCN1CCC2=CC(=C(C=C2CC1=O)OC)OC)CC3CC4=CC(=C(C=C34)OC)OC.Cl
+API,3052775,Rasagiline Mesylate,C13H17NO3S,4,0,,2,0,True,False,False,False,267.4,CS(=O)(=O)O.C#CCNC1CCC2=CC=CC=C12
+API,3058751,Seproxetine,C16H16F3NO,1,1,,1,0,True,False,False,False,295.3,C1=CC=C(C=C1)C(CCN)OC2=CC=C(C=C2)C(F)(F)F
+API,3062316,Dasatinib,C22H26ClN7O2S,7,0,,1,0,True,False,False,False,488.0,CC1=C(C(=CC=C1)Cl)NC(=O)C2=CN=C(S2)NC3=CC(=NC(=N3)C)N4CCN(CC4)CCO
+API,3081361,Vandetanib,C22H24BrFN4O2,8,0,,1,0,True,False,False,False,475.4,CN1CCC(CC1)COC2=C(C=C3C(=C2)N=CN=C3NC4=C(C=C(C=C4)Br)F)OC
+API,5018304,Diclofenac sodium,C14H10Cl2NNaO2,1,1,,2,0,True,True,False,False,318.1,C1=CC=C(C(=C1)CC(=O)[O-])NC2=C(C=CC=C2Cl)Cl.[Na+]
+API,5280443,Apigenin,C15H10O5,4,4,,1,0,True,False,False,False,270.2,C1=CC(=CC=C1C2=CC(=O)C3=C(C=C(C=C3O2)O)O)O
+API,5280445,Luteolin,C15H10O6,2,2,,1,0,True,False,False,False,286.2,C1=CC(=C(C=C1C2=CC(=O)C3=C(C=C(C=C3O2)O)O)O)O
+API,5280965,Amphotericin B,C47H73NO17,3,1,,1,0,True,False,False,False,924.1,CC1C=CC=CC=CC=CC=CC=CC=CC(CC2C(C(CC(O2)(CC(CC(C(CCC(CC(CC(=O)OC(C(C1O)C)C)O)O)O)O)O)O)O)C(=O)O)OC3C(C(C(C(O3)C)O)N)O
+API,5281004,Budesonide,C25H34O6,7,0,,1,0,True,False,False,False,430.5,CCCC1OC2CC3C4CCC5=CC(=O)C=CC5(C4C(CC3(C2(O1)C(=O)CO)C)O)C
+API,5281040,Montelukast,C35H36ClNO3S,10,0,,1,0,True,False,False,False,586.2,CC(C)(C1=CC=CC=C1CCC(C2=CC=CC(=C2)C=CC3=NC4=C(C=CC(=C4)Cl)C=C3)SCC5(CC5)CC(=O)O)O
+API,5281068,Chlorpheniramine Maleate,C20H23ClN2O4,8,0,,2,0,True,False,False,False,390.9,CN(C)CCC(C1=CC=C(C=C1)Cl)C2=CC=CC=N2.C(=CC(=O)O)C(=O)O
+API,5281792,Rosmarinic Acid,C18H16O8,2,2,,1,0,True,False,False,False,360.3,C1=CC(=C(C=C1CC(C(=O)O)OC(=O)C=CC2=CC(=C(C=C2)O)O)O)O
+API,5282379,Isotretinoin,C20H28O2,9,0,,1,0,True,False,False,False,300.4,CC1=C(C(CCC1)(C)C)C=CC(=CC=CC(=CC(=O)O)C)C
+API,5282455,Rosuvastatin Calcium,C44H54CaF2N6O12S2,8,0,,3,0,True,True,False,False,1001.2,CC(C)C1=NC(=NC(=C1C=CC(CC(CC(=O)[O-])O)O)C2=CC=C(C=C2)F)N(C)S(=O)(=O)C.CC(C)C1=NC(=NC(=C1C=CC(CC(CC(=O)[O-])O)O)C2=CC=C(C=C2)F)N(C)S(=O)(=O)C.[Ca+2]
+API,5284359,Calcium Chloride,CaCl2,6,6,flag:non_drug_api,3,0,False,True,False,False,111.0,[Cl-].[Cl-].[Ca+2]
+API,5284583,Levetiracetam,C8H14N2O2,22,0,,1,0,True,False,False,False,170.2,CCC(C(=O)N)N1CCCC1=O
+API,5288227,Maleate(2-),C4H2O4-2,1,1,remove:bare_ion,1,-2,True,False,False,False,114.1,C(=CC(=O)[O-])C(=O)[O-]
+API,5288826,Morphine,C17H19NO3,1,1,,1,0,True,False,False,False,285.3,CN1CCC23C4C1CC5=C2C(=C(C=C5)O)OC3C(C=C4)O
+API,5311027,Bimatoprost,C25H37NO4,3,0,,1,0,True,False,False,False,415.6,CCNC(=O)CCCC=CCC1C(CC(C1C=CC(CCC2=CC=CC=C2)O)O)O
+API,5311037,Istradefylline,C20H24N4O4,10,0,,1,0,True,False,False,False,384.4,CCN1C2=C(C(=O)N(C1=O)CC)N(C(=N2)C=CC3=CC(=C(C=C3)OC)OC)C
+API,5311083,Magnesium omeprazole,C34H36MgN6O6S2,20,0,,3,0,True,True,False,False,713.1,CC1=CN=C(C(=C1OC)C)CS(=O)C2=NC3=C([N-]2)C=CC(=C3)OC.CC1=CN=C(C(=C1OC)C)CS(=O)C2=NC3=C([N-]2)C=CC(=C3)OC.[Mg+2]
+API,5311304,Nalbuphine,C21H27NO4,5,0,,1,0,True,False,False,False,357.5,C1CC(C1)CN2CCC34C5C(CCC3(C2CC6=C4C(=C(C=C6)O)O5)O)O
+API,5311454,Stiripentol,C14H18O3,5,0,,1,0,True,False,False,False,234.3,CC(C)(C)C(C=CC1=CC2=C(C=C1)OCO2)O
+API,5312125,Silodosin,C25H32F3N3O4,6,0,,1,0,True,False,False,False,495.5,CC(CC1=CC2=C(C(=C1)C(=O)N)N(CC2)CCCO)NCCOC3=CC=CC=C3OCC(F)(F)F
+API,5330286,Palbociclib,C24H29N7O2,15,0,,1,0,True,False,False,False,447.5,CC1=C(C(=O)N(C2=NC(=NC=C12)NC3=NC=C(C=C3)N4CCNCC4)C5CCCC5)C(=O)C
+API,5359227,(-)-Codeine phosphate,C18H24NO7P,1,1,,2,0,True,False,False,False,397.4,CN1CCC23C4C1CC5=C2C(=C(C=C5)OC)OC3C(C=C4)O.OP(=O)(O)O
+API,5361917,Methylnaltrexone Bromide,C21H26BrNO4,13,0,,2,0,True,False,False,False,436.3,C[N+]1(CCC23C4C(=O)CCC2(C1CC5=C3C(=C(C=C5)O)O4)O)CC6CC6.[Br-]
+API,5362065,Cefixime,C16H15N5O7S2,18,0,,1,0,True,False,False,False,453.5,C=CC1=C(N2C(C(C2=O)NC(=O)C(=NOCC(=O)O)C3=CSC(=N3)N)SC1)C(=O)O
+API,5362119,Lisinopril,C21H31N3O5,10,2,,1,0,True,False,False,False,405.5,C1CC(N(C1)C(=O)C(CCCCN)NC(CCC2=CC=CC=C2)C(=O)O)C(=O)O
+API,5388962,Enalapril,C20H28N2O5,6,2,,1,0,True,False,False,False,376.5,CCOC(=O)C(CCC1=CC=CC=C1)NC(C)C(=O)N2CCCC2C(=O)O
+API,5479530,Ceftriaxone,C18H18N8O7S3,4,4,,1,0,True,False,False,False,554.6,CN1C(=NC(=O)C(=O)N1)SCC2=C(N3C(C(C3=O)NC(=O)C(=NOC)C4=CSC(=N4)N)SC2)C(=O)O
+API,5486971,Pregabalin,C8H17NO2,11,0,,1,0,True,False,False,False,159.2,CC(C)CC(CC(=O)O)CN
+API,5488548,Alvimopan,C25H32N2O4,1,0,,1,0,True,False,False,False,424.5,CC1CN(CCC1(C)C2=CC(=CC=C2)O)CC(CC3=CC=CC=C3)C(=O)NCC(=O)O
+API,5491577,"(6R,7R)-7-(((2Z)-2-(2-Amino-1,3-thiazol-4-yl)-2-(carboxymethyloxyimino)acetyl)amino)-3-ethenyl-8-oxo-5-thia-1-azabicyclo(4.2.0)oct-2-ene-2-carboxylic acid trihydrate",C16H21N5O10S2,5,0,,4,0,True,False,False,False,507.5,C=CC1=C(N2C(C(C2=O)NC(=O)C(=NOCC(=O)O)C3=CSC(=N3)N)SC1)C(=O)O.O.O.O
+API,5702160,Famotidine,C8H15N7O2S3,11,1,,1,0,True,False,False,False,337.5,C1=C(N=C(S1)N=C(N)N)CSCCC(=NS(=O)(=O)N)N
+API,6093208,Calcium Hydroxide,CaH2O2,6,6,flag:non_drug_api,3,0,False,True,False,False,74.1,[OH-].[OH-].[Ca+2]
+API,6321416,Cefuroxime Axetil,C20H22N4O10S,3,0,,1,0,True,False,False,False,510.5,CC(OC(=O)C)OC(=O)C1=C(CSC2N1C(=O)C2NC(=O)C(=NOC)C3=CC=CO3)COC(=O)N
+API,6324616,Rifamycin,C37H47NO12,11,0,,1,0,True,False,False,False,697.8,CC1C=CC=C(C(=O)NC2=CC(=C3C(=C2O)C(=C(C4=C3C(=O)C(O4)(OC=CC(C(C(C(C(C(C1O)C)O)C)OC(=O)C)C)OC)C)C)O)O)C
+API,6328154,Sodium carboxymethyl cellulose,C8H16NaO8,3,3,flag:non_drug_api,3,0,True,True,True,False,263.2,CC(=O)O.C(C(C(C(C(C=O)O)O)O)O)O.[Na]
+API,6436173,Rifaximin,C43H51N3O11,8,0,,1,0,True,False,False,False,785.9,CC1C=CC=C(C(=O)NC2=C(C3=C(C4=C(C(=C3O)C)OC(C4=O)(OC=CC(C(C(C(C(C(C1O)C)O)C)OC(=O)C)C)OC)C)C5=C2N6C=CC(=CC6=N5)C)O)C
+API,6442177,Everolimus,C53H83NO14,8,0,,1,0,True,False,False,False,958.2,CC1CCC2CC(C(=CC=CC=CC(CC(C(=O)C(C(C(=CC(C(=O)CC(OC(=O)C3CCCCN3C(=O)C(=O)C1(O2)O)C(C)CC4CCC(C(C4)OC)OCCO)C)C)O)OC)C)C)C)OC
+API,6450551,Axitinib,C22H18N4OS,8,0,,1,0,True,False,False,False,386.5,CNC(=O)C1=CC=CC=C1SC2=CC3=C(C=C2)C(=NN3)C=CC4=CC=CC=N4
+API,6450800,"Artemether, Lumefantrine Drug Combination",C46H58Cl3NO6,5,0,flag:multi_api,2,0,True,False,False,False,827.3,CCCCN(CCCC)CC(C1=CC(=CC2=C1C3=C(C2=CC4=CC=C(C=C4)Cl)C=C(C=C3)Cl)Cl)O.CC1CCC2C(C(OC3C24C1CCC(O3)(OO4)C)OC)C
+API,6451150,Sitagliptin Phosphate Anhydrous,C16H18F6N5O5P,12,0,,2,0,True,False,False,False,505.3,C1CN2C(=NN=C2C(F)(F)F)CN1C(=O)CC(CC3=CC(=C(C=C3F)F)F)N.OP(=O)(O)O
+API,6456015,Sunitinib Malate,C26H33FN4O7,10,0,,2,0,True,False,False,False,532.6,CCN(CC)CCNC(=O)C1=C(NC(=C1C)C=C2C3=C(C=CC(=C3)F)NC2=O)C.C(C(C(=O)O)O)C(=O)O
+API,6474107,Digitonin,C56H92O29,1,1,flag:non_drug_api,1,0,True,False,False,False,1229.3,CC1CCC2(C(C3C(O2)C(C4C3(CCC5C4CCC6C5(CC(C(C6)OC7C(C(C(C(O7)CO)OC8C(C(C(C(O8)CO)O)OC9C(C(C(CO9)O)O)O)OC2C(C(C(C(O2)CO)O)OC2C(C(C(C(O2)CO)O)O)O)O)O)O)O)C)C)O)C)OC1
+API,6842999,Nifurtimox,C10H13N3O5S,4,0,,1,0,True,False,False,False,287.3,CC1CS(=O)(=O)CCN1N=CC2=CC=C(O2)[N+](=O)[O-]
+API,6850754,Kaltostat,C14H22O13,4,4,flag:non_drug_api,1,0,True,False,False,False,398.3,COC1C(C(C(OC1C(=O)O)OC2C(C(C(OC2C(=O)O)OC)O)O)O)O
+API,6917875,Asenapine Maleate,C21H20ClNO5,2,0,,2,0,True,False,False,False,401.8,CN1CC2C(C1)C3=C(C=CC(=C3)Cl)OC4=CC=CC=C24.C(=CC(=O)O)C(=O)O
+API,6918248,Flibanserin,C20H21F3N4O,8,0,,1,0,True,False,False,False,390.4,C1CN(CCN1CCN2C3=CC=CC=C3NC2=O)C4=CC=CC(=C4)C(F)(F)F
+API,6918313,"2-benzofurancarboxamide, 5-(4-(4-(5-cyano-1H-indol-3-yl)butyl)-1-piperazinyl)-, hydrochloride (1:1)",C26H28ClN5O2,9,0,,2,0,True,False,False,False,478.0,C1CN(CCN1CCCCC2=CNC3=C2C=C(C=C3)C#N)C4=CC5=C(C=C4)OC(=C5)C(=O)N.Cl
+API,6918427,Aliskiren Hemifumarate,C64H110N6O16,8,0,,3,0,True,False,False,False,1219.6,CC(C)C(CC1=CC(=C(C=C1)OC)OCCCOC)CC(C(CC(C(C)C)C(=O)NCC(C)(C)C(=O)N)O)N.CC(C)C(CC1=CC(=C(C=C1)OC)OCCCOC)CC(C(CC(C(C)C)C(=O)NCC(C)(C)C(=O)N)O)N.C(=CC(=O)O)C(=O)O
+API,6918486,Voclosporin,C63H111N11O12,6,0,,1,0,True,False,False,False,1214.6,CCC1C(=O)N(CC(=O)N(C(C(=O)NC(C(=O)N(C(C(=O)NC(C(=O)NC(C(=O)N(C(C(=O)N(C(C(=O)N(C(C(=O)N(C(C(=O)N1)C(C(C)CC=CC=C)O)C)C(C)C)C)CC(C)C)C)CC(C)C)C)C)C)CC(C)C)C)C(C)C)CC(C)C)C)C
+API,6918493,Ambrisentan,C22H22N2O4,8,0,,1,0,True,False,False,False,378.4,CC1=CC(=NC(=N1)OC(C(=O)O)C(C2=CC=CC=C2)(C3=CC=CC=C3)OC)C
+API,9552079,Chlorhexidine,C22H30Cl2N10,8,8,,1,0,True,False,False,False,505.5,C1=CC(=CC=C1NC(=NC(=NCCCCCCN=C(N)N=C(N)NC2=CC=C(C=C2)Cl)N)N)Cl
+API,9578005,Dexlansoprazole,C16H14F3N3O2S,10,0,,1,0,True,False,False,False,369.4,CC1=C(C=CN=C1CS(=O)C2=NC3=CC=CC=C3N2)OCC(F)(F)F
+API,9588170,Gemifloxacin Mesylate,C19H24FN5O7S,6,0,,2,0,True,False,False,False,485.5,CON=C1CN(CC1CN)C2=C(C=C3C(=O)C(=CN(C3=N2)C4CC4)C(=O)O)F.CS(=O)(=O)O
+API,9800068,Desvenlafaxine succinate anhydrous,C20H31NO6,7,0,,2,0,True,False,False,False,381.5,CN(C)CC(C1=CC=C(C=C1)O)C2(CCCCC2)O.C(CC(=O)O)C(=O)O
+API,9821849,Abiraterone Acetate,C26H33NO2,7,0,,1,0,True,False,False,False,391.6,CC(=O)OC1CCC2(C3CCC4(C(C3CC=C2C1)CC=C4C5=CN=CC=C5)C)C
+API,9832912,Moxidectin,C37H53NO8,6,0,,1,0,True,False,False,False,639.8,CC1CC(=CCC2CC(CC3(O2)CC(=NOC)C(C(O3)C(=CC(C)C)C)C)OC(=O)C4C=C(C(C5C4(C(=CC=C1)CO5)O)O)C)C
+API,9837243,Brivaracetam,C11H20N2O2,11,0,,1,0,True,False,False,False,212.3,CCCC1CC(=O)N(C1)C(CC)C(=O)N
+API,9838021,Tapentadol Hydrochloride,C14H24ClNO,17,0,,2,0,True,False,False,False,257.8,CCC(C1=CC(=CC=C1)O)C(C)CN(C)C.Cl
+API,9844225,(-)-Heroin hydrochloride,C21H24ClNO5,1,1,,2,0,True,False,False,False,405.9,CC(=O)OC1C=CC2C3CC4=C5C2(C1OC5=C(C=C4)OC(=O)C)CCN3C.Cl
+API,9849808,Fesoterodine Fumarate,C30H41NO7,5,0,,2,0,True,False,False,False,527.7,CC(C)C(=O)OC1=C(C=C(C=C1)CO)C(CCN(C(C)C)C(C)C)C2=CC=CC=C2.C(=CC(=O)O)C(=O)O
+API,9865528,Mirabegron,C21H24N4O2S,6,0,,1,0,True,False,False,False,396.5,C1=CC=C(C=C1)C(CNCCC2=CC=C(C=C2)NC(=O)CC3=CSC(=N3)N)O
+API,9869929,Avanafil,C23H26ClN7O3,6,0,,1,0,True,False,False,False,484.0,COC1=C(C=C(C=C1)CNC2=NC(=NC=C2C(=O)NCC3=NC=CC=N3)N4CCCC4CO)Cl
+API,9871419,Ticagrelor,C23H28F2N6O4S,10,0,,1,0,True,False,False,False,522.6,CCCSC1=NC(=C2C(=N1)N(N=N2)C3CC(C(C3O)O)OCCO)NC4CC4C5=CC(=C(C=C5)F)F
+API,9874560,Dienogest; estradiol valerate,C43H57NO5,7,0,flag:multi_api,2,0,True,False,False,False,667.9,CCCCC(=O)OC1CCC2C1(CCC3C2CCC4=C3C=CC(=C4)O)C.CC12CCC3=C4CCC(=O)C=C4CCC3C1CCC2(CC#N)O
+API,9875401,Rivaroxaban,C19H18ClN3O5S,9,0,,1,0,True,False,False,False,435.9,C1COCC(=O)N1C2=CC=C(C=C2)N3CC(OC3=O)CNC(=O)C4=CC=C(S4)Cl
+API,9883933,Gabapentin Enacarbil,C16H27NO6,6,0,,1,0,True,False,False,False,329.4,CC(C)C(=O)OC(C)OC(=O)NCC1(CCCCC1)CC(=O)O
+API,9913767,Selexipag,C26H32N4O4S,8,0,,1,0,True,False,False,False,496.6,CC(C)N(CCCCOCC(=O)NS(=O)(=O)C)C1=CN=C(C(=N1)C2=CC=CC=C2)C3=CC=CC=C3
+API,9918581,Avatrombopag Maleate,C33H38Cl2N6O7S2,10,0,,2,0,True,False,False,False,765.7,C1CCC(CC1)N2CCN(CC2)C3=C(N=C(S3)NC(=O)C4=CC(=C(N=C4)N5CCC(CC5)C(=O)O)Cl)C6=CC(=CS6)Cl.C(=CC(=O)O)C(=O)O
+API,9924495,Perampanel,C23H15N3O,10,0,,1,0,True,False,False,False,349.4,C1=CC=C(C=C1)N2C=C(C=C(C2=O)C3=CC=CC=C3C#N)C4=CC=CC=N4
+API,9933004,"2,2'-Azanediylbis(1-(6-fluorochroman-2-yl)ethanol) hydrochloride",C22H26ClF2NO4,9,0,,2,0,True,False,False,False,441.9,C1CC2=C(C=CC(=C2)F)OC1C(CNCC(C3CCC4=C(O3)C=CC(=C4)F)O)O.Cl
+API,9941095,Lapatinib ditosylate anhydrous,C43H42ClFN4O10S3,6,0,,3,0,True,False,False,False,925.5,CC1=CC=C(C=C1)S(=O)(=O)O.CC1=CC=C(C=C1)S(=O)(=O)O.CS(=O)(=O)CCNCC1=CC=C(O1)C2=CC3=C(C=C2)N=CN=C3NC4=CC(=C(C=C4)OCC5=CC(=CC=C5)F)Cl
+API,9989226,Alumina,Al2O3,3,3,flag:non_drug_api,5,0,False,True,False,False,102.0,[O-2].[O-2].[O-2].[Al+3].[Al+3]
+API,9997821,Sulbactam Pivoxil,C14H21NO7S,1,1,,1,0,True,False,False,False,347.4,CC1(C(N2C(S1(=O)=O)CC2=O)C(=O)OCOC(=O)C(C)(C)C)C
+API,10034073,Fidaxomicin,C52H74Cl2O18,9,0,,1,0,True,False,False,False,1058.1,CCC1C=C(C(CC=CC=C(C(=O)OC(CC=C(C=C(C1OC2C(C(C(C(O2)(C)C)OC(=O)C(C)C)O)O)C)C)C(C)O)COC3C(C(C(C(O3)C)OC(=O)C4=C(C(=C(C(=C4O)Cl)O)Cl)CC)O)OC)O)C
+API,10077129,Vorapaxar Sulfate,C29H35FN2O8S,8,0,,2,0,True,False,False,False,590.7,CCOC(=O)NC1CCC2C(C1)CC3C(C2C=CC4=NC=C(C=C4)C5=CC(=CC=C5)F)C(OC3=O)C.OS(=O)(=O)O
+API,10096344,Linagliptin,C25H28N8O2,7,0,,1,0,True,False,False,False,472.6,CC#CCN1C2=C(N=C1N3CCCC(C3)N)N(C(=O)N(C2=O)CC4=NC5=CC=CC=C5C(=N4)C)C
+API,10130337,Solriamfetol,C10H14N2O2,7,0,,1,0,True,False,False,False,194.2,C1=CC=C(C=C1)CC(COC(=O)N)N
+API,10158453,Prasugrel Hydrochloride,C20H21ClFNO3S,9,0,,2,0,True,False,False,False,409.9,CC(=O)OC1=CC2=C(S1)CCN(C2)C(C3=CC=CC=C3F)C(=O)C4CC4.Cl
+API,10174505,Tofacitinib Citrate,C22H28N6O8,16,0,,2,0,True,False,False,False,504.5,CC1CCN(CC1N(C)C2=NC=NC3=C2C=CN3)C(=O)CC#N.C(C(=O)O)C(CC(=O)O)(C(=O)O)O
+API,10176082,Aluminum Hydroxide,AlH3O3,4,4,,4,0,False,True,False,False,78.0,[OH-].[OH-].[OH-].[Al+3]
+API,10182969,Apixaban,C25H25N5O4,9,0,,1,0,True,False,False,False,459.5,COC1=CC=C(C=C1)N2C3=C(CCN(C3=O)C4=CC=C(C=C4)N5CCCCC5=O)C(=N2)C(=O)N
+API,10220503,Tasimelteon,C15H19NO2,6,0,,1,0,True,False,False,False,245.3,CCC(=O)NCC1CC1C2=C3CCOC3=CC=C2
+API,10288191,Binimetinib,C17H15BrF2N4O3,11,0,,1,0,True,False,False,False,441.2,CN1C=NC2=C1C=C(C(=C2F)NC3=C(C=C(C=C3)Br)F)C(=O)NOCCO
+API,10324367,Boceprevir,C27H45N5O5,9,0,,1,0,True,False,False,False,519.7,CC1(C2C1C(N(C2)C(=O)C(C(C)(C)C)NC(=O)NC(C)(C)C)C(=O)NC(CC3CCC3)C(=O)C(=O)N)C
+API,10348973,Relugolix,C29H27F2N7O5S,5,0,,1,0,True,False,False,False,623.6,CN(C)CC1=C(SC2=C1C(=O)N(C(=O)N2CC3=C(C=CC=C3F)F)C4=NN=C(C=C4)OC)C5=CC=C(C=C5)NC(=O)NOC
+API,10472693,Bempedoic Acid,C19H36O5,9,0,,1,0,True,False,False,False,344.5,CC(C)(CCCCCC(CCCCCC(C)(C)C(=O)O)O)C(=O)O
+API,11001318,Tafamidis,C14H7Cl2NO3,13,0,,1,0,True,False,False,False,308.1,C1=CC2=C(C=C1C(=O)O)OC(=N2)C3=CC(=CC(=C3)Cl)Cl
+API,11167602,Regorafenib,C21H15ClF4N4O3,11,0,,1,0,True,False,False,False,482.8,CNC(=O)C1=NC=CC(=C1)OC2=CC(=C(C=C2)NC(=O)NC3=CC(=C(C=C3)Cl)C(F)(F)F)F
+API,11237860,Lurasidone Hydrochloride,C28H37ClN4O2S,4,0,,2,0,True,False,False,False,529.2,C1CCC(C(C1)CN2CCN(CC2)C3=NSC4=CC=CC=C43)CN5C(=O)C6C7CCC(C7)C6C5=O.Cl
+API,11250029,Eluxadoline,C32H35N5O5,11,0,,1,0,True,False,False,False,569.7,CC1=CC(=CC(=C1CC(C(=O)N(CC2=CC(=C(C=C2)OC)C(=O)O)C(C)C3=NC=C(N3)C4=CC=CC=C4)N)C)C(=O)N
+API,11251522,ITAVASTATIN Ca,C50H46CaF2N2O8,7,0,,3,0,True,True,False,False,881.0,C1CC1C2=NC3=CC=CC=C3C(=C2C=CC(CC(CC(=O)[O-])O)O)C4=CC=C(C=C4)F.C1CC1C2=NC3=CC=CC=C3C(=C2C=CC(CC(CC(=O)[O-])O)O)C4=CC=C(C=C4)F.[Ca+2]
+API,11274333,Lomitapide Mesylate,C40H41F6N3O5S,7,0,,2,0,True,False,False,False,789.8,CS(=O)(=O)O.C1CN(CCC1NC(=O)C2=CC=CC=C2C3=CC=C(C=C3)C(F)(F)F)CCCCC4(C5=CC=CC=C5C6=CC=CC=C64)C(=O)NCC(F)(F)F
+API,11304743,Riociguat,C20H19FN8O2,8,0,,1,0,True,False,False,False,422.4,CN(C1=C(N=C(N=C1N)C2=NN(C3=C2C=CC=N3)CC4=CC=CC=C4F)N)C(=O)OC
+API,11363176,Ponesimod,C23H25ClN2O4S,13,0,,1,0,True,False,False,False,461.0,CCCN=C1N(C(=O)C(=CC2=CC(=C(C=C2)OCC(CO)O)Cl)S1)C3=CC=CC=C3C
+API,11434065,Pradaxa mesylate,C35H45N7O8S,9,0,,2,0,True,False,False,False,723.9,CCCCCCOC(=O)N=C(C1=CC=C(C=C1)NCC2=NC3=C(N2C)C=CC(=C3)C(=O)N(CCC(=O)OCC)C4=CC=CC=N4)N.CS(=O)(=O)O
+API,11476460,Tedizolid Phosphate,C17H16FN6O6P,10,0,,1,0,True,False,False,False,450.3,CN1N=C(N=N1)C2=NC=C(C=C2)C3=C(C=C(C=C3)N4CC(OC4=O)COP(=O)(O)O)F
+API,11511120,Dacomitinib,C24H25ClFN5O2,8,0,,1,0,True,False,False,False,469.9,COC1=C(C=C2C(=C1)N=CN=C2NC3=CC(=C(C=C3)F)Cl)NC(=O)C=CCN4CCCCC4
+API,11525740,Pazopanib Hydrochloride,C21H24ClN7O2S,7,0,,2,0,True,False,False,False,474.0,CC1=C(C=C(C=C1)NC2=NC=CC(=N2)N(C)C3=CC4=NN(C(=C4C=C3)C)C)S(=O)(=O)N.Cl
+API,11547978,Tivozanib Hydrochloride,C22H22Cl2N4O6,6,0,,3,0,True,False,False,False,509.3,CC1=CC(=NO1)NC(=O)NC2=C(C=C(C=C2)OC3=C4C=C(C(=CC4=NC=C3)OC)OC)Cl.O.Cl
+API,11551689,Pitolisant Hydrochloride,C17H27Cl2NO,8,0,,2,0,True,False,False,False,332.3,C1CCN(CC1)CCCOCCCC2=CC=C(C=C2)Cl.Cl
+API,11561674,Apremilast,C22H24N2O7S,7,0,,1,0,True,False,False,False,460.5,CCOC1=C(C=CC(=C1)C(CS(=O)(=O)C)N2C(=O)C3=C(C2=O)C(=CC=C3)NC(=O)C)OC
+API,11597697,Lisdexamfetamine Dimesylate,C17H33N3O7S2,6,0,,3,0,True,False,False,False,455.6,CC(CC1=CC=CC=C1)NC(=O)C(CCCCN)N.CS(=O)(=O)O.CS(=O)(=O)O
+API,11625818,Idelalisib,C22H18FN7O,8,0,,1,0,True,False,False,False,415.4,CCC(C1=NC2=C(C(=CC=C2)F)C(=O)N1C3=CC=CC=C3)NC4=NC=NC5=C4NC=N5
+API,11626560,Crizotinib,C21H22Cl2FN5O,10,0,,1,0,True,False,False,False,450.3,CC(C1=C(C=CC(=C1Cl)F)Cl)OC2=C(N=CC(=C2)C3=CN(N=C3)C4CCNCC4)N
+API,11644097,Migalastat Hydrochloride,C6H14ClNO4,6,0,,2,0,True,False,False,False,199.6,C1C(C(C(C(N1)CO)O)O)O.Cl
+API,11672491,Pimavanserin Tartrate,C54H74F2N6O10,6,0,,3,0,True,False,False,False,1005.2,CC(C)COC1=CC=C(C=C1)CNC(=O)N(CC2=CC=C(C=C2)F)C3CCN(CC3)C.CC(C)COC1=CC=C(C=C1)CNC(=O)N(CC2=CC=C(C=C2)F)C3CCN(CC3)C.C(C(C(=O)O)O)(C(=O)O)O
+API,11673085,Lorcaserin Hydrochloride,C11H15Cl2N,19,0,,2,0,True,False,False,False,232.2,CC1CNCCC2=C1C=C(C=C2)Cl.Cl
+API,11711114,Rilpivirine Hydrochloride,C22H19ClN6,10,0,,2,0,True,False,False,False,402.9,CC1=CC(=CC(=C1NC2=NC(=NC=C2)NC3=CC=C(C=C3)C#N)C)C=CC#N.Cl
+API,11751549,Losartan Potassium,C22H22ClKN6O,4,0,,2,0,True,True,False,False,461.0,CCCCC1=NC(=C(N1CC2=CC=C(C=C2)C3=CC=CC=C3C4=NN=N[N-]4)CO)Cl.[K+]
+API,11949652,Teneligliptin,C22H30N6OS,1,1,,1,0,True,False,False,False,426.6,CC1=NN(C(=C1)N2CCN(CC2)C3CC(NC3)C(=O)N4CCSC4)C5=CC=CC=C5
+API,11978813,Brexpiprazole,C25H27N3O2S,8,0,,1,0,True,False,False,False,433.6,C1CN(CCN1CCCCOC2=CC3=C(C=C2)C=CC(=O)N3)C4=C5C=CSC5=CC=C4
+API,11990828,Bosutinib Monohydrate,C26H31Cl2N5O4,10,0,,2,0,True,False,False,False,548.5,CN1CCN(CC1)CCCOC2=C(C=C3C(=C2)N=CC(=C3NC4=CC(=C(C=C4Cl)Cl)OC)C#N)OC.O
+API,14055602,"2-[4,5-Dihydroxy-2-(hydroxymethyl)-6-methoxyoxan-3-yl]oxy-6-(hydroxymethyl)-5-methoxyoxane-3,4-diol",C14H26O11,2,2,flag:non_drug_api,1,0,True,False,False,False,370.4,COC1C(OC(C(C1O)O)OC2C(OC(C(C2O)O)OC)CO)CO
+API,14720269,Rabeprazole Sodium,C18H20N3NaO3S,6,0,,2,0,True,True,False,False,381.4,CC1=C(C=CN=C1CS(=O)C2=NC3=CC=CC=C3[N-]2)OCCCOC.[Na+]
+API,15008962,Pantoprazole Sodium,C16H14F2N3NaO4S,8,0,,2,0,True,True,False,False,405.4,COC1=C(C(=NC=C1)CS(=O)C2=NC3=C([N-]2)C=CC(=C3)OC(F)F)OC.[Na+]
+API,15606394,Afatinib Dimaleate,C32H33ClFN5O11,9,0,,3,0,True,False,False,False,718.1,CN(C)CC=CC(=O)NC1=C(C=C2C(=C1)C(=NC=N2)NC3=CC(=C(C=C3)F)Cl)OC4CCOC4.C(=CC(=O)O)C(=O)O.C(=CC(=O)O)C(=O)O
+API,15951529,Enzalutamide,C21H16F4N4O2S,11,0,,1,0,True,False,False,False,464.4,CC1(C(=O)N(C(=S)N1C2=CC(=C(C=C2)C(=O)NC)F)C3=CC(=C(C=C3)C#N)C(F)(F)F)C
+API,16004692,Macitentan,C19H20Br2N6O4S,10,0,,1,0,True,False,False,False,588.3,CCCNS(=O)(=O)NC1=C(C(=NC=N1)OCCOC2=NC=C(C=N2)Br)C3=CC=C(C=C3)Br
+API,16088021,Alogliptin Benzoate,C25H27N5O4,11,0,,2,0,True,False,False,False,461.5,CN1C(=O)C=C(N(C1=O)CC2=CC=CC=C2C#N)N3CCCC(C3)N.C1=CC=C(C=C1)C(=O)O
+API,16124688,Tecovirimat,C19H15F3N2O3,10,0,,1,0,True,False,False,False,376.3,C1C2C1C3C=CC2C4C3C(=O)N(C4=O)NC(=O)C5=CC=C(C=C5)C(F)(F)F
+API,16158208,Linaclotide,C59H79N15O21S6,10,0,,1,0,True,False,False,False,1526.8,CC1C(=O)NC2CSSCC3C(=O)NC(C(=O)NC(C(=O)NC(CSSCC(NC(=O)CNC(=O)C(NC2=O)C(C)O)C(=O)NC(CC4=CC=C(C=C4)O)C(=O)O)C(=O)NC(CSSCC(C(=O)N3)N)C(=O)NC(C(=O)N5CCCC5C(=O)N1)CC(=O)N)CC6=CC=C(C=C6)O)CCC(=O)O
+API,16203739,Rolapitant Hydrochloride,C25H29ClF6N2O3,12,0,,3,0,True,False,False,False,555.0,CC(C1=CC(=CC(=C1)C(F)(F)F)C(F)(F)F)OCC2(CCC3(CCC(=O)N3)CN2)C4=CC=CC=C4.O.Cl
+API,16214875,Selumetinib Sulfate,C17H17BrClFN4O7S,4,0,,2,0,True,False,False,False,555.8,CN1C=NC2=C1C=C(C(=C2F)NC3=C(C=C(C=C3)Br)Cl)C(=O)NOCCO.OS(=O)(=O)O
+API,16220172,Ivacaftor,C24H28N2O3,14,0,,1,0,True,False,False,False,392.5,CC(C)(C)C1=CC(=C(C=C1NC(=O)C2=CNC3=CC=CC=C3C2=O)O)C(C)(C)C
+API,16757572,Nilotinib Hydrochloride Monohydrate,C28H25ClF3N7O2,8,0,,3,0,True,False,False,False,584.0,CC1=C(C=C(C=C1)C(=O)NC2=CC(=CC(=C2)C(F)(F)F)N3C=C(N=C3)C)NC4=NC=CC(=N4)C5=CN=CC=C5.O.Cl
+API,17397714,"N-[(2-methoxyphenyl)methyl]-5-phenyl-1,2-oxazole-3-carboxamide",C18H16N2O3,10,0,,1,0,True,False,False,False,308.3,COC1=CC=CC=C1CNC(=O)C2=NOC(=C2)C3=CC=CC=C3
+API,17747012,Esomeprazole magnesium dihydrate,C34H40MgN6O8S2,7,0,,5,0,True,True,False,False,749.2,CC1=CN=C(C(=C1OC)C)CS(=O)C2=NC3=C([N-]2)C=CC(=C3)OC.CC1=CN=C(C(=C1OC)C)CS(=O)C2=NC3=C([N-]2)C=CC(=C3)OC.O.O.[Mg+2]
+API,18004026,"N,N-Dimethyl-2-(6-methyl-2-(p-tolyl)imidazo[1,2-a]pyridin-3-yl)acetamide 2,3-dihydroxysuccinate",C23H27N3O7,9,0,,2,0,True,False,False,False,457.5,CC1=CC=C(C=C1)C2=C(N3C=C(C=CC3=N2)C)CC(=O)N(C)C.C(C(C(=O)O)O)(C(=O)O)O
+API,23663870,Sodium Oxybate,C4H7NaO3,5,1,,2,0,True,True,False,False,126.1,C(CC(=O)[O-])CO.[Na+]
+API,23665037,Levothyroxine sodium pentahydrate,C15H20I4NNaO9,12,2,,7,0,True,True,False,False,888.9,C1=C(C=C(C(=C1I)OC2=CC(=C(C(=C2)I)O)I)I)CC(C(=O)[O-])N.O.O.O.O.O.[Na+]
+API,23668479,Raltegravir Potassium,C20H20FKN6O5,34,0,,2,0,True,True,False,False,482.5,CC1=NN=C(O1)C(=O)NC(C)(C)C2=NC(=C(C(=O)N2C)[O-])C(=O)NCC3=CC=C(C=C3)F.[K+]
+API,23670359,Ibandronate Sodium Anhydrous,C9H22NNaO7P2,8,0,,2,0,True,True,False,False,341.2,CCCCCN(C)CCC(O)(P(=O)(O)O)P(=O)(O)[O-].[Na+]
+API,23681451,Fosinopril Sodium,C30H45NNaO7P,1,1,,2,0,True,True,False,False,585.7,CCC(=O)OC(C(C)C)OP(=O)(CCCCC1=CC=CC=C1)CC(=O)N2CC(CC2C(=O)[O-])C3CCCCC3.[Na+]
+API,23699544,Azilsartan Kamedoxomil,C30H23KN4O8,7,0,,2,0,True,True,False,False,606.6,CCOC1=NC2=CC=CC(=C2N1CC3=CC=C(C=C3)C4=CC=CC=C4C5=NOC(=O)[N-]5)C(=O)OCC6=C(OC(=O)O6)C.[K+]
+API,23725083,Darunavir Ethanolate,C29H43N3O8S,10,0,,2,0,True,False,False,False,593.7,CCO.CC(C)CN(CC(C(CC1=CC=CC=C1)NC(=O)OC2COC3C2CCO3)O)S(=O)(=O)C4=CC=C(C=C4)N
+API,23725423,Panobinostat Lactate,C24H29N3O5,8,0,,2,0,True,False,False,False,439.5,CC1=C(C2=CC=CC=C2N1)CCNCC3=CC=C(C=C3)C=CC(=O)NO.CC(C(=O)O)O
+API,23725625,Olaparib,C24H23FN4O3,4,0,,1,0,True,False,False,False,434.5,C1CC1C(=O)N2CCN(CC2)C(=O)C3=C(C=CC(=C3)CC4=NNC(=O)C5=CC=CC=C54)F
+API,24755604,LCZ696 (Valsarta + sacubitril),C48H57N6Na3O9,10,0,flag:multi_api,6,0,True,True,False,False,931.0,CCCCC(=O)N(CC1=CC=C(C=C1)C2=CC=CC=C2C3=NN=N[N-]3)C(C(C)C)C(=O)[O-].CCOC(=O)C(C)CC(CC1=CC=C(C=C1)C2=CC=CC=C2)NC(=O)CCC(=O)[O-].O.[Na+].[Na+].[Na+]
+API,24776445,Vismodegib,C19H14Cl2N2O3S,10,0,,1,0,True,False,False,False,421.3,CS(=O)(=O)C1=CC(=C(C=C1)C(=O)NC2=CC(=C(C=C2)Cl)C3=CC=CC=N3)Cl
+API,24785956,Elagolix Sodium,C32H29F5N3NaO5,10,0,,2,0,True,True,False,False,653.6,CC1=C(C(=O)N(C(=O)N1CC2=C(C=CC=C2F)C(F)(F)F)CC(C3=CC=CC=C3)NCCCC(=O)[O-])C4=C(C(=CC=C4)OC)F.[Na+]
+API,24812732,Bedaquiline Fumarate,C36H35BrN2O6,8,0,,2,0,True,False,False,False,671.6,CN(C)CCC(C1=CC=CC2=CC=CC=C21)(C(C3=CC=CC=C3)C4=C(N=C5C=CC(=CC5=C4)Br)OC)O.C(=CC(=O)O)C(=O)O
+API,24812758,Canagliflozin,C24H25FO5S,10,0,,1,0,True,False,False,False,444.5,CC1=C(C=C(C=C1)C2C(C(C(C(O2)CO)O)O)O)CC3=CC=C(S3)C4=CC=C(C=C4)F
+API,24821094,Ibrutinib,C25H24N6O2,9,0,,1,0,True,False,False,False,440.5,C=CC(=O)N1CCCC(C1)N2C3=NC=NC(=C3C(=N2)C4=CC=C(C=C4)OC5=CC=CC=C5)N
+API,24872560,Apalutamide,C21H15F4N5O2S,12,0,,1,0,True,False,False,False,477.4,CNC(=O)C1=C(C=C(C=C1)N2C(=S)N(C(=O)C23CCC3)C4=CC(=C(N=C4)C#N)C(F)(F)F)F
+API,24883443,"3-[[2-(diaminomethylideneamino)-1,3-thiazol-4-yl]methylsulfanyl]-N'-sulfamoylpropanimidamide;hydron;chloride",C8H16ClN7O2S3,6,0,,3,0,True,False,False,False,373.9,[H+].C1=C(N=C(S1)N=C(N)N)CSCCC(=NS(=O)(=O)N)N.[Cl-]
+API,24906252,Dapagliflozin Propanediol,C24H35ClO9,10,0,,3,0,True,False,False,False,503.0,CCOC1=CC=C(C=C1)CC2=C(C=CC(=C2)C3C(C(C(C(O3)CO)O)O)O)Cl.CC(CO)O.O
+API,24965990,Suvorexant,C23H23ClN6O2,9,0,,1,0,True,False,False,False,450.9,CC1CCN(CCN1C(=O)C2=C(C=CC(=C2)C)N3N=CC=N3)C4=NC5=C(O4)C=CC(=C5)Cl
+API,24970412,Tafamidis Meglumine,C21H24Cl2N2O8,14,0,,2,0,True,False,False,False,503.3,CNCC(C(C(C(CO)O)O)O)O.C1=CC2=C(C=C1C(=O)O)OC(=N2)C3=CC(=CC(=C3)Cl)Cl
+API,25008120,Fostamatinib disodium anhydrous,C23H24FN6Na2O9P,10,0,,3,0,True,True,False,False,624.4,CC1(C(=O)N(C2=C(O1)C=CC(=N2)NC3=NC(=NC=C3F)NC4=CC(=C(C(=C4)OC)OC)OC)COP(=O)([O-])[O-])C.[Na+].[Na+]
+API,25096873,Cariprazine hydrochloride,C21H33Cl3N4O,4,0,,2,0,True,False,False,False,463.9,CN(C)C(=O)NC1CCC(CC1)CCN2CCN(CC2)C3=C(C(=CC=C3)Cl)Cl.Cl
+API,25102846,Cabozantinib S-malate,C32H30FN3O10,12,0,,2,0,True,False,False,False,635.6,COC1=CC2=C(C=CN=C2C=C1OC)OC3=CC=C(C=C3)NC(=O)C4(CC4)C(=O)NC5=CC=C(C=C5)F.C(C(C(=O)O)O)C(=O)O
+API,25127112,Jakafi,C17H21N6O4P,6,0,,2,0,True,False,False,False,404.4,C1CCC(C1)C(CC#N)N2C=C(C=N2)C3=C4C=CNC4=NC=N3.OP(=O)(O)O
+API,25141092,Entrectinib,C31H34F2N6O2,12,0,,1,0,True,False,False,False,560.6,CN1CCN(CC1)C2=CC(=C(C=C2)C(=O)NC3=NNC4=C3C=C(C=C4)CC5=CC(=CC(=C5)F)F)NC6CCOCC6
+API,25151352,Pexidartinib,C20H15ClF3N5,7,0,,1,0,True,False,False,False,417.8,C1=CC(=NC=C1CC2=CNC3=C2C=C(C=N3)Cl)NCC4=CN=C(C=C4)C(F)(F)F
+API,25154713,Daclatasvir Dihydrochloride,C40H52Cl2N8O6,10,0,,3,0,True,False,False,False,811.8,CC(C)C(C(=O)N1CCCC1C2=NC=C(N2)C3=CC=C(C=C3)C4=CC=C(C=C4)C5=CN=C(N5)C6CCCN6C(=O)C(C(C)C)NC(=O)OC)NC(=O)OC.Cl.Cl
+API,25166913,Glasdegib,C21H22N6O,9,0,,1,0,True,False,False,False,374.4,CN1CCC(CC1C2=NC3=CC=CC=C3N2)NC(=O)NC4=CC=C(C=C4)C#N
+API,42611257,Vemurafenib,C23H18ClF2N3O3S,10,0,,1,0,True,False,False,False,489.9,CCCS(=O)(=O)NC1=C(C(=C(C=C1)F)C(=O)C2=CNC3=C2C=C(C=N3)C4=CC=C(C=C4)Cl)F
+API,44205240,Baricitinib,C16H17N7O2S,8,0,,1,0,True,False,False,False,371.4,CCS(=O)(=O)N1CC(C1)(CC#N)N2C=C(C=N2)C3=C4C=CNC4=NC=N3
+API,44232548,Quad Tablet,C94H120ClF2N16O27PS3,13,0,flag:multi_api,5,0,True,False,False,False,2106.7,CC(C)C1=NC(=CS1)CN(C)C(=O)NC(CCN2CCOCC2)C(=O)NC(CCC(CC3=CC=CC=C3)NC(=O)OCC4=CN=CS4)CC5=CC=CC=C5.CC(C)C(CO)N1C=C(C(=O)C2=C1C=C(C(=C2)CC3=C(C(=CC=C3)Cl)F)OC)C(=O)O.CC(C)OC(=O)OCOP(=O)(COC(C)CN1C=NC2=C(N=CN=C21)N)OCOC(=O)OC(C)C.C1C(OC(S1)CO)N2C=C(C(=NC2=O)N)F.C(=CC(=O)O)C(=O)O
+API,44472635,Vibegron,C26H28N4O3,10,0,,1,0,True,False,False,False,444.5,C1CC(NC1CC2=CC=C(C=C2)NC(=O)C3CCC4=NC=CC(=O)N34)C(C5=CC=CC=C5)O
+API,44516822,Dabrafenib Mesylate,C24H24F3N5O5S3,10,0,,2,0,True,False,False,False,615.7,CC(C)(C)C1=NC(=C(S1)C2=NC(=NC=C2)N)C3=C(C(=CC=C3)NS(=O)(=O)C4=C(C=CC=C4F)F)F.CS(=O)(=O)O
+API,44610678,Edoxaban Tosylate,C31H38ClN7O7S2,10,0,,2,0,True,False,False,False,720.3,CC1=CC=C(C=C1)S(=O)(=O)O.CN1CCC2=C(C1)SC(=N2)C(=O)NC3CC(CCC3NC(=O)C(=O)NC4=NC=C(C=C4)Cl)C(=O)N(C)C
+API,44630049,"calcium;(2S,3S,4S,5S,6R)-6-[(2R,3S,4R,5S,6R)-2-carboxy-6-[(2R,3S,4R,5S,6R)-2-carboxylato-4,5,6-trihydroxyoxan-3-yl]oxy-4,5-dihydroxyoxan-3-yl]oxy-3,4,5-trihydroxyoxane-2-carboxylate",C18H24CaO19,1,1,flag:non_drug_api,2,0,True,True,False,False,584.4,C1(C(C(OC(C1O)OC2C(C(C(OC2C(=O)O)OC3C(C(C(OC3C(=O)[O-])O)O)O)O)O)C(=O)[O-])O)O.[Ca+2]
+API,45138699,Sonidegib Phosphate,C26H32F3N3O11P2,11,0,,3,0,True,False,False,False,681.5,CC1CN(CC(O1)C)C2=NC=C(C=C2)NC(=O)C3=CC=CC(=C3C)C4=CC=C(C=C4)OC(F)(F)F.OP(=O)(O)O.OP(=O)(O)O
+API,45375808,Sofosbuvir,C22H29FN3O9P,10,0,,1,0,True,False,False,False,529.5,CC(C)OC(=O)C(C)NP(=O)(OCC1C(C(C(O1)N2C=CC(=O)NC2=O)(C)F)O)OC3=CC=CC=C3
+API,46188928,Larotrectinib,C21H22F2N6O2,1,0,,1,0,True,False,False,False,428.4,C1CC(N(C1)C2=NC3=C(C=NN3C=C2)NC(=O)N4CCC(C4)O)C5=C(C=CC(=C5)F)F
+API,46215800,Cabotegravir Sodium,C19H16F2N3NaO5,5,0,,2,0,True,True,False,False,427.3,CC1COC2N1C(=O)C3=C(C(=O)C(=CN3C2)C(=O)NCC4=C(C=C(C=C4)F)F)[O-].[Na+]
+API,46216142,Dolutegravir Sodium,C20H18F2N3NaO5,16,0,,2,0,True,True,False,False,441.4,CC1CCOC2N1C(=O)C3=C(C(=O)C(=CN3C2)C(=O)NCC4=C(C=C(C=C4)F)F)[O-].[Na+]
+API,46700774,Tepotinib Hydrochloride,C29H31ClN6O3,10,0,,3,0,True,False,False,False,547.1,CN1CCC(CC1)COC2=CN=C(N=C2)C3=CC=CC(=C3)CN4C(=O)C=CC(=N4)C5=CC=CC(=C5)C#N.O.Cl
+API,46700777,Siponimod Fumarate,C62H74F6N4O10,13,0,,3,0,True,False,False,False,1149.3,CCC1=C(C=CC(=C1)C(=NOCC2=CC(=C(C=C2)C3CCCCC3)C(F)(F)F)C)CN4CC(C4)C(=O)O.CCC1=C(C=CC(=C1)C(=NOCC2=CC(=C(C=C2)C3CCCCC3)C(F)(F)F)C)CN4CC(C4)C(=O)O.C(=CC(=O)O)C(=O)O
+API,46783232,Champix,C17H19N3O6,1,0,,2,0,True,False,False,False,361.4,C1C2CNCC1C3=CC4=NC=CN=C4C=C23.C(C(C(=O)O)O)(C(=O)O)O
+API,46783235,"(3S,4S,6R)-2-(hydroxymethyl)-6-(5,8,14-triazatetracyclo[10.3.1.02,11.04,9]hexadeca-2,4,6,8,10-pentaen-14-yl)oxane-3,4,5-triol",C19H23N3O5,1,0,,1,0,True,False,False,False,373.4,C1C2CN(CC1C3=CC4=NC=CN=C4C=C23)C5C(C(C(C(O5)CO)O)O)O
+API,46783236,Varenicline Lactam,C13H11N3O,1,0,,1,0,True,False,False,False,225.3,C1C2CNC(=O)C1C3=CC4=NC=CN=C4C=C23
+API,46866715,Simeprevir Sodium,C38H46N5NaO7S2,8,0,,2,0,True,True,False,False,771.9,CC1=C(C=CC2=C1N=C(C=C2OC3CC4C(C3)C(=O)N(CCCCC=CC5CC5(NC4=O)C(=O)[N-]S(=O)(=O)C6CC6)C)C7=NC(=CS7)C(C)C)OC.[Na+]
+API,46892186,Fostemsavir Tromethamine,C29H37N8O11P,9,0,,2,0,True,False,False,False,704.6,CC1=NN(C=N1)C2=NC=C(C3=C2N(C=C3C(=O)C(=O)N4CCN(CC4)C(=O)C5=CC=CC=C5)COP(=O)(O)O)OC.C(C(CO)(CO)N)O
+API,46908927,Ponatinib Hydrochloride,C29H28ClF3N6O,8,0,,2,0,True,False,False,False,569.0,CC1=C(C=C(C=C1)C(=O)NC2=CC(=C(C=C2)CN3CCN(CC3)C)C(F)(F)F)C#CC4=CN=C5N4N=CC=C5.Cl
+API,49800073,Saxagliptin Hydrochloride,C18H26ClN3O2,8,0,,2,0,True,False,False,False,351.9,C1C2CC2N(C1C#N)C(=O)C(C34CC5CC(C3)CC(C5)(C4)O)N.Cl
+API,49843517,Lusutrombopag,C29H32Cl2N2O5S,10,0,,1,0,True,False,False,False,591.6,CCCCCCOC(C)C1=CC=CC(=C1OC)C2=CSC(=N2)NC(=O)C3=CC(=C(C(=C3)Cl)C=C(C)C(=O)O)Cl
+API,49846579,Venetoclax,C45H50ClN7O7S,10,0,,1,0,True,False,False,False,868.5,CC1(CCC(=C(C1)C2=CC=C(C=C2)Cl)CN3CCN(CC3)C4=CC(=C(C=C4)C(=O)NS(=O)(=O)C5=CC(=C(C=C5)NCC6CCOCC6)[N+](=O)[O-])OC7=CN=C8C(=C7)C=CN8)C
+API,50905713,Duvelisib,C22H17ClN6O,6,0,,1,0,True,False,False,False,416.9,CC(C1=CC2=C(C(=CC=C2)Cl)C(=O)N1C3=CC=CC=C3)NC4=NC=NC5=C4NC=N5
+API,50922675,Encorafenib,C22H27ClFN7O4S,11,0,,1,0,True,False,False,False,540.0,CC(C)N1C=C(C(=N1)C2=C(C(=CC(=C2)Cl)NS(=O)(=O)C)F)C3=NC(=NC=C3)NCC(C)NC(=O)OC
+API,50992434,Trametinib Dimethyl Sulfoxide,C28H29FIN5O5S,9,0,,2,0,True,False,False,False,693.5,CC1=C2C(=C(N(C1=O)C)NC3=C(C=C(C=C3)I)F)C(=O)N(C(=O)N2C4=CC=CC(=C4)NC(=O)C)C5CC5.CS(=O)C
+API,51039094,Tucatinib,C26H24N8O2,13,0,,1,0,True,False,False,False,480.5,CC1=C(C=CC(=C1)NC2=NC=NC3=C2C=C(C=C3)NC4=NC(CO4)(C)C)OC5=CC6=NC=NN6C=C5
+API,52918379,Eliglustat Tartrate,C50H78N4O14,9,0,,3,0,True,False,False,False,959.2,CCCCCCCC(=O)NC(CN1CCCC1)C(C2=CC3=C(C=C2)OCCO3)O.CCCCCCCC(=O)NC(CN1CCCC1)C(C2=CC3=C(C=C2)OCCO3)O.C(C(C(=O)O)O)(C(=O)O)O
+API,53239799,Alectinib Hydrochloride,C30H35ClN4O2,10,0,,2,0,True,False,False,False,519.1,CCC1=CC2=C(C=C1N3CCC(CC3)N4CCOCC4)C(C5=C(C2=O)C6=C(N5)C=C(C=C6)C#N)(C)C.Cl
+API,53393742,ACRIFLAVINE HCl,C27H28Cl4N6,1,1,,6,0,True,False,False,False,578.4,C[N+]1=C2C=C(C=CC2=CC3=C1C=C(C=C3)N)N.C1=CC(=CC2=NC3=C(C=CC(=C3)N)C=C21)N.Cl.Cl.Cl.[Cl-]
+API,54674461,Vericiguat,C19H16F2N8O2,9,0,,1,0,True,False,False,False,426.4,COC(=O)NC1=C(N=C(N=C1N)C2=NN(C3=C2C=C(C=N3)F)CC4=CC=CC=C4F)N
+API,54675776,Tetracycline,C22H24N2O8,6,6,,1,0,True,False,False,False,444.4,CC1(C2CC3C(C(=O)C(=C(C3(C(=O)C2=C(C4=C1C=CC=C4O)O)O)O)C(=O)N)N(C)C)O
+API,54675850,Salicylate,C7H5O3-,1,1,remove:bare_ion,1,-1,True,False,False,False,137.1,C1=CC=C(C(=C1)C(=O)O)[O-]
+API,54676228,Piroxicam,C15H13N3O4S,5,1,,1,0,True,False,False,False,331.4,CN1C(=C(C2=CC=CC=C2S1(=O)=O)O)C(=O)NC3=CC=CC=N3
+API,54681908,Sarecycline,C24H29N3O8,10,0,,1,0,True,False,False,False,487.5,CN(C)C1C2CC3CC4=C(C=CC(=C4C(=C3C(=O)C2(C(=C(C1=O)C(=O)N)O)O)O)O)CN(C)OC
+API,54682461,Tipranavir,C31H33F3N2O5S,4,0,,1,0,True,False,False,False,602.7,CCCC1(CC(=C(C(=O)O1)C(CC)C2=CC(=CC=C2)NS(=O)(=O)C3=NC=C(C=C3)C(F)(F)F)O)CCC4=CC=CC=C4
+API,54684141,Teriflunomide,C12H9F3N2O2,10,0,,1,0,True,False,False,False,270.2,CC(=C(C#N)C(=O)NC1=CC=C(C=C1)C(F)(F)F)O
+API,54697325,Omadacycline,C29H40N4O7,11,0,,1,0,True,False,False,False,556.7,CC(C)(C)CNCC1=CC(=C2CC3CC4C(C(=O)C(=C(C4(C(=O)C3=C(C2=C1O)O)O)O)C(=O)N)N(C)C)N(C)C
+API,54704426,"2-Naphthacenecarboxamide, 4-(dimethylamino)-1,4,4a,5,5a,6,11,12a-octahydro-3,6,10,12,12a-pentahydroxy-6-methyl-1,11-dioxo-, hydrochloride (1:1), (4S,4aS,5aS,6S,12aS)-",C22H25ClN2O8,7,1,,2,0,True,False,False,False,480.9,CC1(C2CC3C(C(=O)C(=C(C3(C(=O)C2=C(C4=C1C=CC=C4O)O)O)O)C(=O)N)N(C)C)O.Cl
+API,56649450,Alpelisib,C19H22F3N5O2S,7,0,,1,0,True,False,False,False,441.5,CC1=C(SC(=N1)NC(=O)N2CCCC2C(=O)N)C3=CC(=NC=C3)C(C)(C)C(F)(F)F
+API,56843331,Semaglutide,C187H291N45O59,3,0,,1,0,True,False,False,False,4113.6,CCC(C)C(C(=O)NC(C)C(=O)NC(CC1=CNC2=CC=CC=C21)C(=O)NC(CC(C)C)C(=O)NC(C(C)C)C(=O)NC(CCCNC(=N)N)C(=O)NCC(=O)NC(CCCNC(=N)N)C(=O)NCC(=O)O)NC(=O)C(CC3=CC=CC=C3)NC(=O)C(CCC(=O)O)NC(=O)C(CCCCNC(=O)COCCOCCNC(=O)COCCOCCNC(=O)CCC(C(=O)O)NC(=O)CCCCCCCCCCCCCCCCC(=O)O)NC(=O)C(C)NC(=O)C(C)NC(=O)C(CCC(=O)N)NC(=O)CNC(=O)C(CCC(=O)O)NC(=O)C(CC(C)C)NC(=O)C(CC4=CC=C(C=C4)O)NC(=O)C(CO)NC(=O)C(CO)NC(=O)C(C(C)C)NC(=O)C(CC(=O)O)NC(=O)C(CO)NC(=O)C(C(C)O)NC(=O)C(CC5=CC=CC=C5)NC(=O)C(C(C)O)NC(=O)CNC(=O)C(CCC(=O)O)NC(=O)C(C)(C)NC(=O)C(CC6=CN=CN6)N
+API,56844015,Ixazomib citrate,C20H23BCl2N2O9,9,0,,1,0,True,False,False,False,517.1,B1(OC(=O)C(O1)(CC(=O)O)CC(=O)O)C(CC(C)C)NC(=O)CNC(=O)C2=C(C=CC(=C2)Cl)Cl
+API,56959086,Naloxegol oxalate,C36H55NO15,9,0,,2,0,True,False,False,False,741.8,COCCOCCOCCOCCOCCOCCOCCOC1CCC2(C3CC4=C5C2(C1OC5=C(C=C4)O)CCN3CC=C)O.C(=O)(C(=O)O)O
+API,57379345,Ceritinib,C28H36ClN5O3S,8,0,,1,0,True,False,False,False,558.1,CC1=CC(=C(C=C1C2CCNCC2)OC(C)C)NC3=NC=C(C(=N3)NC4=CC=CC=C4S(=O)(=O)C(C)C)Cl
+API,58460047,Doravirine,C17H11ClF3N5O3,8,0,,1,0,True,False,False,False,425.8,CN1C(=NNC1=O)CN2C=CC(=C(C2=O)OC3=CC(=CC(=C3)C#N)Cl)C(F)(F)F
+API,58557659,Upadacitinib,C17H19F3N6O,11,0,,1,0,True,False,False,False,380.4,CCC1CN(CC1C2=CN=C3N2C4=C(NC=C4)N=C3)C(=O)NCC(F)(F)F
+API,66558664,Tazemetostat,C34H44N4O4,7,0,,1,0,True,False,False,False,572.8,CCN(C1CCOCC1)C2=CC(=CC(=C2C)C(=O)NCC3=C(C=C(NC3=O)C)C)C4=CC=C(C=C4)CN5CCOCC5
+API,66860907,Vortioxetine hydrochloride,C18H23ClN2S,8,0,,2,0,True,False,False,False,334.9,CC1=CC(=C(C=C1)SC2=CC=CC=C2N3CCNCC3)C.Cl
+API,67171867,Darolutamide,C19H19ClN6O2,7,0,,1,0,True,False,False,False,398.9,CC(CN1C=CC(=N1)C2=CC(=C(C=C2)C#N)Cl)NC(=O)C3=NNC(=C3)C(C)O
+API,67462786,Erdafitinib,C25H30N6O2,12,0,,1,0,True,False,False,False,446.6,CC(C)NCCN(C1=CC2=NC(=CN=C2C=C1)C3=CN(N=C3)C)C4=CC(=CC(=C4)OC)OC
+API,67505836,Ledipasvir,C49H54F2N8O6,8,0,,1,0,True,False,False,False,889.0,CC(C)C(C(=O)N1CC2(CC2)CC1C3=NC=C(N3)C4=CC5=C(C=C4)C6=C(C5(F)F)C=C(C=C6)C7=CC8=C(C=C7)N=C(N8)C9C1CCC(C1)N9C(=O)C(C(C)C)NC(=O)OC)NC(=O)OC
+API,67517580,Fedratinib Hydrochloride,C27H40Cl2N6O4S,4,0,,4,0,True,False,False,False,615.6,CC1=CN=C(N=C1NC2=CC(=CC=C2)S(=O)(=O)NC(C)(C)C)NC3=CC=C(C=C3)OCCN4CCCC4.O.Cl.Cl
+API,67683363,Velpatasvir,C49H54N8O8,9,0,,1,0,True,False,False,False,883.0,CC1CCC(N1C(=O)C(C(C)C)NC(=O)OC)C2=NC3=C(N2)C=CC4=CC5=C(C=C43)OCC6=C5C=CC(=C6)C7=CN=C(N7)C8CC(CN8C(=O)C(C9=CC=CC=C9)NC(=O)OC)COC
+API,71009737,Osilodrostat Phosphate,C13H13FN3O4P,10,0,,2,0,True,False,False,False,325.2,C1CC2=CN=CN2C1C3=C(C=C(C=C3)C#N)F.OP(=O)(O)O
+API,71481097,Selinexor,C17H11F6N7O,6,0,,1,0,True,False,False,False,443.3,C1=CN=C(C=N1)NNC(=O)C=CN2C=NC(=N2)C3=CC(=CC(=C3)C(F)(F)F)C(F)(F)F
+API,71491931,Cobimetinib Fumarate,C46H46F6I2N6O8,8,0,,3,0,True,False,False,False,1178.7,C1CCNC(C1)C2(CN(C2)C(=O)C3=C(C(=C(C=C3)F)F)NC4=C(C=C(C=C4)I)F)O.C1CCNC(C1)C2(CN(C2)C(=O)C3=C(C(=C(C=C3)F)F)NC4=C(C=C(C=C4)I)F)O.C(=CC(=O)O)C(=O)O
+API,71492247,Tenofovir Alafenamide Fumarate,C46H62N12O14P2,7,0,,3,0,True,False,False,False,1069.0,CC(C)OC(=O)C(C)NP(=O)(COC(C)CN1C=NC2=C(N=CN=C21)N)OC3=CC=CC=C3.CC(C)OC(=O)C(C)NP(=O)(COC(C)CN1C=NC2=C(N=CN=C21)N)OC3=CC=CC=C3.C(=CC(=O)O)C(=O)O
+API,71494926,Ivacaftor; lumacaftor,C48H46F2N4O8,6,0,flag:multi_api,2,0,True,False,False,False,844.9,CC1=C(N=C(C=C1)NC(=O)C2(CC2)C3=CC4=C(C=C3)OC(O4)(F)F)C5=CC(=CC=C5)C(=O)O.CC(C)(C)C1=CC(=C(C=C1NC(=O)C2=CNC3=CC=CC=C3C2=O)O)C(C)(C)C
+API,71584930,Ripretinib,C24H21BrFN5O2,6,0,,1,0,True,False,False,False,510.4,CCN1C2=CC(=NC=C2C=C(C1=O)C3=CC(=C(C=C3Br)F)NC(=O)NC4=CC=CC=C4)NC
+API,71586738,Rimegepant Sulfate,C56H64F4N12O13S,7,0,,6,0,True,False,False,False,1221.3,C1CC(C2=C(C=CC=N2)C(C1C3=C(C(=CC=C3)F)F)N)OC(=O)N4CCC(CC4)N5C6=C(NC5=O)N=CC=C6.C1CC(C2=C(C=CC=N2)C(C1C3=C(C(=CC=C3)F)F)N)OC(=O)N4CCC(CC4)N5C6=C(NC5=O)N=CC=C6.O.O.O.OS(=O)(=O)O
+API,71657455,Ivosidenib,C28H22ClF3N6O3,10,0,,1,0,True,False,False,False,583.0,C1CC(=O)N(C1C(=O)N(C2=CC(=CN=C2)F)C(C3=CC=CC=C3Cl)C(=O)NC4CC(C4)(F)F)C5=NC=CC(=C5)C#N
+API,71731823,Lorlatinib,C21H19FN6O2,10,0,,1,0,True,False,False,False,406.4,CC1C2=C(C=CC(=C2)F)C(=O)N(CC3=NN(C(=C3C4=CC(=C(N=C4)N)O1)C#N)C)C
+API,72722243,Ivacaftor; Tezacaftor,C50H55F3N4O9,9,0,flag:multi_api,2,0,True,False,False,False,913.0,CC(C)(C)C1=CC(=C(C=C1NC(=O)C2=CNC3=CC=CC=C3C2=O)O)C(C)(C)C.CC(C)(CO)C1=CC2=CC(=C(C=C2N1CC(CO)O)F)NC(=O)C3(CC3)C4=CC5=C(C=C4)OC(O5)(F)F
+API,76970819,Gilteritinib Fumarate,C62H92N16O10,7,0,,3,0,True,False,False,False,1221.5,CCC1=C(N=C(C(=N1)C(=O)N)NC2=CC(=C(C=C2)N3CCC(CC3)N4CCN(CC4)C)OC)NC5CCOCC5.CCC1=C(N=C(C(=N1)C(=O)N)NC2=CC(=C(C=C2)N3CCC(CC3)N4CCN(CC4)C)OC)NC5CCOCC5.C(=CC(=O)O)C(=O)O
+API,78131177,Tenapanor Hydrochloride,C50H68Cl6N8O10S2,7,0,,3,0,True,False,False,False,1218.0,CN1CC(C2=C(C1)C(=CC(=C2)Cl)Cl)C3=CC(=CC=C3)S(=O)(=O)NCCOCCOCCNC(=O)NCCCCNC(=O)NCCOCCOCCNS(=O)(=O)C4=CC=CC(=C4)C5CN(CC6=C5C=C(C=C6Cl)Cl)C.Cl.Cl
+API,78357807,Osimertinib Mesylate,C29H37N7O5S,10,0,,2,0,True,False,False,False,595.7,CN1C=C(C2=CC=CC=C21)C3=NC(=NC=C3)NC4=C(C=C(C(=C4)NC(=O)C=C)N(C)CCN(C)C)OC.CS(=O)(=O)O
+API,86346053,Lefamulin Acetate,C30H49NO7S,13,0,,2,0,True,False,False,False,567.8,CC1CCC23CCC(=O)C2C1(C(CC(C(C3C)O)(C)C=C)OC(=O)CSC4CCC(CC4O)N)C.CC(=O)O
+API,86707828,Umbralisib Tosylate,C38H32F3N5O6S,13,0,,2,0,True,False,False,False,743.8,CC1=CC=C(C=C1)S(=O)(=O)O.CC(C)OC1=C(C=C(C=C1)C2=NN(C3=NC=NC(=C23)N)C(C)C4=C(C(=O)C5=C(O4)C=CC(=C5)F)C6=CC(=CC=C6)F)F
+API,91618104,Ozanimod Hydrochloride,C23H25ClN4O3,7,0,,2,0,True,False,False,False,440.9,CC(C)OC1=C(C=C(C=C1)C2=NC(=NO2)C3=C4CCC(C4=CC=C3)NCCO)C#N.Cl
+API,118023034,Avapritinib,C26H27FN10,15,0,,1,0,True,False,False,False,498.6,CC(C1=CC=C(C=C1)F)(C2=CN=C(N=C2)N3CCN(CC3)C4=NC=NN5C4=CC(=C5)C6=CN(N=C6)C)N
+API,118988661,Citric Acid; Magnesium Oxide; Sodium Picosulfate,C24H21MgNNa2O16S2,6,0,flag:multi_api,5,0,True,True,False,False,713.8,C1=CC=NC(=C1)C(C2=CC=C(C=C2)OS(=O)(=O)[O-])C3=CC=C(C=C3)OS(=O)(=O)[O-].C(C(=O)O)C(CC(=O)O)(C(=O)O)O.O=[Mg].[Na+].[Na+]
+API,121494085,Sucralfate (USAN:USP:INN:BAN:JAN),C12H54Al9O55S8,9,0,,22,0,True,True,True,False,1577.9,C(C1C(C(C(C(O1)OC2(C(C(C(O2)COS(=O)(=O)O[Al])OS(=O)(=O)O[Al])OS(=O)(=O)O[Al])COS(=O)(=O)O[Al])OS(=O)(=O)O[Al])OS(=O)(=O)O[Al])OS(=O)(=O)O[Al])OS(=O)(=O)O[Al].O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.[Al]
+API,122201352,Capmatinib Hydrochloride,C23H21Cl2FN6O2,12,0,,4,0,True,False,False,False,503.4,CNC(=O)C1=C(C=C(C=C1)C2=NN3C(=CN=C3N=C2)CC4=CC5=C(C=C4)N=CC=C5)F.O.Cl.Cl
+API,124081896,Baloxavir Marboxil,C27H23F2N3O7S,7,0,,1,0,True,False,False,False,571.6,COC(=O)OCOC1=C2C(=O)N3CCOCC3N(N2C=CC1=O)C4C5=C(CSC6=CC=CC=C46)C(=C(C=C5)F)F
+API,129073603,Pralsetinib,C27H32FN9O2,12,0,,1,0,True,False,False,False,533.6,CC1=CC(=NN1)NC2=NC(=NC(=C2)C)C3CCC(CC3)(C(=O)NC(C)C4=CN=C(C=C4)N5C=C(C=N5)F)OC
+API,129893883,"perchloric acid;(2E)-1,3,3-trimethyl-2-[(2E)-2-[2-phenyl-3-[(E)-2-(1,3,3-trimethylindol-1-ium-2-yl)ethenyl]cyclohex-2-en-1-ylidene]ethylidene]indole",C38H42ClN2O4+,1,1,remove:research_chemical,2,1,True,False,False,False,626.2,CC1(C2=CC=CC=C2[N+](=C1C=CC3=C(C(=CC=C4C(C5=CC=CC=C5N4C)(C)C)CCC3)C6=CC=CC=C6)C)C.OCl(=O)(=O)=O
+API,134436906,Selpercatinib,C29H31N7O3,7,0,,1,0,True,False,False,False,525.6,CC(C)(COC1=CN2C(=C(C=N2)C#N)C(=C1)C3=CN=C(C=C3)N4CC5CC(C4)N5CC6=CN=C(C=C6)OC)O
+API,135398508,Entecavir,C12H15N5O3,9,0,,1,0,True,False,False,False,277.3,C=C1C(CC(C1CO)O)N2C=NC3=C2N=C(NC3=O)N
+API,135398513,Acyclovir,C8H11N5O3,1,1,,1,0,True,False,False,False,225.2,C1=NC2=C(N1COCCO)N=C(NC2=O)N
+API,135398739,Didanosine,C10H12N4O3,7,0,,1,0,True,False,False,False,236.2,C1CC(OC1CO)N2C=NC3=C2N=CNC3=O
+API,135401907,Allopurinol,C5H4N4O,6,0,,1,0,True,False,False,False,136.1,C1=NNC2=C1C(=O)NC=N2
+API,135413536,Aprepitant,C23H21F7N4O3,7,0,,1,0,True,False,False,False,534.4,CC(C1=CC(=CC(=C1)C(F)(F)F)C(F)(F)F)OC2C(N(CCO2)CC3=NNC(=O)N3)C4=CC=C(C=C4)F
+API,135449331,Eltrombopag olamine,C29H36N6O6,9,0,,3,0,True,False,False,False,564.6,CC1=C(C=C(C=C1)N2C(=O)C(=C(N2)C)N=NC3=CC=CC(=C3O)C4=CC(=CC=C4)C(=O)O)C.C(CO)N.C(CO)N
+API,135476717,Nintedanib esylate,C33H39N5O7S,5,0,,2,0,True,False,False,False,649.8,CCS(=O)(=O)O.CN1CCN(CC1)CC(=O)N(C)C2=CC=C(C=C2)N=C(C3=CC=CC=C3)C4=C(NC5=C4C=CC(=C5)C(=O)OC)O
+API,135565082,Talazoparib,C19H14F2N6O,9,0,,1,0,True,False,False,False,380.4,CN1C(=NC=N1)C2C(NC3=CC(=CC4=C3C2=NNC4=O)F)C5=CC=C(C=C5)F
+API,135565903,Opicapone,C15H10Cl2N4O6,5,0,,1,0,True,False,False,False,413.2,CC1=C(C(=[N+](C(=C1Cl)C)[O-])Cl)C2=NOC(=N2)C3=CC(=C(C(=C3)O)O)[N+](=O)[O-]
+API,139030242,Berotralstat Hydrochloride,C30H28Cl2F4N6O,3,0,,3,0,True,False,False,False,635.5,C1CC1CNC(C2=CC(=C(C=C2)F)NC(=O)C3=CC(=NN3C4=CC=CC(=C4)CN)C(F)(F)F)C5=CC=CC(=C5)C#N.Cl.Cl
+Excipient,174,Ethylene Glycol,C2H6O2,144,2,flag:polymer_surrogate,1,0,True,False,False,False,62.1,C(CO)O
+Excipient,180,Acetone,C3H6O,1,0,flag:processing_solvent,1,0,True,False,False,False,58.1,CC(=O)C
+Excipient,222,Ammonia,H3N,4,1,flag:strong_base,1,0,False,False,False,False,17.0,N
+Excipient,244,Benzyl Alcohol,C7H8O,1,0,,1,0,True,False,False,False,108.1,C1=CC=C(C=C1)CO
+Excipient,261,Butanal,C4H8O,1,1,remove:lab_reagent,1,0,True,False,False,False,72.1,CCCC=O
+Excipient,263,1-Butanol,C4H10O,10,0,flag:processing_solvent,1,0,True,False,False,False,74.1,CCCCO
+Excipient,284,Formic Acid,CH2O2,1,0,,1,0,True,False,False,False,46.0,C(=O)O
+Excipient,294,GlyTouCan:G06348JD,C12H22O11,13,0,,1,0,True,False,False,False,342.3,C(C1C(C(C(C(O1)OC2C(OC(C(C2O)O)O)CO)O)O)O)O
+Excipient,311,Citric Acid,C6H8O7,16,2,,1,0,True,False,False,False,192.1,C(C(=O)O)C(CC(=O)O)(C(=O)O)O
+Excipient,342,M-Cresol,C7H8O,1,1,,1,0,True,False,False,False,108.1,CC1=CC(=CC=C1)O
+Excipient,379,Octanoic Acid,C8H16O2,1,0,,1,0,True,False,False,False,144.2,CCCCCCCC(=O)O
+Excipient,525,Malic Acid,C4H6O5,1,0,,1,0,True,False,False,False,134.1,C(C(C(=O)O)O)C(=O)O
+Excipient,679,Dimethyl Sulfoxide,C2H6OS,1,0,,1,0,True,False,False,False,78.1,CS(=O)C
+Excipient,702,Ethanol,C2H6O,12,0,flag:processing_solvent,1,0,True,False,False,False,46.1,CCO
+Excipient,712,Formaldehyde,CH2O,4,4,remove:lab_reagent,1,0,True,False,False,False,30.0,C=O
+Excipient,751,Glyceraldehyde,C3H6O3,2,2,remove:lab_reagent,1,0,True,False,False,False,90.1,C(C(C=O)O)O
+Excipient,753,Glycerol,C3H8O3,6,0,,1,0,True,False,False,False,92.1,C(C(CO)O)O
+Excipient,757,Glycolic Acid,C2H4O3,1,0,,1,0,True,False,False,False,76.1,C(C(=O)O)O
+Excipient,784,Hydrogen Peroxide,H2O2,4,3,remove:lab_reagent,1,0,False,False,False,False,34.0,OO
+Excipient,807,Iodine,I2,1,1,remove:lab_reagent,1,0,False,False,False,False,253.8,II
+Excipient,872,GlyTouCan:G07017AJ,C12H22O11,3,0,,1,0,True,False,False,False,342.3,C(C1C(C(C(C(O1)OCC2C(C(C(C(O2)O)O)O)O)O)O)O)O
+Excipient,875,"2,3-Dihydroxybutanedioic Acid",C4H6O6,8,0,,1,0,True,False,False,False,150.1,C(C(C(=O)O)O)(C(=O)O)O
+Excipient,887,Methanol,CH4O,1,0,flag:processing_solvent,1,0,True,False,False,False,32.0,CO
+Excipient,943,Nitrate,NO3-,2,2,remove:bare_ion,1,-1,False,False,False,False,62.0,[N+](=O)([O-])[O-]
+Excipient,977,Oxygen,O2,2,2,remove:lab_reagent,1,0,False,False,False,False,32.0,O=O
+Excipient,985,Palmitic Acid,C16H32O2,2,2,,1,0,True,False,False,False,256.4,CCCCCCCCCCCCCCCC(=O)O
+Excipient,996,Phenol,C6H6O,2,1,,1,0,True,False,False,False,94.1,C1=CC=C(C=C1)O
+Excipient,1030,Propylene Glycol,C3H8O2,44,0,,1,0,True,False,False,False,76.1,CC(CO)O
+Excipient,1061,Phosphate,O4P-3,3,3,remove:bare_ion,1,-3,False,False,False,False,95.0,[O-]P(=O)([O-])[O-]
+Excipient,1110,Succinic Acid,C4H6O4,4,2,,1,0,True,False,False,False,118.1,C(CC(=O)O)C(=O)O
+Excipient,1117,Sulfate Ion,O4S-2,2,2,remove:bare_ion,1,-2,False,False,False,False,96.1,[O-]S(=O)(=O)[O-]
+Excipient,1118,Sulfuric Acid,H2O4S,6,6,remove:lab_reagent,1,0,False,False,False,False,98.1,OS(=O)(=O)O
+Excipient,1176,Urea,CH4N2O,1,0,,1,0,True,False,False,False,60.1,C(=O)(N)N
+Excipient,1183,Vanillin,C8H8O3,3,2,,1,0,True,False,False,False,152.1,COC1=C(C=CC(=C1)C=O)O
+Excipient,1254,Menthol,C10H20O,3,0,,1,0,True,False,False,False,156.3,CC1CCC(C(C1)O)C(C)C
+Excipient,1264,(2-{[4-({4-[(4-Formylamino-1-methyl-1h-imidazole-2-carbonyl)-amino]-1-methyl-1h-imidazole-2-carbonyl}-amino)-1-methyl-1h-imidazole-2-carbonyl]-amino}-ethyl)-dimethyl-ammonium,C20H28N11O4+,1,0,remove:research_chemical,1,1,True,False,False,False,486.5,CN1C=C(N=C1C(=O)NC2=CN(C(=N2)C(=O)NC3=CN(C(=N3)C(=O)NCC[NH+](C)C)C)C)NC=O
+Excipient,1732,4-Chloro-3-methylphenol,C7H7ClO,5,5,,1,0,True,False,False,False,142.6,CC1=C(C=CC(=C1)O)Cl
+Excipient,2537,Camphor,C10H16O,2,0,,1,0,True,False,False,False,152.2,CC1(C2CCC1(C(=O)C2)C)C
+Excipient,2682,Cetyl Alcohol,C16H34O,2,1,,1,0,True,False,False,False,242.4,CCCCCCCCCCCCCCCCO
+Excipient,3026,Dibutyl Phthalate,C16H22O4,1,0,,1,0,True,False,False,False,278.3,CCCCOC(=O)C1=CC=CC=C1C(=O)OCCCC
+Excipient,3259,Erythrosine,C20H8I4O5,2,0,,1,0,True,False,False,False,835.9,C1=CC=C2C(=C1)C(=O)OC23C4=CC(=C(C(=C4OC5=C(C(=C(C=C35)I)O)I)I)O)I
+Excipient,3705,Indigotindisulfonic acid,C16H10N2O8S2,1,0,,1,0,True,False,False,False,422.4,C1=CC2=C(C=C1S(=O)(=O)O)C(=C(N2)C3=NC4=C(C3=O)C=C(C=C4)S(=O)(=O)O)O
+Excipient,3776,Isopropanol,C3H8O,15,0,flag:processing_solvent,1,0,True,False,False,False,60.1,CC(C)O
+Excipient,4093,Methacrylic Acid,C4H6O2,5,0,flag:polymer_surrogate,1,0,True,False,False,False,86.1,CC(=C)C(=O)O
+Excipient,4764,Phenolphthalein,C20H14O4,2,0,flag:drug_as_excipient,1,0,True,False,False,False,318.3,C1=CC=C2C(=C1)C(=O)OC2(C3=CC=C(C=C3)O)C4=CC=C(C=C4)O
+Excipient,4873,Potassium Chloride,ClK,3,0,,2,0,False,True,False,False,74.6,[Cl-].[K+]
+Excipient,4947,Propyl Gallate,C10H12O5,2,0,,1,0,True,False,False,False,212.2,CCCOC(=O)C1=CC(=C(C(=C1)O)O)O
+Excipient,5143,Saccharin,C7H5NO3S,1,0,,1,0,True,False,False,False,183.2,C1=CC=C2C(=C1)C(=O)NS2(=O)=O
+Excipient,5234,Sodium Chloride,ClNa,6,0,,2,0,False,True,False,False,58.4,[Na+].[Cl-]
+Excipient,5281,Stearic Acid,C18H36O2,17,2,,1,0,True,False,False,False,284.5,CCCCCCCCCCCCCCCCCC(=O)O
+Excipient,5541,Triacetin,C9H14O6,33,0,,1,0,True,False,False,False,218.2,CC(=O)OCC(COC(=O)C)OC(=O)C
+Excipient,5746,Mitomycin C,C15H18N4O5,2,0,flag:drug_as_excipient,1,0,True,False,False,False,334.3,CC1=C(C(=O)C2=C(C1=O)N3CC4C(C3(C2COC(=O)N)OC)N4)N
+Excipient,5780,Sorbitol,C6H14O6,13,0,,1,0,True,False,False,False,182.2,C(C(C(C(C(CO)O)O)O)O)O
+Excipient,5959,Chloramphenicol,C11H12Cl2N2O5,1,1,flag:drug_as_excipient,1,0,True,False,False,False,323.1,C1=CC(=CC=C1C(C(CO)NC(=O)C(Cl)Cl)O)[N+](=O)[O-]
+Excipient,5988,Sucrose,C12H22O11,18,0,,1,0,True,False,False,False,342.3,C(C1C(C(C(C(O1)OC2(C(C(C(O2)CO)O)O)CO)O)O)O)O
+Excipient,5997,Cholesterol,C27H46O,1,1,,1,0,True,False,False,False,386.7,CC(C)CCCC(C)C1CCC2C1(CCC3C2CC=C4C3(CCC(C4)O)C)C
+Excipient,6049,Ethylenediaminetetraacetic Acid,C10H16N2O8,3,2,,1,0,True,False,False,False,292.2,C(CN(CC(=O)O)CC(=O)O)N(CC(=O)O)CC(=O)O
+Excipient,6106,L-Leucine,C6H13NO2,1,0,,1,0,True,False,False,False,131.2,CC(C)CC(C(=O)O)N
+Excipient,6134,beta-Lactose,C12H22O11,60,23,,1,0,True,False,False,False,342.3,C(C1C(C(C(C(O1)OC2C(OC(C(C2O)O)O)CO)O)O)O)O
+Excipient,6144,Edetate Sodium,C10H12N2Na4O8,2,1,,5,0,True,True,False,False,380.2,C(CN(CC(=O)[O-])CC(=O)[O-])N(CC(=O)[O-])CC(=O)[O-].[Na+].[Na+].[Na+].[Na+]
+Excipient,6224,Trisodium citrate,C6H5Na3O7,2,0,,4,0,True,True,False,False,258.1,C(C(=O)[O-])C(CC(=O)[O-])(C(=O)[O-])O.[Na+].[Na+].[Na+]
+Excipient,6251,Mannitol,C6H14O6,96,3,,1,0,True,False,False,False,182.2,C(C(C(C(C(CO)O)O)O)O)O
+Excipient,6255,beta-Maltose,C12H22O11,1,1,,1,0,True,False,False,False,342.3,C(C1C(C(C(C(O1)OC2C(OC(C(C2O)O)O)CO)O)O)O)O
+Excipient,6344,Dichloromethane,CH2Cl2,1,0,flag:processing_solvent,1,0,True,False,False,False,84.9,C(Cl)Cl
+Excipient,6354,Ethylene Oxide,C2H4O,1,1,remove:lab_reagent,1,0,True,False,False,False,44.1,C1CO1
+Excipient,6375,Nitromethane,CH3NO2,1,1,remove:lab_reagent,1,0,True,False,False,False,61.0,C[N+](=O)[O-]
+Excipient,6506,Triethyl Citrate,C12H20O7,12,0,,1,0,True,False,False,False,276.3,CCOC(=O)CC(CC(=O)OCC)(C(=O)OCC)O
+Excipient,6581,Acrylic Acid,C3H4O2,9,0,flag:polymer_surrogate,1,0,True,False,False,False,72.1,C=CC(=O)O
+Excipient,6587,Nitroethane,C2H5NO2,1,1,remove:lab_reagent,1,0,True,False,False,False,75.1,CC[N+](=O)[O-]
+Excipient,6635,Chlorfenson,C12H8Cl2O3S,3,0,remove:lab_reagent,1,0,True,False,False,False,303.2,C1=CC(=CC=C1OS(=O)(=O)C2=CC=C(C=C2)Cl)Cl
+Excipient,6658,Methyl Methacrylate,C5H8O2,1,0,flag:polymer_surrogate,1,0,True,False,False,False,100.1,CC(=C)C(=O)OC
+Excipient,6731,Quinoline Yellow,C18H11NO2,1,0,,1,0,True,False,False,False,273.3,C1=CC=C2C(=C1)C=CC(=N2)C3C(=O)C4=CC=CC=C4C3=O
+Excipient,6781,Diethyl Phthalate,C12H14O4,1,0,,1,0,True,False,False,False,222.2,CCOC(=O)C1=CC=CC=C1C(=O)OCC
+Excipient,6912,"(2S,4R)-Pentane-1,2,3,4,5-Pentol",C5H12O5,1,0,,1,0,True,False,False,False,152.1,C(C(C(C(CO)O)O)O)O
+Excipient,6917,N-vinyl-2-pyrrolidone,C6H9NO,108,0,flag:polymer_surrogate,1,0,True,False,False,False,111.1,C=CN1CCCC1=O
+Excipient,6932,2-tert-Butyl-4-hydroxyanisole,C11H16O2,2,2,,1,0,True,False,False,False,180.2,CC(C)(C)C1=C(C=CC(=C1)O)OC
+Excipient,6989,Thymol,C10H14O,1,0,,1,0,True,False,False,False,150.2,CC1=CC(=C(C=C1)C(C)C)O
+Excipient,7175,Propylparaben,C10H12O3,3,1,,1,0,True,False,False,False,180.2,CCCOC(=O)C1=CC=C(C=C1)O
+Excipient,7439,"Carvone, (+-)-",C10H14O,1,0,,1,0,True,False,False,False,150.2,CC1=CCC(CC1=O)C(=C)C
+Excipient,7456,Methylparaben,C8H8O3,5,2,,1,0,True,False,False,False,152.1,COC(=O)C1=CC=C(C=C1)O
+Excipient,7903,1-Nitropropane,C3H7NO2,1,1,remove:lab_reagent,1,0,True,False,False,False,89.1,CCC[N+](=O)[O-]
+Excipient,7904,Vinyl Acetate,C4H6O2,2,1,flag:polymer_surrogate,1,0,True,False,False,False,86.1,CC(=O)OC=C
+Excipient,7923,Maleic Anhydride,C4H2O3,1,1,remove:lab_reagent,1,0,True,False,False,False,98.1,C1=CC(=O)OC1=O
+Excipient,7986,Dibutyl Sebacate,C18H34O4,1,0,,1,0,True,False,False,False,314.5,CCCCOC(=O)CCCCCCCCC(=O)OCCCC
+Excipient,8146,Diethylene Glycol Monoethyl Ether,C6H14O3,1,0,,1,0,True,False,False,False,134.2,CCOCCOCCO
+Excipient,8314,2-Methylbutanoic Acid,C5H10O2,2,0,,1,0,True,False,False,False,102.1,CCC(C)C(=O)O
+Excipient,8434,Ethylparaben,C9H10O3,1,0,,1,0,True,False,False,False,166.2,CCOC(=O)C1=CC=C(C=C1)O
+Excipient,8456,Butylated Hydroxyanisole,C11H16O2,2,0,,1,0,True,False,False,False,180.2,CC(C)(C)C1=C(C=CC(=C1)OC)O
+Excipient,8567,N-Methyl-D-glucamine,C7H17NO5,3,1,,1,0,True,False,False,False,195.2,CNCC(C(C(C(CO)O)O)O)O
+Excipient,8578,1-(2-(2-Methylphenyl)diazenyl)-2-naphthalenamine,C17H15N3,1,0,flag:colourant_uncertain,1,0,True,False,False,False,261.3,CC1=CC=CC=C1N=NC2=C(C=CC3=CC=CC=C32)N
+Excipient,8753,Benzododecinium Chloride,C21H38ClN,2,2,,2,0,True,False,False,False,340.0,CCCCCCCCCCCC[N+](C)(C)CC1=CC=CC=C1.[Cl-]
+Excipient,9290,Calcium Gluconate,C12H22CaO14,1,1,,3,0,True,True,False,False,430.4,C(C(C(C(C(C(=O)[O-])O)O)O)O)O.C(C(C(C(C(C(=O)[O-])O)O)O)O)O.[Ca+2]
+Excipient,10112,Calcium Carbonate,CCaO3,4,1,,2,0,True,True,False,False,100.1,C(=O)([O-])[O-].[Ca+2]
+Excipient,10340,Sodium Carbonate,CNa2O3,4,2,,3,0,True,True,False,False,106.0,C(=O)([O-])[O-].[Na+].[Na+]
+Excipient,10608,Sodium Fluorescein,C20H10Na2O5,1,1,,3,0,True,True,False,False,376.3,C1=CC=C(C(=C1)C2=C3C=CC(=O)C=C3OC4=C2C=CC(=C4)[O-])C(=O)[O-].[Na+].[Na+]
+Excipient,10960,Glycol monoacetate,C4H8O3,1,1,,1,0,True,False,False,False,104.1,CC(=O)OCCO
+Excipient,11029,Magnesium Carbonate,CMgO3,5,3,,2,0,True,True,False,False,84.3,C(=O)([O-])[O-].[Mg+2]
+Excipient,11177,Magnesium Stearate,C36H70MgO4,350,39,,3,0,True,True,False,False,591.3,CCCCCCCCCCCCCCCCCC(=O)[O-].CCCCCCCCCCCCCCCCCC(=O)[O-].[Mg+2]
+Excipient,11178,Zinc Stearate,C36H70O4Zn,1,0,,3,0,True,True,False,False,632.3,CCCCCCCCCCCCCCCCCC(=O)[O-].CCCCCCCCCCCCCCCCCC(=O)[O-].[Zn+2]
+Excipient,11199,Vinyl alcohol,C2H4O,55,0,flag:polymer_surrogate,1,0,True,False,False,False,44.1,C=CO
+Excipient,11339,Docusate,C20H38O7S,1,1,,1,0,True,False,False,False,422.6,CCCCC(CC)COC(=O)CC(C(=O)OCC(CC)CCCC)S(=O)(=O)O
+Excipient,12449,Brilliant Green,C27H34N2O4S,1,1,flag:colourant_uncertain,2,0,True,False,False,False,482.6,CCN(CC)C1=CC=C(C=C1)C(=C2C=CC(=[N+](CC)CC)C=C2)C3=CC=CC=C3.OS(=O)(=O)[O-]
+Excipient,13136,Tricalcium Citrate,C12H10Ca3O14,1,1,,5,0,True,True,False,False,498.4,C(C(=O)[O-])C(CC(=O)[O-])(C(=O)[O-])O.C(C(=O)[O-])C(CC(=O)[O-])(C(=O)[O-])O.[Ca+2].[Ca+2].[Ca+2]
+Excipient,13144,Calcium Lactate,C6H10CaO6,1,1,,3,0,True,True,False,False,218.2,CC(C(=O)[O-])O.CC(C(=O)[O-])O.[Ca+2]
+Excipient,14778,Calcium Oxide,CaO,2,2,remove:lab_reagent,1,0,False,True,False,False,56.1,O=[Ca]
+Excipient,14781,Hydroxylapatite (Ca5(OH)(PO4)3),Ca5HO13P3,1,0,,9,0,False,True,False,False,502.3,[OH-].[O-]P(=O)([O-])[O-].[O-]P(=O)([O-])[O-].[O-]P(=O)([O-])[O-].[Ca+2].[Ca+2].[Ca+2].[Ca+2].[Ca+2]
+Excipient,14789,Feraheme/Rienso,Fe3H2O4,10,0,flag:approximate_structure,3,0,False,True,False,False,233.5,O[Fe]=O.O[Fe]=O.[Fe]
+Excipient,14792,Magnesium Oxide,MgO,5,3,,1,0,False,True,False,False,40.3,O=[Mg]
+Excipient,14793,Lead dioxide,O2Pb,1,1,remove:lab_reagent,1,0,False,True,False,False,239.2,O=[Pb]=O
+Excipient,14797,Potassium Hydroxide,HKO,16,3,flag:strong_base,2,0,False,True,False,False,56.1,[OH-].[K+]
+Excipient,14798,Sodium Hydroxide,HNaO,9,6,flag:strong_base,2,0,False,True,False,False,40.0,[OH-].[Na+]
+Excipient,14806,Desitin,OZn,1,1,,1,0,False,True,False,False,81.4,O=[Zn]
+Excipient,14915,Chromium Trioxide,CrO3,1,1,remove:lab_reagent,1,0,False,False,False,False,100.0,O=[Cr](=O)=O
+Excipient,14923,Ammonium Hydroxide,H5NO,18,0,,2,0,False,False,False,False,35.0,[NH4+].[OH-]
+Excipient,14945,Wustite,FeO,1,0,,1,0,False,True,False,False,71.8,O=[Fe]
+Excipient,14950,"7-Hexopyranosyl-9,10-dihydro-3,5,6,8-tetrahydroxy-1-methyl-9,10-dioxo-2-anthracenecarboxylic acid",C22H20O13,3,0,,1,0,True,False,False,False,492.4,CC1=C2C(=CC(=C1C(=O)O)O)C(=O)C3=C(C2=O)C(=C(C(=C3O)O)C4C(C(C(C(O4)CO)O)O)O)O
+Excipient,15324,Calcium Stearate,C36H70CaO4,1,0,,3,0,True,True,False,False,607.0,CCCCCCCCCCCCCCCCCC(=O)[O-].CCCCCCCCCCCCCCCCCC(=O)[O-].[Ca+2]
+Excipient,17466,"C.I. Acid Red 18, trisodium salt",C20H11N2Na3O10S3,1,0,,4,0,True,True,False,False,604.5,C1=CC=C2C(=C1)C(=CC=C2S(=O)(=O)[O-])N=NC3=C(C=CC4=CC(=CC(=C43)S(=O)(=O)[O-])S(=O)(=O)[O-])O.[Na+].[Na+].[Na+]
+Excipient,17730,FD&C yellow 6,C16H10N2Na2O7S2,17,0,,3,0,True,True,False,False,452.4,C1=CC(=CC=C1N=NC2=C(C=CC3=C2C=CC(=C3)S(=O)(=O)[O-])O)S(=O)(=O)[O-].[Na+].[Na+]
+Excipient,17734,HC Blue 1,C11H17N3O4,1,0,flag:colourant_uncertain,1,0,True,False,False,False,255.3,CNC1=C(C=C(C=C1)N(CCO)CCO)[N+](=O)[O-]
+Excipient,19116,Azo fuchsine,C16H11N3Na2O7S2,1,0,flag:colourant_uncertain,3,0,True,True,False,False,467.4,C1=CC=C(C=C1)N=NC2=C(C3=C(C=C(C=C3C=C2S(=O)(=O)[O-])S(=O)(=O)[O-])N)O.[Na+].[Na+]
+Excipient,19660,Carbonate Ion,CO3-2,2,2,remove:bare_ion,1,-2,True,False,False,False,60.0,C(=O)([O-])[O-]
+Excipient,19700,FD&C Blue No. 1,C37H34N2Na2O9S3,12,0,,3,0,True,True,False,False,792.9,CCN(CC1=CC(=CC=C1)S(=O)(=O)[O-])C2=CC=C(C=C2)C(=C3C=CC(=[N+](CC)CC4=CC(=CC=C4)S(=O)(=O)[O-])C=C3)C5=CC=CC=C5S(=O)(=O)[O-].[Na+].[Na+]
+Excipient,20353,alpha-Tocopherol succinate,C33H54O5,1,1,,1,0,True,False,False,False,530.8,CC1=C(C(=C(C2=C1OC(CC2)(C)CCCC(C)CCCC(C)CCCC(C)C)C)OC(=O)CCC(=O)O)C
+Excipient,22311,1-Methyl-4-Prop-1-En-2-Ylcyclohexene,C10H16,2,0,,1,0,True,False,False,False,136.2,CC1=CCC(CC1)C(=C)C
+Excipient,22985,Ammonium nitrate,H4N2O3,1,1,remove:lab_reagent,2,0,False,False,False,False,80.0,[NH4+].[N+](=O)([O-])[O-]
+Excipient,23931,Mercury,Hg,1,1,remove:elemental,1,0,False,True,False,False,200.6,[Hg]
+Excipient,23954,Silver,Ag,1,1,remove:elemental,1,0,False,True,True,False,107.9,[Ag]
+Excipient,23978,Copper,Cu,1,1,remove:elemental,1,0,False,True,True,False,63.5,[Cu]
+Excipient,23994,Zinc,Zn,2,2,remove:elemental,1,0,False,True,False,False,65.4,[Zn]
+Excipient,24203,"Sodium Phosphate, Dibasic",HNa2O4P,1,0,,3,0,False,True,False,False,142.0,OP(=O)([O-])[O-].[Na+].[Na+]
+Excipient,24261,Silica,O2Si,153,2,,1,0,False,False,False,False,60.1,O=[Si]=O
+Excipient,24268,Sodium Nitrate,NNaO3,1,1,remove:lab_reagent,2,0,False,True,False,False,85.0,[N+](=O)([O-])[O-].[Na+]
+Excipient,24401,Permanganate,MnO4-,1,1,remove:bare_ion,1,-1,False,True,False,False,118.9,[O-][Mn](=O)(=O)=O
+Excipient,24424,Zinc Sulfate,O4SZn,2,2,,2,0,False,True,False,False,161.5,[O-]S(=O)(=O)[O-].[Zn+2]
+Excipient,24434,Potassium Nitrate,KNO3,1,1,remove:lab_reagent,2,0,False,True,False,False,101.1,[N+](=O)([O-])[O-].[K+]
+Excipient,24441,Calcium hydrogen phosphate,CaHO4P,23,2,,2,0,False,True,False,False,136.1,OP(=O)([O-])[O-].[Ca+2]
+Excipient,24451,Disodium Pyrophosphate,H2Na2O7P2,1,1,,3,0,False,True,False,False,221.9,OP(=O)([O-])OP(=O)(O)[O-].[Na+].[Na+]
+Excipient,24456,Tricalcium Phosphate,Ca3O8P2,4,2,,5,0,False,True,False,False,310.2,[O-]P(=O)([O-])[O-].[O-]P(=O)([O-])[O-].[Ca+2].[Ca+2].[Ca+2]
+Excipient,24462,Copper Sulfate,CuO4S,1,1,remove:lab_reagent,2,0,False,True,True,False,159.6,[O-]S(=O)(=O)[O-].[Cu+2]
+Excipient,24470,Silver Nitrate,AgNO3,1,1,remove:lab_reagent,2,0,False,True,False,False,169.9,[N+](=O)([O-])[O-].[Ag+]
+Excipient,24477,Sodium Thiosulfate,Na2O3S2,1,1,,3,0,False,True,False,False,158.1,[O-]S(=O)(=S)[O-].[Na+].[Na+]
+Excipient,24497,Calcium Sulfate,CaO4S,9,8,,2,0,False,True,False,False,136.1,[O-]S(=O)(=O)[O-].[Ca+2]
+Excipient,24526,Chlorine,Cl2,1,1,remove:lab_reagent,1,0,False,False,False,False,70.9,ClCl
+Excipient,24638,Chlorosulfonic acid,ClHO3S,1,1,remove:lab_reagent,1,0,False,False,False,False,116.5,OS(=O)(=O)Cl
+Excipient,24667,Npc482626,C22H32O4,1,0,,2,0,True,False,False,False,360.5,CC(C)(C)C1=C(C=CC(=C1)O)OC.CC(C)(C)C1=C(C=CC(=C1)OC)O
+Excipient,24671,"Disodium 2-(1,3-dioxo-2,3-dihydro-1H-inden-2-yl)quinoline-6,8-disulfonate",C18H9NNa2O8S2,6,0,,3,0,True,True,False,False,477.4,C1=CC=C2C(=C1)C(=O)C(C2=O)C3=NC4=C(C=C(C=C4C=C3)S(=O)(=O)[O-])S(=O)(=O)[O-].[Na+].[Na+]
+Excipient,24699,Monostearin,C21H42O4,2,1,,1,0,True,False,False,False,358.6,CCCCCCCCCCCCCCCCCC(=O)OCC(CO)O
+Excipient,24705,Octamethyltrisiloxane,C8H24O2Si3,4,0,flag:polymer_surrogate,1,0,True,False,False,False,236.5,C[Si](C)(C)O[Si](C)(C)O[Si](C)(C)C
+Excipient,24748,Carmellose (JP17/NF/INN),C8H16O8,9,1,flag:polymer_surrogate,2,0,True,False,False,False,240.2,CC(=O)O.C(C(C(C(C(C=O)O)O)O)O)O
+Excipient,24751,Crl-8131,C5H10O2,9,0,,2,0,True,False,False,False,102.1,CC1CO1.C1CO1
+Excipient,24823,Ozone,O3,8,8,remove:lab_reagent,1,0,False,False,False,False,48.0,[O-][O+]=O
+Excipient,24844,Calcium chloride hydrate,CaCl2H4O2,2,0,,5,0,False,True,False,False,147.0,O.O.[Cl-].[Cl-].[Ca+2]
+Excipient,24928,Calcium Sulfate Dihydrate,CaH4O6S,1,0,,4,0,False,True,False,False,172.2,O.O.[O-]S(=O)(=O)[O-].[Ca+2]
+Excipient,25100,Trihydroxystearin,C57H110O9,2,0,,1,0,True,False,False,False,939.5,CCCCCCC(CCCCCCCCCCC(=O)OCC(COC(=O)CCCCCCCCCCC(CCCCCC)O)OC(=O)CCCCCCCCCCC(CCCCCC)O)O
+Excipient,25517,Ammonium Chloride,ClH4N,1,1,,2,0,False,False,False,False,53.5,[NH4+].[Cl-]
+Excipient,26042,Titanium dioxide,O2Ti,226,0,,1,0,False,True,False,False,79.9,O=[Ti]=O
+Excipient,26447,Menthone,C10H18O,1,0,,1,0,True,False,False,False,154.3,CC1CCC(C(=O)C1)C(C)C
+Excipient,26574,Borate,BO3-3,1,1,remove:bare_ion,1,-3,False,False,False,False,58.8,B([O-])([O-])[O-]
+Excipient,26924,Supreme,H2Mg3O12Si4,180,1,,7,0,False,True,False,False,379.3,O[Si](=O)[O-].O[Si](=O)[O-].[O-][Si](=O)[O-].[O-][Si](=O)[O-].[Mg+2].[Mg+2].[Mg+2]
+Excipient,27099,Copper(2+),Cu+2,1,1,remove:bare_ion,1,2,False,True,True,False,63.5,[Cu+2]
+Excipient,27284,Ferrous cation,Fe+2,1,1,remove:bare_ion,1,2,False,True,False,False,55.8,[Fe+2]
+Excipient,29936,Ferric cation,Fe+3,1,1,remove:bare_ion,1,3,False,True,True,False,55.8,[Fe+3]
+Excipient,30165,Iodide Ion,I-,1,1,remove:bare_ion,1,-1,False,False,False,False,126.9,[I-]
+Excipient,31296,Dibromochloromethane,CHBr2Cl,2,0,remove:lab_reagent,1,0,True,False,False,False,208.3,C(Cl)(Br)Br
+Excipient,31348,Citrate,C6H5O7-3,1,1,remove:bare_ion,1,-3,True,False,False,False,189.1,C(C(=O)[O-])C(CC(=O)[O-])(C(=O)[O-])O
+Excipient,31404,"2,6-Di-tert-butyl-4-methylphenol",C15H24O,9,1,,1,0,True,False,False,False,220.4,CC1=CC(=C(C(=C1)C(C)(C)C)O)C(C)(C)C
+Excipient,33258,E129,C18H14N2Na2O8S2,9,0,,3,0,True,True,False,False,496.4,CC1=CC(=C(C=C1S(=O)(=O)[O-])OC)N=NC2=C(C=CC3=C2C=CC(=C3)S(=O)(=O)[O-])O.[Na+].[Na+]
+Excipient,47932,"2-(2',4'-Diaminophenoxy)ethanol dihydrochloride",C8H14Cl2N2O2,7,0,remove:invalid_structure,3,0,True,False,False,False,241.1,C1=CC(=C(C=C1N)N)OCCO.Cl.Cl
+Excipient,61560,Ferric oxide hydrate,Fe2H2O4,2,0,,6,0,False,True,True,False,177.7,O.[O-2].[O-2].[O-2].[Fe+3].[Fe+3]
+Excipient,61817,CI 15985:1,C16H9AlN2O7S2,4,0,,2,0,True,True,False,False,432.4,C1=CC(=CC=C1N=NC2=C(C=CC3=C2C=CC(=C3)S(=O)(=O)[O-])[O-])S(=O)(=O)[O-].[Al+3]
+Excipient,62238,Cetearyl alcohol,C34H72O2,1,1,,2,0,True,False,False,False,512.9,CCCCCCCCCCCCCCCCCCO.CCCCCCCCCCCCCCCCO
+Excipient,62344,Acridine Orange Base,C17H19N3,1,0,flag:colourant_uncertain,1,0,True,False,False,False,265.4,CN(C)C1=CC2=C(C=C1)C=C3C=CC(=CC3=N2)N(C)C
+Excipient,62551,Pentaethylene glycol,C10H22O6,6,2,flag:polymer_surrogate,1,0,True,False,False,False,238.3,C(COCCOCCOCCOCCO)O
+Excipient,62698,Dextrin,C18H32O16,18,0,flag:polymer_surrogate,1,0,True,False,False,False,504.4,C(C1C(C(C(C(O1)OC2C(OC(C(C2O)O)OC3C(OC(C(C3O)O)O)CO)CO)O)O)O)O
+Excipient,68245,Delphinidin Chloride,C15H11ClO7,1,0,,2,0,True,False,False,False,338.7,C1=C(C=C(C(=C1O)O)O)C2=[O+]C3=CC(=CC(=C3C=C2O)O)O.[Cl-]
+Excipient,71406,"2-Hydroxyethyl 2,5,7,8-tetramethyl-2-(4,8,12-trimethyltridecyl)-3,4-dihydro-2H-1-benzopyran-6-yl butanedioate",C35H58O6,1,0,,1,0,True,False,False,False,574.8,CC1=C(C(=C(C2=C1OC(CC2)(C)CCCC(C)CCCC(C)CCCC(C)C)C)OC(=O)CCC(=O)OCCO)C
+Excipient,71485,Sucralose,C12H19Cl3O8,11,0,,1,0,True,False,False,False,397.6,C(C1C(C(C(C(O1)OC2(C(C(C(O2)CCl)O)O)CCl)O)O)Cl)O
+Excipient,71853,Chitosan from shrimp shells,C56H103N9O39,4,2,flag:polymer_surrogate,1,0,True,False,False,False,1526.5,COC(=O)NC1C(C(C(OC1OC2C(OC(C(C2O)N)OC3C(OC(C(C3O)N)O)CO)CO)CO)OC4C(C(C(C(O4)CO)OC5C(C(C(C(O5)CO)OC6C(C(C(C(O6)CO)OC7C(C(C(C(O7)CO)OC8C(C(C(C(O8)CO)OC9C(C(C(C(O9)CO)O)O)N)O)N)O)N)O)N)O)N)O)N)O
+Excipient,72041,Acemananan,C66H100NO49-,1,0,flag:polymer_surrogate,1,-1,True,False,False,False,1691.5,CC(=O)NC1C(C(C(OC1OC2C(OC(C(C2OC(=O)C)O)OC3C(OC(C(C3OC(=O)C)O)OC4C(OC(C(C4OC(=O)C)O)OC)CO)CO)CO)CO)OC5C(C(C(C(O5)CO)OC6C(C(C(C(O6)C(=O)[O-])OC7C(C(C(C(O7)CO)OC8C(C(C(C(O8)CO)OC)OC(=O)C)O)OC(=O)C)O)OC(=O)C)O)OC(=O)C)O)O
+Excipient,73981,Magnesium Hydroxide,H2MgO2,1,1,,3,0,False,True,False,False,58.3,[OH-].[OH-].[Mg+2]
+Excipient,75905,4-Styrenesulfonic acid,C8H8O3S,1,0,,1,0,True,False,False,False,184.2,C=CC1=CC=C(C=C1)S(=O)(=O)O
+Excipient,84571,alpha-D-lactose,C12H22O11,4,0,,1,0,True,False,False,False,342.3,C(C1C(C(C(C(O1)OC2C(OC(C(C2O)O)O)CO)O)O)O)O
+Excipient,86472,Alpha-Tocopherol Acetate,C31H52O3,1,0,,1,0,True,False,False,False,472.8,CC1=C(C(=C(C2=C1OC(CC2)(C)CCCC(C)CCCC(C)CCCC(C)C)C)OC(=O)C)C
+Excipient,88735,1-O-alpha-D-Glucopyranosyl-D-mannitol,C12H24O11,1,0,,1,0,True,False,False,False,344.3,C(C1C(C(C(C(O1)OCC(C(C(C(CO)O)O)O)O)O)O)O)O
+Excipient,89597,Pigment Yellow 81,C36H32Cl4N6O4,1,0,flag:colourant_uncertain,1,0,True,False,False,False,754.5,CC1=CC(=C(C=C1)NC(=O)C(C(=O)C)N=NC2=C(C=C(C(=C2)Cl)C3=CC(=C(C=C3Cl)N=NC(C(=O)C)C(=O)NC4=C(C=C(C=C4)C)C)Cl)Cl)C
+Excipient,91502,Goethite,FeHO2,3,0,,1,0,False,True,False,False,88.9,O[Fe]=O
+Excipient,93374,Melamine formaldehyde,C4H8N6O,1,0,flag:polymer_surrogate,2,0,True,False,False,False,156.1,C=O.C1(=NC(=NC(=N1)N)N)N
+Excipient,101269,"Glyceryl 1,3-distearate",C39H76O5,1,0,,1,0,True,False,False,False,625.0,CCCCCCCCCCCCCCCCCC(=O)OCC(COC(=O)CCCCCCCCCCCCCCCCC)O
+Excipient,102503,DL-2-Benzamido-5-guanidino-N-2-naphthylvaleramide hydrochloride,C23H26ClN5O2,1,0,remove:research_chemical,2,0,True,False,False,False,439.9,C1=CC=C(C=C1)C(=O)NC(CCCN=C(N)N)C(=O)NC2=CC3=CC=CC=C3C=C2.Cl
+Excipient,104748,Bisulfite,HO3S-,1,0,remove:bare_ion,1,-1,False,False,False,False,81.1,OS(=O)[O-]
+Excipient,104755,Silver cation,Ag+,1,1,remove:bare_ion,1,1,False,True,False,False,107.9,[Ag+]
+Excipient,104804,"2-Methylprop-2-enoic acid--N,N-dimethylmethanamine (2/1)",C11H21NO4,4,0,flag:polymer_surrogate,3,0,True,False,False,False,231.3,CC(=C)C(=O)O.CC(=C)C(=O)O.CN(C)C
+Excipient,104805,Brushite,CaH5O6P,11,6,,4,0,False,True,False,False,172.1,O.O.OP(=O)([O-])[O-].[Ca+2]
+Excipient,104840,Cremophor EL,C5H12O4,1,0,flag:approximate_structure,2,0,True,False,False,False,136.1,C1CO1.C(C(CO)O)O
+Excipient,104931,Ethyl prop-2-enoate;methyl 2-methylprop-2-enoate;trimethyl-[2-(2-methylprop-2-enoyloxy)ethyl]azanium;chloride,C19H34ClNO6,3,3,flag:polymer_surrogate,4,0,True,False,False,False,407.9,CCOC(=O)C=C.CC(=C)C(=O)OC.CC(=C)C(=O)OCC[N+](C)(C)C.[Cl-]
+Excipient,104938,alpha-Lactose monohydrate,C12H24O12,142,3,,2,0,True,False,False,False,360.3,C(C1C(C(C(C(O1)OC2C(OC(C(C2O)O)O)CO)O)O)O)O.O
+Excipient,105075,"Sulfuric acid, iron salt (1:?)",FeH2O4S,1,1,flag:drug_as_excipient,2,0,False,True,False,False,153.9,OS(=O)(=O)O.[Fe]
+Excipient,107665,2-Methylprop-2-enoic acid--ethyl prop-2-enoate (1/1),C9H14O4,1,0,flag:polymer_surrogate,2,0,True,False,False,False,186.2,CCOC(=O)C=C.CC(=C)C(=O)O
+Excipient,107689,L-Lactic Acid,C3H6O3,1,0,,1,0,True,False,False,False,90.1,CC(C(=O)O)O
+Excipient,114690,Precirol,C37H76O7,4,3,,3,0,True,False,False,False,633.0,CCCCCCCCCCCCCCCCCC(=O)O.CCCCCCCCCCCCCCCC(=O)O.C(C(CO)O)O
+Excipient,121950,Hypromellose Acetate Succinate,C10H22O9,12,1,flag:polymer_surrogate,4,0,True,False,False,False,286.3,CC(CO)O.CC(=O)O.CO.C(CC(=O)O)C(=O)O
+Excipient,123671,Brillant blue,C37H36N2O9S3,1,0,,1,0,True,False,False,False,748.9,CCN(CC1=CC(=CC=C1)S(=O)(=O)[O-])C2=CC=C(C=C2)C(=C3C=CC(=[N+](CC)CC4=CC(=CC=C4)S(=O)(=O)O)C=C3)C5=CC=CC=C5S(=O)(=O)O
+Excipient,123706,"4-(1-Aminopropyl)-N,N,3-trimethylaniline",C12H20N2,55,0,repair:wrong_structure,1,0,True,False,False,False,192.3,CCC(C1=C(C=C(C=C1)N(C)C)C)N
+Excipient,131411,Umifenovir,C22H25BrN2O3S,1,0,flag:drug_as_excipient,1,0,True,False,False,False,477.4,CCOC(=O)C1=C(N(C2=CC(=C(C(=C21)CN(C)C)O)Br)C)CSC3=CC=CC=C3
+Excipient,134601,Aspartame,C14H18N2O5,25,0,,1,0,True,False,False,False,294.3,COC(=O)C(CC1=CC=CC=C1)NC(=O)C(CC(=O)O)N
+Excipient,138843,"Phosphine, methylidyne-",CHP,2,0,remove:invalid_structure,1,0,True,False,False,False,44.0,C#P
+Excipient,160041,"Chryseno(4,5-bcd)thiophene-4,4-dioxide",C18H10O2S,1,0,remove:research_chemical,1,0,True,False,False,False,290.3,C1=CC=C2C3=C4C(=CC2=C1)S(=O)(=O)C5=CC=CC(=C54)C=C3
+Excipient,161821,Ethenyl acetate;phthalic acid,C12H12O6,2,0,flag:polymer_surrogate,2,0,True,False,False,False,252.2,CC(=O)OC=C.C1=CC=C(C(=C1)C(=O)O)C(=O)O
+Excipient,164825,Tartrazine,C16H9N4Na3O9S2,2,0,,4,0,True,True,False,False,534.4,C1=CC(=CC=C1N=NC2C(=NN(C2=O)C3=CC=C(C=C3)S(=O)(=O)[O-])C(=O)[O-])S(=O)(=O)[O-].[Na+].[Na+].[Na+]
+Excipient,219520,2-(Chloromethyl)furan,C5H5ClO,1,1,remove:lab_reagent,1,0,True,False,False,False,116.5,C1=COC(=C1)CCl
+Excipient,237332,5-(Hydroxymethyl)furfural,C6H6O3,2,2,remove:degradant,1,0,True,False,False,False,126.1,C1=C(OC(=C1)C=O)CO
+Excipient,270885,Ganex E 535,C10H15NO3,13,0,flag:polymer_surrogate,2,0,True,False,False,False,197.2,CC(=O)OC=C.C=CN1CCCC1=O
+Excipient,374707,"3-[(4,5-Dimethyl-1-nitroacridin-9-yl)amino]propyl-hydroxy-dimethylazanium;chloride;hydrochloride",C20H26Cl2N4O3,1,0,remove:research_chemical,3,0,True,False,False,False,441.4,CC1=C2C(=CC=C1)C(=C3C(=CC=C(C3=N2)C)[N+](=O)[O-])NCCC[N+](C)(C)O.Cl.[Cl-]
+Excipient,439195,L-Arabinose,C5H10O5,1,1,,1,0,True,False,False,False,150.1,C1C(C(C(C(O1)O)O)O)O
+Excipient,441374,Kanamycin A Sulfate,C18H38N4O15S,1,1,flag:drug_as_excipient,2,0,True,False,False,False,582.6,C1C(C(C(C(C1N)OC2C(C(C(C(O2)CN)O)O)O)O)OC3C(C(C(C(O3)CO)O)N)O)N.OS(=O)(=O)O
+Excipient,441476,Pectin,C6H10O7,1,0,flag:polymer_surrogate,1,0,True,False,False,False,194.1,C1(C(C(OC(C1O)O)C(=O)O)O)O
+Excipient,443314,"2-(2-(3,4-Bis(2-hydroxyethoxy)tetrahydro-2-furanyl)-2-(2-hydroxyethoxy)ethoxy)ethyl dodecanoate",C26H50O10,6,0,flag:polymer_surrogate,1,0,True,False,False,False,522.7,CCCCCCCCCCCC(=O)OCCOCC(C1C(C(CO1)OCCO)OCCO)OCCO
+Excipient,444041,beta-Cyclodextrin,C42H70O35,4,1,,1,0,True,False,False,False,1135.0,C(C1C2C(C(C(O1)OC3C(OC(C(C3O)O)OC4C(OC(C(C4O)O)OC5C(OC(C(C5O)O)OC6C(OC(C(C6O)O)OC7C(OC(C(C7O)O)OC8C(OC(O2)C(C8O)O)CO)CO)CO)CO)CO)CO)O)O)O
+Excipient,444972,Fumaric Acid,C4H4O4,2,0,,1,0,True,False,False,False,116.1,C(=CC(=O)O)C(=O)O
+Excipient,445639,Oleic Acid,C18H34O2,4,0,,1,0,True,False,False,False,282.5,CCCCCCCCC=CCCCCCCCC(=O)O
+Excipient,445709,Iron;trihydrate,FeH6O3,30,0,flag:approximate_structure,4,0,False,True,False,False,109.9,O.O.O.[Fe]
+Excipient,516875,Potassium Permanganate,KMnO4,9,9,remove:lab_reagent,2,0,False,True,False,False,158.0,[O-][Mn](=O)(=O)=O.[K+]
+Excipient,516892,Sodium Bicarbonate,CHNaO3,16,1,,2,0,True,True,False,False,84.0,C(=O)(O)[O-].[Na+]
+Excipient,516893,Potassium Bicarbonate,CHKO3,1,0,,2,0,True,True,False,False,100.1,C(=O)(O)[O-].[K+]
+Excipient,516919,Sodium Bisulfate,HNaO4S,1,1,,2,0,False,True,False,False,120.1,OS(=O)(=O)[O-].[Na+]
+Excipient,517044,Potassium Acetate,C2H3KO2,1,0,,2,0,True,True,False,False,98.1,CC(=O)[O-].[K+]
+Excipient,517055,Sodium Benzoate,C7H5NaO2,3,1,,2,0,True,True,False,False,144.1,C1=CC=C(C=C1)C(=O)[O-].[Na+]
+Excipient,518696,Iron oxide (Fe2O3),Fe2O3,65,0,,1,0,False,True,False,False,159.7,O=[Fe]O[Fe]=O
+Excipient,637511,Cinnamaldehyde,C9H8O,1,1,,1,0,True,False,False,False,132.2,C1=CC=C(C=C1)C=CC=O
+Excipient,656582,Sodium saccharin,C7H4NNaO3S,9,0,,2,0,True,True,False,False,205.2,C1=CC=C2C(=C1)C(=O)[N-]S2(=O)=O.[Na+]
+Excipient,656671,Sodium Pyrosulfite,Na2O5S2,1,1,,3,0,False,True,False,False,190.1,[O-]S(=O)S(=O)(=O)[O-].[Na+].[Na+]
+Excipient,2723816,Sodium Propionate,C3H5NaO2,1,0,,2,0,True,True,False,False,96.1,CCC(=O)[O-].[Na+]
+Excipient,2723854,Indigo carmine,C16H8N2Na2O8S2,16,0,,3,0,True,True,False,False,466.4,C1=CC2=C(C=C1S(=O)(=O)[O-])C(=C(N2)C3=NC4=C(C3=O)C=C(C=C4)S(=O)(=O)[O-])O.[Na+].[Na+]
+Excipient,2723872,D-Fructose,C6H12O6,2,1,,1,0,True,False,False,False,180.2,C1C(C(C(C(O1)(CO)O)O)O)O
+Excipient,2735133,Sodium Carbonate Monohydrate,CH2Na2O4,1,0,,4,0,True,True,False,False,124.0,C(=O)([O-])[O-].O.[Na+].[Na+]
+Excipient,3028194,Lithium,Li,1,0,remove:elemental,1,0,False,True,True,False,6.9,[Li]
+Excipient,3037558,"Lactose, anhydrous",C12H22O11,12,0,repair:wrong_structure,1,0,True,False,False,False,342.3,C(C1C(C(C(C(O1)OC(C(CO)O)C(C(C=O)O)O)O)O)O)O
+Excipient,3082248,poly(vinyl alcohol-co-N-vinyl-2-pyrrolidone),C8H13NO2,4,0,flag:polymer_surrogate,2,0,True,False,False,False,155.2,C=CN1CCCC1=O.C=CO
+Excipient,3082361,Poly(methyl methacrylate)-poly(gamma-benzylglutamate) copolymer,C17H23NO6,1,0,flag:polymer_surrogate,2,0,True,False,False,False,337.4,CC(=C)C(=O)OC.C1=CC=C(C=C1)COC(=O)CCC(C(=O)O)N
+Excipient,3423265,Sodium Lauryl Sulfate,C12H25NaO4S,59,2,,2,0,True,True,False,False,288.4,CCCCCCCCCCCCOS(=O)(=O)[O-].[Na+]
+Excipient,3806114,"2,3-Dihydroxybutanedioate",C4H4O6-2,2,2,remove:bare_ion,1,-2,True,False,False,False,148.1,C(C(C(=O)[O-])O)(C(=O)[O-])O
+Excipient,4134690,"1,20-Eicosanediol",C20H42O2,9,0,,1,0,True,False,False,False,314.6,C(CCCCCCCCCCO)CCCCCCCCCO
+Excipient,4327536,Hydroxyethyl cellulose,C36H70O19,3,1,flag:approximate_structure,1,0,True,False,False,False,806.9,CC(COCC1C(C(C(C(O1)OC2C(OC(C(C2OCC(C)O)OCC(C)O)OCC(C)O)COCC(C)O)OCC(C)O)OCC(C)O)OCC(C)O)O
+Excipient,4448381,MS dipeptide,C8H16N2O4S,2,0,,1,0,True,False,False,False,236.3,CSCCC(C(=O)NC(CO)C(=O)O)N
+Excipient,5102882,"Sodium 3,4,5,6-tetrahydroxyoxane-2-carboxylate",C6H9NaO7,5,0,,2,0,True,True,False,False,216.1,C1(C(C(OC(C1O)O)C(=O)[O-])O)O.[Na+]
+Excipient,5281955,"2-[2-[3,4-bis(2-hydroxyethoxy)oxolan-2-yl]-2-(2-hydroxyethoxy)ethoxy]ethyl (E)-octadec-9-enoate",C32H60O10,15,0,flag:polymer_surrogate,1,0,True,False,False,False,604.8,CCCCCCCCC=CCCCCCCCC(=O)OCCOCC(C1C(C(CO1)OCCO)OCCO)OCCO
+Excipient,5283468,Glyceryl Monooleate,C21H40O4,1,0,,1,0,True,False,False,False,356.5,CCCCCCCCC=CCCCCCCCC(=O)OCC(CO)O
+Excipient,5284359,Calcium Chloride,CaCl2,1,1,,3,0,False,True,False,False,111.0,[Cl-].[Cl-].[Ca+2]
+Excipient,5284448,Npc150327,C32H60O10,12,1,flag:polymer_surrogate,1,0,True,False,False,False,604.8,CCCCCCCCC=CCCCCCCCC(=O)OCCOCC(C1C(CC(O1)OCCO)OCCO)OCCO
+Excipient,5287971,Asolectin,C42H80NO8P,3,0,,1,0,True,False,False,False,758.1,CCCCCCCCCCCCCCCC(=O)OCC(COP(=O)([O-])OCC[N+](C)(C)C)OC(=O)CCCCCCCC=CCC=CCCCCC
+Excipient,5311266,Magnesium Trisilicate,Mg2O8Si3,1,1,,3,0,False,True,False,False,260.9,[O-][Si](=O)O[Si]([O-])([O-])O[Si](=O)[O-].[Mg+2].[Mg+2]
+Excipient,5311498,Anacobin,C63H88CoN14O14P,1,1,flag:drug_as_excipient,3,0,True,True,False,False,1355.4,CC1=CC2=C(C=C1C)N(C=N2)C3C(C(C(O3)CO)OP(=O)([O-])OC(C)CNC(=O)CCC4(C(C5C6(C(C(C(=C(C7=NC(=CC8=NC(=C(C4=N5)C)C(C8(C)C)CCC(=O)N)C(C7(C)CC(=O)N)CCC(=O)N)C)[N-]6)CCC(=O)N)(C)CC(=O)N)C)CC(=O)N)C)O.[C-]#N.[Co+3]
+Excipient,5359268,Aluminum,Al,4,4,remove:elemental,1,0,False,True,True,False,27.0,[Al]
+Excipient,5360814,beta-D-Fructofuranosyl-alpha-D-glucopyranoside monohexadecanoate,C28H52O12,1,0,,1,0,True,False,False,False,580.7,CCCCCCCCCCCCCCCC(=O)OC1(C(C(C(C(O1)CO)O)O)O)C2(C(C(C(O2)CO)O)O)CO
+Excipient,5362585,Glyceryl Monobehenate,C25H50O4,3,0,,1,0,True,False,False,False,414.7,CCCCCCCCCCCCCCCCCCCCCC(=O)OCC(CO)O
+Excipient,5460613,Mercapto,HS,1,1,remove:invalid_structure,1,0,False,False,True,False,33.1,[SH]
+Excipient,5462222,Potassium,K,1,1,remove:elemental,1,0,False,True,True,False,39.1,[K]
+Excipient,5462309,Phosphorus,P,2,2,remove:elemental,1,0,False,False,True,False,31.0,[P]
+Excipient,6097185,Phloxine B,C20H2Br4Cl4Na2O5,1,0,,3,0,True,True,False,False,829.6,C1=C2C(=C3C=C(C(=O)C(=C3OC2=C(C(=C1Br)[O-])Br)Br)Br)C4=C(C(=C(C(=C4Cl)Cl)Cl)Cl)C(=O)[O-].[Na+].[Na+]
+Excipient,6328154,Sodium carboxymethyl cellulose,C8H16NaO8,104,2,flag:approximate_structure,3,0,True,True,True,False,263.2,CC(=O)O.C(C(C(C(C(C=O)O)O)O)O)O.[Na]
+Excipient,6426889,Potassium Chlorate,ClKO3,2,2,remove:lab_reagent,2,0,False,True,False,False,122.5,[O-]Cl(=O)=O.[K+]
+Excipient,6433516,Simethicone,C6H18O4Si3,3,0,flag:polymer_surrogate,2,0,True,False,False,False,238.5,CO[Si](C)(C)O[Si](C)(C)C.O=[Si]=O
+Excipient,6433718,Acid Red 92,C20H2Br4Cl4Na2O5,1,0,,3,0,True,True,False,False,829.6,C1=C2C(=C(C(=C1Br)[O-])Br)OC3=C(C(=C(C=C3C24C5=C(C(=C(C(=C5Cl)Cl)Cl)Cl)C(=O)O4)Br)[O-])Br.[Na+].[Na+]
+Excipient,6436062,Diethylene glycol monooleate,C22H42O4,1,0,,1,0,True,False,False,False,370.6,CCCCCCCCC=CCCCCCCCC(=O)OCCOCCO
+Excipient,6438359,1-Palmitoyl-2-linoleoylphosphatidylcholine,C42H80NO8P,5,0,,1,0,True,False,False,False,758.1,CCCCCCCCCCCCCCCC(=O)OCC(COP(=O)([O-])OCC[N+](C)(C)C)OC(=O)CCCCCCCC=CCC=CCCCCC
+Excipient,6451167,"Sodium Phosphate, Dibasic, Dihydrate",H5Na2O6P,1,0,,5,0,False,True,False,False,178.0,O.O.OP(=O)([O-])[O-].[Na+].[Na+]
+Excipient,6850741,"3,7-Dimethyl-1-oxaspiro[3.5]nonane;3,6-dimethyl-4,5,6,7-tetrahydro-1-benzofuran;5-methyl-2-propan-2-ylcyclohexan-1-ol;5-methyl-2-propan-2-ylcyclohexan-1-one;(5-methyl-2-propan-2-ylcyclohexyl) acetate;5-methyl-2-propan-2-ylidenecyclohexan-1-one",C62H108O7,1,0,,6,0,True,False,False,False,965.5,CC1CCC2(CC1)C(CO2)C.CC1CCC(C(C1)O)C(C)C.CC1CCC(C(C1)OC(=O)C)C(C)C.CC1CCC(C(=O)C1)C(C)C.CC1CCC2=C(C1)OC=C2C.CC1CCC(=C(C)C)C(=O)C1
+Excipient,6850749,Resins,C30H50O11,30,0,flag:polymer_surrogate,2,0,True,False,False,False,586.7,CC1(C2CCC(C23CC1C(=CC3O)C(=O)O)C(=O)O)CO.C(CCCC(C(CCCCCO)O)O)CCCC(=O)O
+Excipient,9839867,Disodium ethylenediaminetetraacetate,C10H16N2NaO8+,1,0,,2,1,True,True,False,False,315.2,C(CN(CC(=O)O)CC(=O)O)N(CC(=O)O)CC(=O)O.[Na+]
+Excipient,9840857,Phenylmercury nitrate [ISO],C6H5HgNO3,1,1,,2,0,True,True,False,False,339.7,C1=CC=C(C=C1)[Hg+].[N+](=O)([O-])[O-]
+Excipient,9920342,Sorbitan mono-(9Z)-9-octadecenoate,C24H44O6,1,0,,1,0,True,False,False,False,428.6,CCCCCCCCC=CCCCCCCCC(=O)OCC(C1C(C(CO1)O)O)O
+Excipient,9989226,Alumina,Al2O3,1,1,,5,0,False,True,False,False,102.0,[O-2].[O-2].[O-2].[Al+3].[Al+3]
+Excipient,11046239,Sorbitan monododecanoate,C18H34O6,1,0,,1,0,True,False,False,False,346.5,CCCCCCCCCCCC(=O)OCC(C1C(C(CO1)O)O)O
+Excipient,12961638,"Spiro[isobenzofuran-1(3H),9'-[9H]xanthen]-3-one, 3',6'-dihydroxy-2',4',5',7'-tetraiodo-, sodium salt (1:2)",C20H6I4Na2O5,3,0,,3,0,True,True,False,False,879.9,C1=CC=C2C(=C1)C(=O)OC23C4=CC(=C(C(=C4OC5=C(C(=C(C=C35)I)[O-])I)I)[O-])I.[Na+].[Na+]
+Excipient,14055602,"2-[4,5-Dihydroxy-2-(hydroxymethyl)-6-methoxyoxan-3-yl]oxy-6-(hydroxymethyl)-5-methoxyoxane-3,4-diol",C14H26O11,226,4,flag:polymer_surrogate,1,0,True,False,False,False,370.4,COC1C(OC(C(C1O)O)OC2C(OC(C(C2O)O)OC)CO)CO
+Excipient,14109413,"Acacia senegal, ext.",C24H34O5,8,0,flag:polymer_surrogate,1,0,True,False,False,False,402.5,CC(=O)C1CC(=O)C2(C1(CC(=O)C3=C2C(CC4C3(CCC(C4(C)C)O)C)O)C)C
+Excipient,15908632,Acetone peroxide,C3H8O4,1,1,remove:lab_reagent,1,0,True,False,False,False,108.1,CC(C)(OO)OO
+Excipient,16204922,Warfarin Sodium,C19H15NaO4,1,1,flag:drug_as_excipient,2,0,True,True,False,False,330.3,CC(=O)CC(C1=CC=CC=C1)C2=C(C3=CC=CC=C3OC2=O)[O-].[Na+]
+Excipient,16211032,Deae-cellulose,C12H22O11,15,0,flag:polymer_surrogate,1,0,True,False,False,False,342.3,C(C1C(C(C(C(O1)OC2C(OC(C(C2O)O)O)CO)O)O)O)O
+Excipient,16211978,Iron oxide (Fe3O4),Fe3O4,47,0,,2,0,False,True,False,False,231.5,O=[Fe].O=[Fe]O[Fe]=O
+Excipient,16213095,Hydroxyethyl Starch,C22H44O17,1,0,flag:polymer_surrogate,2,0,True,False,False,False,580.6,C(COCC1C(C(C(C(O1)OCCO)OCCO)OCCO)OCCO)O.C(C1C(C(C(C(O1)O)O)O)O)O
+Excipient,21226445,Aluminium lithium hydride,AlH4Li,1,1,remove:lab_reagent,6,0,False,True,False,False,38.0,[H-].[H-].[H-].[H-].[Li+].[Al+3]
+Excipient,21256123,Nanoparticles,Fe3O4-2,1,0,remove:bare_ion,7,-2,False,True,False,False,231.5,[O-2].[O-2].[O-2].[O-2].[Fe+2].[Fe+2].[Fe+2]
+Excipient,21257725,"2-Amino-2-(hydroxymethyl)propane-1,3-diol;2-(2-(bis(carboxymethyl)amino)ethyl-(carboxymethyl)amino)acetic acid;boric acid",C14H30BN3O14,1,1,remove:lab_reagent,3,0,True,False,False,False,475.2,B(O)(O)O.C(CN(CC(=O)O)CC(=O)O)N(CC(=O)O)CC(=O)O.C(C(CO)(CO)N)O
+Excipient,21584077,Dicalcium;phosphate,Ca2O4P+,3,0,,3,1,False,True,False,False,175.1,[O-]P(=O)([O-])[O-].[Ca+2].[Ca+2]
+Excipient,21862903,Dicalcium phosphate-dihydrate,Ca2H4O6P+,7,7,,5,1,False,True,False,False,211.2,O.O.[O-]P(=O)([O-])[O-].[Ca+2].[Ca+2]
+Excipient,22146182,Ethenol;ethenyl acetate,C6H10O3,6,0,flag:polymer_surrogate,2,0,True,False,False,False,130.1,CC(=O)OC=C.C=CO
+Excipient,22477175,Glyceryl Dibehenate,C25H52O5,1,0,,2,0,True,False,False,False,432.7,CCCCCCCCCCCCCCCCCCCCCC(=O)O.C(C(CO)O)O
+Excipient,22895896,2-(2-Propoxypropoxy)ethanol,C8H18O3,4,0,,1,0,True,False,False,False,162.2,CCCOC(C)COCCO
+Excipient,23320441,C.I. Pigment Yellow 42,FeH3O3,13,0,,4,0,False,True,True,False,106.9,O.[OH-].[O-2].[Fe+3]
+Excipient,23663626,Methylparaben Sodium,C8H7NaO3,1,1,,2,0,True,True,False,False,174.1,COC(=O)C1=CC=C(C=C1)[O-].[Na+]
+Excipient,23663939,Novobiocin Sodium,C31H35N2NaO11,1,1,flag:drug_as_excipient,2,0,True,True,False,False,634.6,CC1=C(C=CC2=C1OC(=O)C(=C2[O-])NC(=O)C3=CC(=C(C=C3)O)CC=C(C)C)OC4C(C(C(C(O4)(C)C)OC)OC(=O)N)O.[Na+]
+Excipient,23665634,Sodium Stearyl Fumarate,C22H39NaO4,15,0,,2,0,True,True,False,False,390.5,CCCCCCCCCCCCCCCCCCOC(=O)C=CC(=O)[O-].[Na+]
+Excipient,23665647,Potassium tert-butoxide,C4H9KO,1,1,remove:lab_reagent,2,0,True,True,False,False,112.2,CC(C)(C)[O-].[K+]
+Excipient,23665763,Sodium Bisulfite,HNaO3S,3,2,,2,0,False,True,False,False,104.1,OS(=O)[O-].[Na+]
+Excipient,23673837,Docusate Sodium,C20H37NaO7S,1,1,,2,0,True,True,False,False,444.6,CCCCC(CC)COC(=O)CC(C(=O)OCC(CC)CCCC)S(=O)(=O)[O-].[Na+]
+Excipient,23706213,Sodium carboxymethylcellulose,C8H15NaO8,37,1,flag:polymer_surrogate,3,0,True,True,False,False,262.2,CC(=O)[O-].C(C(C(C(C(C=O)O)O)O)O)O.[Na+]
+Excipient,24180693,"4-(4,6,8-trimethyl-3-nonanyl)benzenesulfate, calcium salt",C36H58CaO6S2,1,1,,3,0,True,True,False,False,691.1,CCC(C1=CC=C(C=C1)S(=O)(=O)[O-])C(C)CC(C)CC(C)C.CCC(C1=CC=C(C=C1)S(=O)(=O)[O-])C(C)CC(C)CC(C)C.[Ca+2]
+Excipient,24180701,Magnesium bis[4-(dodecan-3-yl)benzene-1-sulfonate],C36H58MgO6S2,1,1,,3,0,True,True,False,False,675.3,CCCCCCCCCC(CC)C1=CC=C(C=C1)S(=O)(=O)[O-].CCCCCCCCCC(CC)C1=CC=C(C=C1)S(=O)(=O)[O-].[Mg+2]
+Excipient,24181099,FD & C Yellow no. 5,C16H12N4NaO9S2+,1,0,,2,1,True,True,False,False,491.4,C1=CC(=CC=C1N=NC2C(=NN(C2=O)C3=CC=C(C=C3)S(=O)(=O)O)C(=O)O)S(=O)(=O)O.[Na+]
+Excipient,24832091,Aquacoat,C20H38O11,22,0,flag:polymer_surrogate,1,0,True,False,False,False,454.5,CCOCC1C(C(C(C(O1)OC)OCC)OCC)OC2C(C(C(C(O2)CO)OC)O)O
+Excipient,24832095,Hypromellosum,C32H60O19,15,1,flag:polymer_surrogate,1,0,True,False,False,False,748.8,CC(COCC1C(C(C(C(O1)OC)OCC(C)O)OCC(C)O)OC2C(C(C(C(O2)COC)OC3C(C(C(C(O3)CO)OC)O)O)OC)OC)O
+Excipient,24836924,Npc214502,C27H48O20,8,1,,1,0,True,False,False,False,692.7,CC1C(C(C(C(O1)CO)OC2C(C(C(C(O2)COC3C(C(C(C(O3)CO)OC)O)O)OC4C(C(C(C(O4)CO)OC)O)O)O)O)O)O
+Excipient,24882991,Calcium arachinate,C40H78CaO4,2,0,,3,0,True,True,False,False,663.1,CCCCCCCCCCCCCCCCCCCC(=O)[O-].CCCCCCCCCCCCCCCCCCCC(=O)[O-].[Ca+2]
+Excipient,44134661,Disodium;[[[5-(6-aminopurin-9-yl)-3-hydroxyoxolan-2-yl]methoxy-hydroxyphosphoryl]oxy-oxidophosphoryl] hydrogen phosphate,C10H14N5Na2O12P3,3,0,flag:drug_as_excipient,3,0,True,True,False,False,535.1,C1C(C(OC1N2C=NC3=C(N=CN=C32)N)COP(=O)(O)OP(=O)([O-])OP(=O)(O)[O-])O.[Na+].[Na+]
+Excipient,44630049,"calcium;(2S,3S,4S,5S,6R)-6-[(2R,3S,4R,5S,6R)-2-carboxy-6-[(2R,3S,4R,5S,6R)-2-carboxylato-4,5,6-trihydroxyoxan-3-yl]oxy-4,5-dihydroxyoxan-3-yl]oxy-3,4,5-trihydroxyoxane-2-carboxylate",C18H24CaO19,1,1,,2,0,True,True,False,False,584.4,C1(C(C(OC(C1O)OC2C(C(C(OC2C(=O)O)OC3C(C(C(OC3C(=O)[O-])O)O)O)O)O)C(=O)[O-])O)O.[Ca+2]
+Excipient,51063134,Methylcellulose (4000 cps),C20H38O11,4,4,,1,0,True,False,False,False,454.5,COCC1C(C(C(C(O1)OC2C(OC(C(C2OC)OC)OC)COC)OC)OC)OC
+Excipient,54670067,L-Ascorbic Acid,C6H8O6,4,1,,1,0,True,False,False,False,176.1,C(C(C1C(=C(C(=O)O1)O)O)O)O
+Excipient,56841623,Silodrate,Al2H2Mg2O12Si3,1,0,,10,0,False,True,False,False,380.8,O.[O-2].[O-2].[O-][Si](=O)[O-].[O-][Si](=O)[O-].[O-][Si](=O)[O-].[Mg+2].[Mg+2].[Al+3].[Al+3]
+Excipient,56841934,Colloidal Ferric Oxide,Fe2H6O3,80,0,flag:approximate_structure,5,0,False,True,False,False,165.7,O.O.O.[Fe].[Fe]
+Excipient,56841936,Bentone,Al2H4O9Si2,9,9,,3,0,False,True,False,False,258.2,O.O.O=[Al]O[Si](=O)O[Si](=O)O[Al]=O
+Excipient,56843209,Acid Yellow 23 Aluminium lake,C16H12AlN4O9S2,5,0,,2,0,True,True,True,False,495.4,C1=CC(=CC=C1N=NC2C(=NN(C2=O)C3=CC=C(C=C3)S(=O)(=O)O)C(=O)O)S(=O)(=O)O.[Al]
+Excipient,57503849,Hydroxypropylmethylcellulose,C56H108O30,6,1,flag:polymer_surrogate,2,0,True,False,False,False,1261.4,CC(COCC1C(C(C(C(O1)OC2C(OC(C(C2OCC(C)O)OCC(C)O)OCC(C)O)COCC(C)O)OCC(C)O)OCC(C)O)OCC(C)O)O.COCC1C(C(C(C(O1)OC2C(OC(C(C2OC)OC)OC)COC)OC)OC)OC
+Excipient,70519829,Dimethyl-octyl-phenylazanium chloride,C16H28ClN,4,0,,2,0,True,False,False,False,269.9,CCCCCCCC[N+](C)(C)C1=CC=CC=C1.[Cl-]
+Excipient,71306830,"1-[[(2R,3R,4S,5R)-3,4,5-tris(2-hydroxypropoxy)-6-[(2R,3R,4S,5R,6R)-4,5,6-tris(2-hydroxypropoxy)-2-(2-hydroxypropoxymethyl)oxan-3-yl]oxyoxan-2-yl]methoxy]propan-2-ol",C36H70O19,2,0,flag:polymer_surrogate,1,0,True,False,False,False,806.9,CC(COCC1C(C(C(C(O1)OC2C(OC(C(C2OCC(C)O)OCC(C)O)OCC(C)O)COCC(C)O)OCC(C)O)OCC(C)O)OCC(C)O)O
+Excipient,72941614,"Bentonite, sodian",Al2H2Na2O13Si4,3,3,,21,0,False,True,False,False,422.3,O.[O-2].[O-2].[O-2].[O-2].[O-2].[O-2].[O-2].[O-2].[O-2].[O-2].[O-2].[O-2].[Na+].[Na+].[Al+3].[Al+3].[Si+4].[Si+4].[Si+4].[Si+4]
+Excipient,86278134,GlyTouCan:G12348WV,C42H72O36,19,1,flag:polymer_surrogate,1,0,True,False,False,False,1153.0,C(C1C(C(C(C(O1)OC2C(OC(C(C2O)O)OCC3C(C(C(C(O3)OC4C(OC(C(C4O)O)OC5C(OC(C(C5O)O)O)CO)CO)O)O)OC6C(C(C(C(O6)CO)OC7C(C(C(C(O7)CO)O)O)O)O)O)CO)O)O)O)O
+Excipient,92329579,Polysorbate 40 (USAN:INN:BAN:NF),C26H50O10,1,0,flag:polymer_surrogate,1,0,True,False,False,False,522.7,CCCCCCCCCCCC(=O)OCCOCC(C1C(C(CO1)OCCO)OCCO)OCCO
+Excipient,101418447,Methanidylidynephosphane,CP-,1,0,remove:invalid_structure,1,-1,True,False,False,False,43.0,[C-]#P
+Excipient,102601050,"Bicyclo[7.2.0]undec-3-en-5-ol, 4,11,11-trimethyl-8-methylene-, 5-acetate, (1R,5S,9S)-",C17H26O2,1,0,,1,0,True,False,False,False,262.4,CC1=CCC2C(CC2(C)C)C(=C)CCC1OC(=O)C
+Excipient,129630617,Calcium sodium edetate,C10H13CaN2NaO8,1,0,,3,0,True,True,False,False,352.3,C(CN(CC(=O)[O-])CC(=O)[O-])N(CC(=O)O)CC(=O)[O-].[Na+].[Ca+2]
+Excipient,131750926,Biozan R,C36H58O29P2,4,0,flag:polymer_surrogate,1,0,True,False,False,False,1016.8,CC(=O)OCC1C(C(C(C(O1)OC2C(C(OC(C2OC3C(C(C(C(O3)CO)OP)O)O)CO)CP)O)OC4C(C(C(C(O4)C(=O)O)OC5C(C(C6C(O5)COC(O6)(C)C(=O)O)O)O)O)O)O)O
+Excipient,131751496,Tolpovidone I 131,C6H13NOP2,86,11,repair:wrong_structure,1,0,True,False,False,False,177.1,C1CC(=O)N(C1)C(CP)P
+Excipient,133126842,"sodium (2R,3R,4R,5R,6S)-3,4,5,6-tetrahydroxyoxane-2-carboxylate",C6H9NaO7,1,1,,2,0,True,True,False,False,216.1,C1(C(C(OC(C1O)O)C(=O)[O-])O)O.[Na+]
+Excipient,134159056,,C29H54O20,1,0,,1,0,True,False,False,False,722.7,CC(O)OCC1C(C(C(C(O1)OC2C(OC(C(C2OC(C)O)O)OC3C(OC(C(C3OC(C)O)OC)OC(C)O)CO)COC)O)OC)O
+Excipient,135350084,"N-[2-(1,3-benzodioxol-5-yl)ethyl]-N'-[3-fluoro-4-[8-methoxy-7-(piperidin-4-ylmethoxy)quinolin-4-yl]oxyphenyl]oxamide",C33H33FN4O7,3,0,flag:drug_as_excipient,1,0,True,False,False,False,616.6,COC1=C(C=CC2=C(C=CN=C21)OC3=C(C=C(C=C3)NC(=O)C(=O)NCCC4=CC5=C(C=C4)OCO5)F)OCC6CCNCC6
+Excipient,135436510,Amido black,C22H16N6NaO9S2+,3,0,flag:colourant_uncertain,2,1,True,True,False,False,595.5,C1=CC=C(C=C1)N=NC2=C(C3=C(C(=C(C=C3C=C2S(=O)(=O)O)S(=O)(=O)O)N=NC4=CC=C(C=C4)[N+](=O)[O-])N)O.[Na+]
+Excipient,135436515,FD&C blue 2,C16H10N2NaO8S2+,13,0,,2,1,True,True,False,False,445.4,C1=CC2=C(C=C1S(=O)(=O)O)C(=C(N2)C3=NC4=C(C3=O)C=C(C=C4)S(=O)(=O)O)O.[Na+]
+Excipient,135800280,FD&C Blue No. 2--aluminium lake,C48H24Al2N6O24S6,3,0,,5,0,True,True,False,False,1315.1,C1=CC2=C(C=C1S(=O)(=O)[O-])C(=C(N2)C3=NC4=C(C3=O)C=C(C=C4)S(=O)(=O)[O-])O.C1=CC2=C(C=C1S(=O)(=O)[O-])C(=C(N2)C3=NC4=C(C3=O)C=C(C=C4)S(=O)(=O)[O-])O.C1=CC2=C(C=C1S(=O)(=O)[O-])C(=C(N2)C3=NC4=C(C3=O)C=C(C=C4)S(=O)(=O)[O-])O.[Al+3].[Al+3]
+Excipient,139600838,GlyTouCan:G13250XD,C10H16O8,1,1,,1,0,True,False,False,False,264.2,CC(=O)OCC1C(C(C(C(O1)O)OC(=O)C)O)O
+Excipient,146156863,Hydroxypropyl betadex;Hydroxypropyl-beta-cyclodextrin;HP-beta-CD,C51H88O38,2,0,flag:polymer_surrogate,1,0,True,False,False,False,1309.2,CC(COCC1C2C(C(C(O1)OC3C(OC(C(C3O)O)OC4C(OC(C(C4O)O)OC5C(OC(C(C5O)O)OC6C(OC(C(C6O)O)OC7C(OC(C(C7O)O)OC8C(OC(O2)C(C8O)O)CO)CO)COCC(C)O)CO)COCC(C)O)CO)O)O)O
+Excipient,154724046,Disodium;[[[5-(6-aminopurin-9-yl)-3-hydroxyoxolan-2-yl]oxy-methoxyphosphoryl]oxy-oxidophosphoryl] hydrogen phosphate,C10H14N5Na2O12P3,1,0,flag:drug_as_excipient,3,0,True,True,False,False,535.1,COP(=O)(OC1C(CC(O1)N2C=NC3=C(N=CN=C32)N)O)OP(=O)([O-])OP(=O)(O)[O-].[Na+].[Na+]
+Excipient,154733642,"2-[1,3-Bis[2-(11-hydroxyheptadecoxycarbonyloxy)ethoxy]propan-2-yloxy]ethyl 11-hydroxyheptadecyl carbonate",C63H122O15,1,0,,1,0,True,False,False,False,1119.7,CCCCCCC(CCCCCCCCCCOC(=O)OCCOCC(COCCOC(=O)OCCCCCCCCCCC(CCCCCC)O)OCCOC(=O)OCCCCCCCCCCC(CCCCCC)O)O
+Excipient,154733643,"2-[1,3-bis[2-[(Z)-11-hydroxyheptadec-8-enoxy]carbonyloxyethoxy]propan-2-yloxy]ethyl [(Z)-11-hydroxyheptadec-8-enyl] carbonate",C63H116O15,1,0,,1,0,True,False,False,False,1113.6,CCCCCCC(CC=CCCCCCCCOC(=O)OCCOCC(COCCOC(=O)OCCCCCCCC=CCC(CCCCCC)O)OCCOC(=O)OCCCCCCCC=CCC(CCCCCC)O)O
+Excipient,155491311,Attapulgite [vandf],AlH9MgO15Si4-16,2,2,,21,-16,False,True,True,False,412.7,O.O.O.O.[OH-].[O-2].[O-2].[O-2].[O-2].[O-2].[O-2].[O-2].[O-2].[O-2].[O-2].[Mg+2].[Al+3].[Si].[Si].[Si].[Si]
