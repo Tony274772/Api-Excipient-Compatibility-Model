@@ -36,14 +36,22 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_
 sys.path.insert(0, PROJECT_ROOT)
 
 from experiments.ablations_dmpnn_maccs import variants as V  # noqa: E402
-from experiments.ablations_dmpnn_maccs.run_ablation import (MODEL_CELL, RESULTS_ROOT,  # noqa: E402
-                                                           RUNS_ROOT, SEALED_ROOT, SEEDS, SENTINEL,
-                                                           run_name)
 from experiments.encoder_comparison.collect_grid import (benjamini_hochberg,  # noqa: E402
                                                          detectable_delta, paired_test)
 from experiments.encoder_comparison.run_grid import metric_suite  # noqa: E402
 from src.config import Config  # noqa: E402
 from src.evaluate import tune_threshold  # noqa: E402
+
+MODEL_CELL = "dmpnn__x_maccs"
+SEEDS = [42, 43, 44, 45, 46]
+SENTINEL = "COMPLETE"
+RESULTS_ROOT = os.path.join(PROJECT_ROOT, "experiments", "results", "ablations_dmpnn_maccs")
+RUNS_ROOT = os.path.join(RESULTS_ROOT, "runs")
+SEALED_ROOT = os.path.join(RESULTS_ROOT, "_heldout_sealed")
+
+
+def run_name(ablation: str, seed: int) -> str:
+    return f"{ablation}_seed{seed}"
 
 GRID_ROOT = os.path.join(PROJECT_ROOT, "experiments", "results", "encoder_grid")
 MULTI_ROOT = os.path.join(RESULTS_ROOT, "multi_seed")
@@ -152,6 +160,19 @@ def ensemble_heldout(split_dir, name, seeds):
     return mean_prob, labels
 
 
+# --------------------------------------------------------------------------- decision statistics
+def ci95(delta, sd, n):
+    if n < 2 or not np.isfinite(sd):
+        return (np.nan, np.nan)
+    try:
+        from scipy import stats
+        t = stats.t.ppf(0.975, n - 1)
+    except Exception:
+        t = 2.776 if n == 5 else 1.96
+    half = t * sd / math.sqrt(n)
+    return (delta - half, delta + half)
+
+
 # --------------------------------------------------------------------------- collect
 def collect(ablations=None, reveal_heldout=False):
     ablations = ablations or V.PLAN
@@ -178,9 +199,7 @@ def collect(ablations=None, reveal_heldout=False):
         repro.to_csv(os.path.join(RESULTS_ROOT, "reproduction.csv"), index=False)
 
     # paired tests
-    full_pr = series(df, "full", "val_pr_auc")
-    full_mcc = series(df, "full", "val_mcc")
-    full_p = df[df["ablation"] == "full"]["params"].iloc[0] if "full" in df["ablation"].values else None
+    full_p = int(df[df["ablation"] == "full"]["params"].iloc[0]) if "full" in df["ablation"].values else None
 
     records = []
     pvals = []
@@ -190,57 +209,79 @@ def collect(ablations=None, reveal_heldout=False):
         if n_seeds == 0:
             continue
         ref = V.REFERENCE.get(a, "full")
-        ref_pr = series(df, ref, "val_pr_auc")
-        ref_mcc = series(df, ref, "val_mcc")
-        common = sorted(set(sub["seed"]) & set(ref_pr))
-        a_pr = [sub[sub["seed"] == s]["val_pr_auc"].iloc[0] for s in common]
-        r_pr = [ref_pr[s] for s in common]
-        a_mcc = [sub[sub["seed"] == s]["val_mcc"].iloc[0] for s in common]
-        r_mcc = [ref_mcc[s] for s in common]
+        p = int(sub["params"].iloc[0])
 
-        t_res = paired_test(a_pr, r_pr)
-        delta_pr = t_res["delta_mean"]
-        pval = t_res["p_value"]
-        delta_mcc = float(np.mean(np.array(a_mcc) - np.array(r_mcc))) if common else math.nan
-
-        p = sub["params"].iloc[0]
         rec = {
-            "ablation": a, "reference": ref, "n_seeds": n_seeds, "common_seeds": len(common),
-            "val_pr_auc": float(sub["val_pr_auc"].mean()), "val_pr_sd": float(sub["val_pr_auc"].std()),
-            "val_mcc": float(sub["val_mcc"].mean()), "val_mcc_sd": float(sub["val_mcc"].std()),
+            "ablation": a, "reference": ref if a != "full" else "", "n_seeds": n_seeds,
+            "val_pr_auc": float(sub["val_pr_auc"].mean()),
+            "val_pr_sd": float(sub["val_pr_auc"].std()) if n_seeds > 1 else np.nan,
+            "val_mcc": float(sub["val_mcc"].mean()),
+            "val_mcc_sd": float(sub["val_mcc"].std()) if n_seeds > 1 else np.nan,
             "val_roc_auc": float(sub["val_roc_auc"].mean()), "val_f1": float(sub["val_f1"].mean()),
             "val_precision": float(sub["val_precision"].mean()), "val_recall": float(sub["val_recall"].mean()),
             "val_accuracy": float(sub["val_accuracy"].mean()), "val_correct": float(sub["val_correct"].mean()),
-            "delta_pr_auc": delta_pr, "p_raw": pval, "delta_mcc": delta_mcc,
-            "ci95_low": t_res["ci95_low"], "ci95_high": t_res["ci95_high"],
             "trainable_params": p,
             "delta_params": (p - full_p) if full_p is not None else math.nan,
-            "weight_paired": sub["weight_paired"].all(), "description": V.describe(a)
+            "weight_paired": bool(sub["weight_paired"].all()), "description": V.describe(a)
         }
+
+        if a != "full":
+            t_pr = paired_test(series(df, a), series(df, ref))
+            t_mcc = paired_test(series(df, a, "val_mcc"), series(df, ref, "val_mcc"))
+            delta_pr = t_pr["delta"]
+            delta_mcc = t_mcc["delta"]
+            pval = t_pr["p_t"]
+            lo, hi = ci95(t_pr["delta"], t_pr["sd_diff"], t_pr["n_seeds"])
+            rec.update({
+                "common_seeds": t_pr["n_seeds"],
+                "delta_pr_auc": delta_pr,
+                "delta_mcc": delta_mcc,
+                "p_raw": pval,
+                "ci95_low": lo,
+                "ci95_high": hi,
+                "detectable": (detectable_delta(t_pr["n_seeds"], t_pr["sd_diff"])
+                               if t_pr["n_seeds"] >= 2 and np.isfinite(t_pr["sd_diff"]) and t_pr["sd_diff"] > 0
+                               else np.nan)
+            })
+            if np.isfinite(pval):
+                pvals.append(pval)
+        else:
+            rec.update({
+                "common_seeds": n_seeds,
+                "delta_pr_auc": 0.0,
+                "delta_mcc": 0.0,
+                "p_raw": np.nan,
+                "ci95_low": 0.0,
+                "ci95_high": 0.0,
+                "detectable": np.nan
+            })
         records.append(rec)
-        if a != "full" and not math.isnan(pval):
-            pvals.append(pval)
 
     # BH correction
-    p_bh = benjamini_hochberg(pvals, Q_BH) if pvals else []
-    bh_iter = iter(p_bh)
-    for r in records:
-        if r["ablation"] == "full" or math.isnan(r["p_raw"]):
-            r["p_bh"] = math.nan
+    if pvals:
+        adj, reject = benjamini_hochberg(pvals, Q_BH)
+        bh_iter = iter(zip(adj, reject))
+        for r in records:
+            if r["ablation"] == "full" or not np.isfinite(r.get("p_raw", np.nan)):
+                r["p_bh"] = np.nan
+                r["sig_bh"] = False
+            else:
+                p_adj, sig = next(bh_iter)
+                r["p_bh"] = p_adj
+                r["sig_bh"] = sig
+    else:
+        for r in records:
+            r["p_bh"] = np.nan
             r["sig_bh"] = False
-        else:
-            p_adj, sig = next(bh_iter)
-            r["p_bh"] = p_adj
-            r["sig_bh"] = sig
 
-        # verdict
+    for r in records:
         if r["ablation"] == "full":
             r["verdict"] = "BASELINE"
-        elif r["sig_bh"] and r["delta_pr_auc"] < 0:
+        elif r.get("sig_bh", False) and r["delta_pr_auc"] < 0:
             r["verdict"] = "NEEDED"
-        elif r["sig_bh"] and r["delta_pr_auc"] > 0:
+        elif r.get("sig_bh", False) and r["delta_pr_auc"] > 0:
             r["verdict"] = "HELPS (removal improves)"
-        elif r["delta_pr_auc"] >= -REMOVABLE_PR and r["delta_mcc"] >= -REMOVABLE_MCC:
+        elif r.get("delta_pr_auc", -999) >= -REMOVABLE_PR and r.get("delta_mcc", -999) >= -REMOVABLE_MCC:
             r["verdict"] = "REMOVABLE"
         else:
             r["verdict"] = "UNCLEAR"

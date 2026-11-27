@@ -67,7 +67,7 @@ def parse_log(path: str) -> dict:
     return {"status": "running", "info": lines[-1][:60]}
 
 
-def get_status(target_runs=None, seeds=None) -> dict:
+def get_status(target_runs=None, seeds=None, min_mtime=None) -> dict:
     target_seeds = seeds or SEEDS
     all_runs = [(a, s) for a in (target_runs or V.PLAN) for s in target_seeds]
     completed = []
@@ -83,6 +83,10 @@ def get_status(target_runs=None, seeds=None) -> dict:
         if os.path.exists(sentinel):
             completed.append(name)
         elif os.path.exists(log_path):
+            # If log is from a previous run before this session started, treat as pending
+            if min_mtime and os.path.getmtime(log_path) < min_mtime:
+                pending.append(name)
+                continue
             st = parse_log(log_path)
             if st["status"] == "complete":
                 completed.append(name)
@@ -174,6 +178,7 @@ def monitor_sweep(target_runs=None, target_seeds=None, pids=None, interval=3):
     now_str = datetime.now().strftime("%H:%M:%S")
     print(f"[{now_str}] Live Progress Monitor: {total_runs} runs in scope ({already_done} already done, {total_runs - already_done} to run)")
 
+    start_time = time.time()
     last_line = ""
     is_tty = sys.stdout.isatty()
 
@@ -184,10 +189,12 @@ def monitor_sweep(target_runs=None, target_seeds=None, pids=None, interval=3):
             else:
                 any_alive = True
 
-            st = get_status(target_runs, target_seeds)
+            st = get_status(target_runs, target_seeds, min_mtime=start_time - 10)
 
             # Announce newly completed runs
             for name in st["completed"]:
+                if name in seen_failed:
+                    seen_failed.discard(name)
                 if name not in seen_completed:
                     seen_completed.add(name)
                     if is_tty and last_line:
@@ -214,9 +221,14 @@ def monitor_sweep(target_runs=None, target_seeds=None, pids=None, interval=3):
                     t_str = datetime.now().strftime("%H:%M:%S")
                     print(f"[{t_str}]  ✔ [{done_cnt}/{total_runs} COMPLETE] {name}{mins_str} | {m_str}", flush=True)
 
+            # If a run is now running, remove from failed
+            for name, _ in st["running"]:
+                if name in seen_failed:
+                    seen_failed.discard(name)
+
             # Announce newly failed runs
             for name, err in st["failed"]:
-                if name not in seen_failed:
+                if name not in seen_failed and name not in seen_completed:
                     seen_failed.add(name)
                     if is_tty and last_line:
                         sys.stdout.write("\r" + " " * len(last_line) + "\r")
@@ -224,10 +236,12 @@ def monitor_sweep(target_runs=None, target_seeds=None, pids=None, interval=3):
                     log_file = os.path.join(LOG_DIR, f"{name}.txt")
                     print(f"[{t_str}]  ✖ [{name} FAILED]: {err} (see {log_file})", flush=True)
 
-            if (len(seen_completed) + len(seen_failed)) >= total_runs:
-                break
-            if pids and not any_alive:
-                break
+            if pids:
+                if not any_alive:
+                    break
+            else:
+                if (len(seen_completed) + len(seen_failed)) >= total_runs:
+                    break
 
             brief = render_brief(st)
             if is_tty:
