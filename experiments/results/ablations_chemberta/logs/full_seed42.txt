@@ -1,0 +1,52 @@
+Loading weights:   0%|          | 0/53 [00:00<?, ?it/s]Loading weights: 100%|██████████| 53/53 [00:00<00:00, 9245.09it/s]
+[transformers] [1mRobertaModel LOAD REPORT[0m from: DeepChem/ChemBERTa-77M-MTR
+Key                        | Status     | 
+---------------------------+------------+-
+regression.dense.bias      | UNEXPECTED | 
+regression.out_proj.bias   | UNEXPECTED | 
+norm_std                   | UNEXPECTED | 
+regression.dense.weight    | UNEXPECTED | 
+regression.out_proj.weight | UNEXPECTED | 
+norm_mean                  | UNEXPECTED | 
+pooler.dense.bias          | MISSING    | 
+pooler.dense.weight        | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+thread '<unnamed>' (1924249) panicked at /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rayon-core-1.13.0/src/registry.rs:171:10:
+The global thread pool has not been initialized.: ThreadPoolBuildError { kind: IOError(Os { code: 11, kind: WouldBlock, message: "Resource temporarily unavailable" }) }
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/experiments/ablations_chemberta/run_ablation.py", line 355, in <module>
+    main()
+  File "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/experiments/ablations_chemberta/run_ablation.py", line 350, in main
+    run(args.ablation, args.seed, args.device or "auto", 1 if args.smoke else args.epochs,
+  File "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/experiments/ablations_chemberta/run_ablation.py", line 217, in run
+    out = model({k: (v.to(device) if torch.is_tensor(v) else v) for k, v in first.items()})
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/.conda/envs/generics/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/.conda/envs/generics/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/src/model.py", line 942, in forward
+    api_struct, exc_struct = self._encode_struct(batch, device)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/src/model.py", line 864, in _encode_struct
+    api_tok, api_pool, api_mask = self.encoder.encode(api_smiles)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/src/encoders/chemberta_encoder.py", line 74, in encode
+    tokens = self.tokenizer(
+             ^^^^^^^^^^^^^^^
+  File "/home/jovyan/.conda/envs/generics/lib/python3.11/site-packages/transformers/tokenization_utils_base.py", line 2525, in __call__
+    encodings = self._encode_plus(
+                ^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/.conda/envs/generics/lib/python3.11/site-packages/transformers/tokenization_utils_tokenizers.py", line 959, in _encode_plus
+    encodings = self._tokenizer.encode_batch(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pyo3_runtime.PanicException: The global thread pool has not been initialized.: ThreadPoolBuildError { kind: IOError(Os { code: 11, kind: WouldBlock, message: "Resource temporarily unavailable" }) }

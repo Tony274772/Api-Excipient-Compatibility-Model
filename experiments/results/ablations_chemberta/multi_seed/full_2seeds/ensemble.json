@@ -1,0 +1,8 @@
+{
+  "ablation": "full",
+  "ens_seeds": 2,
+  "ens_threshold": 0.78,
+  "ens_val_pr_auc": 0.7357704668950935,
+  "ens_val_mcc": 0.6748318542705461,
+  "ens_val_correct": 737
+}

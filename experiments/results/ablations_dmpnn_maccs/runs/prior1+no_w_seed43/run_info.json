@@ -1,0 +1,73 @@
+{
+  "model": "dmpnn__x_maccs",
+  "ablation": "prior1+no_w",
+  "parts": [
+    "prior1",
+    "no_w"
+  ],
+  "description": "A. prior 5 -> 1 (p_exact only) + A. prior trust w removed, z = r + b",
+  "build_settings": {},
+  "weight_paired_with_full": true,
+  "reference": "full",
+  "seed_run": "prior1+no_w_seed43",
+  "seed": 43,
+  "device": "cuda",
+  "smoke": false,
+  "secondary": "maccs",
+  "pooling": "cls",
+  "secondary_shuffle_sha1": "",
+  "parameters_total": 10079554,
+  "parameters_trainable": 1365314,
+  "parameters_full_trainable": 1366011,
+  "parameters_cut": 697,
+  "epochs_trained": 3,
+  "best_epoch": 0,
+  "max_epochs": 40,
+  "threshold_from_val": 0.9510000000000001,
+  "tnr_floor": 0.97,
+  "val_pr_auc": 0.7191872815124377,
+  "val_mcc": 0.6710882138184651,
+  "head_layout": {
+    "ablation_head": true,
+    "prior_cols": [
+      "p_exact"
+    ],
+    "use_prior_trust": false,
+    "use_gate": true,
+    "use_bilinear": true,
+    "mech_cols": [
+      "maillard",
+      "ester_amide_hydrolysis",
+      "metal_ion_oxidation",
+      "acid_base_salt_displacement",
+      "schiff_base"
+    ],
+    "api_flags": 18,
+    "exc_flags": 18
+  },
+  "api_tower_layout": {
+    "mix_in": 208,
+    "has_struct": true,
+    "has_secondary": true,
+    "use_salt_context": true
+  },
+  "exc_tower_layout": {
+    "mix_in": 208,
+    "has_struct": true,
+    "has_secondary": true,
+    "use_salt_context": true
+  },
+  "parent_report": null,
+  "data": {
+    "train": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/train.csv",
+    "val": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/val.csv",
+    "heldout": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/heldout/held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 2.97,
+  "finished": "2026-11-27T11:43:13"
+}

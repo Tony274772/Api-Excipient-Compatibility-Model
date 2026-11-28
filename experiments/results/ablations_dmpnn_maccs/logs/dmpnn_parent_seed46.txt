@@ -1,0 +1,21 @@
+CheMeleon message passing: d_h=2048, depth=6
+[dmpnn_parent_seed46] D-MPNN reads the parent molecule for 266 of 867 molecules
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/experiments/ablations_dmpnn_maccs/run_ablation.py", line 356, in <module>
+    main()
+  File "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/experiments/ablations_dmpnn_maccs/run_ablation.py", line 351, in main
+    run(args.ablation, args.seed, device_str=args.device, epochs=epochs,
+  File "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/experiments/ablations_dmpnn_maccs/run_ablation.py", line 208, in run
+    model = build_model(config, cell, encoder, primary_rep, secondary_rep)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/experiments/encoder_comparison/run_grid.py", line 148, in build_model
+    model = PGBCompatibilityModel(config, encoder, towers[0], towers[1])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/src/model.py", line 817, in __init__
+    config.fusion == "cross_attn" and encoder.is_sequence_capable
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/.conda/envs/generics/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1967, in __getattr__
+    raise AttributeError(
+AttributeError: 'ParentSmilesEncoder' object has no attribute 'is_sequence_capable'

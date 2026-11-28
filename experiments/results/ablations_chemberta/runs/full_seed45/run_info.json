@@ -1,0 +1,60 @@
+{
+  "model": "chemberta__x_pubchemfp",
+  "ablation": "full",
+  "parts": [
+    "full"
+  ],
+  "description": "full model (harness baseline)",
+  "build_settings": {},
+  "weight_paired_with_full": true,
+  "reference": "full",
+  "seed_run": "full_seed45",
+  "seed": 45,
+  "device": "cuda",
+  "smoke": false,
+  "secondary": "pubchemfp",
+  "pooling": "cls",
+  "secondary_shuffle_sha1": "",
+  "prior_lookup": "full",
+  "prior_global_rate": 0.09963898916967509,
+  "mech_set": "v1",
+  "n_mech": 5,
+  "parent_smiles": null,
+  "cross_attention": true,
+  "attention_layers": true,
+  "head": {
+    "ablation_head": false
+  },
+  "api_tower": {
+    "mix_in": 208,
+    "has_struct": true,
+    "has_secondary": true,
+    "use_salt_context": true
+  },
+  "exc_tower": {
+    "mix_in": 208,
+    "has_struct": true,
+    "has_secondary": true,
+    "use_salt_context": true
+  },
+  "parameters_total": 3987179,
+  "parameters_trainable": 559739,
+  "parameters_trainable_full": 559739,
+  "epochs_trained": 11,
+  "best_epoch": 4,
+  "max_epochs": 40,
+  "threshold_from_val": 0.744,
+  "tnr_floor": 0.97,
+  "data": {
+    "train": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/train.csv",
+    "val": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/val.csv",
+    "heldout": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/heldout/held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 1.73,
+  "finished": "2026-11-11T06:15:35"
+}

@@ -1,0 +1,59 @@
+{
+  "model": "dmpnn__x_maccs",
+  "ablation": "pool_gated",
+  "parts": [
+    "pool_gated"
+  ],
+  "description": "D. gated-attention pooling instead of CLS (adds layers, drawn last)",
+  "build_settings": {
+    "pooling": "global_gated_attention"
+  },
+  "weight_paired_with_full": true,
+  "reference": "full",
+  "seed_run": "pool_gated_seed43",
+  "seed": 43,
+  "device": "cuda",
+  "smoke": false,
+  "secondary": "maccs",
+  "pooling": "global_gated_attention",
+  "secondary_shuffle_sha1": "",
+  "parameters_total": 10212859,
+  "parameters_trainable": 1498619,
+  "parameters_full_trainable": 1498619,
+  "parameters_cut": 0,
+  "epochs_trained": 3,
+  "best_epoch": 0,
+  "max_epochs": 40,
+  "threshold_from_val": 0.551,
+  "tnr_floor": 0.97,
+  "val_pr_auc": 0.7412368667085192,
+  "val_mcc": 0.6884677825049818,
+  "head_layout": {
+    "ablation_head": false
+  },
+  "api_tower_layout": {
+    "mix_in": 208,
+    "has_struct": true,
+    "has_secondary": true,
+    "use_salt_context": true
+  },
+  "exc_tower_layout": {
+    "mix_in": 208,
+    "has_struct": true,
+    "has_secondary": true,
+    "use_salt_context": true
+  },
+  "parent_report": null,
+  "data": {
+    "train": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/train.csv",
+    "val": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/val.csv",
+    "heldout": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/heldout/held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 1.55,
+  "finished": "2026-11-27T13:02:37"
+}

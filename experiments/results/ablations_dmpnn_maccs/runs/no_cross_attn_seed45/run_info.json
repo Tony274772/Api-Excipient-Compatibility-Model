@@ -1,0 +1,57 @@
+{
+  "model": "dmpnn__x_maccs",
+  "ablation": "no_cross_attn",
+  "parts": [
+    "no_cross_attn"
+  ],
+  "description": "D. cross-attention removed; struct = own projected D-MPNN embedding",
+  "build_settings": {},
+  "weight_paired_with_full": true,
+  "reference": "full",
+  "seed_run": "no_cross_attn_seed45",
+  "seed": 45,
+  "device": "cuda",
+  "smoke": false,
+  "secondary": "maccs",
+  "pooling": "cls",
+  "secondary_shuffle_sha1": "",
+  "parameters_total": 9947515,
+  "parameters_trainable": 1233275,
+  "parameters_full_trainable": 1366011,
+  "parameters_cut": 132736,
+  "epochs_trained": 3,
+  "best_epoch": 0,
+  "max_epochs": 40,
+  "threshold_from_val": 0.801,
+  "tnr_floor": 0.97,
+  "val_pr_auc": 0.7243261036077716,
+  "val_mcc": 0.6708509462295633,
+  "head_layout": {
+    "ablation_head": false
+  },
+  "api_tower_layout": {
+    "mix_in": 208,
+    "has_struct": true,
+    "has_secondary": true,
+    "use_salt_context": true
+  },
+  "exc_tower_layout": {
+    "mix_in": 208,
+    "has_struct": true,
+    "has_secondary": true,
+    "use_salt_context": true
+  },
+  "parent_report": null,
+  "data": {
+    "train": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/train.csv",
+    "val": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/val.csv",
+    "heldout": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/heldout/held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 2.41,
+  "finished": "2026-11-27T13:34:09"
+}

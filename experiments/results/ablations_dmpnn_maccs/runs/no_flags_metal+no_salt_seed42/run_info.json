@@ -1,0 +1,117 @@
+{
+  "model": "dmpnn__x_maccs",
+  "ablation": "no_flags_metal+no_salt",
+  "parts": [
+    "no_flags_metal",
+    "no_salt"
+  ],
+  "description": "B. 10 metal / inorganic flags removed on both sides + B. 8-value salt context removed from both towers",
+  "build_settings": {},
+  "weight_paired_with_full": true,
+  "reference": "full",
+  "seed_run": "no_flags_metal+no_salt_seed42",
+  "seed": 42,
+  "device": "cuda",
+  "smoke": false,
+  "secondary": "maccs",
+  "pooling": "cls",
+  "secondary_shuffle_sha1": "",
+  "parameters_total": 10077755,
+  "parameters_trainable": 1363515,
+  "parameters_full_trainable": 1366011,
+  "parameters_cut": 2496,
+  "epochs_trained": 3,
+  "best_epoch": 0,
+  "max_epochs": 40,
+  "threshold_from_val": 0.786,
+  "tnr_floor": 0.97,
+  "val_pr_auc": 0.713424989895013,
+  "val_mcc": 0.6710882138184651,
+  "head_layout": {
+    "ablation_head": true,
+    "prior_cols": [
+      "p_exact",
+      "p_delta",
+      "p_family",
+      "log_n",
+      "unseen"
+    ],
+    "use_prior_trust": true,
+    "use_gate": true,
+    "use_bilinear": true,
+    "mech_cols": [
+      "maillard",
+      "ester_amide_hydrolysis",
+      "metal_ion_oxidation",
+      "acid_base_salt_displacement",
+      "schiff_base"
+    ],
+    "api_flags": 8,
+    "exc_flags": 8
+  },
+  "api_tower_layout": {
+    "mix_in": 200,
+    "has_struct": true,
+    "has_secondary": true,
+    "use_salt_context": false,
+    "segments": [
+      [
+        "struct",
+        128
+      ],
+      [
+        "secondary",
+        32
+      ],
+      [
+        "desc",
+        24
+      ],
+      [
+        "flags",
+        16
+      ]
+    ],
+    "flags": 8,
+    "use_desc": true
+  },
+  "exc_tower_layout": {
+    "mix_in": 200,
+    "has_struct": true,
+    "has_secondary": true,
+    "use_salt_context": false,
+    "segments": [
+      [
+        "struct",
+        128
+      ],
+      [
+        "secondary",
+        32
+      ],
+      [
+        "desc",
+        24
+      ],
+      [
+        "flags",
+        16
+      ]
+    ],
+    "flags": 8,
+    "use_desc": true
+  },
+  "parent_report": null,
+  "data": {
+    "train": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/train.csv",
+    "val": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/val.csv",
+    "heldout": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/heldout/held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 2.0,
+  "finished": "2026-11-27T12:37:11"
+}

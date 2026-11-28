@@ -1,0 +1,97 @@
+{
+  "model": "dmpnn__x_maccs",
+  "ablation": "no_secondary",
+  "parts": [
+    "no_secondary"
+  ],
+  "description": "D. MACCS branch removed (mix -32)",
+  "build_settings": {},
+  "weight_paired_with_full": true,
+  "reference": "full",
+  "seed_run": "no_secondary_seed42",
+  "seed": 42,
+  "device": "cuda",
+  "smoke": false,
+  "secondary": "maccs",
+  "pooling": "cls",
+  "secondary_shuffle_sha1": "",
+  "parameters_total": 10063227,
+  "parameters_trainable": 1348987,
+  "parameters_full_trainable": 1366011,
+  "parameters_cut": 17024,
+  "epochs_trained": 3,
+  "best_epoch": 0,
+  "max_epochs": 40,
+  "threshold_from_val": 0.799,
+  "tnr_floor": 0.97,
+  "val_pr_auc": 0.6855346841352474,
+  "val_mcc": 0.6619419674088218,
+  "head_layout": {
+    "ablation_head": false
+  },
+  "api_tower_layout": {
+    "mix_in": 176,
+    "has_struct": true,
+    "has_secondary": false,
+    "use_salt_context": true,
+    "segments": [
+      [
+        "struct",
+        128
+      ],
+      [
+        "desc",
+        24
+      ],
+      [
+        "flags",
+        16
+      ],
+      [
+        "salt",
+        8
+      ]
+    ],
+    "flags": 18,
+    "use_desc": true
+  },
+  "exc_tower_layout": {
+    "mix_in": 176,
+    "has_struct": true,
+    "has_secondary": false,
+    "use_salt_context": true,
+    "segments": [
+      [
+        "struct",
+        128
+      ],
+      [
+        "desc",
+        24
+      ],
+      [
+        "flags",
+        16
+      ],
+      [
+        "salt",
+        8
+      ]
+    ],
+    "flags": 18,
+    "use_desc": true
+  },
+  "parent_report": null,
+  "data": {
+    "train": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/train.csv",
+    "val": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/val.csv",
+    "heldout": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/heldout/held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 1.59,
+  "finished": "2026-11-27T12:49:02"
+}

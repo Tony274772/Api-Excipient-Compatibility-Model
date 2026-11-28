@@ -1,0 +1,2 @@
+ablation,reference,n_seeds,params,weight_paired,description,val_pr_auc,val_pr_auc_sd,val_mcc,val_mcc_sd,val_roc_auc,val_roc_auc_sd,val_f1,val_f1_sd,ens_seeds,ens_threshold,ens_val_pr_auc,ens_val_mcc,ens_val_correct
+full,,2,559739,True,full model (harness baseline),0.7323029971022996,0.008386642563643505,0.6905556412849276,0.029452379179932996,0.9312510414930846,0.0005155127758191718,0.6878787878787879,0.02999846950488387,2,0.78,0.7357704668950935,0.6748318542705461,737

@@ -1,0 +1,97 @@
+{
+  "model": "dmpnn__x_maccs",
+  "ablation": "no_dmpnn",
+  "parts": [
+    "no_dmpnn"
+  ],
+  "description": "D. D-MPNN struct branch removed (projection, cross-attention)",
+  "build_settings": {},
+  "weight_paired_with_full": true,
+  "reference": "full",
+  "seed_run": "no_dmpnn_seed42",
+  "seed": 42,
+  "device": "cuda",
+  "smoke": false,
+  "secondary": "maccs",
+  "pooling": "cls",
+  "secondary_shuffle_sha1": "",
+  "parameters_total": 8806395,
+  "parameters_trainable": 92155,
+  "parameters_full_trainable": 1366011,
+  "parameters_cut": 1273856,
+  "epochs_trained": 3,
+  "best_epoch": 0,
+  "max_epochs": 40,
+  "threshold_from_val": 0.893,
+  "tnr_floor": 0.97,
+  "val_pr_auc": 0.7329650925301538,
+  "val_mcc": 0.642017292804543,
+  "head_layout": {
+    "ablation_head": false
+  },
+  "api_tower_layout": {
+    "mix_in": 80,
+    "has_struct": false,
+    "has_secondary": true,
+    "use_salt_context": true,
+    "segments": [
+      [
+        "secondary",
+        32
+      ],
+      [
+        "desc",
+        24
+      ],
+      [
+        "flags",
+        16
+      ],
+      [
+        "salt",
+        8
+      ]
+    ],
+    "flags": 18,
+    "use_desc": true
+  },
+  "exc_tower_layout": {
+    "mix_in": 80,
+    "has_struct": false,
+    "has_secondary": true,
+    "use_salt_context": true,
+    "segments": [
+      [
+        "secondary",
+        32
+      ],
+      [
+        "desc",
+        24
+      ],
+      [
+        "flags",
+        16
+      ],
+      [
+        "salt",
+        8
+      ]
+    ],
+    "flags": 18,
+    "use_desc": true
+  },
+  "parent_report": null,
+  "data": {
+    "train": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/train.csv",
+    "val": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/splits/api_cluster/val.csv",
+    "heldout": "/home/jovyan/generics/temp/Api-Excipient-Compatibility-Model/final_project/data/heldout/held_out_test_set.csv",
+    "rows": {
+      "train": 2770,
+      "val": 774,
+      "heldout": 22
+    }
+  },
+  "minutes": 1.77,
+  "finished": "2026-11-27T13:26:01"
+}
